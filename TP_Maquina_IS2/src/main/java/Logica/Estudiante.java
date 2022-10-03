@@ -11,10 +11,11 @@ import java.util.ArrayList;
  * @author ivanb
  */
 public class Estudiante extends Persona {
-    private ArrayList<HistoriaAcademica> historiaAcademica;
+    private ArrayList<HistoriaAcademica> historiaAcademica = new ArrayList();
     private ArrayList<MesaExamen> inscripciones;
 
     public Estudiante() {
+        //deberia hacer historia.add(historia?manso bardo)
     }
 
     public Estudiante(ArrayList<HistoriaAcademica> historiaAcademica, ArrayList<MesaExamen> inscripciones,

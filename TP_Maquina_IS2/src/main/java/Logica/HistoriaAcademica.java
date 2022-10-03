@@ -12,8 +12,13 @@ import java.util.ArrayList;
  */
 public class HistoriaAcademica {
     private String propuesta;
-    private Estudiante estudiante;
+    private Estudiante estudiante; 
     private ArrayList<Estado> estados;
-    private ArrayList<Examen> examenes;
+    private ArrayList<Examen> examenes;//este es 1..* ?
     private PlanDeEstudios planDeEstudios;
+
+    public HistoriaAcademica (){
+        this.estudiante=new Estudiante();
+    }
+
 }
