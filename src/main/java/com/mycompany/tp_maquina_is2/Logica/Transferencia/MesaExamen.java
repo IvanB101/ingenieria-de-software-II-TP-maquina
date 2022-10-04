@@ -57,4 +57,15 @@ public class MesaExamen {
     public void setMateria(Materia materia) {
         this.materia = materia;
     }
+    
+    @Override
+    public String toString() {
+        String retorno = "Materia: " + materia.toStringSimplificado() + "Año: " + anio +
+                " Turno: " + turno + "Inscriptos:";
+        for (Estudiante inscripto : inscriptos) {
+            retorno += "\t" + inscripto.toString();
+        }
+        
+        return retorno;
+    }
 }

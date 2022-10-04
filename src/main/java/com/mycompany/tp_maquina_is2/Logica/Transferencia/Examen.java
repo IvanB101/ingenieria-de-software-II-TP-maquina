@@ -17,4 +17,58 @@ public class Examen {
     private Materia materia;
     private HistoriaAcademica historiaAcademica;
     private Experiencia experiencia;
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
+    public double getNota() {
+        return nota;
+    }
+
+    public void setNota(double nota) {
+        this.nota = nota;
+    }
+
+    public int getTurno() {
+        return turno;
+    }
+
+    public void setTurno(int turno) {
+        this.turno = turno;
+    }
+
+    public Materia getMateria() {
+        return materia;
+    }
+
+    public void setMateria(Materia materia) {
+        this.materia = materia;
+    }
+
+    public HistoriaAcademica getHistoriaAcademica() {
+        return historiaAcademica;
+    }
+
+    public void setHistoriaAcademica(HistoriaAcademica historiaAcademica) {
+        this.historiaAcademica = historiaAcademica;
+    }
+
+    public Experiencia getExperiencia() {
+        return experiencia;
+    }
+
+    public void setExperiencia(Experiencia experiencia) {
+        this.experiencia = experiencia;
+    }
+    
+    @Override
+    public String toString() {
+        return "Materia: " + materia + "\n" +
+                "Fecha: " + fecha + " Nota: " + nota + " Turno: " + turno;
+    }
 }

@@ -14,6 +14,29 @@ public class PlanDeEstudios {
     private int codigo;
     private ArrayList<Materia> materias;
 
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
+
+    public ArrayList<Materia> getMaterias() {
+        return materias;
+    }
+
+    public void setMaterias(ArrayList<Materia> materias) {
+        this.materias = materias;
+    }
     
-    
+    @Override
+    public String toString() {
+        String retorno = "Codigo: " + codigo + "Materias: ";
+        for (Materia materia : materias) {
+            retorno += "\t" + materia;
+        }
+        
+        return retorno;
+    }
 }

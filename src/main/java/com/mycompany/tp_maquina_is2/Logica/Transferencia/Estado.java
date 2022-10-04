@@ -16,10 +16,25 @@ public class Estado {
     private Materia materia;
     private HistoriaAcademica historiaAcademica;
     private Condicion condicion;
+
+    public Materia getMateria() {
+        return materia;
+    }
+
+    public void setMateria(Materia materia) {
+        this.materia = materia;
+    }
+
+    public Condicion getCondicion() {
+        return condicion;
+    }
+
+    public void setCondicion(Condicion condicion) {
+        this.condicion = condicion;
+    }
     
     @Override
     public String toString() {
-        return "Materia: " + materia.toString() + "\n" +
-                "Condicion: " + condicion;
+        return "Materia: " + materia.toStringSimplificado() + " Condicion: " + condicion;
     }
 }
