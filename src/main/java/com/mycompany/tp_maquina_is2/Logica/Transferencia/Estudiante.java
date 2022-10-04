@@ -40,4 +40,8 @@ public class Estudiante extends Persona {
         this.inscripciones = inscripciones;
     }
 
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }

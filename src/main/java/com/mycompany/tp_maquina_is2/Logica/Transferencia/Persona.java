@@ -45,4 +45,9 @@ public class Persona {
     public void setDni(String dni) {
         this.dni = dni;
     }
+    
+    @Override
+    public String toString() {
+        return "Nombre y Apellido: " + nombre + apellido + " DNI: " + dni;
+    }
 }

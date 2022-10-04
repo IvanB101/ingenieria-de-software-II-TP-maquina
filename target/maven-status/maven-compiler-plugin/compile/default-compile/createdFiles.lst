@@ -1,0 +1,12 @@
+com\mycompany\tp_maquina_is2\Logica\Transferencia\Estado$Condicion.class
+com\mycompany\tp_maquina_is2\Logica\Transferencia\Examen.class
+com\mycompany\tp_maquina_is2\Logica\Util\Excel.class
+com\mycompany\tp_maquina_is2\Logica\Transferencia\Estado.class
+com\mycompany\tp_maquina_is2\Logica\Transferencia\Persona.class
+com\mycompany\tp_maquina_is2\Logica\Transferencia\PlanDeEstudios.class
+com\mycompany\tp_maquina_is2\Logica\Transferencia\Estudiante.class
+com\mycompany\tp_maquina_is2\Logica\Transferencia\Materia.class
+com\mycompany\tp_maquina_is2\Logica\Transferencia\MesaExamen.class
+com\mycompany\tp_maquina_is2\Logica\Transferencia\HistoriaAcademica.class
+com\mycompany\tp_maquina_is2\Logica\Transferencia\Experiencia.class
+com\mycompany\tp_maquina_is2\Logica\Transferencia\NoDocente.class

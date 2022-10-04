@@ -16,4 +16,10 @@ public class Estado {
     private Materia materia;
     private HistoriaAcademica historiaAcademica;
     private Condicion condicion;
+    
+    @Override
+    public String toString() {
+        return "Materia: " + materia.toString() + "\n" +
+                "Condicion: " + condicion;
+    }
 }
