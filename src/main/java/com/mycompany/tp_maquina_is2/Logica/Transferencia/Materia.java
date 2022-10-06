@@ -24,6 +24,50 @@ public class Materia {
         this.nombre = nombre;
         this.planDeEstudios = new PlanDeEstudios();
     }
+
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public ArrayList<Materia> getCorrelativas() {
+        return correlativas;
+    }
+
+    public void setCorrelativas(ArrayList<Materia> correlativas) {
+        this.correlativas = correlativas;
+    }
+
+    public PlanDeEstudios getPlanDeEstudios() {
+        return planDeEstudios;
+    }
+
+    public void setPlanDeEstudios(PlanDeEstudios planDeEstudios) {
+        this.planDeEstudios = planDeEstudios;
+    }
     
+    @Override
+    public String toString() {
+        String retorno = "Codigo: " + codigo + " Nombre: " + nombre +
+                " Plan de Estudios: " + planDeEstudios.getCodigo() + "Correlativas:\n";
+        for (Materia correlativa : correlativas) {
+            retorno += correlativa.toStringSimplificado();
+        }
+        return retorno;
+    }
     
+    public String toStringSimplificado() {
+        return "Codigo: " + codigo + " Nombre: " + nombre;
+    }
 }
