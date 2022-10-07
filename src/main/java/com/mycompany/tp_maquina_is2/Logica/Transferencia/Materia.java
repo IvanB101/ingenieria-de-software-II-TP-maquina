@@ -15,14 +15,14 @@ public class Materia {
     private String nombre;
     private ArrayList<Materia> correlativas;
     private ArrayList<MesaExamen> mesas;
-    private PlanDeEstudios planDeEstudios;
+    private PlanEstudios planDeEstudios;
     private ArrayList<Estado> estados;
     private ArrayList<Examen> examenes;
 
-    public Materia(int codigo, String nombre) {
+    public Materia(int codigo, String nombre, ArrayList<Materia> correlativas) {
         this.codigo = codigo;
         this.nombre = nombre;
-        this.planDeEstudios = new PlanDeEstudios();
+        this.correlativas = correlativas;
     }
 
     public int getCodigo() {
@@ -49,11 +49,11 @@ public class Materia {
         this.correlativas = correlativas;
     }
 
-    public PlanDeEstudios getPlanDeEstudios() {
+    public PlanEstudios getPlanDeEstudios() {
         return planDeEstudios;
     }
 
-    public void setPlanDeEstudios(PlanDeEstudios planDeEstudios) {
+    public void setPlanDeEstudios(PlanEstudios planDeEstudios) {
         this.planDeEstudios = planDeEstudios;
     }
     

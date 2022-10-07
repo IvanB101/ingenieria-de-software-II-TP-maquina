@@ -8,7 +8,7 @@ package com.mycompany.tp_maquina_is2.Logica.Transferencia;
  *
  * @author ivanb
  */
-public class Persona {
+public abstract class Persona {
     private String nombre;
     private String apellido;
     private String dni;
@@ -17,9 +17,6 @@ public class Persona {
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
-    }
-
-    public Persona() {
     }
 
     public String getNombre() {

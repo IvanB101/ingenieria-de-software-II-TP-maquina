@@ -18,6 +18,14 @@ public class Examen {
     private HistoriaAcademica historiaAcademica;
     private Experiencia experiencia;
 
+    public Examen(Date fecha, double nota, int turno, Materia materia, HistoriaAcademica historiaAcademica) {
+        this.fecha = fecha;
+        this.nota = nota;
+        this.turno = turno;
+        this.materia = materia;
+        this.historiaAcademica = historiaAcademica;
+    }
+
     public Date getFecha() {
         return fecha;
     }

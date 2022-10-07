@@ -4,16 +4,16 @@
  */
 package com.mycompany.tp_maquina_is2.Datos.DAO.Interfaces;
 
-import com.mycompany.tp_maquina_is2.Logica.Transferencia.Experiencia;
+import com.mycompany.tp_maquina_is2.Logica.Transferencia.Estudiante;
 import java.util.ArrayList;
 
 /**
  *
  * @author ivanb
  */
-public interface ExperienciaDAOInter {
-    public boolean create(Experiencia experiencia);
-    public ArrayList<Experiencia> read();
-    public boolean update(int codigo, Experiencia experiencia);
-    public boolean delete(int codigo);
+public interface EstudianteDAOInter {
+    public boolean create(Estudiante estudiante);
+    public ArrayList<Estudiante> read();
+    public boolean update(int nroRegistro, Estudiante estudiante);
+    public boolean delete(int nroRegistro);
 }

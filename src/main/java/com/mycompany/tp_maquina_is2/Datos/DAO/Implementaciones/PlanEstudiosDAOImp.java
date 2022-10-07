@@ -4,28 +4,28 @@
  */
 package com.mycompany.tp_maquina_is2.Datos.DAO.Implementaciones;
 
-import com.mycompany.tp_maquina_is2.Datos.DAO.Interfaces.ExperienciaDAOInter;
-import com.mycompany.tp_maquina_is2.Logica.Transferencia.Experiencia;
+import com.mycompany.tp_maquina_is2.Datos.DAO.Interfaces.PlanEstudiosDAOInter;
+import com.mycompany.tp_maquina_is2.Logica.Transferencia.PlanEstudios;
 import java.util.ArrayList;
 
 /**
  *
  * @author ivanb
  */
-public class ExperienciaDAOImp implements ExperienciaDAOInter{
+public class PlanEstudiosDAOImp implements PlanEstudiosDAOInter {
 
     @Override
-    public boolean create(Experiencia experiencia) {
+    public boolean create(PlanEstudios planEstudios) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public ArrayList<Experiencia> read() {
+    public ArrayList<PlanEstudios> read() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public boolean update(int codigo, Experiencia experiencia) {
+    public boolean update(int codigo, PlanEstudios planEstudios) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
@@ -33,5 +33,5 @@ public class ExperienciaDAOImp implements ExperienciaDAOInter{
     public boolean delete(int codigo) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
 }

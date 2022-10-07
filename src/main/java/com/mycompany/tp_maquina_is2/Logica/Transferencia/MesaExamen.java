@@ -16,13 +16,9 @@ public class MesaExamen {
     private ArrayList<Estudiante> inscriptos;
     private Materia materia;
 
-    public MesaExamen() {
-    }
-
-    public MesaExamen(int turno, int anio, ArrayList<Estudiante> inscriptos, Materia materia) {
+    public MesaExamen(int turno, int anio, Materia materia) {
         this.turno = turno;
         this.anio = anio;
-        this.inscriptos = inscriptos;
         this.materia = materia;
     }
 

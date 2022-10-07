@@ -10,9 +10,13 @@ import java.util.ArrayList;
  *
  * @author ivanb
  */
-public class PlanDeEstudios {
+public class PlanEstudios {
     private int codigo;
     private ArrayList<Materia> materias;
+
+    public PlanEstudios(int codigo) {
+        this.codigo = codigo;
+    }
 
     public int getCodigo() {
         return codigo;

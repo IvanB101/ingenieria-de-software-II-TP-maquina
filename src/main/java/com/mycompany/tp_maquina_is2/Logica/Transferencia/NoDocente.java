@@ -8,10 +8,7 @@ package com.mycompany.tp_maquina_is2.Logica.Transferencia;
  *
  * @author ivanb
  */
-public class NoDocente extends Persona{
-
-    public NoDocente() {
-    }
+public class NoDocente extends Persona {
 
     public NoDocente(String nombre, String apellido, String dni) {
         super(nombre, apellido, dni);

@@ -14,6 +14,13 @@ public class Experiencia {
     private int dedicacion;
     private Examen examen;
 
+    public Experiencia(int dificultad, int dias, int dedicacion, Examen examen) {
+        this.dificultad = dificultad;
+        this.dias = dias;
+        this.dedicacion = dedicacion;
+        this.examen = examen;
+    }
+
     public int getDificultad() {
         return dificultad;
     }

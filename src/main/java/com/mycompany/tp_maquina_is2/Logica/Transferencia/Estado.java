@@ -17,6 +17,12 @@ public class Estado {
     private HistoriaAcademica historiaAcademica;
     private Condicion condicion;
 
+    public Estado(Materia materia, HistoriaAcademica historiaAcademica, Condicion condicion) {
+        this.materia = materia;
+        this.historiaAcademica = historiaAcademica;
+        this.condicion = condicion;
+    }
+
     public Materia getMateria() {
         return materia;
     }

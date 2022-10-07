@@ -14,14 +14,8 @@ public class Estudiante extends Persona {
     private ArrayList<HistoriaAcademica> historiaAcademica;
     private ArrayList<MesaExamen> inscripciones;
 
-    public Estudiante() {
-    }
-
-    public Estudiante(ArrayList<HistoriaAcademica> historiaAcademica, ArrayList<MesaExamen> inscripciones,
-            String nombre, String apellido, String dni) {
+    public Estudiante(String nombre, String apellido, String dni) {
         super(nombre, apellido, dni);
-        this.historiaAcademica = historiaAcademica;
-        this.inscripciones = inscripciones;
     }
 
     public ArrayList<HistoriaAcademica> getHistoriaAcademica() {
