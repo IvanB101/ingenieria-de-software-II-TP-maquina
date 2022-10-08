@@ -4,7 +4,7 @@
  */
 package com.mycompany.tp_maquina_is2.Logica.Transferencia;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  *
@@ -12,14 +12,16 @@ import java.util.Date;
  */
 public class Examen {
 
-    private Date fecha;
-    private double nota;
+    private LocalDate fecha;
+    private float nota;
+    private int codigo;
     private int turno;
     private int codMateria;
     private int codHistoriaAcademica;
     private Experiencia experiencia;
 
-    public Examen(Date fecha, double nota, int turno, int codMateria, int codHistoriaAcademica) {
+    public Examen(LocalDate fecha, int turno, float nota, int codMateria, int codHistoriaAcademica) {
+        this.codigo = Integer.parseInt(fecha.getDayOfYear() + fecha.getYear() + codMateria + codHistoriaAcademica + "");
         this.fecha = fecha;
         this.nota = nota;
         this.turno = turno;
@@ -27,19 +29,19 @@ public class Examen {
         this.codHistoriaAcademica = codHistoriaAcademica;
     }
 
-    public Date getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
 
-    public double getNota() {
+    public float getNota() {
         return nota;
     }
 
-    public void setNota(double nota) {
+    public void setNota(float nota) {
         this.nota = nota;
     }
 
@@ -73,5 +75,13 @@ public class Examen {
 
     public void setExperiencia(Experiencia experiencia) {
         this.experiencia = experiencia;
+    }
+
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
     }
 }

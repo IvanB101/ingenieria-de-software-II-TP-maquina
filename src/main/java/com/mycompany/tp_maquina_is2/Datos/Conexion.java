@@ -64,6 +64,13 @@ public class Conexion {
                 + "codigo int NOT NULL, "
                 + "PRIMARY KEY (codigo))");
         
+        query.execute("CREATE TABLE IF NOT EXISTS Materia("
+                + "codigo int NOT NULL, "
+                + "nombre varchar(50) NOT NULL, "
+                + "PlanEstudios_codigo int NOT NULL, "
+                + "FOREIGN KEY (PlanEstudios_codigo) REFERENCES PlanEstudios(codigo), "
+                + "PRIMARY KEY (codigo))");
+        
         query.execute("CREATE TABLE IF NOT EXISTS HistoriaAcademica("
                 + "propuesta varchar(50) NOT NULL, "
                 + "Estudiante_nroRegistro int UNIQUE NOT NULL, "
@@ -71,13 +78,6 @@ public class Conexion {
                 + "FOREIGN KEY (Estudiante_nroRegistro) REFERENCES Estudiante(nroRegistro), "
                 + "FOREIGN KEY (PlanEstudios_codigo) REFERENCES PlanEstudios(codigo), "
                 + "PRIMARY KEY (Estudiante_nroRegistro, PlanEstudios_codigo))");
-        
-        query.execute("CREATE TABLE IF NOT EXISTS Materia("
-                + "codigo int NOT NULL, "
-                + "nombre varchar(50) NOT NULL, "
-                + "PlanEstudios_codigo int NOT NULL, "
-                + "FOREIGN KEY (PlanEstudios_codigo) REFERENCES PlanEstudios(codigo), "
-                + "PRIMARY KEY (codigo))");
         
         query.execute("CREATE TABLE IF NOT EXISTS Correlativas("
                 + "Correlativa_codigo int NOT NULL, "
@@ -117,7 +117,7 @@ public class Conexion {
                 + "dificultad int NOT NULL, "
                 + "dedicacion int NOT NULL, "
                 + "dias int NOT NULL, "
-                + "FOREIGN KEY (Examen_codigo) REFERENCES Examen(codigo), "
+                + "FOREIGN KEY (Examen_codigo) REFERENCES Examen(codigo), ON DELETE CASCADE"
                 + "PRIMARY KEY (Examen_codigo))");
         
         query.execute("CREATE TABLE IF NOT EXISTS MesaExamen("
