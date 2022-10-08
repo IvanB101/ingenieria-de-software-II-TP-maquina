@@ -42,7 +42,7 @@ public class Conexion {
         Statement query = conexion.createStatement();
 
         query.execute("CREATE TABLE IF NOT EXISTS Persona("
-                + "codigo int NOT NULL, "
+                + "codigo varchar(50) NOT NULL, "
                 + "dni int NOT NULL, "
                 + "nombre varchar(50) NOT NULL, "
                 + "apellido varchar(50) NOT NULL,"
@@ -51,13 +51,13 @@ public class Conexion {
         query.execute("CREATE TABLE IF NOT EXISTS NoDocente("
                 + "nroLegajo int NOT NULL, "
                 + "Persona_codigo int NOT NULL, "
-                + "FOREIGN KEY (Persona_codigo) REFERENCES Persona(codigo), "
+                + "FOREIGN KEY (Persona_codigo) REFERENCES Persona(codigo) ON DELETE CASCADE, "
                 + "PRIMARY KEY (nroLegajo))");
         
         query.execute("CREATE TABLE IF NOT EXISTS Estudiante("
                 + "nroRegistro int NOT NULL, "
                 + "Persona_codigo int NOT NULL, "
-                + "FOREIGN KEY (Persona_codigo) REFERENCES Persona(codigo), "
+                + "FOREIGN KEY (Persona_codigo) REFERENCES Persona(codigo) ON DELETE CASCADE, "
                 + "PRIMARY KEY (nroRegistro))");
         
         query.execute("CREATE TABLE IF NOT EXISTS PlanEstudios("
@@ -82,7 +82,7 @@ public class Conexion {
         query.execute("CREATE TABLE IF NOT EXISTS Correlativas("
                 + "Correlativa_codigo int NOT NULL, "
                 + "Materia_codigo int NOT NULL, "
-                + "FOREIGN KEY (Materia_codigo) REFERENCES Materia(codigo), "
+                + "FOREIGN KEY (Materia_codigo) REFERENCES Materia(codigo) ON DELETE CASCADE, "
                 + "FOREIGN KEY (Correlativa_codigo) REFERENCES Materia(codigo), "
                 + "PRIMARY KEY (Materia_codigo, Correlativa_codigo))");
         
@@ -98,7 +98,7 @@ public class Conexion {
                 + "Materia_codigo int NOT NULL, "
                 + "HistoriaAcademica_Estudiante_nroRegistro int NOT NULL, "
                 + "FOREIGN KEY (Materia_codigo) REFERENCES Materia(codigo), "
-                + "FOREIGN KEY (HistoriaAcademica_Estudiante_nroRegistro) REFERENCES HistoriaAcademica(Estudiante_nroRegistro), "
+                + "FOREIGN KEY (HistoriaAcademica_Estudiante_nroRegistro) REFERENCES HistoriaAcademica(Estudiante_nroRegistro) ON DELETE CASCADE, "
                 + "PRIMARY KEY (Materia_codigo, HistoriaAcademica_Estudiante_nroRegistro))");
         
         query.execute("CREATE TABLE IF NOT EXISTS Examen("
@@ -131,8 +131,8 @@ public class Conexion {
         query.execute("CREATE TABLE IF NOT EXISTS Inscripcion("
                 + "Estudiante_nroRegistro int NOT NULL, "
                 + "MesaExamen_codigo int NOT NULL, "
-                + "FOREIGN KEY (Estudiante_nroRegistro) REFERENCES Estudiante(nroRegistro), "
-                + "FOREIGN KEY (MesaExamen_codigo) REFERENCES MesaExamen(codigo), "
+                + "FOREIGN KEY (Estudiante_nroRegistro) REFERENCES Estudiante(nroRegistro) ON DELETE CASCADE, "
+                + "FOREIGN KEY (MesaExamen_codigo) REFERENCES MesaExamen(codigo) ON DELETE CASCADE, "
                 + "PRIMARY KEY (Estudiante_nroRegistro, MesaExamen_codigo))");
     }
 }

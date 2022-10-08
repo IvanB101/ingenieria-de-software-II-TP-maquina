@@ -9,12 +9,12 @@ package com.mycompany.tp_maquina_is2.Logica.Transferencia;
  * @author ivanb
  */
 public abstract class Persona {
-    private int codigo;
+    private String codigo;
     private String nombre;
     private String apellido;
     private int dni;
 
-    public Persona(int codigo, String nombre, String apellido, int dni) {
+    public Persona(String codigo, String nombre, String apellido, int dni) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -45,11 +45,11 @@ public abstract class Persona {
         this.dni = dni;
     }
 
-    public int getCodigo() {
+    public String getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(int codigo) {
+    public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
     

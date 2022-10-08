@@ -12,8 +12,8 @@ public class NoDocente extends Persona {
     
     private int nroLegajo;
 
-    public NoDocente(int nroLegajo, int codigo, String nombre, String apellido, String dni) {
-        super(codigo, nombre, apellido, dni);
+    public NoDocente(int nroLegajo, String nombre, String apellido, int dni) {
+        super("n" + nroLegajo, nombre, apellido, dni);
         this.nroLegajo = nroLegajo;
     }
 

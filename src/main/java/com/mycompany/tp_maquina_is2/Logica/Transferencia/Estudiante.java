@@ -15,11 +15,9 @@ public class Estudiante extends Persona {
     private ArrayList<Integer> codHistoriasAcademicas;
     private ArrayList<Integer> codMesasInscriptas;
 
-    public Estudiante(int nroRegistro, ArrayList<Integer> codHistoriasAcademicas, ArrayList<Integer> codMesasInscriptas, int codigo, String nombre, String apellido, String dni) {
-        super(codigo, nombre, apellido, dni);
+    public Estudiante(int nroRegistro, String nombre, String apellido, int dni) {
+        super("e" + nroRegistro, nombre, apellido, dni);
         this.nroRegistro = nroRegistro;
-        this.codHistoriasAcademicas = codHistoriasAcademicas;
-        this.codMesasInscriptas = codMesasInscriptas;
     }
 
     public ArrayList<Integer> getCodHistoriasAcademicas() {
