@@ -13,24 +13,32 @@ public class Estado {
         regular, cursando, aprobado, libre
     }
     
-    private Materia materia;
-    private HistoriaAcademica historiaAcademica;
+    private int codMateria;
+    private int codHistoriaAcademica;
     private Condicion condicion;
 
-    public Estado(Materia materia, HistoriaAcademica historiaAcademica, Condicion condicion) {
-        this.materia = materia;
-        this.historiaAcademica = historiaAcademica;
+    public Estado(int codMateria, int codHistoriaAcademica, Condicion condicion) {
+        this.codMateria = codMateria;
+        this.codHistoriaAcademica = codHistoriaAcademica;
         this.condicion = condicion;
     }
 
-    public Materia getMateria() {
-        return materia;
+    public int getCodMateria() {
+        return codMateria;
     }
 
-    public void setMateria(Materia materia) {
-        this.materia = materia;
+    public void setCodMateria(int codMateria) {
+        this.codMateria = codMateria;
     }
 
+    public int getCodHistoriaAcademica() {
+        return codHistoriaAcademica;
+    }
+
+    public void setCodHistoriaAcademica(int codHistoriaAcademica) {
+        this.codHistoriaAcademica = codHistoriaAcademica;
+    }
+    
     public Condicion getCondicion() {
         return condicion;
     }
@@ -38,9 +46,5 @@ public class Estado {
     public void setCondicion(Condicion condicion) {
         this.condicion = condicion;
     }
-    
-    @Override
-    public String toString() {
-        return "Materia: " + materia.toStringSimplificado() + " Condicion: " + condicion;
-    }
+
 }

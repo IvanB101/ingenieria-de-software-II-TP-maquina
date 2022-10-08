@@ -11,19 +11,20 @@ import java.util.Date;
  * @author ivanb
  */
 public class Examen {
+
     private Date fecha;
     private double nota;
     private int turno;
-    private Materia materia;
-    private HistoriaAcademica historiaAcademica;
+    private int codMateria;
+    private int codHistoriaAcademica;
     private Experiencia experiencia;
 
-    public Examen(Date fecha, double nota, int turno, Materia materia, HistoriaAcademica historiaAcademica) {
+    public Examen(Date fecha, double nota, int turno, int codMateria, int codHistoriaAcademica) {
         this.fecha = fecha;
         this.nota = nota;
         this.turno = turno;
-        this.materia = materia;
-        this.historiaAcademica = historiaAcademica;
+        this.codMateria = codMateria;
+        this.codHistoriaAcademica = codHistoriaAcademica;
     }
 
     public Date getFecha() {
@@ -50,20 +51,20 @@ public class Examen {
         this.turno = turno;
     }
 
-    public Materia getMateria() {
-        return materia;
+    public int getCodMateria() {
+        return codMateria;
     }
 
-    public void setMateria(Materia materia) {
-        this.materia = materia;
+    public void setCodMateria(int codMateria) {
+        this.codMateria = codMateria;
     }
 
-    public HistoriaAcademica getHistoriaAcademica() {
-        return historiaAcademica;
+    public int getCodHistoriaAcademica() {
+        return codHistoriaAcademica;
     }
 
-    public void setHistoriaAcademica(HistoriaAcademica historiaAcademica) {
-        this.historiaAcademica = historiaAcademica;
+    public void setCodHistoriaAcademica(int codHistoriaAcademica) {
+        this.codHistoriaAcademica = codHistoriaAcademica;
     }
 
     public Experiencia getExperiencia() {
@@ -72,11 +73,5 @@ public class Examen {
 
     public void setExperiencia(Experiencia experiencia) {
         this.experiencia = experiencia;
-    }
-    
-    @Override
-    public String toString() {
-        return "Materia: " + materia + "\n" +
-                "Fecha: " + fecha + " Nota: " + nota + " Turno: " + turno;
     }
 }

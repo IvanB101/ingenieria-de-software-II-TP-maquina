@@ -12,8 +12,13 @@ import java.util.ArrayList;
  * @author ivanb
  */
 public interface HistoriaAcademicaDAOInter {
+
     public boolean create(HistoriaAcademica historiaAcademica);
+
     public ArrayList<HistoriaAcademica> read();
+
     public boolean update(int codigo, HistoriaAcademica historiaAcademica);
+
     public boolean delete(int codigo);
+
 }

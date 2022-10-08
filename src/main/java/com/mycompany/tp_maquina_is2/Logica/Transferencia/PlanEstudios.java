@@ -12,7 +12,7 @@ import java.util.ArrayList;
  */
 public class PlanEstudios {
     private int codigo;
-    private ArrayList<Materia> materias;
+    private ArrayList<Integer> codMaterias;
 
     public PlanEstudios(int codigo) {
         this.codigo = codigo;
@@ -26,21 +26,11 @@ public class PlanEstudios {
         this.codigo = codigo;
     }
 
-    public ArrayList<Materia> getMaterias() {
-        return materias;
+    public ArrayList<Integer> getCodMaterias() {
+        return codMaterias;
     }
 
-    public void setMaterias(ArrayList<Materia> materias) {
-        this.materias = materias;
-    }
-    
-    @Override
-    public String toString() {
-        String retorno = "Codigo: " + codigo + "Materias: ";
-        for (Materia materia : materias) {
-            retorno += "\t" + materia;
-        }
-        
-        return retorno;
+    public void setCodMaterias(ArrayList<Integer> codMaterias) {
+        this.codMaterias = codMaterias;
     }
 }

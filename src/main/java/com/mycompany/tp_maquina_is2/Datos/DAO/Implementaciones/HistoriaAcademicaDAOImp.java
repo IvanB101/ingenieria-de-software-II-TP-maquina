@@ -5,6 +5,7 @@
 package com.mycompany.tp_maquina_is2.Datos.DAO.Implementaciones;
 
 import com.mycompany.tp_maquina_is2.Datos.DAO.Interfaces.HistoriaAcademicaDAOInter;
+import com.mycompany.tp_maquina_is2.Logica.Transferencia.Estado;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.HistoriaAcademica;
 import java.util.ArrayList;
 

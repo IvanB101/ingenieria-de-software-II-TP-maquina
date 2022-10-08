@@ -14,10 +14,10 @@ public class Materia {
     private int codigo;
     private String nombre;
     private ArrayList<Materia> correlativas;
-    private ArrayList<MesaExamen> mesas;
-    private PlanEstudios planDeEstudios;
-    private ArrayList<Estado> estados;
-    private ArrayList<Examen> examenes;
+    private ArrayList<Integer> codMesas;
+    private PlanEstudios codPlanDeEstudios;
+    private ArrayList<Integer> codEstados;
+    private ArrayList<Integer> codExamenes;
 
     public Materia(int codigo, String nombre, ArrayList<Materia> correlativas) {
         this.codigo = codigo;
@@ -49,25 +49,35 @@ public class Materia {
         this.correlativas = correlativas;
     }
 
-    public PlanEstudios getPlanDeEstudios() {
-        return planDeEstudios;
+    public ArrayList<Integer> getCodMesas() {
+        return codMesas;
     }
 
-    public void setPlanDeEstudios(PlanEstudios planDeEstudios) {
-        this.planDeEstudios = planDeEstudios;
+    public void setCodMesas(ArrayList<Integer> codMesas) {
+        this.codMesas = codMesas;
     }
-    
-    @Override
-    public String toString() {
-        String retorno = "Codigo: " + codigo + " Nombre: " + nombre +
-                " Plan de Estudios: " + planDeEstudios.getCodigo() + "Correlativas:\n";
-        for (Materia correlativa : correlativas) {
-            retorno += correlativa.toStringSimplificado();
-        }
-        return retorno;
+
+    public PlanEstudios getCodPlanDeEstudios() {
+        return codPlanDeEstudios;
     }
-    
-    public String toStringSimplificado() {
-        return "Codigo: " + codigo + " Nombre: " + nombre;
+
+    public void setCodPlanDeEstudios(PlanEstudios codPlanDeEstudios) {
+        this.codPlanDeEstudios = codPlanDeEstudios;
+    }
+
+    public ArrayList<Integer> getCodEstados() {
+        return codEstados;
+    }
+
+    public void setCodEstados(ArrayList<Integer> codEstados) {
+        this.codEstados = codEstados;
+    }
+
+    public ArrayList<Integer> getCodExamenes() {
+        return codExamenes;
+    }
+
+    public void setCodExamenes(ArrayList<Integer> codExamenes) {
+        this.codExamenes = codExamenes;
     }
 }

@@ -13,13 +13,13 @@ import java.util.ArrayList;
 public class MesaExamen {
     private int turno;
     private int anio;
-    private ArrayList<Estudiante> inscriptos;
-    private Materia materia;
+    private ArrayList<Integer> codInscriptos;
+    private int codMateria;
 
-    public MesaExamen(int turno, int anio, Materia materia) {
+    public MesaExamen(int turno, int anio, int codMateria) {
         this.turno = turno;
         this.anio = anio;
-        this.materia = materia;
+        this.codMateria = codMateria;
     }
 
     public int getTurno() {
@@ -38,30 +38,19 @@ public class MesaExamen {
         this.anio = anio;
     }
 
-    public ArrayList<Estudiante> getInscriptos() {
-        return inscriptos;
+    public ArrayList<Integer> getCodInscriptos() {
+        return codInscriptos;
     }
 
-    public void setInscriptos(ArrayList<Estudiante> inscriptos) {
-        this.inscriptos = inscriptos;
+    public void setCodInscriptos(ArrayList<Integer> codInscriptos) {
+        this.codInscriptos = codInscriptos;
     }
 
-    public Materia getMateria() {
-        return materia;
+    public int getCodMateria() {
+        return codMateria;
     }
 
-    public void setMateria(Materia materia) {
-        this.materia = materia;
-    }
-    
-    @Override
-    public String toString() {
-        String retorno = "Materia: " + materia.toStringSimplificado() + "Año: " + anio +
-                " Turno: " + turno + "Inscriptos:";
-        for (Estudiante inscripto : inscriptos) {
-            retorno += "\t" + inscripto.toString();
-        }
-        
-        return retorno;
+    public void setCodMateria(int codMateria) {
+        this.codMateria = codMateria;
     }
 }

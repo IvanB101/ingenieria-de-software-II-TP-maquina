@@ -11,27 +11,39 @@ import java.util.ArrayList;
  * @author ivanb
  */
 public class Estudiante extends Persona {
-    private ArrayList<HistoriaAcademica> historiaAcademica;
-    private ArrayList<MesaExamen> inscripciones;
+    private int nroRegistro;
+    private ArrayList<Integer> codHistoriasAcademicas;
+    private ArrayList<Integer> codMesasInscriptas;
 
-    public Estudiante(String nombre, String apellido, String dni) {
-        super(nombre, apellido, dni);
+    public Estudiante(int nroRegistro, ArrayList<Integer> codHistoriasAcademicas, ArrayList<Integer> codMesasInscriptas, int codigo, String nombre, String apellido, String dni) {
+        super(codigo, nombre, apellido, dni);
+        this.nroRegistro = nroRegistro;
+        this.codHistoriasAcademicas = codHistoriasAcademicas;
+        this.codMesasInscriptas = codMesasInscriptas;
     }
 
-    public ArrayList<HistoriaAcademica> getHistoriaAcademica() {
-        return historiaAcademica;
+    public ArrayList<Integer> getCodHistoriasAcademicas() {
+        return codHistoriasAcademicas;
     }
 
-    public void setHistoriaAcademica(ArrayList<HistoriaAcademica> historiaAcademica) {
-        this.historiaAcademica = historiaAcademica;
+    public void setCodHistoriasAcademicas(ArrayList<Integer> codHistoriasAcademicas) {
+        this.codHistoriasAcademicas = codHistoriasAcademicas;
     }
 
-    public ArrayList<MesaExamen> getInscripciones() {
-        return inscripciones;
+    public ArrayList<Integer> getCodMesasInscriptas() {
+        return codMesasInscriptas;
     }
 
-    public void setInscripciones(ArrayList<MesaExamen> inscripciones) {
-        this.inscripciones = inscripciones;
+    public void setCodMesasInscriptas(ArrayList<Integer> codMesasInscriptas) {
+        this.codMesasInscriptas = codMesasInscriptas;
+    }
+
+    public int getNroRegistro() {
+        return nroRegistro;
+    }
+
+    public void setNroRegistro(int nroRegistro) {
+        this.nroRegistro = nroRegistro;
     }
 
     @Override

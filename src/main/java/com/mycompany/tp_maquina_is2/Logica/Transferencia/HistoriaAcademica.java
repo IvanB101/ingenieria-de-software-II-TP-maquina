@@ -13,33 +13,52 @@ import java.util.ArrayList;
 public class HistoriaAcademica {
 
     private String propuesta;
-    private Estudiante estudiante;
+    private int codEstudiante;
     private ArrayList<Estado> estados;
-    private ArrayList<Examen> examenes;
-    private PlanEstudios planDeEstudios;
-    private ArrayList<Materia> materias;
+    private ArrayList<Integer> codExamenes;
+    private int codPlanDeEstudios;
+    private ArrayList<Integer> codMateriasExamenes;
+    private ArrayList<Integer> codMateriasEstados;
 
-    public HistoriaAcademica(String propuesta, Estudiante estudiante, PlanEstudios planDeEstudios, ArrayList<Materia> materias) {
+    public HistoriaAcademica(String propuesta, int codEstudiante, int codPlanDeEstudios,
+            ArrayList<Integer> codMateriasEstados, ArrayList<Estado> estados) {
         this.propuesta = propuesta;
-        this.estudiante = estudiante;
-        this.planDeEstudios = planDeEstudios;
-        this.materias = materias;
+        this.codEstudiante = codEstudiante;
+        this.codPlanDeEstudios = codPlanDeEstudios;
+        this.codMateriasEstados = codMateriasEstados;
+        this.estados = estados;
     }
 
     public String getPropuesta() {
         return propuesta;
     }
 
+    public int getCodEstudiante() {
+        return codEstudiante;
+    }
+
+    public void setCodEstudiante(int codEstudiante) {
+        this.codEstudiante = codEstudiante;
+    }
+
+    public ArrayList<Integer> getCodExamenes() {
+        return codExamenes;
+    }
+
+    public void setCodExamenes(ArrayList<Integer> codExamenes) {
+        this.codExamenes = codExamenes;
+    }
+
+    public int getCodPlanDeEstudios() {
+        return codPlanDeEstudios;
+    }
+
+    public void setCodPlanDeEstudios(int codPlanDeEstudios) {
+        this.codPlanDeEstudios = codPlanDeEstudios;
+    }
+
     public void setPropuesta(String propuesta) {
         this.propuesta = propuesta;
-    }
-
-    public Estudiante getEstudiante() {
-        return estudiante;
-    }
-
-    public void setEstudiante(Estudiante estudiante) {
-        this.estudiante = estudiante;
     }
 
     public ArrayList<Estado> getEstados() {
@@ -50,36 +69,19 @@ public class HistoriaAcademica {
         this.estados = estados;
     }
 
-    public ArrayList<Examen> getExamenes() {
-        return examenes;
+    public ArrayList<Integer> getCodMateriasExamenes() {
+        return codMateriasExamenes;
     }
 
-    public void setExamenes(ArrayList<Examen> examenes) {
-        this.examenes = examenes;
+    public void setCodMateriasExamenes(ArrayList<Integer> codMateriasExamenes) {
+        this.codMateriasExamenes = codMateriasExamenes;
     }
 
-    public PlanEstudios getPlanDeEstudios() {
-        return planDeEstudios;
+    public ArrayList<Integer> getCodMateriasEstados() {
+        return codMateriasEstados;
     }
 
-    public void setPlanDeEstudios(PlanEstudios planDeEstudios) {
-        this.planDeEstudios = planDeEstudios;
-    }
-
-    @Override
-    public String toString() {
-        String retorno = "Propuesta: " + propuesta + "\nPlan de Estudios: " + planDeEstudios.getCodigo()
-                + "\nEstudiante: " + estudiante.toString() + "\nEstados:";
-
-        for (Estado estado : estados) {
-            retorno += "\t" + estado.toString();
-        }
-
-        retorno += "Examenes:";
-        for (Examen examen : examenes) {
-            retorno += examen.toString();
-        }
-
-        return retorno;
+    public void setCodMateriasEstados(ArrayList<Integer> codMateriasEstados) {
+        this.codMateriasEstados = codMateriasEstados;
     }
 }

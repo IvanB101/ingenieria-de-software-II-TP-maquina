@@ -12,13 +12,13 @@ public class Experiencia {
     private int dificultad;
     private int dias;
     private int dedicacion;
-    private Examen examen;
+    private int codExamen;
 
-    public Experiencia(int dificultad, int dias, int dedicacion, Examen examen) {
+    public Experiencia(int dificultad, int dias, int dedicacion, int examen) {
         this.dificultad = dificultad;
         this.dias = dias;
         this.dedicacion = dedicacion;
-        this.examen = examen;
+        this.codExamen = codExamen;
     }
 
     public int getDificultad() {
@@ -45,17 +45,11 @@ public class Experiencia {
         this.dedicacion = dedicacion;
     }
 
-    public Examen getExamen() {
-        return examen;
+    public int getCodExamen() {
+        return codExamen;
     }
 
-    public void setExamen(Examen examen) {
-        this.examen = examen;
-    }
-    
-    @Override
-    public String toString() {
-        return "Examen: " + examen.toString() + "\nDificultad Percibida: " + dificultad +
-                " Dias estudiados: " + dias + "Dedicacion: " + dedicacion;
+    public void setCodExamen(int codExamen) {
+        this.codExamen = codExamen;
     }
 }
