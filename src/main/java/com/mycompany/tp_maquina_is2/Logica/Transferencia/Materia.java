@@ -15,14 +15,15 @@ public class Materia {
     private String nombre;
     private ArrayList<Materia> correlativas;
     private ArrayList<Integer> codMesas;
-    private PlanEstudios codPlanDeEstudios;
+    private int codPlanDeEstudios;
     private ArrayList<Integer> codEstados;
     private ArrayList<Integer> codExamenes;
 
-    public Materia(int codigo, String nombre, ArrayList<Materia> correlativas) {
+    public Materia(int codigo, String nombre, int codigoPlan, ArrayList<Materia> correlativas) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.correlativas = correlativas;
+        this.codPlanDeEstudios = codigoPlan;
     }
 
     public int getCodigo() {
@@ -45,8 +46,11 @@ public class Materia {
         return correlativas;
     }
 
-    public void setCorrelativas(ArrayList<Materia> correlativas) {
+   /* public void setCorrelativas(ArrayList<Materia> correlativas) {
         this.correlativas = correlativas;
+    } */
+    public void setCorrelativas(Materia mat){
+        this.correlativas.add(mat);
     }
 
     public ArrayList<Integer> getCodMesas() {
@@ -57,11 +61,11 @@ public class Materia {
         this.codMesas = codMesas;
     }
 
-    public PlanEstudios getCodPlanDeEstudios() {
+    public int getCodPlanDeEstudios() {
         return codPlanDeEstudios;
     }
 
-    public void setCodPlanDeEstudios(PlanEstudios codPlanDeEstudios) {
+    public void setCodPlanDeEstudios(int codPlanDeEstudios) {
         this.codPlanDeEstudios = codPlanDeEstudios;
     }
 
