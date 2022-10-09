@@ -11,6 +11,7 @@ import java.util.ArrayList;
  * @author ivanb
  */
 public class Materia {
+
     private int codigo;
     private String nombre;
     private ArrayList<Materia> correlativas;
@@ -46,11 +47,8 @@ public class Materia {
         return correlativas;
     }
 
-   /* public void setCorrelativas(ArrayList<Materia> correlativas) {
+    public void setCorrelativas(ArrayList<Materia> correlativas) {
         this.correlativas = correlativas;
-    } */
-    public void setCorrelativas(Materia mat){
-        this.correlativas.add(mat);
     }
 
     public ArrayList<Integer> getCodMesas() {

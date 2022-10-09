@@ -4,9 +4,15 @@
  */
 package com.mycompany.tp_maquina_is2.Datos.DAO.Implementaciones;
 
+import com.mycompany.tp_maquina_is2.Datos.Conexion;
 import com.mycompany.tp_maquina_is2.Datos.DAO.Interfaces.PlanEstudiosDAOInter;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.PlanEstudios;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -14,24 +20,86 @@ import java.util.ArrayList;
  */
 public class PlanEstudiosDAOImp implements PlanEstudiosDAOInter {
 
+    Connection con;
+
+    public PlanEstudiosDAOImp(Conexion conexion) {
+        try {
+            con = conexion.getInstance();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+    }
+
     @Override
     public boolean create(PlanEstudios planEstudios) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            PreparedStatement ps = con.prepareStatement("INSERT INTO PlanEstudios (codigo) VALUES (?)");
+
+            ps.setInt(1, planEstudios.getCodigo());
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+            return false;
+        }
+
+        return true;
     }
 
     @Override
     public ArrayList<PlanEstudios> read() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        ArrayList<PlanEstudios> planesDeEstudios = new ArrayList();
+
+        try {
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM PlanEstudios");
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                planesDeEstudios.add(new PlanEstudios(rs.getInt("codigo")));
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+            return null;
+        }
+
+        return planesDeEstudios;
     }
 
     @Override
     public boolean update(int codigo, PlanEstudios planEstudios) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (delete(codigo)) {
+            return create(planEstudios);
+        }
+        
+        return false;
     }
 
     @Override
     public boolean delete(int codigo) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        PreparedStatement ps;
+        
+        try {
+            // Comprobacion existencia del plan de estudios a eliminar
+            ps = con.prepareStatement("SELECT * FROM PlanEstudios WHERE codigo=?");
+            ps.setInt(1, codigo);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            rs.getString(1);
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "No hay ningun plan cargado con el código: " + codigo);
+            return false;
+        }
+        
+        try {
+            ps = con.prepareStatement("DELETE FROM PlanEstudios WHERE codigo=?");
+            ps.setInt(1, codigo);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,
+                    "No se pudo eliminar el plan de estudios");
+            return false;
+        }
+
+        return true;
     }
 
 }

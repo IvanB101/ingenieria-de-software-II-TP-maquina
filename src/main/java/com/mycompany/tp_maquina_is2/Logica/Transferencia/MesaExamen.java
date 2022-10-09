@@ -11,15 +11,26 @@ import java.util.ArrayList;
  * @author ivanb
  */
 public class MesaExamen {
+
+    private int codigo;
     private int turno;
     private int anio;
     private ArrayList<Integer> codInscriptos;
     private int codMateria;
 
-    public MesaExamen(int turno, int anio, int codMateria) {
+    public MesaExamen(int codigo, int turno, int anio, int codMateria) {
+        this.codigo = codigo;
         this.turno = turno;
         this.anio = anio;
         this.codMateria = codMateria;
+    }
+
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
     }
 
     public int getTurno() {

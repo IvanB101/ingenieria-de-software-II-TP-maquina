@@ -59,10 +59,12 @@ public class MateriaDAOImp implements MateriaDAOInter {
             for (int i = 0; i < materias.size(); i++) {
                 ps = con.prepareStatement("SELECT Correlativa_codigo from Correlativas,Materia WHERE"
                         + materias.get(i).getCodigo() + "= Materia_codigo");
+                rs = ps.executeQuery();
+
                 while (rs.next()) { //obtengo el codigo de la correlativa de una 
                     codscorres.add(rs.getInt("Correlativa_codigo"));
                 }
-                materias.get(i).setCorrelativas(buscarMat(materias,codscorres));
+                materias.get(i).setCorrelativas(buscarMat(materias, codscorres));
             }//fin for materia
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
@@ -76,6 +78,7 @@ public class MateriaDAOImp implements MateriaDAOInter {
         if (delete(codigo)) {
             return create(materia);
         }
+        
         return false;
     }
 
@@ -103,14 +106,16 @@ public class MateriaDAOImp implements MateriaDAOInter {
 
         return true;
     }
- public ArrayList<Materia> buscarMat(ArrayList<Materia> materias, ArrayList<Integer> codigos){
-     ArrayList<Materia> correlativas = new ArrayList();   
-     for(int i=0;i<materias.size();i++){
-         for(int j=0;i<codigos.size();j++){
-            if(materias.get(i).getCodigo()==codigos.get(j))
-                correlativas.add(materias.get(i));
-               }
-     }
+
+    public ArrayList<Materia> buscarMat(ArrayList<Materia> materias, ArrayList<Integer> codigos) {
+        ArrayList<Materia> correlativas = new ArrayList();
+        for (int i = 0; i < materias.size(); i++) {
+            for (int j = 0; i < codigos.size(); j++) {
+                if (materias.get(i).getCodigo() == codigos.get(j)) {
+                    correlativas.add(materias.get(i));
+                }
+            }
+        }
         return correlativas;
     }
 }

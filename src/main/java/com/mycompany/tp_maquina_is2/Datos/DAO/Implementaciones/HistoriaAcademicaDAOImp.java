@@ -111,6 +111,9 @@ public class HistoriaAcademicaDAOImp implements HistoriaAcademicaDAOInter {
                             Condicion.parse(rs.getString("regularidad"))));
                 }
             }
+
+            historia.setEstados(estados);
+            historiasAcademicas.add(historia);
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
             return null;
