@@ -117,7 +117,9 @@ public class Conexion {
                 + "dificultad int NOT NULL, "
                 + "dedicacion int NOT NULL, "
                 + "dias int NOT NULL, "
-                + "FOREIGN KEY (Examen_codigo) REFERENCES Examen(codigo) ON DELETE CASCADE, "
+
+                + "FOREIGN KEY (Examen_codigo) REFERENCES Examen(codigo) ON DELETE CASCADE,"
+
                 + "PRIMARY KEY (Examen_codigo))");
         
         query.execute("CREATE TABLE IF NOT EXISTS MesaExamen("
