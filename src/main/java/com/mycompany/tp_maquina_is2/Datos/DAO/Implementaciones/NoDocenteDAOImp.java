@@ -91,10 +91,10 @@ public class NoDocenteDAOImp implements NoDocenteDAOInter {
     @Override
     public boolean delete(int nroLegajo) {
         PreparedStatement ps;
-        String codigo = "nd" + nroLegajo;
+        String codigo = "n" + nroLegajo;
         // Control existencia del consumo con código a eliminar
         try {
-            ps = con.prepareStatement("SELECT * FROM Personas WHERE codigo=?");
+            ps = con.prepareStatement("SELECT * FROM Persona WHERE codigo=?");
             ps.setString(1, codigo);
             ResultSet rs = ps.executeQuery();
             rs.next();
@@ -104,7 +104,7 @@ public class NoDocenteDAOImp implements NoDocenteDAOInter {
         }
 
         try {
-            ps = con.prepareStatement("DELETE FROM Personas WHERE codigo=?");
+            ps = con.prepareStatement("DELETE FROM Persona WHERE codigo=?");
             ps.setString(1, codigo);
             ps.executeUpdate();
         } catch (SQLException ex) {

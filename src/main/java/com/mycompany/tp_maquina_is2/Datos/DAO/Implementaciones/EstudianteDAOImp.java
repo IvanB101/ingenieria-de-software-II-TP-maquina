@@ -96,7 +96,7 @@ public class EstudianteDAOImp implements EstudianteDAOInter {
         PreparedStatement ps;
         String codigo = "e" + nroRegistro;
 
-        // Control existencia del estudiante con código a eliminar
+        /* Control existencia del estudiante con código a eliminar
         try {
             ps = con.prepareStatement("SELECT * FROM Personas WHERE codigo=?");
             ps.setString(1, codigo);
@@ -105,15 +105,15 @@ public class EstudianteDAOImp implements EstudianteDAOInter {
             rs.getString(1);
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "No hay ningún estudiante cargado con el código: " + codigo);
+            return false;
         }
-
+        */
         try {
-            ps = con.prepareStatement("DELETE FROM Personas WHERE codigo=?");
+            ps = con.prepareStatement("DELETE FROM Persona WHERE codigo=?");
             ps.setString(1, codigo);
             ps.executeUpdate();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null,
-                    "El consumo no puede ser eliminado porque está referenciado en Se_Consume");
+                JOptionPane.showMessageDialog(null, ex.getMessage());
             return false;
         }
 

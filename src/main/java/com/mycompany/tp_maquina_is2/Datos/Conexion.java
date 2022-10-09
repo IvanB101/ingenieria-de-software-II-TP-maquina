@@ -50,13 +50,13 @@ public class Conexion {
         
         query.execute("CREATE TABLE IF NOT EXISTS NoDocente("
                 + "nroLegajo int NOT NULL, "
-                + "Persona_codigo int NOT NULL, "
+                + "Persona_codigo varchar(50) NOT NULL, "
                 + "FOREIGN KEY (Persona_codigo) REFERENCES Persona(codigo) ON DELETE CASCADE, "
                 + "PRIMARY KEY (nroLegajo))");
         
         query.execute("CREATE TABLE IF NOT EXISTS Estudiante("
                 + "nroRegistro int NOT NULL, "
-                + "Persona_codigo int NOT NULL, "
+                + "Persona_codigo varchar(50) NOT NULL, "
                 + "FOREIGN KEY (Persona_codigo) REFERENCES Persona(codigo) ON DELETE CASCADE, "
                 + "PRIMARY KEY (nroRegistro))");
         
@@ -117,7 +117,7 @@ public class Conexion {
                 + "dificultad int NOT NULL, "
                 + "dedicacion int NOT NULL, "
                 + "dias int NOT NULL, "
-                + "FOREIGN KEY (Examen_codigo) REFERENCES Examen(codigo), ON DELETE CASCADE"
+                + "FOREIGN KEY (Examen_codigo) REFERENCES Examen(codigo) ON DELETE CASCADE,"
                 + "PRIMARY KEY (Examen_codigo))");
         
         query.execute("CREATE TABLE IF NOT EXISTS MesaExamen("
