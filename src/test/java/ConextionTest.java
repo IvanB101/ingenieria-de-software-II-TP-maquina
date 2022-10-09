@@ -1,5 +1,7 @@
 
 import com.mycompany.tp_maquina_is2.Datos.Conexion;
+import com.mycompany.tp_maquina_is2.Logica.Util.Excel;
+import java.io.File;
 import java.sql.Connection;
 
 /*
@@ -26,5 +28,7 @@ public class ConextionTest {
         } catch(Exception e) {
             e.printStackTrace();
         }
+        
+        Excel.leerHistoriaAcademica(0, 0, new File("historia_academica.xls"));
     }
 }
