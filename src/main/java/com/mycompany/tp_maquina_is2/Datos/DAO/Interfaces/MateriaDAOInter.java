@@ -5,15 +5,19 @@
 package com.mycompany.tp_maquina_is2.Datos.DAO.Interfaces;
 
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.Materia;
-import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
  * @author ivanb
  */
 public interface MateriaDAOInter {
+
     public boolean create(Materia materia);
-    public ArrayList<Materia> read();
+
+    public HashMap<Integer, Materia> read();
+
     public boolean update(int codigo, Materia materia);
+
     public boolean delete(int codigo);
 }

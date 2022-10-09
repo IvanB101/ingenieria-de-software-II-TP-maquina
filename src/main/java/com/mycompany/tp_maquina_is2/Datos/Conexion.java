@@ -15,7 +15,7 @@ import java.sql.Statement;
  */
 public class Conexion {
 
-    // private String DB_NAME;
+    private String DB_NAME;
     private String DB_URL;
     private String DB_USER;
     private String DB_PWD;
@@ -23,7 +23,7 @@ public class Conexion {
     private static Connection conexion;
 
     public Conexion(String DB_NAME, String DB_URL, String DB_USER, String DB_PWD) {
-        // this.DB_NAME = DB_NAME;
+        this.DB_NAME = DB_NAME;
         this.DB_URL = DB_URL;
         this.DB_USER = DB_USER;
         this.DB_PWD = DB_PWD;
@@ -50,13 +50,13 @@ public class Conexion {
         
         query.execute("CREATE TABLE IF NOT EXISTS NoDocente("
                 + "nroLegajo int NOT NULL, "
-                + "Persona_codigo int NOT NULL, "
+                + "Persona_codigo varchar(50) NOT NULL, "
                 + "FOREIGN KEY (Persona_codigo) REFERENCES Persona(codigo) ON DELETE CASCADE, "
                 + "PRIMARY KEY (nroLegajo))");
         
         query.execute("CREATE TABLE IF NOT EXISTS Estudiante("
                 + "nroRegistro int NOT NULL, "
-                + "Persona_codigo int NOT NULL, "
+                + "Persona_codigo varchar(50) NOT NULL, "
                 + "FOREIGN KEY (Persona_codigo) REFERENCES Persona(codigo) ON DELETE CASCADE, "
                 + "PRIMARY KEY (nroRegistro))");
         
@@ -117,7 +117,7 @@ public class Conexion {
                 + "dificultad int NOT NULL, "
                 + "dedicacion int NOT NULL, "
                 + "dias int NOT NULL, "
-                + "FOREIGN KEY (Examen_codigo) REFERENCES Examen(codigo), ON DELETE CASCADE"
+                + "FOREIGN KEY (Examen_codigo) REFERENCES Examen(codigo) ON DELETE CASCADE, "
                 + "PRIMARY KEY (Examen_codigo))");
         
         query.execute("CREATE TABLE IF NOT EXISTS MesaExamen("

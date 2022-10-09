@@ -5,15 +5,19 @@
 package com.mycompany.tp_maquina_is2.Datos.DAO.Interfaces;
 
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.Estudiante;
-import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
  * @author ivanb
  */
 public interface EstudianteDAOInter {
+
     public boolean create(Estudiante estudiante);
-    public ArrayList<Estudiante> read();
+
+    public HashMap<Integer, Estudiante> read();
+
     public boolean update(int nroRegistro, Estudiante estudiante);
+
     public boolean delete(int nroRegistro);
 }

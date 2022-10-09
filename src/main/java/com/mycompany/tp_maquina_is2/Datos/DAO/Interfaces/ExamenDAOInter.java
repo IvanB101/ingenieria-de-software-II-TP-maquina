@@ -5,7 +5,7 @@
 package com.mycompany.tp_maquina_is2.Datos.DAO.Interfaces;
 
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.Examen;
-import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public interface ExamenDAOInter {
     public boolean create(Examen examen);
-    public ArrayList<Examen> read();
+    public HashMap<Integer, Examen> read();
     public boolean update(int codigo, Examen examen);
     public boolean delete(int codigo);
 }
