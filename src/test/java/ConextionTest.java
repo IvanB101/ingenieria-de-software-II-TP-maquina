@@ -15,7 +15,7 @@ import java.sql.Connection;
  */
 public class ConextionTest {
     
-    private static final String DB_NAME = "tests";
+    private static final String DB_NAME = "testeosUNSL";
     private static final String DB_URL = "jdbc:postgresql://localhost:5432/" + DB_NAME;
     private static final String DB_USER = "postgres";
     private static final String DB_PWD = "gino";

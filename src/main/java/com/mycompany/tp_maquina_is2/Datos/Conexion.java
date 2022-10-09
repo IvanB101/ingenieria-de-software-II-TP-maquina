@@ -83,7 +83,7 @@ public class Conexion {
                 + "Correlativa_codigo int NOT NULL, "
                 + "Materia_codigo int NOT NULL, "
                 + "FOREIGN KEY (Materia_codigo) REFERENCES Materia(codigo) ON DELETE CASCADE, "
-                + "FOREIGN KEY (Correlativa_codigo) REFERENCES Materia(codigo), "
+                + "FOREIGN KEY (Correlativa_codigo) REFERENCES Materia(codigo) ON DELETE CASCADE, "
                 + "PRIMARY KEY (Materia_codigo, Correlativa_codigo))");
         
         query.execute("DO $$ "

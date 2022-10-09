@@ -34,18 +34,20 @@ public class MateriaDAOImp implements MateriaDAOInter {
     @Override
     public boolean create(Materia materia) {
         try {
-            PreparedStatement ps = con.prepareStatement("INSERT INTO Materia (codigo, nombre, PlanEstudios_codigo,) VALUES (?,?,?)");
+            PreparedStatement ps = con.prepareStatement("INSERT INTO Materia (codigo, nombre, PlanEstudios_codigo) VALUES (?,?,?)");
             ps.setInt(1, materia.getCodigo());
             ps.setString(2, materia.getNombre());
             ps.setString(3, materia.getCodPlanDeEstudios());
             
             ps.executeUpdate();
-            
+           
+            if(!materia.getCorrelativas().isEmpty()){
             for(int k=0;k<materia.getCorrelativas().size();k++){
                 ps=con.prepareStatement("INSERT INTO Correlativas (correlativa_codigo, materia_codigo) VALUES (?,?)");
                 ps.setInt(1,materia.getCorrelativas().get(k).getCodigo());
                 ps.setInt(2, materia.getCodigo());
                 ps.executeUpdate();
+                }
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
@@ -66,19 +68,19 @@ public class MateriaDAOImp implements MateriaDAOInter {
                 materias.put(materia.getCodigo(), materia);
             }
             //me traigo las correlativas de cada materia
+          
             for (Materia materia : materias.values()) {
                 ps = con.prepareStatement("SELECT Correlativa_codigo from Correlativas,Materia WHERE"
                         + materia.getCodigo() + "= Materia_codigo");
                 rs = ps.executeQuery();
-
-                while (rs.next()) { //obtengo el codigo de la correlativa de una 
-                    codscorres.add(rs.getInt("Correlativa_codigo"));
-                }
-                materia.setCorrelativas(buscarMat((Materia[]) materias.values().toArray(), codscorres));
-            }
-            for (int i = 0; i < materias.size(); i++) {
                 
-            }//fin for materia
+                while (rs.next()) { //obtengo el codigo de la correlativa de una  
+                    codscorres.add(rs.getInt("correlativa_codigo")); 
+                }
+                //materia.setCorrelativas(buscarMat((Materia[]) materias.values().toArray(), codscorres));
+            
+            }
+
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
             return null;
@@ -113,7 +115,7 @@ public class MateriaDAOImp implements MateriaDAOInter {
             ps.setInt(1, codigo);
             ps.executeUpdate();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "No pudo ser eliminada la materia");
+            JOptionPane.showMessageDialog(null, ex.getMessage());
             return false;
         }
 
