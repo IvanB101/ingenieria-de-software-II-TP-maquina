@@ -37,6 +37,7 @@ public class HistoriaAcademicaDAOImp implements HistoriaAcademicaDAOInter {
         try {
             PreparedStatement ps;
 
+            // Carga de la historia academica
             ps = con.prepareStatement("INSERT INTO HistoriaAcademica (propuesta, Estudiante_nroRegistro, "
                     + "PlanEstudios_codigo) VALUES (?,?,?)");
 
@@ -51,8 +52,8 @@ public class HistoriaAcademicaDAOImp implements HistoriaAcademicaDAOInter {
             // Carga de los estados de la historia academica
             for (Estado estado : historiaAcademica.getEstados()) {
                 ps.setString(1, estado.getCondicion().toString());
-                ps.setInt(0, estado.getCodMateria());
-                ps.setInt(0, estado.getCodHistoriaAcademica());
+                ps.setInt(2, estado.getCodMateria());
+                ps.setInt(3, estado.getCodHistoriaAcademica());
 
                 ps.executeUpdate();
             }
@@ -69,6 +70,10 @@ public class HistoriaAcademicaDAOImp implements HistoriaAcademicaDAOInter {
         ArrayList<HistoriaAcademica> historiasAcademicas = new ArrayList<>();
 
         try {
+            /* Realiza un ensamble de las tablas HistoriaAcademica y Estado para tener todos los
+            estados de una historia academica seguidos en el ResultSet. Ademas, se realiza un ensamble
+            con Materia para poder diferenciar dos historias academicas del mismo estudiante en
+            distintas carreras*/
             PreparedStatement ps = con.prepareStatement("SELECT propuesta, Estudiante_nroRegistro, PlanEstudios_codigo, "
                     + "Materia_codigo, regularidad FROM HistoriaAcademica, Estado, Materia "
                     + "WHERE Estudiante_nroRegistro=HistoriaAcademica_Estudiante_nroRegistro AND "
@@ -76,6 +81,7 @@ public class HistoriaAcademicaDAOImp implements HistoriaAcademicaDAOInter {
                     + "Materia_codigo = codigo");
             ResultSet rs = ps.executeQuery();
 
+            // Se iniciaizan las primera historia academica y estado del ResultSet
             rs.next();
             ArrayList<Estado> estados = new ArrayList<>();
             estados.add(new Estado(rs.getInt("codigo"),
@@ -89,11 +95,15 @@ public class HistoriaAcademicaDAOImp implements HistoriaAcademicaDAOInter {
                     new ArrayList<>());
 
             while (rs.next()) {
+                /* Cuando cambia el codigo del plan de estudios o el numero de registro del estudiante se
+                sabe que se ha pasado a otra historia*/
                 if (rs.getInt("Estudiante_nroRegistro") != historia.getNroRegEstudiante()
                         || rs.getInt("PlanEstudios_codigo") != historia.getCodPlanDeEstudios()) {
+                    // Se cargan los datos de las historia en el ArrayList a retornar
                     historia.setEstados(estados);
                     historiasAcademicas.add(historia);
 
+                    // Se carga la nueva historia academica
                     historia = new HistoriaAcademica(
                             rs.getString("propuesta"),
                             rs.getInt("Estudiante_nroRegistro"),
@@ -112,6 +122,7 @@ public class HistoriaAcademicaDAOImp implements HistoriaAcademicaDAOInter {
                 }
             }
 
+            // Se carga la ultima historia academica con sus respectivos estados
             historia.setEstados(estados);
             historiasAcademicas.add(historia);
         } catch (SQLException ex) {

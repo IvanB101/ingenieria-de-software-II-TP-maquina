@@ -55,41 +55,65 @@ public class MesaExamenDAOImp implements MesaExamenDAOInter {
         ArrayList<MesaExamen> mesasExamenes = new ArrayList();
 
         try {
+            /*Se realiza un ensamble de las tablas MesaExamen e Inscripciones para que obtener
+            los datos de una mesa junto con las incripciones a la misma*/
             PreparedStatement ps = con.prepareStatement("SELECT codigo, turno, anio, Materia_codigo, Estudiante_nroRegistro "
                     + "FROM MesaExamen, Inscripciones "
-                    + "WHERE "
-                    + "");
+                    + "WHERE MesaExamen_codigo = codigo");
             ResultSet rs = ps.executeQuery();
 
+            // Inicializacion de la primera mesa
             rs.next();
-
             MesaExamen mesa = new MesaExamen(
                     rs.getInt("codigo"),
                     rs.getInt("turno"),
                     rs.getInt("anio"),
                     rs.getInt("Materia_codigo"));
-
+            // Inicializacion de la lista de codigos de estudiantes inscriptos a la mesa
             ArrayList<Integer> inscriptos = new ArrayList<>();
             inscriptos.add(rs.getInt("Estudiante_nroRegistro"));
 
             while (rs.next()) {
+                // Cuando cambia el codigo de la mesa sabemos que se pasa a otra mesa
                 if (mesa.getCodigo() != rs.getInt("codigo")) {
+                    // Se añaden los datos acumulados en las variables declaradas anteriormente
                     mesa.setCodInscriptos(inscriptos);
                     mesasExamenes.add(mesa);
 
+                    // Se cargan los datos correspondientes a la nueva mesa
                     mesa = new MesaExamen(
                             rs.getInt("codigo"),
                             rs.getInt("turno"),
                             rs.getInt("anio"),
                             rs.getInt("Materia_codigo"));
 
+                    // Se reinicia la lista de codigos de inscriptos
                     inscriptos = new ArrayList<>();
+                    inscriptos.add(rs.getInt("Estudiante_nroRegistro"));
+                } else {
+                    // Si no cambio la mesa se acumulan los codigos de inscriptos
                     inscriptos.add(rs.getInt("Estudiante_nroRegistro"));
                 }
             }
 
+            // Se agregan los datos correspondientes a la ultima mesa
             mesa.setCodInscriptos(inscriptos);
             mesasExamenes.add(mesa);
+
+            // Se realiza otra consulta para las mesas que no tengan ningun inscripto
+            ps = con.prepareStatement("SELECT codigo, turno, anio, Materia_codigo, Estudiante_nroRegistro "
+                    + "FROM MesaExamen, Inscripciones "
+                    + "WHERE codigo NOT IN "
+                    + "(SELECT codigo FROM MesaExamen, Inscripciones WHERE MesaExamen_codigo = codigo)");
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                mesasExamenes.add(new MesaExamen(
+                        rs.getInt("codigo"),
+                        rs.getInt("turno"),
+                        rs.getInt("anio"),
+                        rs.getInt("Materia_codigo")));
+            }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
             return null;

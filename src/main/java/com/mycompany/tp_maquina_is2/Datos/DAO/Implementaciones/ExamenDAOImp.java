@@ -124,8 +124,14 @@ public class ExamenDAOImp implements ExamenDAOInter {
         
         return false;
     }
-
+    
     @Override
+    /**
+    * Elimina el examen con el codigo dado de la base de datos, en el caso de que el examen
+    * posea una experiencia asociada, esta tambien sera eliminada
+    * @param codigo correspondiente al codigo del examen a eliminar
+    * @return boolean correspondiente al exito de la operacion
+    */
     public boolean delete(int codigo) {
         PreparedStatement ps;
         
@@ -141,6 +147,8 @@ public class ExamenDAOImp implements ExamenDAOInter {
         }
 
         try {
+            /* Tambien se borrara la experiencia correspondiente al examen ya que posee la opcion
+            ON DELETE CASCADE */
             ps = con.prepareStatement("DELETE FROM Examen WHERE codigo=?");
             ps.setInt(1, codigo);
             ps.executeUpdate();

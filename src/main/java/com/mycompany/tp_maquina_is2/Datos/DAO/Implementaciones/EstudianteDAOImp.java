@@ -33,6 +33,7 @@ public class EstudianteDAOImp implements EstudianteDAOInter {
     @Override
     public boolean create(Estudiante estudiante) {
         try {
+            // Insercion de los datos correspondientes a Persona
             PreparedStatement ps = con.prepareStatement("INSERT INTO Persona (codigo, dni, nombre, apellido) VALUES (?,?,?,?)");
 
             ps.setString(1, estudiante.getCodigo());
@@ -41,6 +42,8 @@ public class EstudianteDAOImp implements EstudianteDAOInter {
             ps.setString(4, estudiante.getApellido());
 
             ps.executeUpdate();
+            
+            // Insercion de los datos correspondientes a Estudiante
             ps = con.prepareStatement("INSERT INTO Estudiante (nroRegistro, Persona_codigo) VALUES (?,?)");
 
             ps.setInt(1, estudiante.getNroRegistro());
@@ -58,13 +61,13 @@ public class EstudianteDAOImp implements EstudianteDAOInter {
     @Override
     public ArrayList<Estudiante> read() {
         ArrayList<Estudiante> estudiantes = new ArrayList();
-        
+
         try {
             PreparedStatement ps = con.prepareStatement("SELECT nroRegistro, codigo, nombre, apellido,"
                     + " dni FROM Estudiante, Persona WHERE Persona_codigo = codigo");
             ResultSet rs = ps.executeQuery();
-            
-            while(rs.next()) {
+
+            while (rs.next()) {
                 estudiantes.add(new Estudiante(
                         rs.getInt("nroRegistro"),
                         rs.getString("nombre"),
@@ -75,16 +78,16 @@ public class EstudianteDAOImp implements EstudianteDAOInter {
             JOptionPane.showMessageDialog(null, ex.getMessage());
             return null;
         }
-        
+
         return estudiantes;
     }
 
     @Override
     public boolean update(int nroRegistro, Estudiante estudiante) {
-        if(delete(nroRegistro)) {
+        if (delete(nroRegistro)) {
             return create(estudiante);
         }
-        
+
         return false;
     }
 
@@ -92,7 +95,7 @@ public class EstudianteDAOImp implements EstudianteDAOInter {
     public boolean delete(int nroRegistro) {
         PreparedStatement ps;
         String codigo = "e" + nroRegistro;
-        
+
         // Control existencia del estudiante con código a eliminar
         try {
             ps = con.prepareStatement("SELECT * FROM Personas WHERE codigo=?");
