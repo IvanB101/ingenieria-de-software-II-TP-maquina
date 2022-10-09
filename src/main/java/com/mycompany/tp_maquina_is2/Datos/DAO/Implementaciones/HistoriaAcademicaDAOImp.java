@@ -14,6 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import javax.swing.JOptionPane;
 
 /**
@@ -66,8 +67,8 @@ public class HistoriaAcademicaDAOImp implements HistoriaAcademicaDAOInter {
     }
 
     @Override
-    public ArrayList<HistoriaAcademica> read() {
-        ArrayList<HistoriaAcademica> historiasAcademicas = new ArrayList<>();
+    public HashMap<Integer, HistoriaAcademica> read() {
+        HashMap<Integer, HistoriaAcademica> historiasAcademicas = new HashMap<>();
 
         try {
             /* Realiza un ensamble de las tablas HistoriaAcademica y Estado para tener todos los
@@ -101,7 +102,7 @@ public class HistoriaAcademicaDAOImp implements HistoriaAcademicaDAOInter {
                         || rs.getInt("PlanEstudios_codigo") != historia.getCodPlanDeEstudios()) {
                     // Se cargan los datos de las historia en el ArrayList a retornar
                     historia.setEstados(estados);
-                    historiasAcademicas.add(historia);
+                    historiasAcademicas.put(rs.getInt("Estudiante_nroRegistro"), historia);
 
                     // Se carga la nueva historia academica
                     historia = new HistoriaAcademica(
@@ -124,7 +125,7 @@ public class HistoriaAcademicaDAOImp implements HistoriaAcademicaDAOInter {
 
             // Se carga la ultima historia academica con sus respectivos estados
             historia.setEstados(estados);
-            historiasAcademicas.add(historia);
+            historiasAcademicas.put(rs.getInt("Estudiante_nroRegistro"), historia);
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
             return null;

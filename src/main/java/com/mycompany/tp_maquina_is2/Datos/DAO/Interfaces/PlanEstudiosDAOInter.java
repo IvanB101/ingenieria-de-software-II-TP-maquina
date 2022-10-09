@@ -5,15 +5,19 @@
 package com.mycompany.tp_maquina_is2.Datos.DAO.Interfaces;
 
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.PlanEstudios;
-import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
  * @author ivanb
  */
 public interface PlanEstudiosDAOInter {
+
     public boolean create(PlanEstudios planEstudios);
-    public ArrayList<PlanEstudios> read();
+
+    public HashMap<Integer, PlanEstudios> read();
+
     public boolean update(int codigo, PlanEstudios planEstudios);
+
     public boolean delete(int codigo);
 }

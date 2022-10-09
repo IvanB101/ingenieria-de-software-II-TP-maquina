@@ -11,7 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.HashMap;
 import javax.swing.JOptionPane;
 
 /**
@@ -46,15 +46,15 @@ public class PlanEstudiosDAOImp implements PlanEstudiosDAOInter {
     }
 
     @Override
-    public ArrayList<PlanEstudios> read() {
-        ArrayList<PlanEstudios> planesDeEstudios = new ArrayList();
+    public HashMap<Integer, PlanEstudios> read() {
+        HashMap<Integer, PlanEstudios> planesDeEstudios = new HashMap<>();
 
         try {
             PreparedStatement ps = con.prepareStatement("SELECT * FROM PlanEstudios");
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                planesDeEstudios.add(new PlanEstudios(rs.getInt("codigo")));
+                planesDeEstudios.put(rs.getInt("codigo"), new PlanEstudios(rs.getInt("codigo")));
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());

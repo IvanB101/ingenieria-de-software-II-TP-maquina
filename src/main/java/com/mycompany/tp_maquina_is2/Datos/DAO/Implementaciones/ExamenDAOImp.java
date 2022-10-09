@@ -13,7 +13,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.HashMap;
 import javax.swing.JOptionPane;
 
 /**
@@ -69,8 +69,8 @@ public class ExamenDAOImp implements ExamenDAOInter {
     }
 
     @Override
-    public ArrayList<Examen> read() {
-        ArrayList<Examen> examenes = new ArrayList<>();
+    public HashMap<Integer, Examen> read() {
+        HashMap<Integer, Examen> examenes = new HashMap<>();
 
         try {
             PreparedStatement ps = con.prepareStatement("SELECT codigo, fecha, turno, nota, Materia_codigo, "
@@ -90,7 +90,7 @@ public class ExamenDAOImp implements ExamenDAOInter {
                         rs.getInt("dificultad"),
                         rs.getInt("dedicacion"),
                         rs.getInt("dias")));
-                examenes.add(examen);
+                examenes.put(rs.getInt("codigo"), examen);
             }
             
             ps = con.prepareStatement("SELECT codigo, fecha, turno, nota, Materia_codigo, "
@@ -100,13 +100,12 @@ public class ExamenDAOImp implements ExamenDAOInter {
             
             // Agregado de examenes que no poseen experiencia
             while (rs.next()) {
-                examenes.add(new Examen(
+                examenes.put(rs.getInt("codigo"), new Examen(
                         rs.getDate("fecha").toLocalDate(),
                         rs.getInt("turno"),
                         rs.getFloat("nota"),
                         rs.getInt("Materia_codigo"),
-                        rs.getInt("columnHistoriaAcademica_Estudiante_nroRegistro")
-                ));
+                        rs.getInt("columnHistoriaAcademica_Estudiante_nroRegistro")));
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());

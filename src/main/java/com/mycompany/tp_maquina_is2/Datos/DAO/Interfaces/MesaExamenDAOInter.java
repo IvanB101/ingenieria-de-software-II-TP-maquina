@@ -5,15 +5,19 @@
 package com.mycompany.tp_maquina_is2.Datos.DAO.Interfaces;
 
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.MesaExamen;
-import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
  * @author ivanb
  */
 public interface MesaExamenDAOInter {
+
     public boolean create(MesaExamen mesaExamen);
-    public ArrayList<MesaExamen> read();
+
+    public HashMap<Integer, MesaExamen> read();
+
     public boolean update(int codigo, MesaExamen mesaExamen);
+
     public boolean delete(int codigo);
 }
