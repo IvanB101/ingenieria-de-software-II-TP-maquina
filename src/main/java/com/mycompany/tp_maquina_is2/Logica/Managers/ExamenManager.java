@@ -4,10 +4,21 @@
  */
 package com.mycompany.tp_maquina_is2.Logica.Managers;
 
+import com.mycompany.tp_maquina_is2.Datos.Conexion;
+import com.mycompany.tp_maquina_is2.Datos.DAO.Implementaciones.ExamenDAOImp;
+import java.util.HashMap;
+import com.mycompany.tp_maquina_is2.Logica.Transferencia.Examen;
+
 /**
  *
  * @author ivanb
  */
 public abstract class ExamenManager {
+    private static HashMap<Integer, Examen> examenes;
+    private static ExamenDAOImp examenDAOImp;
     
+    public static void init(Conexion conexion) {
+        examenDAOImp = new ExamenDAOImp(conexion);
+        examenes = examenDAOImp.read();
+    }
 }
