@@ -35,7 +35,7 @@ public class PlanEstudiosDAOImp implements PlanEstudiosDAOInter {
         try {
             PreparedStatement ps = con.prepareStatement("INSERT INTO PlanEstudios (codigo) VALUES (?)");
 
-            ps.setInt(1, planEstudios.getCodigo());
+            ps.setString(1, planEstudios.getCodigo());
             ps.executeUpdate();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
@@ -46,15 +46,15 @@ public class PlanEstudiosDAOImp implements PlanEstudiosDAOInter {
     }
 
     @Override
-    public HashMap<Integer, PlanEstudios> read() {
-        HashMap<Integer, PlanEstudios> planesDeEstudios = new HashMap<>();
+    public HashMap<String, PlanEstudios> read() {
+        HashMap<String, PlanEstudios> planesDeEstudios = new HashMap<>();
 
         try {
             PreparedStatement ps = con.prepareStatement("SELECT * FROM PlanEstudios");
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                planesDeEstudios.put(rs.getInt("codigo"), new PlanEstudios(rs.getInt("codigo")));
+                planesDeEstudios.put(rs.getString("codigo"), new PlanEstudios(rs.getString("codigo")));
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
@@ -65,7 +65,7 @@ public class PlanEstudiosDAOImp implements PlanEstudiosDAOInter {
     }
 
     @Override
-    public boolean update(int codigo, PlanEstudios planEstudios) {
+    public boolean update(String codigo, PlanEstudios planEstudios) {
         if (delete(codigo)) {
             return create(planEstudios);
         }
@@ -74,13 +74,13 @@ public class PlanEstudiosDAOImp implements PlanEstudiosDAOInter {
     }
 
     @Override
-    public boolean delete(int codigo) {
+    public boolean delete(String codigo) {
         PreparedStatement ps;
         
         try {
             // Comprobacion existencia del plan de estudios a eliminar
             ps = con.prepareStatement("SELECT * FROM PlanEstudios WHERE codigo=?");
-            ps.setInt(1, codigo);
+            ps.setString(1, codigo);
             ResultSet rs = ps.executeQuery();
             rs.next();
             rs.getString(1);
@@ -91,7 +91,7 @@ public class PlanEstudiosDAOImp implements PlanEstudiosDAOInter {
         
         try {
             ps = con.prepareStatement("DELETE FROM PlanEstudios WHERE codigo=?");
-            ps.setInt(1, codigo);
+            ps.setString(1, codigo);
             ps.executeUpdate();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null,

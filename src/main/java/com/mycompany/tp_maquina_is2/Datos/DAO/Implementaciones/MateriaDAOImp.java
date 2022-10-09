@@ -37,7 +37,7 @@ public class MateriaDAOImp implements MateriaDAOInter {
             PreparedStatement ps = con.prepareStatement("INSERT INTO Materia (codigo, nombre, PlanEstudios_codigo,) VALUES (?,?,?)");
             ps.setInt(1, materia.getCodigo());
             ps.setString(2, materia.getNombre());
-            ps.setInt(3, materia.getCodPlanDeEstudios());
+            ps.setString(3, materia.getCodPlanDeEstudios());
             
             ps.executeUpdate();
             
@@ -62,7 +62,7 @@ public class MateriaDAOImp implements MateriaDAOInter {
             PreparedStatement ps = con.prepareStatement("SELECT * from Materia");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) { //me traigo todas las materias
-                Materia materia = new Materia(rs.getInt("codigo"), rs.getString("nombre"), rs.getInt("PlanEstudios_codigo"), new ArrayList()); //le paso un array vacio
+                Materia materia = new Materia(rs.getInt("codigo"), rs.getString("nombre"), rs.getString("PlanEstudios_codigo"), new ArrayList()); //le paso un array vacio
                 materias.put(materia.getCodigo(), materia);
             }
             //me traigo las correlativas de cada materia

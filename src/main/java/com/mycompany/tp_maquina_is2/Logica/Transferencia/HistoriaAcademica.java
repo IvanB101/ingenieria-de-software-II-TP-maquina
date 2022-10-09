@@ -16,11 +16,11 @@ public class HistoriaAcademica {
     private int codEstudiante;
     private ArrayList<Estado> estados;
     private ArrayList<Integer> codExamenes;
-    private int codPlanDeEstudios;
+    private String codPlanDeEstudios;
     private ArrayList<Integer> codMateriasExamenes;
     private ArrayList<Integer> codMateriasEstados;
 
-    public HistoriaAcademica(String propuesta, int codEstudiante, int codPlanDeEstudios,
+    public HistoriaAcademica(String propuesta, int codEstudiante, String codPlanDeEstudios,
             ArrayList<Integer> codMateriasEstados, ArrayList<Estado> estados) {
         this.propuesta = propuesta;
         this.codEstudiante = codEstudiante;
@@ -49,11 +49,11 @@ public class HistoriaAcademica {
         this.codExamenes = codExamenes;
     }
 
-    public int getCodPlanDeEstudios() {
+    public String getCodPlanDeEstudios() {
         return codPlanDeEstudios;
     }
 
-    public void setCodPlanDeEstudios(int codPlanDeEstudios) {
+    public void setCodPlanDeEstudios(String codPlanDeEstudios) {
         this.codPlanDeEstudios = codPlanDeEstudios;
     }
 

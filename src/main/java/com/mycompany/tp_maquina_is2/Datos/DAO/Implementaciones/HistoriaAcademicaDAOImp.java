@@ -44,7 +44,7 @@ public class HistoriaAcademicaDAOImp implements HistoriaAcademicaDAOInter {
 
             ps.setString(1, historiaAcademica.getPropuesta());
             ps.setInt(2, historiaAcademica.getNroRegEstudiante());
-            ps.setInt(3, historiaAcademica.getCodPlanDeEstudios());
+            ps.setString(3, historiaAcademica.getCodPlanDeEstudios());
 
             ps.executeUpdate();
 
@@ -91,15 +91,15 @@ public class HistoriaAcademicaDAOImp implements HistoriaAcademicaDAOInter {
             HistoriaAcademica historia = new HistoriaAcademica(
                     rs.getString("propuesta"),
                     rs.getInt("Estudiante_nroRegistro"),
-                    rs.getInt("PlanEstudios_codigo"),
+                    rs.getString("PlanEstudios_codigo"),
                     new ArrayList<>(),
                     new ArrayList<>());
 
             while (rs.next()) {
                 /* Cuando cambia el codigo del plan de estudios o el numero de registro del estudiante se
                 sabe que se ha pasado a otra historia*/
-                if (rs.getInt("Estudiante_nroRegistro") != historia.getNroRegEstudiante()
-                        || rs.getInt("PlanEstudios_codigo") != historia.getCodPlanDeEstudios()) {
+                if((rs.getInt("Estudiante_nroRegistro") != historia.getNroRegEstudiante()) || (rs.getString("PlanEstudios_codigo").equals(historia.getCodPlanDeEstudios())))
+                    {
                     // Se cargan los datos de las historia en el ArrayList a retornar
                     historia.setEstados(estados);
                     historiasAcademicas.put(rs.getInt("Estudiante_nroRegistro"), historia);
@@ -108,7 +108,7 @@ public class HistoriaAcademicaDAOImp implements HistoriaAcademicaDAOInter {
                     historia = new HistoriaAcademica(
                             rs.getString("propuesta"),
                             rs.getInt("Estudiante_nroRegistro"),
-                            rs.getInt("PlanEstudios_codigo"),
+                            rs.getString("PlanEstudios_codigo"),
                             new ArrayList<>(),
                             new ArrayList<>());
 

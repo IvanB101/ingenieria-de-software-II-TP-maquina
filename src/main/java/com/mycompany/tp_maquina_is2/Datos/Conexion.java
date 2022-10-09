@@ -61,20 +61,20 @@ public class Conexion {
                 + "PRIMARY KEY (nroRegistro))");
         
         query.execute("CREATE TABLE IF NOT EXISTS PlanEstudios("
-                + "codigo int NOT NULL, "
+                + "codigo varchar(50) NOT NULL, "
                 + "PRIMARY KEY (codigo))");
         
         query.execute("CREATE TABLE IF NOT EXISTS Materia("
                 + "codigo int NOT NULL, "
                 + "nombre varchar(50) NOT NULL, "
-                + "PlanEstudios_codigo int NOT NULL, "
+                + "PlanEstudios_codigo varchar(50) NOT NULL, "
                 + "FOREIGN KEY (PlanEstudios_codigo) REFERENCES PlanEstudios(codigo), "
                 + "PRIMARY KEY (codigo))");
         
         query.execute("CREATE TABLE IF NOT EXISTS HistoriaAcademica("
                 + "propuesta varchar(50) NOT NULL, "
                 + "Estudiante_nroRegistro int UNIQUE NOT NULL, "
-                + "PlanEstudios_codigo int NOT NULL, "
+                + "PlanEstudios_codigo varchar(50) NOT NULL, "
                 + "FOREIGN KEY (Estudiante_nroRegistro) REFERENCES Estudiante(nroRegistro), "
                 + "FOREIGN KEY (PlanEstudios_codigo) REFERENCES PlanEstudios(codigo), "
                 + "PRIMARY KEY (Estudiante_nroRegistro, PlanEstudios_codigo))");

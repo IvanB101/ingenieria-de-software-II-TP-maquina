@@ -6,23 +6,20 @@ package com.mycompany.tp_maquina_is2.Logica.Transferencia;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author ivanb
- */
+
 public class PlanEstudios {
-    private int codigo;
+    private String codigo;
     private ArrayList<Integer> codMaterias;
 
-    public PlanEstudios(int codigo) {
+    public PlanEstudios(String codigo) {
         this.codigo = codigo;
     }
 
-    public int getCodigo() {
+    public String getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(int codigo) {
+    public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
 
