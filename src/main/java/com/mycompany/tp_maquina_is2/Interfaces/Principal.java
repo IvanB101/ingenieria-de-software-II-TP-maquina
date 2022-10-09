@@ -4,17 +4,26 @@
  */
 package com.mycompany.tp_maquina_is2.Interfaces;
 
+import com.mycompany.tp_maquina_is2.Datos.Conexion;
+import com.mycompany.tp_maquina_is2.Interfaces.Paneles.AgregarExpPanel;
+import java.awt.Color;
+import javax.swing.JPanel;
+
 /**
  *
  * @author ivanb
  */
 public class Principal extends javax.swing.JFrame {
+    private Conexion conn;
+    private Color mainButtonFontColorOnHover = new Color(255, 255, 255);
+    private Color mainButtonFont = new Color(0, 153, 153);
 
     /**
      * Creates new form Principal
      */
     public Principal() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -26,21 +35,351 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        ContenedorPrincipal = new javax.swing.JPanel();
+        MenuBar = new javax.swing.JPanel();
+        titulo = new javax.swing.JLabel();
+        insertButtonP = new javax.swing.JPanel();
+        insertButtonL = new javax.swing.JLabel();
+        ExperienceButton = new javax.swing.JPanel();
+        ExperienceButtonL = new javax.swing.JLabel();
+        queryButtonP = new javax.swing.JPanel();
+        queryButtonL = new javax.swing.JLabel();
+        closeButtonP = new javax.swing.JPanel();
+        closeButtonL = new javax.swing.JLabel();
+        tablesButtonP = new javax.swing.JPanel();
+        tablesButtonL = new javax.swing.JLabel();
+        PanelCambiable = new javax.swing.JPanel();
+        insertButtonL1 = new javax.swing.JLabel();
+        insertButtonL2 = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
+        setResizable(false);
+
+        MenuBar.setBackground(new java.awt.Color(0, 153, 153));
+        MenuBar.setToolTipText("");
+        MenuBar.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                MenuBarMouseDragged(evt);
+            }
+        });
+        MenuBar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                MenuBarMousePressed(evt);
+            }
+        });
+        MenuBar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        titulo.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        titulo.setForeground(new java.awt.Color(255, 255, 255));
+        titulo.setText("Sistema de asistencia universitaria");
+        MenuBar.add(titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, 410, -1));
+
+        insertButtonP.setBackground(new java.awt.Color(0, 153, 153));
+        insertButtonP.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        insertButtonP.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        insertButtonP.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                insertButtonPMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                insertButtonPMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                insertButtonPMouseExited(evt);
+            }
+        });
+
+        insertButtonL.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        insertButtonL.setForeground(new java.awt.Color(255, 255, 255));
+        insertButtonL.setText("Cargar historia academica");
+
+        javax.swing.GroupLayout insertButtonPLayout = new javax.swing.GroupLayout(insertButtonP);
+        insertButtonP.setLayout(insertButtonPLayout);
+        insertButtonPLayout.setHorizontalGroup(
+            insertButtonPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(insertButtonPLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(insertButtonL)
+                .addContainerGap(10, Short.MAX_VALUE))
+        );
+        insertButtonPLayout.setVerticalGroup(
+            insertButtonPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(insertButtonPLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(insertButtonL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        MenuBar.add(insertButtonP, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, 230, -1));
+
+        ExperienceButton.setBackground(new java.awt.Color(0, 153, 153));
+        ExperienceButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        ExperienceButton.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        ExperienceButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ExperienceButtonMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                ExperienceButtonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                ExperienceButtonMouseExited(evt);
+            }
+        });
+
+        ExperienceButtonL.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        ExperienceButtonL.setForeground(new java.awt.Color(255, 255, 255));
+        ExperienceButtonL.setText("Agregar Experiencia");
+
+        javax.swing.GroupLayout ExperienceButtonLayout = new javax.swing.GroupLayout(ExperienceButton);
+        ExperienceButton.setLayout(ExperienceButtonLayout);
+        ExperienceButtonLayout.setHorizontalGroup(
+            ExperienceButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ExperienceButtonLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(ExperienceButtonL)
+                .addContainerGap())
+        );
+        ExperienceButtonLayout.setVerticalGroup(
+            ExperienceButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ExperienceButtonLayout.createSequentialGroup()
+                .addGap(0, 6, Short.MAX_VALUE)
+                .addComponent(ExperienceButtonL))
+        );
+
+        MenuBar.add(ExperienceButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 70, 170, 30));
+
+        queryButtonP.setBackground(new java.awt.Color(0, 153, 153));
+        queryButtonP.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        queryButtonP.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        queryButtonP.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                queryButtonPMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                queryButtonPMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                queryButtonPMouseExited(evt);
+            }
+        });
+
+        queryButtonL.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        queryButtonL.setForeground(new java.awt.Color(255, 255, 255));
+        queryButtonL.setText("Consultar estadisticas");
+
+        javax.swing.GroupLayout queryButtonPLayout = new javax.swing.GroupLayout(queryButtonP);
+        queryButtonP.setLayout(queryButtonPLayout);
+        queryButtonPLayout.setHorizontalGroup(
+            queryButtonPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(queryButtonPLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(queryButtonL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(14, 14, 14))
+        );
+        queryButtonPLayout.setVerticalGroup(
+            queryButtonPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, queryButtonPLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(queryButtonL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        MenuBar.add(queryButtonP, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 70, -1, -1));
+
+        closeButtonP.setBackground(new java.awt.Color(0, 153, 153));
+        closeButtonP.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        closeButtonP.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                closeButtonPMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                closeButtonPMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                closeButtonPMouseExited(evt);
+            }
+        });
+
+        closeButtonL.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
+        closeButtonL.setForeground(new java.awt.Color(255, 255, 255));
+        closeButtonL.setText("x");
+
+        javax.swing.GroupLayout closeButtonPLayout = new javax.swing.GroupLayout(closeButtonP);
+        closeButtonP.setLayout(closeButtonPLayout);
+        closeButtonPLayout.setHorizontalGroup(
+            closeButtonPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(closeButtonPLayout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(closeButtonL))
+        );
+        closeButtonPLayout.setVerticalGroup(
+            closeButtonPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(closeButtonL, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
+        MenuBar.add(closeButtonP, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 0, 50, 50));
+
+        tablesButtonP.setBackground(new java.awt.Color(0, 153, 153));
+        tablesButtonP.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        tablesButtonP.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        tablesButtonP.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablesButtonPMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                tablesButtonPMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                tablesButtonPMouseExited(evt);
+            }
+        });
+
+        tablesButtonL.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        tablesButtonL.setForeground(new java.awt.Color(255, 255, 255));
+        tablesButtonL.setText("Ver Lista Finales");
+
+        javax.swing.GroupLayout tablesButtonPLayout = new javax.swing.GroupLayout(tablesButtonP);
+        tablesButtonP.setLayout(tablesButtonPLayout);
+        tablesButtonPLayout.setHorizontalGroup(
+            tablesButtonPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tablesButtonPLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(tablesButtonL)
+                .addContainerGap(8, Short.MAX_VALUE))
+        );
+        tablesButtonPLayout.setVerticalGroup(
+            tablesButtonPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tablesButtonPLayout.createSequentialGroup()
+                .addContainerGap(12, Short.MAX_VALUE)
+                .addComponent(tablesButtonL, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        MenuBar.add(tablesButtonP, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 60, -1, 50));
+
+        PanelCambiable.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        insertButtonL1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        insertButtonL1.setForeground(new java.awt.Color(51, 51, 51));
+        insertButtonL1.setText("Bienvenido al Sistema de asistencia universitaria");
+        PanelCambiable.add(insertButtonL1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 60, -1, -1));
+
+        insertButtonL2.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        insertButtonL2.setForeground(new java.awt.Color(51, 51, 51));
+        insertButtonL2.setText("Seleccione la operación que desea realizar");
+        PanelCambiable.add(insertButtonL2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 100, -1, -1));
+
+        javax.swing.GroupLayout ContenedorPrincipalLayout = new javax.swing.GroupLayout(ContenedorPrincipal);
+        ContenedorPrincipal.setLayout(ContenedorPrincipalLayout);
+        ContenedorPrincipalLayout.setHorizontalGroup(
+            ContenedorPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(MenuBar, javax.swing.GroupLayout.DEFAULT_SIZE, 918, Short.MAX_VALUE)
+            .addComponent(PanelCambiable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        ContenedorPrincipalLayout.setVerticalGroup(
+            ContenedorPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ContenedorPrincipalLayout.createSequentialGroup()
+                .addComponent(MenuBar, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(PanelCambiable, javax.swing.GroupLayout.PREFERRED_SIZE, 516, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(ContenedorPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(ContenedorPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void changePane(JPanel jPanel) {
+        PanelCambiable.setLayout(new java.awt.CardLayout());
+        PanelCambiable.removeAll();
+        PanelCambiable.add(jPanel);
+        PanelCambiable.revalidate();
+        PanelCambiable.repaint();
+    }
+    
+    private void insertButtonPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_insertButtonPMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_insertButtonPMouseClicked
+
+    private void insertButtonPMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_insertButtonPMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_insertButtonPMouseEntered
+
+    private void insertButtonPMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_insertButtonPMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_insertButtonPMouseExited
+
+    private void ExperienceButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExperienceButtonMouseClicked
+      changePane(new AgregarExpPanel(null,null));
+      // Hay que pasarle read de examenes y de materias.
+    }//GEN-LAST:event_ExperienceButtonMouseClicked
+
+    private void ExperienceButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExperienceButtonMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ExperienceButtonMouseEntered
+
+    private void ExperienceButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExperienceButtonMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ExperienceButtonMouseExited
+
+    private void tablesButtonPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablesButtonPMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tablesButtonPMouseClicked
+
+    private void tablesButtonPMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablesButtonPMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tablesButtonPMouseEntered
+
+    private void tablesButtonPMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablesButtonPMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tablesButtonPMouseExited
+
+    private void queryButtonPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_queryButtonPMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_queryButtonPMouseClicked
+
+    private void queryButtonPMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_queryButtonPMouseEntered
+       
+    }//GEN-LAST:event_queryButtonPMouseEntered
+
+    private void queryButtonPMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_queryButtonPMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_queryButtonPMouseExited
+
+    private void closeButtonPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeButtonPMouseClicked
+       System.exit(0);
+    }//GEN-LAST:event_closeButtonPMouseClicked
+
+    private void closeButtonPMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeButtonPMouseEntered
+       closeButtonP.setForeground(mainButtonFontColorOnHover);
+    }//GEN-LAST:event_closeButtonPMouseEntered
+
+    private void closeButtonPMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeButtonPMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_closeButtonPMouseExited
+
+    private void MenuBarMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuBarMouseDragged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MenuBarMouseDragged
+
+    private void MenuBarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuBarMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MenuBarMousePressed
 
     /**
      * @param args the command line arguments
@@ -72,5 +411,21 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel ContenedorPrincipal;
+    private javax.swing.JPanel ExperienceButton;
+    private javax.swing.JLabel ExperienceButtonL;
+    private javax.swing.JPanel MenuBar;
+    private javax.swing.JPanel PanelCambiable;
+    private javax.swing.JLabel closeButtonL;
+    private javax.swing.JPanel closeButtonP;
+    private javax.swing.JLabel insertButtonL;
+    private javax.swing.JLabel insertButtonL1;
+    private javax.swing.JLabel insertButtonL2;
+    private javax.swing.JPanel insertButtonP;
+    private javax.swing.JLabel queryButtonL;
+    private javax.swing.JPanel queryButtonP;
+    private javax.swing.JLabel tablesButtonL;
+    private javax.swing.JPanel tablesButtonP;
+    private javax.swing.JLabel titulo;
     // End of variables declaration//GEN-END:variables
 }
