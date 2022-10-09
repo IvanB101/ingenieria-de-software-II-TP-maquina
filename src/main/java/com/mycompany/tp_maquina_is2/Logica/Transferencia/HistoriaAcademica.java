@@ -33,7 +33,7 @@ public class HistoriaAcademica {
         return propuesta;
     }
 
-    public int getCodEstudiante() {
+    public int getNroRegEstudiante() {
         return codEstudiante;
     }
 

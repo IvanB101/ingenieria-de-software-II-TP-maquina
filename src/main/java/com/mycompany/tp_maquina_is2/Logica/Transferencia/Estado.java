@@ -10,7 +10,19 @@ package com.mycompany.tp_maquina_is2.Logica.Transferencia;
  */
 public class Estado {
     public enum Condicion {
-        regular, cursando, aprobado, libre
+        regular, cursando, aprobado, libre;
+        
+        public static Condicion parse(String text) {
+            if(regular.name().equalsIgnoreCase(text)) {
+                return regular;
+            } else if (cursando.name().equalsIgnoreCase(text)) {
+                return cursando;
+            } else if (aprobado.name().equalsIgnoreCase(text)) {
+                return aprobado;
+            } else {
+                return libre;
+            }
+        }
     }
     
     private int codMateria;

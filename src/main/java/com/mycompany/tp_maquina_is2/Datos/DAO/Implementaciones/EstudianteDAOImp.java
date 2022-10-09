@@ -33,7 +33,7 @@ public class EstudianteDAOImp implements EstudianteDAOInter {
     @Override
     public boolean create(Estudiante estudiante) {
         try {
-                PreparedStatement ps = con.prepareStatement("INSERT INTO Persona (codigo, dni, nombre, apellido) VALUES (?,?,?,?)");
+            PreparedStatement ps = con.prepareStatement("INSERT INTO Persona (codigo, dni, nombre, apellido) VALUES (?,?,?,?)");
 
             ps.setString(1, estudiante.getCodigo());
             ps.setInt(2, estudiante.getDni());
@@ -65,14 +65,11 @@ public class EstudianteDAOImp implements EstudianteDAOInter {
             ResultSet rs = ps.executeQuery();
             
             while(rs.next()) {
-                Estudiante estudiante = new Estudiante(
+                estudiantes.add(new Estudiante(
                         rs.getInt("nroRegistro"),
                         rs.getString("nombre"),
                         rs.getString("apellido"),
-                        rs.getInt("dni")
-                );
-                
-                estudiantes.add(estudiante);
+                        rs.getInt("dni")));
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
@@ -95,7 +92,8 @@ public class EstudianteDAOImp implements EstudianteDAOInter {
     public boolean delete(int nroRegistro) {
         PreparedStatement ps;
         String codigo = "e" + nroRegistro;
-        // Control existencia del consumo con código a eliminar
+        
+        // Control existencia del estudiante con código a eliminar
         try {
             ps = con.prepareStatement("SELECT * FROM Personas WHERE codigo=?");
             ps.setString(1, codigo);
@@ -112,7 +110,7 @@ public class EstudianteDAOImp implements EstudianteDAOInter {
             ps.executeUpdate();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null,
-                    "El consumo np puede ser eliminado porque está referenciado en Se_Consume");
+                    "El consumo no puede ser eliminado porque está referenciado en Se_Consume");
             return false;
         }
 
