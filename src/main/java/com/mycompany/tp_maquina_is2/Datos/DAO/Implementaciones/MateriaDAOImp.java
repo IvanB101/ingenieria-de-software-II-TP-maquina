@@ -38,6 +38,15 @@ public class MateriaDAOImp implements MateriaDAOInter {
             ps.setInt(1, materia.getCodigo());
             ps.setString(2, materia.getNombre());
             ps.setInt(3, materia.getCodPlanDeEstudios());
+            
+            ps.executeUpdate();
+            
+            for(int k=0;k<materia.getCorrelativas().size();k++){
+                ps=con.prepareStatement("INSERT INTO Correlativas (correlativa_codigo, materia_codigo) VALUES (?,?)");
+                ps.setInt(1,materia.getCorrelativas().get(k).getCodigo());
+                ps.setInt(2, materia.getCodigo());
+                ps.executeUpdate();
+            }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
             return false;

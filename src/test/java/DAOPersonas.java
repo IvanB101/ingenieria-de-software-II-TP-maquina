@@ -5,6 +5,8 @@ import com.mycompany.tp_maquina_is2.Datos.DAO.Implementaciones.NoDocenteDAOImp;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.Estudiante;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.NoDocente;
 import java.sql.Connection;
+import java.util.HashMap;
+import java.util.Map;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -64,10 +66,19 @@ public class DAOPersonas {
     
     Update Docente
     nodocDAOImp.update(8260284,nd4Update);
+    
+    READ Estudiante por consola
+    
+    Map<Integer, Estudiante> estudiantes = new HashMap<Integer, Estudiante>();
+    estudiantes = estDAOImp.read();
+    for (Map.Entry<Integer, Estudiante> entry : estudiantes.entrySet()) {
+    System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());
+    }
     */
- 
-    
-    
-    
+    Map<Integer, NoDocente> nodocentes = new HashMap<Integer, NoDocente>();
+    nodocentes = nodocDAOImp.read();
+    for (Map.Entry<Integer,NoDocente > entry : nodocentes.entrySet()) {
+    System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());
+    }
     }
 }
