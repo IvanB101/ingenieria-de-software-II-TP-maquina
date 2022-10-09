@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import javax.swing.JOptionPane;
 
 /**
@@ -50,9 +51,9 @@ public class MesaExamenDAOImp implements MesaExamenDAOInter {
     }
 
     @Override
-    public ArrayList<MesaExamen> read() {
+    public HashMap<Integer, MesaExamen> read() {
         ArrayList<Integer> aux = new ArrayList();
-        ArrayList<MesaExamen> mesasExamenes = new ArrayList();
+        HashMap<Integer, MesaExamen> mesasExamenes = new HashMap();
 
         try {
             /*Se realiza un ensamble de las tablas MesaExamen e Inscripciones para que obtener
@@ -78,7 +79,7 @@ public class MesaExamenDAOImp implements MesaExamenDAOInter {
                 if (mesa.getCodigo() != rs.getInt("codigo")) {
                     // Se añaden los datos acumulados en las variables declaradas anteriormente
                     mesa.setCodInscriptos(inscriptos);
-                    mesasExamenes.add(mesa);
+                    mesasExamenes.put(mesa.getCodigo(), mesa);
 
                     // Se cargan los datos correspondientes a la nueva mesa
                     mesa = new MesaExamen(
@@ -98,7 +99,7 @@ public class MesaExamenDAOImp implements MesaExamenDAOInter {
 
             // Se agregan los datos correspondientes a la ultima mesa
             mesa.setCodInscriptos(inscriptos);
-            mesasExamenes.add(mesa);
+            mesasExamenes.put(mesa.getCodigo(), mesa);
 
             // Se realiza otra consulta para las mesas que no tengan ningun inscripto
             ps = con.prepareStatement("SELECT codigo, turno, anio, Materia_codigo, Estudiante_nroRegistro "
@@ -108,7 +109,7 @@ public class MesaExamenDAOImp implements MesaExamenDAOInter {
             rs = ps.executeQuery();
 
             while (rs.next()) {
-                mesasExamenes.add(new MesaExamen(
+                mesasExamenes.put(rs.getInt("codigo"), new MesaExamen(
                         rs.getInt("codigo"),
                         rs.getInt("turno"),
                         rs.getInt("anio"),

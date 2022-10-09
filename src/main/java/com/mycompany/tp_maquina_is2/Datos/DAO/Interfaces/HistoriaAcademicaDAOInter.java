@@ -5,7 +5,7 @@
 package com.mycompany.tp_maquina_is2.Datos.DAO.Interfaces;
 
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.HistoriaAcademica;
-import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
@@ -15,7 +15,7 @@ public interface HistoriaAcademicaDAOInter {
 
     public boolean create(HistoriaAcademica historiaAcademica);
 
-    public ArrayList<HistoriaAcademica> read();
+    public HashMap<Integer, HistoriaAcademica> read();
 
     public boolean update(int codigo, HistoriaAcademica historiaAcademica);
 

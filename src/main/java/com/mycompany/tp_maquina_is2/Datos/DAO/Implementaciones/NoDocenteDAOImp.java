@@ -11,7 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.HashMap;
 import javax.swing.JOptionPane;
 
 /**
@@ -56,8 +56,8 @@ public class NoDocenteDAOImp implements NoDocenteDAOInter {
     }
 
     @Override
-    public ArrayList<NoDocente> read() {
-        ArrayList<NoDocente> noDocentes = new ArrayList();
+    public HashMap<Integer, NoDocente> read() {
+        HashMap<Integer, NoDocente> noDocentes = new HashMap<>();
 
         try {
             PreparedStatement ps = con.prepareStatement("SELECT nroLegajo, codigo, nombre, apellido,"
@@ -65,7 +65,7 @@ public class NoDocenteDAOImp implements NoDocenteDAOInter {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                noDocentes.add(new NoDocente(
+                noDocentes.put(rs.getInt("nroLegajo"), new NoDocente(
                         rs.getInt("nroLegajo"),
                         rs.getString("nombre"),
                         rs.getString("apellido"),

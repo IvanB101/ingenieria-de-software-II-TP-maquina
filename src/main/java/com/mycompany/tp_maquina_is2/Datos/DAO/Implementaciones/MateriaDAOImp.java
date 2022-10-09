@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import javax.swing.JOptionPane;
 
 /**
@@ -45,26 +46,29 @@ public class MateriaDAOImp implements MateriaDAOInter {
     }
 
     @Override
-    public ArrayList<Materia> read() {
-        ArrayList<Materia> materias = new ArrayList();//todas las mat de todos los planes
+    public HashMap<Integer, Materia> read() {
+        HashMap<Integer, Materia> materias = new HashMap();//todas las mat de todos los planes
         ArrayList<Integer> codscorres = new ArrayList(); // todos los codigos de las correlativas
         try {
             PreparedStatement ps = con.prepareStatement("SELECT * from Materia");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) { //me traigo todas las materias
                 Materia materia = new Materia(rs.getInt("codigo"), rs.getString("nombre"), rs.getInt("PlanEstudios_codigo"), new ArrayList()); //le paso un array vacio
-                materias.add(materia);
+                materias.put(materia.getCodigo(), materia);
             }
             //me traigo las correlativas de cada materia
-            for (int i = 0; i < materias.size(); i++) {
+            for (Materia materia : materias.values()) {
                 ps = con.prepareStatement("SELECT Correlativa_codigo from Correlativas,Materia WHERE"
-                        + materias.get(i).getCodigo() + "= Materia_codigo");
+                        + materia.getCodigo() + "= Materia_codigo");
                 rs = ps.executeQuery();
 
                 while (rs.next()) { //obtengo el codigo de la correlativa de una 
                     codscorres.add(rs.getInt("Correlativa_codigo"));
                 }
-                materias.get(i).setCorrelativas(buscarMat(materias, codscorres));
+                materia.setCorrelativas(buscarMat((Materia[]) materias.values().toArray(), codscorres));
+            }
+            for (int i = 0; i < materias.size(); i++) {
+                
             }//fin for materia
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
@@ -107,12 +111,12 @@ public class MateriaDAOImp implements MateriaDAOInter {
         return true;
     }
 
-    public ArrayList<Materia> buscarMat(ArrayList<Materia> materias, ArrayList<Integer> codigos) {
+    public ArrayList<Materia> buscarMat(Materia[]materias, ArrayList<Integer> codigos) {
         ArrayList<Materia> correlativas = new ArrayList();
-        for (int i = 0; i < materias.size(); i++) {
+        for (int i = 0; i < materias.length; i++) {
             for (int j = 0; i < codigos.size(); j++) {
-                if (materias.get(i).getCodigo() == codigos.get(j)) {
-                    correlativas.add(materias.get(i));
+                if (materias[i].getCodigo() == codigos.get(j)) {
+                    correlativas.add(materias[i]);
                 }
             }
         }
