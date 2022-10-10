@@ -7,6 +7,7 @@ package com.mycompany.tp_maquina_is2.Logica.Managers;
 import com.mycompany.tp_maquina_is2.Datos.Conexion;
 import com.mycompany.tp_maquina_is2.Datos.DAO.Implementaciones.MateriaDAOImp;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.Materia;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -28,5 +29,8 @@ public abstract class MateriaManager {
             System.out.println(materia);
         }
        return true; 
+    }
+    public static ArrayList<Materia> obtenerMaterias(){
+        return (ArrayList)materias.values();
     }
 }

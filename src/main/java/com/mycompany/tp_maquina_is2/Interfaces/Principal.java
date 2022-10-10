@@ -4,8 +4,17 @@
  */
 package com.mycompany.tp_maquina_is2.Interfaces;
 
+import com.mycompany.tp_maquina_is2.Datos.Conexion;
 import com.mycompany.tp_maquina_is2.Interfaces.Paneles.AgregarExpPanel;
+import com.mycompany.tp_maquina_is2.Logica.Managers.EstudianteManager;
+import com.mycompany.tp_maquina_is2.Logica.Managers.ExamenManager;
+import com.mycompany.tp_maquina_is2.Logica.Managers.HistoriaAcademicaManager;
+import com.mycompany.tp_maquina_is2.Logica.Managers.MateriaManager;
+import com.mycompany.tp_maquina_is2.Logica.Managers.PlanEstudiosManager;
 import java.awt.Color;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
 
 /**
@@ -13,6 +22,13 @@ import javax.swing.JPanel;
  * @author ivanb
  */
 public class Principal extends javax.swing.JFrame {
+    private static final String DB_NAME = "FINALES";
+    private static final String DB_URL = "jdbc:postgresql://localhost:5432/" + DB_NAME;
+    private static final String DB_USER = "postgres";
+    private static final String DB_PWD = "admin";
+    private Conexion conn;
+    
+    
 
     /**
      * Creates new form Principal
@@ -20,6 +36,19 @@ public class Principal extends javax.swing.JFrame {
     public Principal() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.conn = new Conexion(DB_NAME, DB_URL, DB_USER, DB_PWD);
+
+        try {
+            // Conexion con la base de datos
+            conn.getInstance();
+        } catch (SQLException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        MateriaManager.init(conn);
+        ExamenManager.init(conn);
+        EstudianteManager.init(conn);
+        HistoriaAcademicaManager.init(conn);
+        PlanEstudiosManager.init(conn);
     }
 
     /**
@@ -364,7 +393,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_tablesButtonPMouseExited
 
     private void AñadirExpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AñadirExpMouseClicked
-       changePane(new AgregarExpPanel());
+       changePane(new AgregarExpPanel(10));
     }//GEN-LAST:event_AñadirExpMouseClicked
 
     private void AñadirExpMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AñadirExpMouseEntered
