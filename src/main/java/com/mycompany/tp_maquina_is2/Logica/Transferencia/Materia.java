@@ -82,4 +82,16 @@ public class Materia {
     public void setCodExamenes(ArrayList<Integer> codExamenes) {
         this.codExamenes = codExamenes;
     }
+    
+    @Override
+    public String toString() {
+        String ret = "Codigo: " + codigo + " | Nombre: " + nombre + " | Correlativas: ";
+        ArrayList<String>codCorrelativas = new ArrayList<>();
+        
+        for (Materia correlativa : correlativas) {
+            codCorrelativas.add(correlativa.getCodigo() + "");
+        }
+        
+        return ret + String.join(", ", (CharSequence[]) codCorrelativas.toArray());
+    }
 }

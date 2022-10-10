@@ -1,5 +1,6 @@
 
 import com.mycompany.tp_maquina_is2.Datos.Conexion;
+import com.mycompany.tp_maquina_is2.Logica.Transferencia.HistoriaAcademica;
 import com.mycompany.tp_maquina_is2.Logica.Util.Excel;
 import java.io.File;
 import java.sql.Connection;
@@ -29,7 +30,11 @@ public class ConextionTest {
         }
         */
         try {
-            Excel.leerHistoriaAcademica(0, "32/12", new File("historia_academica.xls"));
+            Excel.leerPlanEstudios(new File("LIC. 32_12.xls"));
+            
+            // HistoriaAcademica historia = Excel.leerHistoriaAcademica(0, "32/12", new File("historia_academica.xls"));
+            
+            // System.out.println(historia);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -38,15 +38,15 @@ public class MateriaDAOImp implements MateriaDAOInter {
             ps.setInt(1, materia.getCodigo());
             ps.setString(2, materia.getNombre());
             ps.setString(3, materia.getCodPlanDeEstudios());
-            
+
             ps.executeUpdate();
-           
-            if(!materia.getCorrelativas().isEmpty()){
-            for(int k=0;k<materia.getCorrelativas().size();k++){
-                ps=con.prepareStatement("INSERT INTO Correlativas (correlativa_codigo, materia_codigo) VALUES (?,?)");
-                ps.setInt(1,materia.getCorrelativas().get(k).getCodigo());
-                ps.setInt(2, materia.getCodigo());
-                ps.executeUpdate();
+
+            if (!materia.getCorrelativas().isEmpty()) {
+                for (int k = 0; k < materia.getCorrelativas().size(); k++) {
+                    ps = con.prepareStatement("INSERT INTO Correlativas (correlativa_codigo, materia_codigo) VALUES (?,?)");
+                    ps.setInt(1, materia.getCorrelativas().get(k).getCodigo());
+                    ps.setInt(2, materia.getCodigo());
+                    ps.executeUpdate();
                 }
             }
         } catch (SQLException ex) {
@@ -59,28 +59,25 @@ public class MateriaDAOImp implements MateriaDAOInter {
     @Override
     public HashMap<Integer, Materia> read() {
         HashMap<Integer, Materia> materias = new HashMap();//todas las mat de todos los planes
-        ArrayList<Integer> codscorres = new ArrayList(); // todos los codigos de las correlativas
+        ArrayList<Integer> codCorrelativas = new ArrayList(); // todos los codigos de las correlativas
         try {
+            // Carga de las materias sin sus correlativas
             PreparedStatement ps = con.prepareStatement("SELECT * from Materia");
             ResultSet rs = ps.executeQuery();
-            while (rs.next()) { //me traigo todas las materias
-                Materia materia = new Materia(rs.getInt("codigo"), rs.getString("nombre"), rs.getString("PlanEstudios_codigo"), new ArrayList()); //le paso un array vacio
-                materias.put(materia.getCodigo(), materia);
-            }
-            //me traigo las correlativas de cada materia
-          
-            for (Materia materia : materias.values()) {
-                ps = con.prepareStatement("SELECT Correlativa_codigo from Correlativas,Materia WHERE"
-                        + materia.getCodigo() + "= Materia_codigo");
-                rs = ps.executeQuery();
-                
-                while (rs.next()) { //obtengo el codigo de la correlativa de una  
-                    codscorres.add(rs.getInt("correlativa_codigo")); 
-                }
-                //materia.setCorrelativas(buscarMat((Materia[]) materias.values().toArray(), codscorres));
-            
+            while (rs.next()) {
+                materias.put(rs.getInt("codigo"), new Materia(
+                        rs.getInt("codigo"),
+                        rs.getString("nombre"),
+                        rs.getString("PlanEstudios_codigo"),
+                        new ArrayList()));
             }
 
+            // Carga de las correlativas de cada materia
+            ps = con.prepareStatement("SELECT * from Correlativas");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                materias.get(rs.getInt("Materia_codigo")).getCorrelativas().add(materias.get(rs.getInt("Correlativa_codigo")));
+            }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
             return null;
@@ -93,7 +90,7 @@ public class MateriaDAOImp implements MateriaDAOInter {
         if (delete(codigo)) {
             return create(materia);
         }
-        
+
         return false;
     }
 
@@ -122,7 +119,7 @@ public class MateriaDAOImp implements MateriaDAOInter {
         return true;
     }
 
-    public ArrayList<Materia> buscarMat(Materia[]materias, ArrayList<Integer> codigos) {
+    public ArrayList<Materia> buscarMat(Materia[] materias, ArrayList<Integer> codigos) {
         ArrayList<Materia> correlativas = new ArrayList();
         for (int i = 0; i < materias.length; i++) {
             for (int j = 0; i < codigos.size(); j++) {

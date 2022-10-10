@@ -7,10 +7,12 @@ package com.mycompany.tp_maquina_is2.Logica.Util;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.Estado;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.Estado.Condicion;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.HistoriaAcademica;
+import com.mycompany.tp_maquina_is2.Logica.Transferencia.PlanEstudios;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.FormatFlagsConversionMismatchException;
 import java.util.Iterator;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -23,18 +25,7 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
  */
 public class Excel {
 
-    /**
-     * Metodo para leer una historia academica de un documento Excel
-     *
-     * @param nroRegistro es el numero de registro del estudiante al cual
-     * pertenece la historia
-     * @param file es el archivo con la historia a leer
-     * @param codPlanEstudios es el codigo del plan de estudios de la carrera
-     * @return un objeto tipo HistoriaAcadamica con los datos del documento
-     * Excel
-     * @throws java.lang.Exception
-     */
-    public static HistoriaAcademica leerHistoriaAcademica(int nroRegistro, String codPlanEstudios, File file) throws Exception {
+    public static PlanEstudios leerPlanEstudios(File file) {
         try {
             FileInputStream fileInputStream = new FileInputStream(file);
             // Estructura central dentro del libro de Excel
@@ -44,30 +35,71 @@ public class Excel {
             // Iterador sobre las filas de la hoja
             Iterator rowIterator = sheet0.rowIterator();
 
+            if (!avanzarIteradorFilasHasta(rowIterator, "Carrera")) {
+                throw new FormatFlagsConversionMismatchException("Historia Academica invalida", 'a');
+            }
+
             HSSFRow row = (HSSFRow) rowIterator.next();
             // Iterador sobre las celdas de las filas
             Iterator cellIterator = row.cellIterator();
+            // Descartamos el contenido de la primera celda
+            cellIterator.next();
             HSSFCell cell = (HSSFCell) cellIterator.next();
+            // Codigo del plan de estudios
+            String codigo = cell.toString();
+            
+            if (!avanzarIteradorFilasHasta(rowIterator, "Nombre")) {
+                throw new FormatFlagsConversionMismatchException("Historia Academica invalida", 'a');
+            }
+            
+            while(rowIterator.hasNext()) {
+                
+            }
+            
+        } catch (IOException e) {
+            System.out.println("Error en la lectura del archivo .xlsx");
+            return null;
+        }
+
+        return null;
+    }
+
+    /**
+     * Metodo para leer una historia academica de un documento Excel
+     *
+     * @param nroRegistro es el numero de registro del estudiante al cual
+     * pertenece la historia
+     * @param file es el archivo con la historia a leer
+     * @param codPlanEstudios es el codigo del plan de estudios de la carrera
+     * @return un objeto tipo HistoriaAcadamica con los datos del documento
+     * Excel
+     */
+    public static HistoriaAcademica leerHistoriaAcademica(int nroRegistro, String codPlanEstudios, File file)
+            throws FormatFlagsConversionMismatchException {
+        try {
+            FileInputStream fileInputStream = new FileInputStream(file);
+            // Estructura central dentro del libro de Excel
+            HSSFWorkbook book = new HSSFWorkbook(fileInputStream);
+            // Obtencion de la primera hoja del libro
+            HSSFSheet sheet0 = book.getSheetAt(0);
+            // Iterador sobre las filas de la hoja
+            Iterator rowIterator = sheet0.rowIterator();
 
             ArrayList<Estado> estados = new ArrayList<>();
             ArrayList<Integer> codMaterias = new ArrayList<>();
 
             // Obtencion de la propuesta de la primera celda del excel
+            HSSFRow row = (HSSFRow) rowIterator.next();
+            // Iterador sobre las celdas de las filas
+            Iterator cellIterator = row.cellIterator();
+            HSSFCell cell = (HSSFCell) cellIterator.next();
+            
             String eliminar = "Propuesta: ";
             String propuesta = cell.toString();
             propuesta = (String) propuesta.subSequence(eliminar.length(), propuesta.length());
 
-            // Iteracion para salteas las filas vacias y el encabezado de la tabla
-            while (rowIterator.hasNext()) {
-                row = (HSSFRow) rowIterator.next();
-
-                cellIterator = row.cellIterator();
-                // Iterador sobre las celdas de las filas
-                cell = (HSSFCell) cellIterator.next();
-
-                if (cell.toString().equals("Actividad")) {
-                    break;
-                }
+            if (!avanzarIteradorFilasHasta(rowIterator, "Actividad")) {
+                throw new FormatFlagsConversionMismatchException("Historia Academica invalida", 'a');
             }
 
             // Carga de la primera fila de la historia
@@ -130,6 +162,31 @@ public class Excel {
         }
     }
 
+    /**
+     * Avanza el iterador de fila del documento excel hasta la fila posterior a
+     * la ocurrencia
+     *
+     * @param rowIterator iterador de las filas del documento a avanzar
+     * @param ocurrencia contenido de la primera celda de la fila anterior a la
+     * que se desea avanzar
+     * @return true si la ocurrencia fue encontrada, false en otro caso
+     */
+    private static boolean avanzarIteradorFilasHasta(Iterator rowIterator, String ocurrencia) {
+        while (rowIterator.hasNext()) {
+            HSSFRow row = (HSSFRow) rowIterator.next();
+
+            Iterator cellIterator = row.cellIterator();
+            // Iterador sobre las celdas de las filas
+            HSSFCell cell = (HSSFCell) cellIterator.next();
+
+            if (cell.toString().equals(ocurrencia)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     private static int codigoMateria(String contenidoCelda) {
         int start = contenidoCelda.indexOf("(") + 1;
         int finish = contenidoCelda.indexOf(")");
@@ -143,7 +200,7 @@ public class Excel {
      * historia academica
      * @return condicion del alumno a partir de los parametros dados
      */
-    private static Condicion formatCondicion(String tipo, String resultado) throws Exception {
+    private static Condicion formatCondicion(String tipo, String resultado) throws FormatFlagsConversionMismatchException {
         Condicion ret = Condicion.libre;
 
         switch (tipo) {
@@ -166,7 +223,7 @@ public class Excel {
                 ret = Condicion.cursando;
                 break;
             default:
-                throw new Exception("Historia Academica invalida");
+                throw new FormatFlagsConversionMismatchException("Historia Academica invalida", 'a');
         }
 
         return ret;

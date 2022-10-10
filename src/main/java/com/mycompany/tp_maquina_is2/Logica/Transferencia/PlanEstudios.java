@@ -30,4 +30,15 @@ public class PlanEstudios {
     public void setCodMaterias(ArrayList<Integer> codMaterias) {
         this.codMaterias = codMaterias;
     }
+    
+    @Override
+    public String toString() {
+        String ret = "Codigo: " + codigo + "\nCodigos Materias:";
+        
+        for (Integer codMateria : codMaterias) {
+            ret += "\n" + codMateria;
+        }
+        
+        return ret;
+    }
 }
