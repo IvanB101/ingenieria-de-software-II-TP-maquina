@@ -21,6 +21,7 @@ public class Examen {
     private Experiencia experiencia;
 
     public Examen(LocalDate fecha, int turno, float nota, int codMateria, int codHistoriaAcademica) {
+        // TODO
         this.codigo = Integer.parseInt(fecha.getDayOfYear() + fecha.getYear() + codMateria + codHistoriaAcademica + "");
         this.fecha = fecha;
         this.nota = nota;

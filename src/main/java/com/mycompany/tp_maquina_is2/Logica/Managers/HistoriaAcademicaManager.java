@@ -23,7 +23,7 @@ public abstract class HistoriaAcademicaManager {
     }
     
     public static boolean agregar(HistoriaAcademica historiaAcademica) {
-        // TODO
-        return false;
+        System.out.println(historiaAcademica);
+        return true;
     }
 }
