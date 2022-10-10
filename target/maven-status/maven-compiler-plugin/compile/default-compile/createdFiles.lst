@@ -1,4 +1,5 @@
 com\mycompany\tp_maquina_is2\Logica\Transferencia\Estado$Condicion.class
+com\mycompany\tp_maquina_is2\Logica\Managers\EstudianteManager.class
 com\mycompany\tp_maquina_is2\Logica\Transferencia\Examen.class
 com\mycompany\tp_maquina_is2\Datos\DAO\Interfaces\MesaExamenDAOInter.class
 com\mycompany\tp_maquina_is2\Interfaces\Principal.class
@@ -8,6 +9,7 @@ com\mycompany\tp_maquina_is2\Logica\Transferencia\Estado.class
 com\mycompany\tp_maquina_is2\Datos\DAO\Interfaces\EstudianteDAOInter.class
 com\mycompany\tp_maquina_is2\Logica\Transferencia\Persona.class
 com\mycompany\tp_maquina_is2\Datos\DAO\Implementaciones\NoDocenteDAOImp.class
+com\mycompany\tp_maquina_is2\Logica\Managers\HistoriaAcademicaManager.class
 com\mycompany\tp_maquina_is2\Datos\DAO\Interfaces\ExamenDAOInter.class
 com\mycompany\tp_maquina_is2\Datos\DAO\Interfaces\HistoriaAcademicaDAOInter.class
 com\mycompany\tp_maquina_is2\Datos\DAO\Implementaciones\ExamenDAOImp.class
@@ -16,10 +18,13 @@ com\mycompany\tp_maquina_is2\Logica\Transferencia\PlanEstudios.class
 com\mycompany\tp_maquina_is2\Datos\DAO\Implementaciones\MesaExamenDAOImp.class
 com\mycompany\tp_maquina_is2\Datos\DAO\Implementaciones\HistoriaAcademicaDAOImp.class
 com\mycompany\tp_maquina_is2\Datos\DAO\Implementaciones\MateriaDAOImp.class
+com\mycompany\tp_maquina_is2\Logica\Managers\PlanEstudiosManager.class
 com\mycompany\tp_maquina_is2\Logica\Transferencia\Estudiante.class
 com\mycompany\tp_maquina_is2\Datos\DAO\Interfaces\NoDocenteDAOInter.class
 com\mycompany\tp_maquina_is2\Logica\Transferencia\Materia.class
+com\mycompany\tp_maquina_is2\Logica\Managers\ExamenManager.class
 com\mycompany\tp_maquina_is2\Datos\DAO\Implementaciones\EstudianteDAOImp.class
+com\mycompany\tp_maquina_is2\Logica\Managers\MateriaManager.class
 com\mycompany\tp_maquina_is2\Datos\DAO\Interfaces\PlanEstudiosDAOInter.class
 com\mycompany\tp_maquina_is2\Datos\DAO\Interfaces\MateriaDAOInter.class
 com\mycompany\tp_maquina_is2\Logica\Transferencia\MesaExamen.class
