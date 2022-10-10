@@ -21,15 +21,15 @@ public abstract class ExamenManager {
     
     public static void init(Conexion conexion) {
         examenDAOImp = new ExamenDAOImp(conexion);
-        //examenes = examenDAOImp.read();
+        examenes = examenDAOImp.read();
     }
-    public static HashMap<String,Examen> examenesEstudiante(int cod_historia){
+    public static ArrayList<Examen> examenesEstudiante(int cod_historia){
         int i=0;
-        HashMap<String,Examen> aux=new HashMap<String,Examen>();
+        ArrayList<Examen> aux=new ArrayList<Examen>();
         ArrayList<Examen> aux2=(ArrayList<Examen>)examenes.values();
         for(i=0;i<aux2.size();i++){
             if(aux2.get(i).getCodHistoriaAcademica()==cod_historia){
-                //aux.put(aux2.get(i).getCodigo(),aux2.get(i));
+                aux.add(aux2.get(i));
             }
         }
         return aux;

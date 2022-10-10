@@ -35,15 +35,9 @@
             <version>42.3.2</version>
         </dependency>
         <dependency>
-<<<<<<< Updated upstream
             <groupId>unknown.binary</groupId>
             <artifactId>AbsoluteLayout</artifactId>
             <version>SNAPSHOT</version>
-=======
-            <groupId>org.netbeans.external</groupId>
-            <artifactId>AbsoluteLayout</artifactId>
-            <version>RELEASE130</version>
->>>>>>> Stashed changes
         </dependency>
     </dependencies>
 </project>

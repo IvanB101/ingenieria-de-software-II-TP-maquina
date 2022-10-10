@@ -5,8 +5,11 @@
 package com.mycompany.tp_maquina_is2.Interfaces.Paneles;
 
 import com.mycompany.tp_maquina_is2.Logica.Managers.ExamenManager;
+import com.mycompany.tp_maquina_is2.Logica.Managers.MateriaManager;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.Examen;
+import com.mycompany.tp_maquina_is2.Logica.Transferencia.Experiencia;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.Materia;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
@@ -17,14 +20,16 @@ import javax.swing.table.DefaultTableModel;
  * @author juan_
  */
 public class AgregarExpPanel extends javax.swing.JPanel {
+    private int cod_historia_usuario;
 
     /**
      * Creates new form AgregarExpPanel
      */
-    public AgregarExpPanel() {
+    public AgregarExpPanel(int cod_historia_usuario) {
+        this.cod_historia_usuario=cod_historia_usuario;
         initComponents();
         this.PanelDatosExp.setVisible(false);
-        //LlenarTablaExamenes(examenes,materias);
+        LlenarTablaExamenes();
     }
     
 
@@ -60,10 +65,7 @@ public class AgregarExpPanel extends javax.swing.JPanel {
 
         TablaExamenes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Codigo", "Nombre", "Fecha"
@@ -238,7 +240,7 @@ public class AgregarExpPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Contenedor, javax.swing.GroupLayout.PREFERRED_SIZE, 920, Short.MAX_VALUE)
+            .addComponent(Contenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 929, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -278,14 +280,23 @@ public class AgregarExpPanel extends javax.swing.JPanel {
 
         //ArrayList<Examen> examenes,HashMap<Integer,Materia> materias
     public void LlenarTablaExamenes(){
-        //Hashmap<String,Examen> aux=ExamenManager.examenesEstudiante(codigo_historia_academica);
+        //ArrayList<Examen> aux=ExamenManager.examenesEstudiante(cod_historia_usuario);
+        //ArrayList<Materia> mat= MateriaManager.obtenerMaterias();
+        ArrayList<Examen> aux=new ArrayList<Examen>();
+        HashMap<Integer,Materia> mat=new HashMap<Integer,Materia>();
+        /*aux.add(new Examen(LocalDate.now(),12,1,20,10));
+        mat.put(20,new Materia(20,"Calculo","",new ArrayList<Materia>()));
+        Examen e1= new Examen(LocalDate.now(),12,1,20,10);
+        e1.setExperiencia(new Experiencia(1,2,3,""));*/
+        //aux.add(e1);
         DefaultTableModel modelo = (DefaultTableModel) TablaExamenes.getModel();
         Object [] lista=new Object[40];
-        //for(Examen e : //aux)
+        for(Examen e : aux)
         {
-         //modelo.addRow(new Object []{e.getCodMateria(),arrayM.get(e.getCodMateria()).getNombre()});
+            if(e.getExperiencia()==null)
+                modelo.addRow(new Object []{e.getCodMateria(),mat.get(e.getCodMateria()).getNombre(),e.getFecha().toString()});
+            }
         }
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ConfirmarDatosExp;
