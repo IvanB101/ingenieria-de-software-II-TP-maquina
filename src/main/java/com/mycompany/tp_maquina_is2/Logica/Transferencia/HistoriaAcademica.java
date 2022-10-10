@@ -84,4 +84,16 @@ public class HistoriaAcademica {
     public void setCodMateriasEstados(ArrayList<Integer> codMateriasEstados) {
         this.codMateriasEstados = codMateriasEstados;
     }
+
+    @Override
+    public String toString() {
+        String ret = "NroRegistro: " + codEstudiante + " | Plan de Estudios: " + codPlanDeEstudios
+                + "\nEstados:\n";
+
+        for (Estado estado : estados) {
+            ret += estado + "\n";
+        }
+
+        return ret;
+    }
 }

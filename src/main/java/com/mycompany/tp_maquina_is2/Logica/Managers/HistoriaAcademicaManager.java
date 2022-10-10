@@ -21,4 +21,9 @@ public abstract class HistoriaAcademicaManager {
         historiaAcademicaDAOImp = new HistoriaAcademicaDAOImp(conexion);
         historiasAcademicas = historiaAcademicaDAOImp.read();
     }
+    
+    public static boolean agregar(HistoriaAcademica historiaAcademica) {
+        // TODO
+        return false;
+    }
 }

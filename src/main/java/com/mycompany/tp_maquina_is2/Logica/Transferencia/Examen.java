@@ -84,4 +84,10 @@ public class Examen {
     public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
+    
+    @Override
+    public String toString() {
+        return "Nro Registro: " + codHistoriaAcademica + " | Codigo Materia: " + codMateria
+                + " | Turno: " + turno + " | Codigo: " + codigo + " | Nota: " + nota;
+    }
 }
