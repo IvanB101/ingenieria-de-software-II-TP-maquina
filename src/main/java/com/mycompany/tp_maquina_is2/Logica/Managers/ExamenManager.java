@@ -15,17 +15,20 @@ import java.util.List;
  * @author ivanb
  */
 public abstract class ExamenManager {
+
     private static HashMap<String, Examen> examenes;
     private static ExamenDAOImp examenDAOImp;
-    
+
     public static void init(Conexion conexion) {
         examenDAOImp = new ExamenDAOImp(conexion);
         examenes = examenDAOImp.read();
     }
-    
+
     public static boolean agregar(List<Examen> examenes) {
-        // TODO
-        
+        for (Examen examen : examenes) {
+            System.out.println(examen);
+        }
+
         return false;
     }
 }
