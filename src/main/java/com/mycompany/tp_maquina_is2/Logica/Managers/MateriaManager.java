@@ -7,6 +7,7 @@ package com.mycompany.tp_maquina_is2.Logica.Managers;
 import com.mycompany.tp_maquina_is2.Datos.Conexion;
 import com.mycompany.tp_maquina_is2.Datos.DAO.Implementaciones.MateriaDAOImp;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.Materia;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -21,4 +22,9 @@ public abstract class MateriaManager {
         materiaDAOImp = new MateriaDAOImp(conexion);
         materias = materiaDAOImp.read();
     }
+    public static ArrayList<Materia> buscarCorrelativas(int codigo){
+            return materias.get(codigo).getCorrelativas(); //obtengo las correlativas de una materia
+        
+    }
+
 }

@@ -45,14 +45,15 @@ public class DAOExamenTest {
         e2.setExperiencia(ex2);
         examendao.create(e2); */
         //read
-        HashMap<String, Examen> examenes = examendao.read();
+       /* HashMap<String, Examen> examenes = examendao.read();
        
         // Invoke keySet() on the HashMap object to get the keys as a set
         Set<String> keys = examenes.keySet();
         for ( String key : keys ) {
            System.out.println(examenes.get(key).toString());
         }
-        
+        */
+        examendao.delete("40-2021-16-3010820");
            
      
 }
