@@ -113,7 +113,7 @@ public class Conexion {
                 + "PRIMARY KEY (codigo))");
         
         query.execute("CREATE TABLE IF NOT EXISTS Experiencia("
-                + "Examen_codigo int NOT NULL, "
+                + "Examen_codigo varchar(100) NOT NULL, "
                 + "dificultad int NOT NULL, "
                 + "dedicacion int NOT NULL, "
                 + "dias int NOT NULL, "
