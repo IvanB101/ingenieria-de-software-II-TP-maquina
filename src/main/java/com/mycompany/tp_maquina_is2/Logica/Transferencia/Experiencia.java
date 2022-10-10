@@ -12,9 +12,9 @@ public class Experiencia {
     private int dificultad;
     private int dias;
     private int dedicacion;
-    private int codExamen;
+    private String codExamen;
 
-    public Experiencia(int dificultad, int dias, int dedicacion, int examen) {
+    public Experiencia(int dificultad, int dias, int dedicacion, String codExamen) {
         this.dificultad = dificultad;
         this.dias = dias;
         this.dedicacion = dedicacion;
@@ -45,11 +45,17 @@ public class Experiencia {
         this.dedicacion = dedicacion;
     }
 
-    public int getCodExamen() {
+    public String getCodExamen() {
         return codExamen;
     }
 
-    public void setCodExamen(int codExamen) {
+    public void setCodExamen(String codExamen) {
         this.codExamen = codExamen;
     }
+    
+    @Override
+    public String toString(){
+        return "Dificultad:"+dificultad+ " | Dias: " + dias + " | Dedicacion: " + dedicacion +" | Cod examen: "+codExamen; 
+    }
+
 }

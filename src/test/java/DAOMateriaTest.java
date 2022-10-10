@@ -21,7 +21,7 @@ import java.util.Set;
  * @author ginop
  */
 public class DAOMateriaTest {
-    private static final String DB_NAME = "nuevabd2";
+    private static final String DB_NAME = "nuevabd4";
     private static final String DB_URL = "jdbc:postgresql://localhost:5432/" + DB_NAME;
     private static final String DB_USER = "postgres";
     private static final String DB_PWD = "gino";
@@ -45,12 +45,13 @@ public class DAOMateriaTest {
         
         //Prueba Create Materia, delete sin correlativas anda
         Materia mat1 = new Materia(10,"ALGEBRA I","32/12",new ArrayList());
-        //matDAOImp.create(mat1); //añado materia sin correlativas 
+        matDAOImp.create(mat1); //añado materia sin correlativas 
  
         ArrayList<Materia> correlativas = new ArrayList();
-        //correlativas.add(mat1); //añado la alg1 a las correlativas de alg2
+        correlativas.add(mat1); //añado la alg1 a las correlativas de alg2
         Materia mat2 = new Materia(16,"ALGEBRA II","32/12",correlativas);
-        //matDAOImp.create(mat2); //añado materia con correlativas
+        matDAOImp.create(mat2); //añado materia con correlativas
+        
         
       
        //Prueba delete con correlativas si yo elimino algebra 1 se elimina como correlativa de alg2

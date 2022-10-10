@@ -20,7 +20,7 @@ import java.util.Set;
  * @author ginop
  */
 public class DAOHistoriaTest {
-    private static final String DB_NAME = "nuevabd2";
+    private static final String DB_NAME = "nuevabd4";
     private static final String DB_URL = "jdbc:postgresql://localhost:5432/" + DB_NAME;
     private static final String DB_USER = "postgres";
     private static final String DB_PWD = "gino";
@@ -35,7 +35,7 @@ public class DAOHistoriaTest {
         
         HistoriaAcademicaDAOImp hisDAO = new HistoriaAcademicaDAOImp(conexion);
         //create
-        /*Condicion c1 = null;
+        Condicion c1 = null;
         Estado e1 = new Estado(10,3010820,c1.parse("aprobado")); //funciona
         Estado e2 = new Estado(16,3010820,c1.parse("regular"));
         ArrayList<Estado> estaditos = new ArrayList();
@@ -45,7 +45,7 @@ public class DAOHistoriaTest {
         hisDAO.create(h1); 
         //delete
         //hisDAO.delete(3010820);
-        */
+        
         //read
        
          HashMap<Integer, HistoriaAcademica> historias = hisDAO.read();

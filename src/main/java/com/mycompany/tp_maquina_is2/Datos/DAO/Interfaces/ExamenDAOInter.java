@@ -13,7 +13,7 @@ import java.util.HashMap;
  */
 public interface ExamenDAOInter {
     public boolean create(Examen examen);
-    public HashMap<Integer, Examen> read();
-    public boolean update(int codigo, Examen examen);
-    public boolean delete(int codigo);
+    public HashMap<String, Examen> read();
+    public boolean update(String codigo, Examen examen);
+    public boolean delete(String codigo);
 }
