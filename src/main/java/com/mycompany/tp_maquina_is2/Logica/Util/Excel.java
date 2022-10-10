@@ -4,16 +4,21 @@
  */
 package com.mycompany.tp_maquina_is2.Logica.Util;
 
+import com.mycompany.tp_maquina_is2.Logica.Managers.ExamenManager;
+import com.mycompany.tp_maquina_is2.Logica.Managers.HistoriaAcademicaManager;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.Estado;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.Estado.Condicion;
+import com.mycompany.tp_maquina_is2.Logica.Transferencia.Examen;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.HistoriaAcademica;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.PlanEstudios;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.FormatFlagsConversionMismatchException;
 import java.util.Iterator;
+import java.util.LinkedList;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -25,6 +30,11 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
  */
 public class Excel {
 
+    /**
+     *
+     * @param file el archivo excel con el plan de estudios a cargar
+     * @return el plan de estudios contenido en el excel
+     */
     public static PlanEstudios leerPlanEstudios(File file) {
         try {
             FileInputStream fileInputStream = new FileInputStream(file);
@@ -47,21 +57,21 @@ public class Excel {
             HSSFCell cell = (HSSFCell) cellIterator.next();
             // Codigo del plan de estudios
             String codigo = cell.toString();
-            
+
             if (!avanzarIteradorFilasHasta(rowIterator, "Nombre")) {
                 throw new FormatFlagsConversionMismatchException("Historia Academica invalida", 'a');
             }
-            
-            while(rowIterator.hasNext()) {
-                
+
+            // Carga de la materias
+            while (rowIterator.hasNext()) {
+
             }
-            
+
+            return null;
         } catch (IOException e) {
             System.out.println("Error en la lectura del archivo .xlsx");
             return null;
         }
-
-        return null;
     }
 
     /**
@@ -71,10 +81,10 @@ public class Excel {
      * pertenece la historia
      * @param file es el archivo con la historia a leer
      * @param codPlanEstudios es el codigo del plan de estudios de la carrera
-     * @return un objeto tipo HistoriaAcadamica con los datos del documento
-     * Excel
+     * @return boolean con el exito de la operacion
+     * @throws FormatFlagsConversionMismatchException
      */
-    public static HistoriaAcademica leerHistoriaAcademica(int nroRegistro, String codPlanEstudios, File file)
+    public static boolean cargarHistoriaAcademica(int nroRegistro, String codPlanEstudios, File file)
             throws FormatFlagsConversionMismatchException {
         try {
             FileInputStream fileInputStream = new FileInputStream(file);
@@ -87,13 +97,14 @@ public class Excel {
 
             ArrayList<Estado> estados = new ArrayList<>();
             ArrayList<Integer> codMaterias = new ArrayList<>();
+            LinkedList<Examen> examenes = new LinkedList<>();
 
             // Obtencion de la propuesta de la primera celda del excel
             HSSFRow row = (HSSFRow) rowIterator.next();
             // Iterador sobre las celdas de las filas
             Iterator cellIterator = row.cellIterator();
             HSSFCell cell = (HSSFCell) cellIterator.next();
-            
+
             String eliminar = "Propuesta: ";
             String propuesta = cell.toString();
             propuesta = (String) propuesta.subSequence(eliminar.length(), propuesta.length());
@@ -122,6 +133,17 @@ public class Excel {
 
             // Carga de los estados
             while (rowIterator.hasNext()) {
+                if (datos[2].equals("Examen")) {
+                    String[] temp = datos[1].split("/");
+
+                    examenes.add(new Examen(
+                            LocalDate.of(Integer.parseInt(temp[2]), Integer.parseInt(temp[1]), Integer.parseInt(temp[0])),
+                            Integer.parseInt(temp[1]),
+                            Float.parseFloat(datos[3]),
+                            codigoMateria(datos[0]),
+                            nroRegistro));
+                }
+                
                 row = (HSSFRow) rowIterator.next();
                 cellIterator = row.cellIterator();
 
@@ -155,10 +177,23 @@ public class Excel {
             estados.add(estado);
             codMaterias.add(estado.getCodMateria());
 
-            return new HistoriaAcademica(propuesta, nroRegistro, codPlanEstudios, codMaterias, estados);
+            if (datos[2].equals("Examen")) {
+                String[] temp = datos[1].split("/");
+
+                examenes.add(new Examen(
+                        LocalDate.of(Integer.parseInt(temp[2]), Integer.parseInt(temp[1]), Integer.parseInt(temp[0])),
+                        Integer.parseInt(temp[1]),
+                        Float.parseFloat(datos[3]),
+                        codigoMateria(datos[0]),
+                        nroRegistro));
+            }
+
+            // Carga de los datos sacados del excel
+            return (HistoriaAcademicaManager.agregar(new HistoriaAcademica(propuesta, nroRegistro, codPlanEstudios, codMaterias, estados))
+                    && ExamenManager.agregar(examenes));
         } catch (IOException e) {
             System.out.println("Error en la lectura del archivo .xlsx");
-            return null;
+            return false;
         }
     }
 
@@ -187,9 +222,18 @@ public class Excel {
         return false;
     }
 
+    /**
+     * 
+     * @param contenidoCelda contenido de la celda
+     * @return codigo de la materia, -1 si el contenido de la celda es invalido
+     */
     private static int codigoMateria(String contenidoCelda) {
         int start = contenidoCelda.indexOf("(") + 1;
         int finish = contenidoCelda.indexOf(")");
+        
+        if(start == -1 || finish == -1) {
+            return -1;
+        }
 
         return Integer.parseInt((String) contenidoCelda.subSequence(start, finish));
     }
