@@ -86,12 +86,11 @@ public class Materia {
     @Override
     public String toString() {
         String ret = "Codigo: " + codigo + " | Nombre: " + nombre + " | Correlativas: ";
-        ArrayList<String>codCorrelativas = new ArrayList<>();
-        
-        for (Materia correlativa : correlativas) {
-            codCorrelativas.add(correlativa.getCodigo() + "");
+        //ArrayList<String>codCorrelativas = new ArrayList<>();
+        for(int i =0; i<correlativas.size();i++){
+            ret = ret + (correlativas.get(i).getNombre());
         }
-        
-        return ret + String.join(", ", (CharSequence[]) codCorrelativas.toArray());
+        return ret;
+      
     }
 }
