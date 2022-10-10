@@ -20,7 +20,7 @@ import java.util.Set;
  * @author ginop
  */
 public class DAOHistoriaTest {
-    private static final String DB_NAME = "nuevabd2";
+    private static final String DB_NAME = "nuevabd3";
     private static final String DB_URL = "jdbc:postgresql://localhost:5432/" + DB_NAME;
     private static final String DB_USER = "postgres";
     private static final String DB_PWD = "gino";
