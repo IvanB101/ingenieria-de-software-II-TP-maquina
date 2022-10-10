@@ -59,4 +59,8 @@ public class Estado {
         this.condicion = condicion;
     }
 
+    @Override
+    public String toString() {
+        return "nroReg: " + codHistoriaAcademica + " | codMat: " + codMateria + " | Estado: " + condicion;
+    }
 }

@@ -20,10 +20,10 @@ public class HistoriaAcademica {
     private ArrayList<Integer> codMateriasExamenes;
     private ArrayList<Integer> codMateriasEstados;
 
-    public HistoriaAcademica(String propuesta, int codEstudiante, String codPlanDeEstudios,
+    public HistoriaAcademica(String propuesta, int nroRegEstudiante, String codPlanDeEstudios,
             ArrayList<Integer> codMateriasEstados, ArrayList<Estado> estados) {
         this.propuesta = propuesta;
-        this.codEstudiante = codEstudiante;
+        this.codEstudiante = nroRegEstudiante;
         this.codPlanDeEstudios = codPlanDeEstudios;
         this.codMateriasEstados = codMateriasEstados;
         this.estados = estados;

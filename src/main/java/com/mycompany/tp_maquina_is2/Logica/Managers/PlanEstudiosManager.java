@@ -14,7 +14,7 @@ import java.util.HashMap;
  * @author ivanb
  */
 public abstract class PlanEstudiosManager {
-    private static HashMap<Integer, PlanEstudios> planesEstudios;
+    private static HashMap<String, PlanEstudios> planesEstudios;
     private static PlanEstudiosDAOImp planEstudiosDAOImp;
     
     public static void init(Conexion conexion) {
@@ -27,7 +27,7 @@ public abstract class PlanEstudiosManager {
      * @param codMateria codigo de la materia
      * @return true si la materia pertenece al plan de estudios, false en otro caso
     */
-    public static boolean comprobarMateria(int codPlanEstudios, int codMateria) {
+    public static boolean comprobarMateria(String codPlanEstudios, int codMateria) {
         return planesEstudios.get(codPlanEstudios).getCodMaterias().indexOf(codMateria) != -1;
     }
 }
