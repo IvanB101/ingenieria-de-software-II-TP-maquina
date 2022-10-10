@@ -88,6 +88,6 @@ public class Examen {
     @Override
     public String toString() {
         return "Nro Registro: " + codHistoriaAcademica + " | Codigo Materia: " + codMateria
-                + " | Turno: " + turno + " | Codigo: " + codigo + " | Nota: " + nota;
+                + " | Turno: " + turno + " | Codigo: " + codigo + " | Nota: " + nota + " | Experiencia: " + experiencia;
     }
 }

@@ -84,7 +84,7 @@ public class ExamenDAOImp implements ExamenDAOInter {
                         rs.getInt("turno"),
                         rs.getFloat("nota"),
                         rs.getInt("Materia_codigo"),
-                        rs.getInt("columnHistoriaAcademica_Estudiante_nroRegistro"));
+                        rs.getInt("HistoriaAcademica_Estudiante_nroRegistro"));
                 examen.setExperiencia(new Experiencia(
                         rs.getInt("dificultad"),
                         rs.getInt("dias"),
@@ -105,7 +105,7 @@ public class ExamenDAOImp implements ExamenDAOInter {
                         rs.getInt("turno"),
                         rs.getFloat("nota"),
                         rs.getInt("Materia_codigo"),
-                        rs.getInt("columnHistoriaAcademica_Estudiante_nroRegistro")));
+                        rs.getInt("HistoriaAcademica_Estudiante_nroRegistro")));
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());

@@ -52,4 +52,10 @@ public class Experiencia {
     public void setCodExamen(String codExamen) {
         this.codExamen = codExamen;
     }
+    
+    @Override
+    public String toString(){
+        return "Dificultad:"+dificultad+ " | Dias: " + dias + " | Dedicacion: " + dedicacion +" | Cod examen: "+codExamen; 
+    }
+
 }
