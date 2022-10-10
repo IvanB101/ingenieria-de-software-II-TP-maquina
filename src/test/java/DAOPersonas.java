@@ -18,7 +18,7 @@ import java.util.Map;
  * @author ginop
  */
 public class DAOPersonas {
-    private static final String DB_NAME = "nuevabd3";
+    private static final String DB_NAME = "nuevabd4";
     private static final String DB_URL = "jdbc:postgresql://localhost:5432/" + DB_NAME;
     private static final String DB_USER = "postgres";
     private static final String DB_PWD = "gino";
