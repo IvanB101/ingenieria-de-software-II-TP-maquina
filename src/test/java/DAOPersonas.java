@@ -18,7 +18,7 @@ import java.util.Map;
  * @author ginop
  */
 public class DAOPersonas {
-    private static final String DB_NAME = "testeosUNSL";
+    private static final String DB_NAME = "nuevabd2";
     private static final String DB_URL = "jdbc:postgresql://localhost:5432/" + DB_NAME;
     private static final String DB_USER = "postgres";
     private static final String DB_PWD = "gino";
@@ -47,12 +47,12 @@ public class DAOPersonas {
     NoDocente nd3Eliminar = new NoDocente(1234567,"corina","is2",77821269);
     NoDocente nd4Update = new NoDocente(8260284,"unhdp","grosso",62124550);
     //llamada a metodos
-    /*
+    
     estDAOImp.create(e1);
     estDAOImp.create(e2);
     nodocDAOImp.create(nd1);
     nodocDAOImp.create(nd2);
-    
+    /*
     Elimianr estudiante
     estDAOImp.create(e3Eliminar);
     estDAOImp.delete(6313777);

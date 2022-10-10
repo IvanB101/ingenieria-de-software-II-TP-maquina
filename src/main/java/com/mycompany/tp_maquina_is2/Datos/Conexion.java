@@ -86,15 +86,15 @@ public class Conexion {
                 + "FOREIGN KEY (Correlativa_codigo) REFERENCES Materia(codigo) ON DELETE CASCADE, "
                 + "PRIMARY KEY (Materia_codigo, Correlativa_codigo))");
         
-        query.execute("DO $$ "
+        /*query.execute("DO $$ "
                         + "BEGIN "
                             + "IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'regularidadenum') THEN "
                                 + "CREATE TYPE regularidadenum as ENUM('libre', 'cursando', 'regular', 'aprobado'); "
                             + "END IF; "
-                        + "END$$; ");
+                        + "END$$; "); */
         
         query.execute("CREATE TABLE IF NOT EXISTS Estado("
-                + "regularidad regularidadENUM NOT NULL, "
+                + "regularidad varchar(50) NOT NULL, "
                 + "Materia_codigo int NOT NULL, "
                 + "HistoriaAcademica_Estudiante_nroRegistro int NOT NULL, "
                 + "FOREIGN KEY (Materia_codigo) REFERENCES Materia(codigo), "
