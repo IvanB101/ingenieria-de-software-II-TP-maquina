@@ -29,9 +29,9 @@ public class ConextionTest {
         }
         */
         try {
-            // Excel.leerPlanEstudios(new File("LIC. 32_12.xls"));
+            Excel.cargarPlanEstudios(new File("LIC. 32_12.xlsx"));
             
-            Excel.cargarHistoriaAcademica(0, "32/12", new File("historia_academica.xls"));
+            // Excel.cargarHistoriaAcademica(0, "32/12", new File("historia_academica.xls"));
         } catch (Exception e) {
             e.printStackTrace();
         }
