@@ -30,4 +30,10 @@ public abstract class PlanEstudiosManager {
     public static boolean comprobarMateria(String codPlanEstudios, int codMateria) {
         return planesEstudios.get(codPlanEstudios).getCodMaterias().indexOf(codMateria) != -1;
     }
+    
+    public static boolean agregar(PlanEstudios planEstudios) {
+        System.out.println(planEstudios);
+        
+        return true;
+    }
 }

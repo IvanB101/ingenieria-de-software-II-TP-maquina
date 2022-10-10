@@ -11,10 +11,15 @@ public class PlanEstudios {
     private String codigo;
     private ArrayList<Integer> codMaterias;
 
+    public PlanEstudios(String codigo, ArrayList<Integer> codMaterias) {
+        this.codigo = codigo;
+        this.codMaterias = codMaterias;
+    }
+
     public PlanEstudios(String codigo) {
         this.codigo = codigo;
     }
-
+    
     public String getCodigo() {
         return codigo;
     }

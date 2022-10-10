@@ -4,6 +4,7 @@
  */
 package com.mycompany.tp_maquina_is2.Interfaces.Paneles;
 
+import com.mycompany.tp_maquina_is2.Logica.Managers.ExamenManager;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.Examen;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.Materia;
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ public class AgregarExpPanel extends javax.swing.JPanel {
     /**
      * Creates new form AgregarExpPanel
      */
-    public AgregarExpPanel(ArrayList<Examen> examenes,HashMap<Integer,Materia> materias) {
+    public AgregarExpPanel() {
         initComponents();
         this.PanelDatosExp.setVisible(false);
         //LlenarTablaExamenes(examenes,materias);
@@ -41,33 +42,38 @@ public class AgregarExpPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         TablaExamenes = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        ElegirExam = new javax.swing.JButton();
         PanelDatosExp = new javax.swing.JPanel();
         SliderDif = new javax.swing.JSlider();
         SliderDedi = new javax.swing.JSlider();
-        SpinnerDiasDeEstudio = new javax.swing.JSpinner();
         DificultadL = new javax.swing.JLabel();
         DificultadL1 = new javax.swing.JLabel();
         DificultadL2 = new javax.swing.JLabel();
         ConfirmarDatosExp = new javax.swing.JButton();
         Datos = new javax.swing.JLabel();
+        DatosDed = new javax.swing.JLabel();
+        DiasDeEstudio = new javax.swing.JTextField();
+
+        Contenedor.setBackground(new java.awt.Color(255, 255, 255));
+        Contenedor.setPreferredSize(new java.awt.Dimension(920, 500));
+
+        panelExamRendidos.setBackground(new java.awt.Color(255, 255, 255));
 
         TablaExamenes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Codigo", "Nombre"
+                "Codigo", "Nombre", "Fecha"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -78,22 +84,20 @@ public class AgregarExpPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        TablaExamenes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaExamenesMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(TablaExamenes);
         if (TablaExamenes.getColumnModel().getColumnCount() > 0) {
             TablaExamenes.getColumnModel().getColumn(0).setResizable(false);
             TablaExamenes.getColumnModel().getColumn(1).setResizable(false);
+            TablaExamenes.getColumnModel().getColumn(2).setResizable(false);
         }
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setText("Examenes Rendidos");
-
-        ElegirExam.setBackground(new java.awt.Color(102, 255, 102));
-        ElegirExam.setText("Elegir examen");
-        ElegirExam.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ElegirExamActionPerformed(evt);
-            }
-        });
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel1.setText("Lista de Examenes");
 
         javax.swing.GroupLayout panelExamRendidosLayout = new javax.swing.GroupLayout(panelExamRendidos);
         panelExamRendidos.setLayout(panelExamRendidosLayout);
@@ -103,27 +107,23 @@ public class AgregarExpPanel extends javax.swing.JPanel {
                 .addGroup(panelExamRendidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelExamRendidosLayout.createSequentialGroup()
                         .addGap(27, 27, 27)
-                        .addGroup(panelExamRendidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelExamRendidosLayout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelExamRendidosLayout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addComponent(ElegirExam, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(124, 124, 124)
+                        .addComponent(jLabel1)))
                 .addContainerGap(47, Short.MAX_VALUE))
         );
         panelExamRendidosLayout.setVerticalGroup(
             panelExamRendidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelExamRendidosLayout.createSequentialGroup()
-                .addGap(37, 37, 37)
+                .addGap(49, 49, 49)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53)
-                .addComponent(ElegirExam, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60))
+                .addGap(30, 30, 30)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        PanelDatosExp.setBackground(new java.awt.Color(255, 255, 255));
 
         SliderDif.setMaximum(10);
         SliderDif.setValue(5);
@@ -135,6 +135,11 @@ public class AgregarExpPanel extends javax.swing.JPanel {
 
         SliderDedi.setMaximum(10);
         SliderDedi.setValue(5);
+        SliderDedi.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                SliderDediStateChanged(evt);
+            }
+        });
 
         DificultadL.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         DificultadL.setText("Dificultad");
@@ -153,6 +158,18 @@ public class AgregarExpPanel extends javax.swing.JPanel {
             }
         });
 
+        Datos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        Datos.setPreferredSize(new java.awt.Dimension(20, 10));
+
+        DatosDed.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        DatosDed.setPreferredSize(new java.awt.Dimension(20, 15));
+
+        DiasDeEstudio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DiasDeEstudioActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout PanelDatosExpLayout = new javax.swing.GroupLayout(PanelDatosExp);
         PanelDatosExp.setLayout(PanelDatosExpLayout);
         PanelDatosExpLayout.setHorizontalGroup(
@@ -162,38 +179,43 @@ public class AgregarExpPanel extends javax.swing.JPanel {
                 .addGroup(PanelDatosExpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelDatosExpLayout.createSequentialGroup()
                         .addGroup(PanelDatosExpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(DificultadL2)
                             .addComponent(DificultadL1)
                             .addComponent(SliderDedi, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(SliderDif, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(SpinnerDiasDeEstudio)
                             .addComponent(DificultadL)
-                            .addComponent(ConfirmarDatosExp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(ConfirmarDatosExp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(DificultadL2)
+                            .addComponent(DiasDeEstudio))
                         .addGap(115, 115, 115))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelDatosExpLayout.createSequentialGroup()
-                        .addComponent(Datos)
-                        .addGap(198, 198, 198))))
+                        .addComponent(Datos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(205, 205, 205))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelDatosExpLayout.createSequentialGroup()
+                        .addComponent(DatosDed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(205, 205, 205))))
         );
         PanelDatosExpLayout.setVerticalGroup(
             PanelDatosExpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelDatosExpLayout.createSequentialGroup()
-                .addGap(90, 90, 90)
+                .addGap(79, 79, 79)
                 .addComponent(DificultadL)
-                .addGap(7, 7, 7)
-                .addComponent(Datos)
+                .addGap(28, 28, 28)
+                .addComponent(SliderDif, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(SliderDif, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
+                .addComponent(Datos, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(DificultadL1)
-                .addGap(18, 18, 18)
-                .addComponent(SpinnerDiasDeEstudio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(DificultadL2)
                 .addGap(27, 27, 27)
+                .addComponent(DiasDeEstudio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(DificultadL2)
+                .addGap(23, 23, 23)
                 .addComponent(SliderDedi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(58, 58, 58)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(DatosDed, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(ConfirmarDatosExp, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(57, 57, 57))
         );
 
         javax.swing.GroupLayout ContenedorLayout = new javax.swing.GroupLayout(Contenedor);
@@ -216,7 +238,7 @@ public class AgregarExpPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Contenedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(Contenedor, javax.swing.GroupLayout.PREFERRED_SIZE, 920, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -226,7 +248,7 @@ public class AgregarExpPanel extends javax.swing.JPanel {
 
     private void ConfirmarDatosExpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarDatosExpActionPerformed
       try{
-            Integer DiasDeEstudio=Integer.parseInt((String)SpinnerDiasDeEstudio.getValue());
+            Integer DiasDeEstudioo=Integer.parseInt(DiasDeEstudio.getText().trim());
         }catch(Exception e){
                JOptionPane.showMessageDialog(null, "Error en los dias de estudio");
                 }
@@ -234,41 +256,49 @@ public class AgregarExpPanel extends javax.swing.JPanel {
             int Dedicacion=SliderDedi.getValue();
             int cod_examen = (Integer)TablaExamenes.getValueAt(TablaExamenes.getSelectedRow(),0);
             
+        
         //metodo manager para crear exp(cod_examen,DiasDeEstudio,Dificultad,Dedicacion);
     }//GEN-LAST:event_ConfirmarDatosExpActionPerformed
-
-    private void ElegirExamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ElegirExamActionPerformed
-        if(TablaExamenes.getSelectedRow()==-1){
-            JOptionPane.showMessageDialog(null, "No se selecciono ningun examen");
-        }
-        else
-        this.PanelDatosExp.setVisible(true);
-    }//GEN-LAST:event_ElegirExamActionPerformed
 
     private void SliderDifStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_SliderDifStateChanged
         Datos.setText(String.valueOf(SliderDif.getValue()));
     }//GEN-LAST:event_SliderDifStateChanged
 
-    public void LlenarTablaExamenes(ArrayList<Examen> array,HashMap<Integer,Materia> arrayM){
+    private void SliderDediStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_SliderDediStateChanged
+       DatosDed.setText(String.valueOf(SliderDedi.getValue()));
+    }//GEN-LAST:event_SliderDediStateChanged
+
+    private void DiasDeEstudioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DiasDeEstudioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DiasDeEstudioActionPerformed
+
+    private void TablaExamenesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaExamenesMouseClicked
+       PanelDatosExp.setVisible(true);
+    }//GEN-LAST:event_TablaExamenesMouseClicked
+
+        //ArrayList<Examen> examenes,HashMap<Integer,Materia> materias
+    public void LlenarTablaExamenes(){
+        //Hashmap<String,Examen> aux=ExamenManager.examenesEstudiante(codigo_historia_academica);
         DefaultTableModel modelo = (DefaultTableModel) TablaExamenes.getModel();
         Object [] lista=new Object[40];
-        for(Examen e : array)
-        
-        modelo.addRow(new Object []{e.getCodMateria(),arrayM.get(e.getCodMateria()).getNombre()});
+        //for(Examen e : //aux)
+        {
+         //modelo.addRow(new Object []{e.getCodMateria(),arrayM.get(e.getCodMateria()).getNombre()});
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ConfirmarDatosExp;
     private javax.swing.JPanel Contenedor;
     private javax.swing.JLabel Datos;
+    private javax.swing.JLabel DatosDed;
+    private javax.swing.JTextField DiasDeEstudio;
     private javax.swing.JLabel DificultadL;
     private javax.swing.JLabel DificultadL1;
     private javax.swing.JLabel DificultadL2;
-    private javax.swing.JButton ElegirExam;
     private javax.swing.JPanel PanelDatosExp;
     private javax.swing.JSlider SliderDedi;
     private javax.swing.JSlider SliderDif;
-    private javax.swing.JSpinner SpinnerDiasDeEstudio;
     private javax.swing.JTable TablaExamenes;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
