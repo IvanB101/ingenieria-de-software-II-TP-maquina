@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -20,7 +21,7 @@ import java.util.Map;
  * @author ginop
  */
 public class DAOMateriaTest {
-    private static final String DB_NAME = "nuevabd";
+    private static final String DB_NAME = "nuevabd2";
     private static final String DB_URL = "jdbc:postgresql://localhost:5432/" + DB_NAME;
     private static final String DB_USER = "postgres";
     private static final String DB_PWD = "gino";
@@ -38,12 +39,12 @@ public class DAOMateriaTest {
         //cargar un plan de estudio pa referencia
         PlanEstudiosDAOImp DAOplan = new PlanEstudiosDAOImp(conexion);
         PlanEstudios plan = new PlanEstudios("32/12");
-        //DAOplan.create(plan);
+        DAOplan.create(plan);
         
         
         
         //Prueba Create Materia, delete sin correlativas anda
-       /* Materia mat1 = new Materia(10,"ALGEBRA I","32/12",new ArrayList());
+        Materia mat1 = new Materia(10,"ALGEBRA I","32/12",new ArrayList());
         matDAOImp.create(mat1); //añado materia sin correlativas 
  
         ArrayList<Materia> correlativas = new ArrayList();
@@ -51,16 +52,19 @@ public class DAOMateriaTest {
         Materia mat2 = new Materia(16,"ALGEBRA II","32/12",correlativas);
         matDAOImp.create(mat2); //añado materia con correlativas
         
-      */
+      
        //Prueba delete con correlativas si yo elimino algebra 1 se elimina como correlativa de alg2
         //matDAOImp.delete(10);
        // matDAOImp.delete(16);
        
-       Map<Integer, Materia> mats = new HashMap<Integer, Materia>();
-        mats = matDAOImp.read();
-        for (Map.Entry<Integer,Materia> entry : mats.entrySet()) {
-        System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());
+       /*Map<Integer, Materia> mats = new HashMap<Integer, Materia>();
+        mats = matDAOImp.read();  
+        // Invoke keySet() on the HashMap object to get the keys as a set
+        Set<Integer> keys = mats.keySet();
+        for ( Integer key : keys ) {
+           System.out.println(mats.get(key).toString());
         }
+    */
        
         
      

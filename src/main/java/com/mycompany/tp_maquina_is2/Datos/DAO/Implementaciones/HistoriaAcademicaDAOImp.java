@@ -75,7 +75,7 @@ public class HistoriaAcademicaDAOImp implements HistoriaAcademicaDAOInter {
             estados de una historia academica seguidos en el ResultSet. Ademas, se realiza un ensamble
             con Materia para poder diferenciar dos historias academicas del mismo estudiante en
             distintas carreras*/
-            PreparedStatement ps = con.prepareStatement("SELECT propuesta, Estudiante_nroRegistro, PlanEstudios_codigo, "
+            PreparedStatement ps = con.prepareStatement("SELECT propuesta, Estudiante_nroRegistro, historiaacademica.PlanEstudios_codigo, "
                     + "Materia_codigo, regularidad FROM HistoriaAcademica, Estado, Materia "
                     + "WHERE Estudiante_nroRegistro=HistoriaAcademica_Estudiante_nroRegistro AND "
                     + "HistoriaAcademica.PlanEstudios_codigo = Materia.PlanEstudios_codigo AND "
@@ -83,9 +83,9 @@ public class HistoriaAcademicaDAOImp implements HistoriaAcademicaDAOInter {
             ResultSet rs = ps.executeQuery();
 
             // Se iniciaizan las primera historia academica y estado del ResultSet
-            rs.next();
+            rs.next(); //falta el while?
             ArrayList<Estado> estados = new ArrayList<>();
-            estados.add(new Estado(rs.getInt("codigo"),
+            estados.add(new Estado(rs.getInt("materia_codigo"),
                     rs.getInt("Estudiante_nroRegistro"),
                     Condicion.parse(rs.getString("regularidad"))));
             HistoriaAcademica historia = new HistoriaAcademica(
@@ -113,7 +113,7 @@ public class HistoriaAcademicaDAOImp implements HistoriaAcademicaDAOInter {
                             new ArrayList<>());
 
                     estados = new ArrayList<>();
-                    estados.add(new Estado(rs.getInt("codigo"),
+                    estados.add(new Estado(rs.getInt("materia_codigo"),
                             rs.getInt("Estudiante_nroRegistro"),
                             Condicion.parse(rs.getString("regularidad"))));
                 } else {
