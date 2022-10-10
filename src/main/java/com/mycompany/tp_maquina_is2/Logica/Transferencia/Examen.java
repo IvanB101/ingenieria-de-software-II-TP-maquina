@@ -14,15 +14,15 @@ public class Examen {
 
     private LocalDate fecha;
     private float nota;
-    private int codigo;
+    private String codigo;
     private int turno;
     private int codMateria;
-    private int codHistoriaAcademica;
+    private int codHistoriaAcademica; //numero de registro del alumno xd
     private Experiencia experiencia;
 
     public Examen(LocalDate fecha, int turno, float nota, int codMateria, int codHistoriaAcademica) {
-        this.codigo = Integer.parseInt(fecha.getDayOfYear() + fecha.getYear() + codMateria + codHistoriaAcademica + "");
-        this.fecha = fecha;
+        this.codigo = "" + fecha.getDayOfYear()+"-"+ fecha.getYear()+"-"+ codMateria+"-"+ codHistoriaAcademica;
+        this.fecha = fecha; //dia-año-codmat-codhistoria
         this.nota = nota;
         this.turno = turno;
         this.codMateria = codMateria;
@@ -77,11 +77,11 @@ public class Examen {
         this.experiencia = experiencia;
     }
 
-    public int getCodigo() {
+    public String getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(int codigo) {
+    public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
     

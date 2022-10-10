@@ -15,7 +15,7 @@ import java.util.List;
  * @author ivanb
  */
 public abstract class ExamenManager {
-    private static HashMap<Integer, Examen> examenes;
+    private static HashMap<String, Examen> examenes;
     private static ExamenDAOImp examenDAOImp;
     
     public static void init(Conexion conexion) {
