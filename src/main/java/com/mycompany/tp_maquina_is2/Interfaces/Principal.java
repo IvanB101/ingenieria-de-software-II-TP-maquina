@@ -19,6 +19,7 @@ import java.io.File;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -30,9 +31,10 @@ public class Principal extends javax.swing.JFrame {
     private static final String DB_NAME = "finalDB";
     private static final String DB_URL = "jdbc:postgresql://localhost:5432/" + DB_NAME;
     private static final String DB_USER = "postgres";
-    private static final String DB_PWD = "gino";
+    private static final String DB_PWD = "admin";
     private Conexion conn;
     private Estudiante user=new Estudiante(3010820,"Gino","Paoletti",44075067);
+    private int xMouse,yMouse;
     
     
 
@@ -83,6 +85,7 @@ public class Principal extends javax.swing.JFrame {
         Cambiable = new javax.swing.JPanel();
         PrincipalL = new javax.swing.JLabel();
         PrincipalL1 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         Archivo.setCurrentDirectory(new java.io.File("C:\\Users\\juan_\\Desktop"));
         Archivo.setDialogTitle("Seleccionar Historia Academica");
@@ -315,15 +318,22 @@ public class Principal extends javax.swing.JFrame {
         PrincipalL1.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
         PrincipalL1.setText("Seleccione la operacion que desee realizar");
 
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\juan_\\Desktop\\Universidad\\5) Ing. Software II\\Practico Integrador\\TP_Maquina_IS2\\src\\main\\java\\com\\mycompany\\tp_maquina_is2\\Interfaces\\logo_imagen.png")); // NOI18N
+        jLabel1.setText("jLabel1");
+
         javax.swing.GroupLayout CambiableLayout = new javax.swing.GroupLayout(Cambiable);
         Cambiable.setLayout(CambiableLayout);
         CambiableLayout.setHorizontalGroup(
             CambiableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CambiableLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(CambiableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(PrincipalL1, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(PrincipalL))
+                .addGroup(CambiableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(CambiableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(PrincipalL1, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(PrincipalL))
+                    .addGroup(CambiableLayout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 475, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(4, 4, 4)))
                 .addGap(232, 232, 232))
         );
         CambiableLayout.setVerticalGroup(
@@ -333,7 +343,9 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(PrincipalL, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(PrincipalL1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(348, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(51, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout ContenedorLayout = new javax.swing.GroupLayout(Contenedor);
@@ -376,11 +388,14 @@ public class Principal extends javax.swing.JFrame {
     }
     private void insertButtonPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_insertButtonPMouseClicked
        int returnVal = Archivo.showOpenDialog(this);
-        if (returnVal == Archivo.APPROVE_OPTION){
-        File file = Archivo.getSelectedFile();
-        archivoExcel(file);
-        }
-        else{
+        if (returnVal == Archivo.APPROVE_OPTION) {
+            File file = Archivo.getSelectedFile();
+            if (Excel.cargarHistoriaAcademica(user.getNroRegistro(), "32/12", file)) {
+                JOptionPane.showMessageDialog(null, "Historia cargada correctamente");
+            } else {
+                JOptionPane.showMessageDialog(null, "Ha habido un problema con la carga de la historia");
+            }
+        } else {
         }
     }//GEN-LAST:event_insertButtonPMouseClicked
         
@@ -442,11 +457,13 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_closeButtonPMouseExited
 
     private void MenuTopMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuTopMouseDragged
-        // TODO add your handling code here:
+       int x = evt.getXOnScreen(), y = evt.getYOnScreen();
+        this.setLocation(x - xMouse, y - yMouse);
     }//GEN-LAST:event_MenuTopMouseDragged
 
     private void MenuTopMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuTopMousePressed
-        // TODO add your handling code here:
+       xMouse = evt.getX();
+        yMouse = evt.getY();
     }//GEN-LAST:event_MenuTopMousePressed
 
     private void ArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ArchivoActionPerformed
@@ -504,6 +521,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JPanel deleteButtonP;
     private javax.swing.JLabel insertButtonL;
     private javax.swing.JPanel insertButtonP;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel queryButtonL;
     private javax.swing.JLabel tablesButtonL;
     private javax.swing.JPanel tablesButtonP;
