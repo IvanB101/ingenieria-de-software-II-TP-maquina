@@ -12,6 +12,8 @@ import com.mycompany.tp_maquina_is2.Logica.Managers.ExamenManager;
 import com.mycompany.tp_maquina_is2.Logica.Managers.HistoriaAcademicaManager;
 import com.mycompany.tp_maquina_is2.Logica.Managers.MateriaManager;
 import com.mycompany.tp_maquina_is2.Logica.Managers.PlanEstudiosManager;
+import com.mycompany.tp_maquina_is2.Logica.Transferencia.Estudiante;
+import com.mycompany.tp_maquina_is2.Logica.Util.Excel;
 import java.awt.Color;
 import java.io.File;
 import java.sql.SQLException;
@@ -30,6 +32,7 @@ public class Principal extends javax.swing.JFrame {
     private static final String DB_USER = "postgres";
     private static final String DB_PWD = "admin";
     private Conexion conn;
+    private Estudiante user=new Estudiante(3010820,"Gino","Paoletti",44075067);
     
     
 
@@ -375,7 +378,6 @@ public class Principal extends javax.swing.JFrame {
         archivoExcel(file);
         }
         else{
-            JOptionPane.showMessageDialog(null, "Accion cancelada por el usuario");
         }
     }//GEN-LAST:event_insertButtonPMouseClicked
         
@@ -389,7 +391,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_insertButtonPMouseExited
 
     private void deleteButtonPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteButtonPMouseClicked
-        changePane(new ListaPanel(3010820));
+        changePane(new ListaPanel(user.getNroRegistro()));
     }//GEN-LAST:event_deleteButtonPMouseClicked
 
     private void deleteButtonPMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteButtonPMouseEntered
@@ -413,7 +415,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_tablesButtonPMouseExited
 
     private void AñadirExpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AñadirExpMouseClicked
-       changePane(new AgregarExpPanel(3010820));
+       changePane(new AgregarExpPanel(user.getNroRegistro()));
     }//GEN-LAST:event_AñadirExpMouseClicked
 
     private void AñadirExpMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AñadirExpMouseEntered
@@ -447,14 +449,13 @@ public class Principal extends javax.swing.JFrame {
     private void ArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ArchivoActionPerformed
         }
 
-        public File archivoExcel(File file){
+        public void archivoExcel(File file){
             if(file.getName().equals("historia_academica.xls")){
                 JOptionPane.showMessageDialog(null, "Archivo seleccionado correctamente!");
-                return file;
+                Excel.cargarHistoriaAcademica(user.getNroRegistro(),"32/12", file);
             }else{
                 JOptionPane.showMessageDialog(null, "Archivo seleccionado invalido");
             }
-            return null;
     }//GEN-LAST:event_ArchivoActionPerformed
 
     /**
