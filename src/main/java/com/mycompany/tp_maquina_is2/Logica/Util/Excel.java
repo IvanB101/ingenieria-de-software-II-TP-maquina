@@ -239,9 +239,17 @@ public class Excel {
             }
 
             // Carga de los datos sacados del excel
-            return (HistoriaAcademicaManager.agregar(new HistoriaAcademica(propuesta, nroRegistro, estados, 
+            if (HistoriaAcademicaManager.buscar(nroRegistro) == null) {
+                return (HistoriaAcademicaManager.agregar(new HistoriaAcademica(propuesta, nroRegistro, estados,
+                        codMateriasExamenes, codPlanEstudios, codMateriasExamenes, codMateriasEstados))
+                        && ExamenManager.agregar(examenes));
+            }
+
+            // Modificacion de los datos existentes en caso de haber una historia cargada
+            return (HistoriaAcademicaManager.modificar(new HistoriaAcademica(propuesta, nroRegistro, estados,
                     codMateriasExamenes, codPlanEstudios, codMateriasExamenes, codMateriasEstados))
                     && ExamenManager.agregar(examenes));
+
         } catch (IOException e) {
             System.out.println("Error en la lectura del archivo .xlsx");
             return false;
