@@ -72,8 +72,9 @@ public class ExamenDAOImp implements ExamenDAOInter {
     public HashMap<String, Examen> read() {
         HashMap<String, Examen> examenes = new HashMap<>();
         try {
-            PreparedStatement ps = con.prepareStatement("SELECT codigo, fecha, turno, nota, Materia_codigo, "
-                    + "HistoriaAcademica_Estudiante_nroRegistro, dificultad, dedicacion, dias FROM Examen, Experiencia WHERE codigo = Examen_codigo");
+            PreparedStatement ps = con.prepareStatement("SELECT codigo, fecha, turno, nota, Materia_codigo,HistoriaAcademica_Estudiante_nroRegistro, dificultad, dedicacion, dias "
+                    + "FROM Examen, Experiencia "
+                    + "WHERE codigo = Examen_codigo");
             ResultSet rs = ps.executeQuery();
 
             // Agregado de examenes que poseen experiencia
@@ -92,9 +93,11 @@ public class ExamenDAOImp implements ExamenDAOInter {
                 examenes.put(rs.getString("codigo"), examen);
             }
             
-            ps = con.prepareStatement("SELECT codigo, fecha, turno, nota, Materia_codigo, "
-                    + "HistoriaAcademica_Estudiante_nroRegistro FROM Examen, Experiencia WHERE codigo NOT IN "
-                    + "(SELECT codigo FROM Examen, Experiencia WHERE codigo = Examen_codigo)");
+            ps = con.prepareStatement("SELECT codigo, fecha, turno, nota, Materia_codigo,HistoriaAcademica_Estudiante_nroRegistro "
+                    + "FROM Examen "
+                    + "EXCEPT "
+                    + "SELECT codigo, fecha, turno, nota, Materia_codigo,HistoriaAcademica_Estudiante_nroRegistro "
+                    + "FROM Examen,Experiencia WHERE codigo = Examen_codigo");
             rs = ps.executeQuery();
             
             // Agregado de examenes que no poseen experiencia

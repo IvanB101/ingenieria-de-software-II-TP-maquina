@@ -21,7 +21,6 @@ import javax.swing.table.DefaultTableModel;
  */
 public class AgregarExpPanel extends javax.swing.JPanel {
     private int cod_historia_usuario;
-    ArrayList<Examen> examenes=ExamenManager.examenesEstudiante(cod_historia_usuario);
 
     /**
      * Creates new form AgregarExpPanel
@@ -253,13 +252,16 @@ public class AgregarExpPanel extends javax.swing.JPanel {
       int diasEstudio=0;
         try{
             diasEstudio=Integer.parseInt(DiasDeEstudio.getText().trim());
+            int dificultad=SliderDif.getValue();
+            int dedicacion=SliderDedi.getValue();
+            String codExamen = (String)TablaExamenes.getValueAt(TablaExamenes.getSelectedRow(),0);
+            ExamenManager.agregarExperiencia(new Experiencia(dificultad,diasEstudio,dedicacion,codExamen));
+            JOptionPane.showMessageDialog(null, "Experiencia cargada exitosamente!.");
+            LlenarTablaExamenes();
+            
         }catch(Exception e){
                JOptionPane.showMessageDialog(null, "Error en los dias de estudio");
                 }
-        int dificultad=SliderDif.getValue();
-        int dedicacion=SliderDedi.getValue();
-        String codExamen = (String)TablaExamenes.getValueAt(TablaExamenes.getSelectedRow(),0);
-        ExamenManager.agregarExperiencia(new Experiencia(dificultad,diasEstudio,dedicacion,codExamen));
     }//GEN-LAST:event_ConfirmarDatosExpActionPerformed
 
     private void SliderDifStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_SliderDifStateChanged
@@ -279,17 +281,13 @@ public class AgregarExpPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_TablaExamenesMouseClicked
 
     public void LlenarTablaExamenes(){
-        /*aux.add(new Examen(LocalDate.now(),12,1,20,10));
-        mat.put(20,new Materia(20,"Calculo","",new ArrayList<Materia>()));
-        Examen e1= new Examen(LocalDate.now(),12,1,20,10);
-        e1.setExperiencia(new Experiencia(1,2,3,""));
-        aux.add(e1);*/
+        ArrayList<Examen> examenes=ExamenManager.examenesEstudiante(cod_historia_usuario);
         DefaultTableModel modelo = (DefaultTableModel) TablaExamenes.getModel();
         Object [] lista=new Object[40];
         for(Examen e : examenes)
         {
             if(e.getExperiencia()==null)
-                modelo.addRow(new Object []{e.getCodMateria(),MateriaManager.buscarMateria(e.getCodMateria()).getNombre(),e.getFecha().toString()});
+                modelo.addRow(new Object []{e.getCodigo(),MateriaManager.buscarMateria(e.getCodMateria()).getNombre(),e.getFecha().toString()});
             }
         }
 

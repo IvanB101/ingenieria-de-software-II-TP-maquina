@@ -19,7 +19,7 @@ import java.util.Set;
  * @author ginop
  */
 public class DAOExamenTest {
-    private static final String DB_NAME = "nuevabd4";
+    private static final String DB_NAME = "finalDB";
     private static final String DB_URL = "jdbc:postgresql://localhost:5432/" + DB_NAME;
     private static final String DB_USER = "postgres";
     private static final String DB_PWD = "admin";
@@ -45,10 +45,10 @@ public class DAOExamenTest {
         e2.setExperiencia(ex2);
         examendao.create(e2); */
         //read
-       /* HashMap<String, Examen> examenes = examendao.read();
+        HashMap<String, Examen> examenes = examendao.read();
        
         // Invoke keySet() on the HashMap object to get the keys as a set
-        Set<String> keys = examenes.keySet();
+        /*Set<String> keys = examenes.keySet();
         for ( String key : keys ) {
            System.out.println(examenes.get(key).toString());
         }
