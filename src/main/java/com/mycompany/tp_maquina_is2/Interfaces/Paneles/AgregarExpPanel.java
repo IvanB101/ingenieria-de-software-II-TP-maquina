@@ -11,7 +11,7 @@ import com.mycompany.tp_maquina_is2.Logica.Transferencia.Experiencia;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.Materia;
 import java.time.LocalDate;
 import java.util.ArrayList;
-
+import java.util.HashMap;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -20,14 +20,15 @@ import javax.swing.table.DefaultTableModel;
  * @author juan_
  */
 public class AgregarExpPanel extends javax.swing.JPanel {
-    private int nroRegistro;
-    ArrayList<Examen> examenes=ExamenManager.examenesEstudiante(nroRegistro);
+    private int cod_historia_usuario;
+    ArrayList<Examen> examenes=ExamenManager.examenesEstudiante(cod_historia_usuario);
+    ArrayList<Materia> materias= MateriaManager.obtenerMaterias();
 
     /**
      * Creates new form AgregarExpPanel
      */
-    public AgregarExpPanel(int nroRegistro) {
-        this.nroRegistro=nroRegistro;
+    public AgregarExpPanel(int cod_historia_usuario) {
+        this.cod_historia_usuario=cod_historia_usuario;
         initComponents();
         this.PanelDatosExp.setVisible(false);
         LlenarTablaExamenes();
@@ -250,16 +251,18 @@ public class AgregarExpPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ConfirmarDatosExpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarDatosExpActionPerformed
-      int diasEstudio=0;
-        try{
-            diasEstudio=Integer.parseInt(DiasDeEstudio.getText().trim());
+      try{
+            Integer DiasDeEstudioo=Integer.parseInt(DiasDeEstudio.getText().trim());
         }catch(Exception e){
                JOptionPane.showMessageDialog(null, "Error en los dias de estudio");
                 }
-        int dificultad=SliderDif.getValue();
-        int dedicacion=SliderDedi.getValue();
-        String codExamen = (String)TablaExamenes.getValueAt(TablaExamenes.getSelectedRow(),0);
-        ExamenManager.agregarExperiencia(new Experiencia(dificultad,diasEstudio,dedicacion,codExamen));
+            int Dificultad=SliderDif.getValue();
+            int Dedicacion=SliderDedi.getValue();
+            int cod_examen = (Integer)TablaExamenes.getValueAt(TablaExamenes.getSelectedRow(),0);
+        //Obtener el examen del cual voy a agregarle la experiencia y agregarla    
+        //Examen e=new Examen();
+        //e.setExperiencia(new Experiencia(Dificultad,DiasDeEstudioo,dedicacion,cod_examen);
+        //ExamenManager.agregarExpExamen();
     }//GEN-LAST:event_ConfirmarDatosExpActionPerformed
 
     private void SliderDifStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_SliderDifStateChanged
@@ -279,12 +282,17 @@ public class AgregarExpPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_TablaExamenesMouseClicked
 
     public void LlenarTablaExamenes(){
+        /*aux.add(new Examen(LocalDate.now(),12,1,20,10));
+        mat.put(20,new Materia(20,"Calculo","",new ArrayList<Materia>()));
+        Examen e1= new Examen(LocalDate.now(),12,1,20,10);
+        e1.setExperiencia(new Experiencia(1,2,3,""));
+        aux.add(e1);*/
         DefaultTableModel modelo = (DefaultTableModel) TablaExamenes.getModel();
         Object [] lista=new Object[40];
         for(Examen e : examenes)
         {
             if(e.getExperiencia()==null)
-                modelo.addRow(new Object []{e.getCodMateria(),MateriaManager.buscarMateria(e.getCodMateria()).getNombre(),e.getFecha().toString()});
+                modelo.addRow(new Object []{e.getCodMateria(),materias.get(e.getCodMateria()).getNombre(),e.getFecha().toString()});
             }
         }
 
