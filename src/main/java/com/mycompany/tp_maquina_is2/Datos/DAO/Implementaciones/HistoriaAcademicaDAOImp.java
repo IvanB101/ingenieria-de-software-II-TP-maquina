@@ -164,8 +164,7 @@ public class HistoriaAcademicaDAOImp implements HistoriaAcademicaDAOInter {
             ps.setInt(1, nroRegistro);
             ps.executeUpdate();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null,
-                    "El examen no puede ser eliminado porque está referenciado en Se_Consume");
+            JOptionPane.showMessageDialog(null,ex.getMessage());
 
             return false;
         }
