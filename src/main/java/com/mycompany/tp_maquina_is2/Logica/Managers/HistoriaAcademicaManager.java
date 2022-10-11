@@ -41,18 +41,20 @@ public abstract class HistoriaAcademicaManager {
 
         return historiaAcademicaDAOImp.create(historiaAcademica);
     }
-
+    //CONTAR DE QUE MATERIAS ES CORRELATIVA
     public static HashMap<Materia, Integer> listaExamenes(int nroRegistro) {
         HistoriaAcademica historia = historiasAcademicas.get(nroRegistro);
         HashMap<Materia, Integer> ranking = new HashMap<>();
         ArrayList<Materia> correlativas = new ArrayList();
-        
+        int cant=0;
         for (Estado estado : historiasAcademicas.get(nroRegistro).getEstados().values()) {
             if(estado.getCondicion().equals(Condicion.regular)) {
+                //correlativas de una materia regular
                 correlativas = MateriaManager.buscarCorrelativas(estado.getCodMateria());
-                
                 if (cumpleRequisitos(correlativas, historia)) {
-                    ranking.put(MateriaManager.buscarMateria(estado.getCodMateria()), correlativas.size());
+                    //busco en cuantas materias es correlativa
+                    cant=MateriaManager.esCorrelativaDe(estado.getCodMateria());
+                    ranking.put(MateriaManager.buscarMateria(estado.getCodMateria()),cant );
                 }
             }
         }
