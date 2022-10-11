@@ -51,7 +51,7 @@ public class HistoriaAcademicaDAOImp implements HistoriaAcademicaDAOInter {
             ps = con.prepareStatement("INSERT INTO Estado (regularidad, Materia_codigo, "
                     + "HistoriaAcademica_Estudiante_nroRegistro) VALUES (?,?,?)");
             // Carga de los estados de la historia academica
-            for (Estado estado : historiaAcademica.getEstados()) {
+            for (Estado estado : historiaAcademica.getEstados().values()) {
                 ps.setString(1, estado.getCondicion().toString());
                 ps.setInt(2, estado.getCodMateria());
                 ps.setInt(3, estado.getCodHistoriaAcademica());
@@ -84,8 +84,14 @@ public class HistoriaAcademicaDAOImp implements HistoriaAcademicaDAOInter {
 
             // Se iniciaizan las primera historia academica y estado del ResultSet
             rs.next(); //falta el while?
-            ArrayList<Estado> estados = new ArrayList<>();
-            estados.add(new Estado(rs.getInt("materia_codigo"),
+            HashMap<Integer, Estado> estados = new HashMap<>();
+            ArrayList<Integer> codMateriasEstados = new ArrayList<>();
+
+            int codMateria = rs.getInt("materia_codigo");
+
+            codMateriasEstados.add(codMateria);
+
+            estados.put(codMateria, new Estado(codMateria,
                     rs.getInt("Estudiante_nroRegistro"),
                     Condicion.parse(rs.getString("regularidad"))));
             HistoriaAcademica historia = new HistoriaAcademica(
@@ -98,9 +104,11 @@ public class HistoriaAcademicaDAOImp implements HistoriaAcademicaDAOInter {
             while (rs.next()) {
                 /* Cuando cambia el codigo del plan de estudios o el numero de registro del estudiante se
                 sabe que se ha pasado a otra historia*/
-                if((rs.getInt("Estudiante_nroRegistro") != historia.getNroRegEstudiante()) || !(rs.getString("PlanEstudios_codigo").equals(historia.getCodPlanDeEstudios())))
-                    {
+                if ((rs.getInt("Estudiante_nroRegistro") != historia.getNroRegEstudiante())
+                        || !(rs.getString("PlanEstudios_codigo").equals(historia.getCodPlanDeEstudios()))) {
                     // Se cargan los datos de las historia en el ArrayList a retornar
+                    historia.setCodMateriasEstados(codMateriasEstados);
+
                     historia.setEstados(estados);
                     historiasAcademicas.put(rs.getInt("Estudiante_nroRegistro"), historia);
 
@@ -112,18 +120,29 @@ public class HistoriaAcademicaDAOImp implements HistoriaAcademicaDAOInter {
                             new ArrayList<>(),
                             new ArrayList<>());
 
-                    estados = new ArrayList<>();
-                    estados.add(new Estado(rs.getInt("materia_codigo"),
+                    codMateria = rs.getInt("materia_codigo");
+
+                    codMateriasEstados = new ArrayList<>();
+                    codMateriasEstados.add(codMateria);
+
+                    estados = new HashMap<>();
+                    estados.put(codMateria, new Estado(codMateria,
                             rs.getInt("Estudiante_nroRegistro"),
                             Condicion.parse(rs.getString("regularidad"))));
                 } else {
-                    estados.add(new Estado(rs.getInt("materia_codigo"),
+                    codMateria = rs.getInt("materia_codigo");
+
+                    codMateriasEstados.add(codMateria);
+
+                    estados.put(codMateria, new Estado(codMateria,
                             rs.getInt("Estudiante_nroRegistro"),
                             Condicion.parse(rs.getString("regularidad"))));
                 }
             }
 
             // Se carga la ultima historia academica con sus respectivos estados
+            historia.setCodMateriasEstados(codMateriasEstados);
+
             historia.setEstados(estados);
             historiasAcademicas.put(historia.getNroRegEstudiante(), historia);
         } catch (SQLException ex) {
@@ -164,7 +183,7 @@ public class HistoriaAcademicaDAOImp implements HistoriaAcademicaDAOInter {
             ps.setInt(1, nroRegistro);
             ps.executeUpdate();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null,ex.getMessage());
+            JOptionPane.showMessageDialog(null, ex.getMessage());
 
             return false;
         }

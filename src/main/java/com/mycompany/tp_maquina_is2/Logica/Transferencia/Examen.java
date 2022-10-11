@@ -17,16 +17,17 @@ public class Examen {
     private String codigo;
     private int turno;
     private int codMateria;
-    private int codHistoriaAcademica; //numero de registro del alumno xd
+    private int nroRegitroEstudiante;
     private Experiencia experiencia;
 
-    public Examen(LocalDate fecha, int turno, float nota, int codMateria, int codHistoriaAcademica) {
-        this.codigo = "" + fecha.getDayOfYear()+"-"+ fecha.getYear()+"-"+ codMateria+"-"+ codHistoriaAcademica;
-        this.fecha = fecha; //dia-año-codmat-codhistoria
+    public Examen(LocalDate fecha, int turno, float nota, int codMateria, int nroRegistroEstudiante) {
+        //dia-año-codmat-codhistoria
+        this.codigo = "" + fecha.getDayOfYear() + "-" + fecha.getYear() + "-" + codMateria + "-" + nroRegistroEstudiante;
+        this.fecha = fecha;
         this.nota = nota;
         this.turno = turno;
         this.codMateria = codMateria;
-        this.codHistoriaAcademica = codHistoriaAcademica;
+        this.nroRegitroEstudiante = nroRegistroEstudiante;
     }
 
     public LocalDate getFecha() {
@@ -61,12 +62,12 @@ public class Examen {
         this.codMateria = codMateria;
     }
 
-    public int getCodHistoriaAcademica() {
-        return codHistoriaAcademica;
+    public int getNroRegitroEstudiante() {
+        return nroRegitroEstudiante;
     }
 
-    public void setCodHistoriaAcademica(int codHistoriaAcademica) {
-        this.codHistoriaAcademica = codHistoriaAcademica;
+    public void setNroRegitroEstudiante(int codHistoriaAcademica) {
+        this.nroRegitroEstudiante = codHistoriaAcademica;
     }
 
     public Experiencia getExperiencia() {
@@ -84,10 +85,10 @@ public class Examen {
     public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
-    
+
     @Override
     public String toString() {
-        return "Nro Registro: " + codHistoriaAcademica + " | Codigo Materia: " + codMateria
+        return "Nro Registro: " + nroRegitroEstudiante + " | Codigo Materia: " + codMateria
                 + " | Turno: " + turno + " | Codigo: " + codigo + " | Nota: " + nota + " | Experiencia: " + experiencia;
     }
 }
