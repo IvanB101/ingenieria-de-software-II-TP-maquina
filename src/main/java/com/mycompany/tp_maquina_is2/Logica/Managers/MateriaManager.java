@@ -23,14 +23,22 @@ public abstract class MateriaManager {
         materiaDAOImp = new MateriaDAOImp(conexion);
         materias = materiaDAOImp.read();
     }
-    
+
     public static boolean agregar(List<Materia> materias) {
         for (Materia materia : materias) {
             System.out.println(materia);
         }
        return true; 
     }
+
+    public static ArrayList<Materia> buscarCorrelativas(int codigo){
+        return materias.get(codigo).getCorrelativas(); //obtengo las correlativas de una materia
+    }
+    public static Materia buscarMateria(int codigo){
+        return materias.get(codigo);
+    }
     public static ArrayList<Materia> obtenerMaterias(){
         return (ArrayList)materias.values();
     }
+    
 }

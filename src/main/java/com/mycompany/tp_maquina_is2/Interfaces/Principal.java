@@ -6,6 +6,7 @@ package com.mycompany.tp_maquina_is2.Interfaces;
 
 import com.mycompany.tp_maquina_is2.Datos.Conexion;
 import com.mycompany.tp_maquina_is2.Interfaces.Paneles.AgregarExpPanel;
+import com.mycompany.tp_maquina_is2.Interfaces.Paneles.ListaPanel;
 import com.mycompany.tp_maquina_is2.Logica.Managers.EstudianteManager;
 import com.mycompany.tp_maquina_is2.Logica.Managers.ExamenManager;
 import com.mycompany.tp_maquina_is2.Logica.Managers.HistoriaAcademicaManager;
@@ -24,10 +25,10 @@ import javax.swing.JPanel;
  * @author ivanb
  */
 public class Principal extends javax.swing.JFrame {
-    private static final String DB_NAME = "FINALES";
+    private static final String DB_NAME = "nuevabd4";
     private static final String DB_URL = "jdbc:postgresql://localhost:5432/" + DB_NAME;
     private static final String DB_USER = "postgres";
-    private static final String DB_PWD = "admin";
+    private static final String DB_PWD = "gino";
     private Conexion conn;
     
     
@@ -388,7 +389,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_insertButtonPMouseExited
 
     private void deleteButtonPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteButtonPMouseClicked
-        // TODO add your handling code here:
+        changePane(new ListaPanel(4128100));
     }//GEN-LAST:event_deleteButtonPMouseClicked
 
     private void deleteButtonPMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteButtonPMouseEntered
@@ -412,7 +413,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_tablesButtonPMouseExited
 
     private void AñadirExpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AñadirExpMouseClicked
-       changePane(new AgregarExpPanel(10));
+       changePane(new AgregarExpPanel(4128100));
     }//GEN-LAST:event_AñadirExpMouseClicked
 
     private void AñadirExpMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AñadirExpMouseEntered
