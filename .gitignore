@@ -26,3 +26,6 @@ buildNumber.properties
 .mvn/timing.properties
 .mvn/wrapper/maven-wrapper.jar
 pom.xml
+target/classes/com/mycompany/tp_maquina_is2/Interfaces/Principal.class
+target/classes/com/mycompany/tp_maquina_is2/Interfaces/Principal.class
+*.class
