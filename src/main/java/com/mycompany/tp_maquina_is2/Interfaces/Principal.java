@@ -34,6 +34,7 @@ public class Principal extends javax.swing.JFrame {
     private static final String DB_PWD = "admin";
     private Conexion conn;
     private Estudiante user=new Estudiante(3010820,"Gino","Paoletti",44075067);
+    private int xMouse,yMouse;
     
     
 
@@ -387,11 +388,14 @@ public class Principal extends javax.swing.JFrame {
     }
     private void insertButtonPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_insertButtonPMouseClicked
        int returnVal = Archivo.showOpenDialog(this);
-        if (returnVal == Archivo.APPROVE_OPTION){
-        File file = Archivo.getSelectedFile();
-        archivoExcel(file);
-        }
-        else{
+        if (returnVal == Archivo.APPROVE_OPTION) {
+            File file = Archivo.getSelectedFile();
+            if (Excel.cargarHistoriaAcademica(user.getNroRegistro(), "32/12", file)) {
+                JOptionPane.showMessageDialog(null, "Historia cargada correctamente");
+            } else {
+                JOptionPane.showMessageDialog(null, "Ha habido un problema con la carga de la historia");
+            }
+        } else {
         }
     }//GEN-LAST:event_insertButtonPMouseClicked
         
@@ -453,11 +457,13 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_closeButtonPMouseExited
 
     private void MenuTopMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuTopMouseDragged
-        // TODO add your handling code here:
+       int x = evt.getXOnScreen(), y = evt.getYOnScreen();
+        this.setLocation(x - xMouse, y - yMouse);
     }//GEN-LAST:event_MenuTopMouseDragged
 
     private void MenuTopMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuTopMousePressed
-        // TODO add your handling code here:
+       xMouse = evt.getX();
+        yMouse = evt.getY();
     }//GEN-LAST:event_MenuTopMousePressed
 
     private void ArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ArchivoActionPerformed
