@@ -12,9 +12,11 @@ import com.mycompany.tp_maquina_is2.Logica.Managers.HistoriaAcademicaManager;
 import com.mycompany.tp_maquina_is2.Logica.Managers.MateriaManager;
 import com.mycompany.tp_maquina_is2.Logica.Managers.PlanEstudiosManager;
 import java.awt.Color;
+import java.io.File;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -60,6 +62,7 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        Archivo = new javax.swing.JFileChooser();
         Contenedor = new javax.swing.JPanel();
         MenuTop = new javax.swing.JPanel();
         titulo = new javax.swing.JLabel();
@@ -76,6 +79,14 @@ public class Principal extends javax.swing.JFrame {
         Cambiable = new javax.swing.JPanel();
         PrincipalL = new javax.swing.JLabel();
         PrincipalL1 = new javax.swing.JLabel();
+
+        Archivo.setCurrentDirectory(new java.io.File("C:\\Users\\juan_\\Desktop"));
+        Archivo.setDialogTitle("Seleccionar Historia Academica");
+        Archivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ArchivoActionPerformed(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -357,9 +368,17 @@ public class Principal extends javax.swing.JFrame {
         Cambiable.repaint();
     }
     private void insertButtonPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_insertButtonPMouseClicked
-        // TODO add your handling code here:
+       int returnVal = Archivo.showOpenDialog(this);
+        if (returnVal == Archivo.APPROVE_OPTION){
+        File file = Archivo.getSelectedFile();
+        archivoExcel(file);
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Accion cancelada por el usuario");
+        }
     }//GEN-LAST:event_insertButtonPMouseClicked
-
+        
+    
     private void insertButtonPMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_insertButtonPMouseEntered
         // TODO add your handling code here:
     }//GEN-LAST:event_insertButtonPMouseEntered
@@ -424,6 +443,19 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_MenuTopMousePressed
 
+    private void ArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ArchivoActionPerformed
+        }
+
+        public File archivoExcel(File file){
+            if(file.getName().equals("historia_academica.xls")){
+                JOptionPane.showMessageDialog(null, "Archivo seleccionado correctamente!");
+                return file;
+            }else{
+                JOptionPane.showMessageDialog(null, "Archivo seleccionado invalido");
+            }
+            return null;
+    }//GEN-LAST:event_ArchivoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -454,6 +486,7 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JFileChooser Archivo;
     private javax.swing.JPanel AñadirExp;
     private javax.swing.JPanel Cambiable;
     private javax.swing.JPanel Contenedor;
