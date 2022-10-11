@@ -124,7 +124,7 @@
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="100" y="70" width="230" height="-1"/>
+                  <AbsoluteConstraints x="60" y="70" width="230" height="-1"/>
                 </Constraint>
               </Constraints>
 
@@ -159,7 +159,11 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Cargar historia academica"/>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+<<<<<<< Updated upstream
                       <Color id="Default Cursor"/>
+=======
+                      <Color id="Hand Cursor"/>
+>>>>>>> Stashed changes
                     </Property>
                   </Properties>
                 </Component>
@@ -184,7 +188,7 @@
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="350" y="70" width="160" height="-1"/>
+                  <AbsoluteConstraints x="320" y="70" width="160" height="-1"/>
                 </Constraint>
               </Constraints>
 
@@ -219,7 +223,11 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Ver Lista Finales"/>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+<<<<<<< Updated upstream
                       <Color id="Default Cursor"/>
+=======
+                      <Color id="Hand Cursor"/>
+>>>>>>> Stashed changes
                     </Property>
                   </Properties>
                 </Component>
@@ -244,7 +252,7 @@
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="530" y="70" width="120" height="-1"/>
+                  <AbsoluteConstraints x="510" y="70" width="120" height="-1"/>
                 </Constraint>
               </Constraints>
 
@@ -279,7 +287,11 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Estadisticas"/>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+<<<<<<< Updated upstream
                       <Color id="Default Cursor"/>
+=======
+                      <Color id="Hand Cursor"/>
+>>>>>>> Stashed changes
                     </Property>
                   </Properties>
                 </Component>
@@ -304,7 +316,7 @@
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="650" y="70" width="250" height="-1"/>
+                  <AbsoluteConstraints x="640" y="70" width="250" height="-1"/>
                 </Constraint>
               </Constraints>
 
@@ -339,7 +351,11 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="A&#xf1;adir Experiencia examen"/>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+<<<<<<< Updated upstream
                       <Color id="Default Cursor"/>
+=======
+                      <Color id="Hand Cursor"/>
+>>>>>>> Stashed changes
                     </Property>
                   </Properties>
                 </Component>

@@ -12,6 +12,8 @@ import com.mycompany.tp_maquina_is2.Logica.Managers.ExamenManager;
 import com.mycompany.tp_maquina_is2.Logica.Managers.HistoriaAcademicaManager;
 import com.mycompany.tp_maquina_is2.Logica.Managers.MateriaManager;
 import com.mycompany.tp_maquina_is2.Logica.Managers.PlanEstudiosManager;
+import com.mycompany.tp_maquina_is2.Logica.Transferencia.Estudiante;
+import com.mycompany.tp_maquina_is2.Logica.Util.Excel;
 import java.awt.Color;
 import java.io.File;
 import java.sql.SQLException;
@@ -25,11 +27,17 @@ import javax.swing.JPanel;
  * @author ivanb
  */
 public class Principal extends javax.swing.JFrame {
+<<<<<<< Updated upstream
     private static final String DB_NAME = "finalDB";
+=======
+    private static final String DB_NAME = "FINALES";
+>>>>>>> Stashed changes
     private static final String DB_URL = "jdbc:postgresql://localhost:5432/" + DB_NAME;
     private static final String DB_USER = "postgres";
     private static final String DB_PWD = "gino";
     private Conexion conn;
+    Estudiante userprueba=new Estudiante(3010820,"Gino","Paoletti",44075067);
+    private int xMouse, yMouse;
     
     
 
@@ -150,7 +158,7 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        MenuTop.add(insertButtonP, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 230, -1));
+        MenuTop.add(insertButtonP, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, 230, -1));
 
         deleteButtonP.setBackground(new java.awt.Color(0, 153, 153));
         deleteButtonP.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -189,7 +197,7 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        MenuTop.add(deleteButtonP, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 70, 160, -1));
+        MenuTop.add(deleteButtonP, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 70, 160, -1));
 
         tablesButtonP.setBackground(new java.awt.Color(0, 153, 153));
         tablesButtonP.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -228,7 +236,7 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        MenuTop.add(tablesButtonP, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 70, 120, -1));
+        MenuTop.add(tablesButtonP, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 70, 120, -1));
 
         AñadirExp.setBackground(new java.awt.Color(0, 153, 153));
         AñadirExp.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -267,7 +275,7 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        MenuTop.add(AñadirExp, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 70, 250, -1));
+        MenuTop.add(AñadirExp, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 70, 250, -1));
 
         closeButtonP.setBackground(new java.awt.Color(0, 153, 153));
         closeButtonP.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -413,7 +421,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_tablesButtonPMouseExited
 
     private void AñadirExpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AñadirExpMouseClicked
-       changePane(new AgregarExpPanel(3010820));
+       changePane(new AgregarExpPanel(userprueba.getNroRegistro()));
     }//GEN-LAST:event_AñadirExpMouseClicked
 
     private void AñadirExpMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AñadirExpMouseEntered
@@ -437,24 +445,25 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_closeButtonPMouseExited
 
     private void MenuTopMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuTopMouseDragged
-        // TODO add your handling code here:
+        int x = evt.getXOnScreen(), y = evt.getYOnScreen();
+        this.setLocation(x - xMouse, y - yMouse);
     }//GEN-LAST:event_MenuTopMouseDragged
 
     private void MenuTopMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuTopMousePressed
-        // TODO add your handling code here:
+        xMouse = evt.getX();
+        yMouse = evt.getY();
     }//GEN-LAST:event_MenuTopMousePressed
 
     private void ArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ArchivoActionPerformed
         }
 
-        public File archivoExcel(File file){
+        public void archivoExcel(File file){
             if(file.getName().equals("historia_academica.xls")){
                 JOptionPane.showMessageDialog(null, "Archivo seleccionado correctamente!");
-                return file;
+                Excel.cargarHistoriaAcademica(userprueba.getNroRegistro(),"32/12", file);
             }else{
                 JOptionPane.showMessageDialog(null, "Archivo seleccionado invalido");
             }
-            return null;
     }//GEN-LAST:event_ArchivoActionPerformed
 
     /**
