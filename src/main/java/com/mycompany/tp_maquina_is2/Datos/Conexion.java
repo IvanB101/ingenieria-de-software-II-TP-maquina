@@ -86,13 +86,6 @@ public class Conexion {
                 + "FOREIGN KEY (Correlativa_codigo) REFERENCES Materia(codigo) ON DELETE CASCADE, "
                 + "PRIMARY KEY (Materia_codigo, Correlativa_codigo))");
         
-        /*query.execute("DO $$ "
-                        + "BEGIN "
-                            + "IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'regularidadenum') THEN "
-                                + "CREATE TYPE regularidadenum as ENUM('libre', 'cursando', 'regular', 'aprobado'); "
-                            + "END IF; "
-                        + "END$$; "); */
-        
         query.execute("CREATE TABLE IF NOT EXISTS Estado("
                 + "regularidad varchar(50) NOT NULL, "
                 + "Materia_codigo int NOT NULL, "
@@ -109,7 +102,7 @@ public class Conexion {
                 + "Materia_codigo int NOT NULL, "
                 + "HistoriaAcademica_Estudiante_nroRegistro int NOT NULL, "
                 + "FOREIGN KEY (Materia_codigo) REFERENCES Materia(codigo), "
-                + "FOREIGN KEY (HistoriaAcademica_Estudiante_nroRegistro) REFERENCES HistoriaAcademica(Estudiante_nroRegistro), "
+                + "FOREIGN KEY (HistoriaAcademica_Estudiante_nroRegistro) REFERENCES HistoriaAcademica(Estudiante_nroRegistro) ON DELETE CASCADE, "
                 + "PRIMARY KEY (codigo))");
         
         query.execute("CREATE TABLE IF NOT EXISTS Experiencia("
@@ -117,9 +110,7 @@ public class Conexion {
                 + "dificultad int NOT NULL, "
                 + "dedicacion int NOT NULL, "
                 + "dias int NOT NULL, "
-
-                + "FOREIGN KEY (Examen_codigo) REFERENCES Examen(codigo) ON DELETE CASCADE,"
-
+                + "FOREIGN KEY (Examen_codigo) REFERENCES Examen(codigo) ON DELETE NO ACTION,"
                 + "PRIMARY KEY (Examen_codigo))");
         
         query.execute("CREATE TABLE IF NOT EXISTS MesaExamen("
