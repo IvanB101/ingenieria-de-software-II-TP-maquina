@@ -6,6 +6,8 @@ package com.mycompany.tp_maquina_is2.Interfaces.Paneles;
 
 import com.mycompany.tp_maquina_is2.Logica.Managers.HistoriaAcademicaManager;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.Materia;
+import java.awt.Color;
+import java.awt.Font;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,6 +28,14 @@ public class ListaPanel extends javax.swing.JPanel {
     public ListaPanel(int cod_historia_usuario) {
         this.cod_historia_usuario = cod_historia_usuario;
         initComponents();
+        TablaMaterias.getTableHeader().setFont(new Font("Segoe UI",Font.BOLD,12));
+        TablaMaterias.getTableHeader().setOpaque(true);
+        TablaMaterias.getTableHeader().setBackground(new Color(0,153,153));
+        jScrollPane1.getViewport().setBackground(new Color(255,255,255)); //tabla color blanco
+        TablaMaterias.getTableHeader().setReorderingAllowed(false);
+        
+        
+        listaFinales();
 
     }
 
@@ -56,38 +66,46 @@ public class ListaPanel extends javax.swing.JPanel {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         PanelCambiable = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TablaMaterias = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        ComboBoxCriterio = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
+        PanelCambiable.setBackground(new java.awt.Color(255, 255, 255));
         PanelCambiable.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         TablaMaterias.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][] {
+            new Object [][] {
 
-                },
-                new String[] {
-                        "Codigo", "Nombre", "Correlativas"
-                }) {
-            Class[] types = new Class[] {
-                    java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class
+            },
+            new String [] {
+                "CODIGO", "NOMBRE", "CORRELATIVAS"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class
             };
-            boolean[] canEdit = new boolean[] {
-                    false, false, false
+            boolean[] canEdit = new boolean [] {
+                false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
-                return types[columnIndex];
+                return types [columnIndex];
             }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit[columnIndex];
+                return canEdit [columnIndex];
             }
         });
+        TablaMaterias.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        TablaMaterias.setFocusable(false);
+        TablaMaterias.setRowHeight(25);
+        TablaMaterias.setSelectionBackground(new java.awt.Color(118, 35, 47));
         jScrollPane1.setViewportView(TablaMaterias);
         if (TablaMaterias.getColumnModel().getColumnCount() > 0) {
             TablaMaterias.getColumnModel().getColumn(0).setResizable(false);
@@ -95,35 +113,48 @@ public class ListaPanel extends javax.swing.JPanel {
             TablaMaterias.getColumnModel().getColumn(2).setResizable(false);
         }
 
-        PanelCambiable.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, 580, 220));
+        PanelCambiable.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 670, 340));
 
-        jButton1.setText("Buscar finales a rendir!!");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        PanelCambiable.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 320, -1, -1));
+        ComboBoxCriterio.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        ComboBoxCriterio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Correlativas", "Tiempo", "Proximidad a cursar", "Profundidad a cursar", "Vencimiento de regularidad", "Dificultad" }));
+        ComboBoxCriterio.setBorder(null);
+        ComboBoxCriterio.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        PanelCambiable.add(ComboBoxCriterio, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 80, 170, -1));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel1.setText("A continuación se muestran las materias que el Estudiante está en condiciones de rendir, es decir, cumple con las correlativas ");
+        PanelCambiable.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel2.setText("El criterio seleccionado por default es la cantidad de materias que tienen a dicha materia como correlativa.");
+        PanelCambiable.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(PanelCambiable, javax.swing.GroupLayout.DEFAULT_SIZE, 919, Short.MAX_VALUE));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(PanelCambiable, javax.swing.GroupLayout.DEFAULT_SIZE, 913, Short.MAX_VALUE)
+                .addContainerGap())
+        );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(PanelCambiable, javax.swing.GroupLayout.PREFERRED_SIZE, 500,
-                                javax.swing.GroupLayout.PREFERRED_SIZE));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(PanelCambiable, javax.swing.GroupLayout.DEFAULT_SIZE, 506, Short.MAX_VALUE)
+                .addContainerGap())
+        );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton1ActionPerformed
-        listaFinales();
+       
     }// GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> ComboBoxCriterio;
     private javax.swing.JPanel PanelCambiable;
     private javax.swing.JTable TablaMaterias;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

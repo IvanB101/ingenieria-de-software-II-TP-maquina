@@ -30,7 +30,7 @@ public class Principal extends javax.swing.JFrame {
     private static final String DB_NAME = "finalDB";
     private static final String DB_URL = "jdbc:postgresql://localhost:5432/" + DB_NAME;
     private static final String DB_USER = "postgres";
-    private static final String DB_PWD = "admin";
+    private static final String DB_PWD = "gino";
     private Conexion conn;
     private Estudiante user=new Estudiante(3010820,"Gino","Paoletti",44075067);
     
@@ -43,7 +43,7 @@ public class Principal extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.conn = new Conexion(DB_NAME, DB_URL, DB_USER, DB_PWD);
-
+        
         try {
             // Conexion con la base de datos
             conn.getInstance();
@@ -97,7 +97,7 @@ public class Principal extends javax.swing.JFrame {
 
         Contenedor.setBackground(new java.awt.Color(255, 255, 255));
 
-        MenuTop.setBackground(new java.awt.Color(0, 153, 153));
+        MenuTop.setBackground(new java.awt.Color(118, 35, 47));
         MenuTop.setToolTipText("");
         MenuTop.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
@@ -114,9 +114,9 @@ public class Principal extends javax.swing.JFrame {
         titulo.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         titulo.setForeground(new java.awt.Color(255, 255, 255));
         titulo.setText("Sistema de asistencia universitaria");
-        MenuTop.add(titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(251, 18, 410, -1));
+        MenuTop.add(titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 20, 410, -1));
 
-        insertButtonP.setBackground(new java.awt.Color(0, 153, 153));
+        insertButtonP.setBackground(new java.awt.Color(118, 35, 47));
         insertButtonP.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         insertButtonP.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         insertButtonP.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -153,9 +153,9 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        MenuTop.add(insertButtonP, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 230, -1));
+        MenuTop.add(insertButtonP, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 230, -1));
 
-        deleteButtonP.setBackground(new java.awt.Color(0, 153, 153));
+        deleteButtonP.setBackground(new java.awt.Color(118, 35, 47));
         deleteButtonP.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         deleteButtonP.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         deleteButtonP.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -192,9 +192,9 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        MenuTop.add(deleteButtonP, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 70, 160, -1));
+        MenuTop.add(deleteButtonP, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 70, 160, -1));
 
-        tablesButtonP.setBackground(new java.awt.Color(0, 153, 153));
+        tablesButtonP.setBackground(new java.awt.Color(118, 35, 47));
         tablesButtonP.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         tablesButtonP.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         tablesButtonP.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -231,9 +231,9 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        MenuTop.add(tablesButtonP, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 70, 120, -1));
+        MenuTop.add(tablesButtonP, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 70, 120, -1));
 
-        AñadirExp.setBackground(new java.awt.Color(0, 153, 153));
+        AñadirExp.setBackground(new java.awt.Color(118, 35, 47));
         AñadirExp.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         AñadirExp.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         AñadirExp.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -270,9 +270,9 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        MenuTop.add(AñadirExp, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 70, 250, -1));
+        MenuTop.add(AñadirExp, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 70, 250, -1));
 
-        closeButtonP.setBackground(new java.awt.Color(0, 153, 153));
+        closeButtonP.setBackground(new java.awt.Color(118, 35, 47));
         closeButtonP.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         closeButtonP.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -288,24 +288,26 @@ public class Principal extends javax.swing.JFrame {
 
         closeButtonL.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
         closeButtonL.setForeground(new java.awt.Color(255, 255, 255));
-        closeButtonL.setText("x");
+        closeButtonL.setText(" x");
+        closeButtonL.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout closeButtonPLayout = new javax.swing.GroupLayout(closeButtonP);
         closeButtonP.setLayout(closeButtonPLayout);
         closeButtonPLayout.setHorizontalGroup(
             closeButtonPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(closeButtonPLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(closeButtonL))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, closeButtonPLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(closeButtonL, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE))
         );
         closeButtonPLayout.setVerticalGroup(
             closeButtonPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(closeButtonL, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(closeButtonL, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
         );
 
         MenuTop.add(closeButtonP, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 0, 50, 50));
 
         Cambiable.setBackground(new java.awt.Color(255, 255, 255));
+        Cambiable.setPreferredSize(new java.awt.Dimension(950, 500));
 
         PrincipalL.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
         PrincipalL.setText("Bienvenido al sistema de asistencia universitaria");
@@ -318,20 +320,20 @@ public class Principal extends javax.swing.JFrame {
         CambiableLayout.setHorizontalGroup(
             CambiableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CambiableLayout.createSequentialGroup()
-                .addGap(244, 244, 244)
-                .addGroup(CambiableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(PrincipalL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(PrincipalL1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(CambiableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(PrincipalL1, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(PrincipalL))
+                .addGap(232, 232, 232))
         );
         CambiableLayout.setVerticalGroup(
             CambiableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CambiableLayout.createSequentialGroup()
                 .addGap(60, 60, 60)
                 .addComponent(PrincipalL, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(PrincipalL1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(332, Short.MAX_VALUE))
+                .addContainerGap(348, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout ContenedorLayout = new javax.swing.GroupLayout(Contenedor);
@@ -339,21 +341,22 @@ public class Principal extends javax.swing.JFrame {
         ContenedorLayout.setHorizontalGroup(
             ContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(MenuTop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(Cambiable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(Cambiable, javax.swing.GroupLayout.DEFAULT_SIZE, 920, Short.MAX_VALUE)
         );
         ContenedorLayout.setVerticalGroup(
             ContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ContenedorLayout.createSequentialGroup()
                 .addComponent(MenuTop, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Cambiable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(Cambiable, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Contenedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(Contenedor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -403,7 +406,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_deleteButtonPMouseExited
 
     private void tablesButtonPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablesButtonPMouseClicked
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, "En construccion");
     }//GEN-LAST:event_tablesButtonPMouseClicked
 
     private void tablesButtonPMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablesButtonPMouseEntered
@@ -435,7 +438,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_closeButtonPMouseEntered
 
     private void closeButtonPMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeButtonPMouseExited
-       closeButtonP.setBackground(new Color(0,153,153));
+       closeButtonP.setBackground(new Color(118,35,47));
     }//GEN-LAST:event_closeButtonPMouseExited
 
     private void MenuTopMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuTopMouseDragged
