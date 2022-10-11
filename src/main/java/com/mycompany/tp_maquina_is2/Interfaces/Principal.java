@@ -30,7 +30,7 @@ public class Principal extends javax.swing.JFrame {
     private static final String DB_NAME = "finalDB";
     private static final String DB_URL = "jdbc:postgresql://localhost:5432/" + DB_NAME;
     private static final String DB_USER = "postgres";
-    private static final String DB_PWD = "gino";
+    private static final String DB_PWD = "admin";
     private Conexion conn;
     Estudiante userprueba=new Estudiante(3010820,"Gino","Paoletti",44075067);
     private int xMouse, yMouse;

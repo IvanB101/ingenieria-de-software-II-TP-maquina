@@ -22,7 +22,7 @@ public class DAOExamenTest {
     private static final String DB_NAME = "nuevabd4";
     private static final String DB_URL = "jdbc:postgresql://localhost:5432/" + DB_NAME;
     private static final String DB_USER = "postgres";
-    private static final String DB_PWD = "gino";
+    private static final String DB_PWD = "admin";
         
     public static void main(String[]args) {
         Conexion conexion = new Conexion(DB_NAME, DB_URL, DB_USER, DB_PWD);
