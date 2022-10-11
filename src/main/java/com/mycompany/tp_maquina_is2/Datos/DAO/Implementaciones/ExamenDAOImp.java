@@ -43,7 +43,7 @@ public class ExamenDAOImp implements ExamenDAOInter {
             ps.setInt(3, examen.getTurno());
             ps.setFloat(4, examen.getNota());
             ps.setInt(5, examen.getCodMateria());
-            ps.setInt(6, examen.getCodHistoriaAcademica());
+            ps.setInt(6, examen.getNroRegitroEstudiante());
 
             Experiencia experiencia = examen.getExperiencia();
             
@@ -51,7 +51,6 @@ public class ExamenDAOImp implements ExamenDAOInter {
             if (experiencia == null) {
                 return true;
             }
-
             
             ps = con.prepareStatement("INSERT INTO Experiencia (Examen_codigo, dificultad, dedicacion, dias) VALUES (?,?,?,?)");
 

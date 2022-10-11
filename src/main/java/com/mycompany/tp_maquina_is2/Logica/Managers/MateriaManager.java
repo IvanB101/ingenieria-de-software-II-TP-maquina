@@ -16,29 +16,46 @@ import java.util.List;
  * @author ivanb
  */
 public abstract class MateriaManager {
+
     private static HashMap<Integer, Materia> materias;
     private static MateriaDAOImp materiaDAOImp;
-    
+
     public static void init(Conexion conexion) {
         materiaDAOImp = new MateriaDAOImp(conexion);
         materias = materiaDAOImp.read();
     }
+    
+    /**
+     * Completa las asociaciones que no se leen directamente de la base de datos
+     */
+    public static void initAsociaciones() {
+        // codigo mesas de examenes
+        // codigo examenes
+        // estados
+    }
 
     public static boolean agregar(List<Materia> materias) {
         for (Materia materia : materias) {
-            System.out.println(materia);
+            if(!materiaDAOImp.create(materia)) {
+                return false;
+            }
+            
+            MateriaManager.materias.put(materia.getCodigo(), materia);
         }
-       return true; 
+        
+        return true;
     }
 
-    public static ArrayList<Materia> buscarCorrelativas(int codigo){
+    public static ArrayList<Materia> buscarCorrelativas(int codigo) {
         return materias.get(codigo).getCorrelativas(); //obtengo las correlativas de una materia
     }
-    public static Materia buscarMateria(int codigo){
+
+    public static Materia buscarMateria(int codigo) {
         return materias.get(codigo);
     }
-    public static ArrayList<Materia> obtenerMaterias(){
-        return (ArrayList)materias.values();
+
+    public static ArrayList<Materia> obtenerMaterias() {
+        return (ArrayList) materias.values();
     }
-    
+
 }

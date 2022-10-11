@@ -14,10 +14,10 @@ import java.sql.Connection;
  */
 public class ConextionTest {
 
-    private static final String DB_NAME = "nuevabd2";
+    private static final String DB_NAME = "TP_Maquina_IS2";
     private static final String DB_URL = "jdbc:postgresql://localhost:5432/" + DB_NAME;
     private static final String DB_USER = "postgres";
-    private static final String DB_PWD = "gino";
+    private static final String DB_PWD = "admin";
 
     public static void main(String[] args) {
         Conexion conexion = new Conexion(DB_NAME, DB_URL, DB_USER, DB_PWD);
@@ -29,7 +29,7 @@ public class ConextionTest {
         }
         */
         try {
-            Excel.cargarPlanEstudios(new File("LIC. 32_12.xlsx"));
+            Excel.cargarPlanEstudios(new File("LIC. 32_12.xls"));
             
             // Excel.cargarHistoriaAcademica(0, "32/12", new File("historia_academica.xls"));
         } catch (Exception e) {

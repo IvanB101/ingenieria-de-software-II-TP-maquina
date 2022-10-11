@@ -19,7 +19,15 @@ public abstract class PlanEstudiosManager {
     
     public static void init(Conexion conexion) {
         planEstudiosDAOImp = new PlanEstudiosDAOImp(conexion);
+        
         planesEstudios = planEstudiosDAOImp.read();
+    }
+    
+    /**
+     * Completa las asociaciones que no se leen directamente de la base de datos
+     */
+    public static void initAsociaciones() {
+        // numero registro estudiantes
     }
     
     /**
@@ -32,8 +40,8 @@ public abstract class PlanEstudiosManager {
     }
     
     public static boolean agregar(PlanEstudios planEstudios) {
-        System.out.println(planEstudios);
+        planesEstudios.put(planEstudios.getCodigo(), planEstudios);
         
-        return true;
+        return planEstudiosDAOImp.create(planEstudios);
     }
 }

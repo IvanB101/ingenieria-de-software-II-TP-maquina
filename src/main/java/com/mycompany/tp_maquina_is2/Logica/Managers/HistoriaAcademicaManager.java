@@ -6,6 +6,7 @@ package com.mycompany.tp_maquina_is2.Logica.Managers;
 
 import com.mycompany.tp_maquina_is2.Datos.Conexion;
 import com.mycompany.tp_maquina_is2.Datos.DAO.Implementaciones.HistoriaAcademicaDAOImp;
+import com.mycompany.tp_maquina_is2.Logica.Transferencia.Estado.Condicion;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.HistoriaAcademica;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.Materia;
 import java.util.ArrayList;
@@ -22,13 +23,22 @@ public abstract class HistoriaAcademicaManager {
 
     public static void init(Conexion conexion) {
         historiaAcademicaDAOImp = new HistoriaAcademicaDAOImp(conexion);
-        historiasAcademicas = historiaAcademicaDAOImp.read();
 
+        historiasAcademicas = historiaAcademicaDAOImp.read();
+    }
+    
+    /**
+     * Completa las asociaciones que no se leen directamente de la base de datos
+     */
+    public static void initAsociaciones() {
+        // codigo materias examenes
+        // codigo examenes
     }
 
     public static boolean agregar(HistoriaAcademica historiaAcademica) {
-        System.out.println(historiaAcademica);
-        return true;
+        historiasAcademicas.put(historiaAcademica.getNroRegEstudiante(), historiaAcademica);
+
+        return historiaAcademicaDAOImp.create(historiaAcademica);
     }
 
     public static HashMap<Materia, Integer> listaExamenes(int nroRegistro) {
@@ -51,29 +61,17 @@ public abstract class HistoriaAcademicaManager {
 
         }
         return ranking;
-        
-    }  
-     
+
+    }
     
-    
-    //devuelve true si todas las correlativas estan aprobadas en la historia
-    //false si al menos una no esta aprobada
-    //busqueda costosa
-    public static boolean cumpleRequisitos(ArrayList<Materia> correlativas, HistoriaAcademica historia) {
-        if(correlativas == null){
-            return true; //no tiene correlativas
-        }
-        for (int i = 0; i < historia.getEstados().size(); i++) {
-            for (int k = 0; k < correlativas.size(); k++) {
-                if (historia.getEstados().get(i).getCodMateria() == correlativas.get(k).getCodigo()) {
-                    if (!(historia.getEstados().get(i).getCondicion().toString().equals("aprobado"))) {
-                        return false;
-                    }
-                }//FIN 1IF
+    public static boolean cumpleRequisitos(ArrayList<Materia> codCorrelativas, HistoriaAcademica historia) {
+        for (Materia correlativa : codCorrelativas) {
+            if(!historia.getEstados().get(correlativa.getCodigo()).getCondicion().equals(Condicion.aprobado)) {
+                return false;
             }
         }
+        
         return true;
     }
 
 }
-

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public class PlanEstudios {
     private String codigo;
     private ArrayList<Integer> codMaterias;
+    private ArrayList<Integer> nroRegistroEstudiantes;
 
     public PlanEstudios(String codigo, ArrayList<Integer> codMaterias) {
         this.codigo = codigo;
@@ -34,6 +35,14 @@ public class PlanEstudios {
 
     public void setCodMaterias(ArrayList<Integer> codMaterias) {
         this.codMaterias = codMaterias;
+    }
+
+    public ArrayList<Integer> getNroRegistroEstudiantes() {
+        return nroRegistroEstudiantes;
+    }
+
+    public void setNroRegistroEstudiantes(ArrayList<Integer> nroRegistroEstudiantes) {
+        this.nroRegistroEstudiantes = nroRegistroEstudiantes;
     }
     
     @Override
