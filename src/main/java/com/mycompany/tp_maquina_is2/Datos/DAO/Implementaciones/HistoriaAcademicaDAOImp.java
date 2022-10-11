@@ -82,8 +82,11 @@ public class HistoriaAcademicaDAOImp implements HistoriaAcademicaDAOInter {
                     + "Materia_codigo = codigo");
             ResultSet rs = ps.executeQuery();
 
+            // Si no hay ninguna historia cargada se retorna el HashMap vacio
+            if (!rs.next()) {
+                return new HashMap<>();
+            }
             // Se iniciaizan las primera historia academica y estado del ResultSet
-            rs.next(); //falta el while?
             HashMap<Integer, Estado> estados = new HashMap<>();
             ArrayList<Integer> codMateriasEstados = new ArrayList<>();
 
@@ -99,7 +102,7 @@ public class HistoriaAcademicaDAOImp implements HistoriaAcademicaDAOInter {
                     rs.getInt("Estudiante_nroRegistro"),
                     rs.getString("PlanEstudios_codigo"),
                     new ArrayList<>(),
-                    new ArrayList<>());
+                    new HashMap<>());
 
             while (rs.next()) {
                 /* Cuando cambia el codigo del plan de estudios o el numero de registro del estudiante se
@@ -118,7 +121,7 @@ public class HistoriaAcademicaDAOImp implements HistoriaAcademicaDAOInter {
                             rs.getInt("Estudiante_nroRegistro"),
                             rs.getString("PlanEstudios_codigo"),
                             new ArrayList<>(),
-                            new ArrayList<>());
+                            new HashMap<>());
 
                     codMateria = rs.getInt("materia_codigo");
 

@@ -66,7 +66,7 @@ public class Conexion {
         
         query.execute("CREATE TABLE IF NOT EXISTS Materia("
                 + "codigo int NOT NULL, "
-                + "nombre varchar(50) NOT NULL, "
+                + "nombre varchar(100) NOT NULL, "
                 + "PlanEstudios_codigo varchar(50) NOT NULL, "
                 + "FOREIGN KEY (PlanEstudios_codigo) REFERENCES PlanEstudios(codigo), "
                 + "PRIMARY KEY (codigo))");

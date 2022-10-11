@@ -64,7 +64,9 @@ public class MesaExamenDAOImp implements MesaExamenDAOInter {
             ResultSet rs = ps.executeQuery();
 
             // Inicializacion de la primera mesa
-            rs.next();
+            if(!rs.next()) {
+                return new HashMap<>();
+            }
             MesaExamen mesa = new MesaExamen(
                     rs.getInt("codigo"),
                     rs.getInt("turno"),

@@ -18,26 +18,30 @@ import javax.swing.table.DefaultTableModel;
  * @author juan_
  */
 public class ListaPanel extends javax.swing.JPanel {
+
     private int cod_historia_usuario;
+
     /**
      * Creates new form ListaPanel
      */
     public ListaPanel(int cod_historia_usuario) {
-        this.cod_historia_usuario=cod_historia_usuario;
+        this.cod_historia_usuario = cod_historia_usuario;
         initComponents();
- 
+
     }
-    public void listaFinales(){
+
+    public void listaFinales() {
         HashMap<Materia, Integer> materias = new HashMap();
-        materias=HistoriaAcademicaManager.listaExamenes(cod_historia_usuario);
+        materias = HistoriaAcademicaManager.listaExamenes(cod_historia_usuario);
         DefaultTableModel modelo = (DefaultTableModel) TablaMaterias.getModel();
         Set<Materia> keys = materias.keySet(); //obtengo las llaves 
-        List<Entry<Materia, Integer>> list = new ArrayList<>(materias.entrySet()); //uso clase entry
-        list.sort(Entry.comparingByValue()); //ordeno por nombre
-        for ( Materia key : keys ) {
-            modelo.addRow(new Object []{key.getCodigo(),key.getNombre()});
+        //List<Entry<Materia, Integer>> list = new ArrayList<>(materias.entrySet()); //uso clase entry
+        //list.sort(Entry.comparingByValue()); //ordeno por nombre
+        for (Materia key : keys) {
+            modelo.addRow(new Object[]{key.getCodigo(), key.getNombre(), materias.get(key)});
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -59,14 +63,14 @@ public class ListaPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Codigo", "Nombre"
+                "Codigo", "Nombre", "Correlativas"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -81,9 +85,10 @@ public class ListaPanel extends javax.swing.JPanel {
         if (TablaMaterias.getColumnModel().getColumnCount() > 0) {
             TablaMaterias.getColumnModel().getColumn(0).setResizable(false);
             TablaMaterias.getColumnModel().getColumn(1).setResizable(false);
+            TablaMaterias.getColumnModel().getColumn(2).setResizable(false);
         }
 
-        PanelCambiable.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 320, 220));
+        PanelCambiable.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, 580, 220));
 
         jButton1.setText("Buscar finales a rendir!!");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -91,7 +96,7 @@ public class ListaPanel extends javax.swing.JPanel {
                 jButton1ActionPerformed(evt);
             }
         });
-        PanelCambiable.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 350, -1, -1));
+        PanelCambiable.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 320, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

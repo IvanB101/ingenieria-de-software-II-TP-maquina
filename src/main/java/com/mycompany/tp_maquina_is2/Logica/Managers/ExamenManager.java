@@ -27,11 +27,11 @@ public abstract class ExamenManager {
         examenes = examenDAOImp.read();
     }
 
-    public static ArrayList<Examen> examenesEstudiante(int cod_historia) {
+    public static ArrayList<Examen> examenesEstudiante(int nroRegistro) {
         ArrayList<Examen> aux = new ArrayList<>();
         
         for (Examen examen : examenes.values()) {
-            if (examen.getNroRegitroEstudiante() == cod_historia) {
+            if (examen.getNroRegitroEstudiante() == nroRegistro) {
                 aux.add(examen);
             }
         }
@@ -39,12 +39,14 @@ public abstract class ExamenManager {
         return aux;
     }
 
-    public static boolean agregar(List<Examen> examenesA) {
-        for (int i = 0; i < examenesA.size(); i++) {
-            examenDAOImp.create(examenesA.get(i));
+    public static boolean agregar(List<Examen> examenes) {
+        for (Examen examen : examenes) {
+            if(!examenDAOImp.create(examen)) {
+                return false;
+            }
         }
 
-        return false;
+        return true;
     }
 
     public static boolean agregar(Examen examen) {
@@ -55,6 +57,6 @@ public abstract class ExamenManager {
         Examen examen = examenes.get(experiencia.getCodExamen());
         examen.setExperiencia(experiencia);
         
-        return examenDAOImp.create(examen);
+        return examenDAOImp.update(examen.getCodigo(), examen);
     }
 }

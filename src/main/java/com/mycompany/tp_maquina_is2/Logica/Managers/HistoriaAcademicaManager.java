@@ -6,6 +6,7 @@ package com.mycompany.tp_maquina_is2.Logica.Managers;
 
 import com.mycompany.tp_maquina_is2.Datos.Conexion;
 import com.mycompany.tp_maquina_is2.Datos.DAO.Implementaciones.HistoriaAcademicaDAOImp;
+import com.mycompany.tp_maquina_is2.Logica.Transferencia.Estado;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.Estado.Condicion;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.HistoriaAcademica;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.Materia;
@@ -45,23 +46,17 @@ public abstract class HistoriaAcademicaManager {
         HistoriaAcademica historia = historiasAcademicas.get(nroRegistro);
         HashMap<Materia, Integer> ranking = new HashMap<>();
         ArrayList<Materia> correlativas = new ArrayList();
-        int cant = 0;
-        for (int i = 0; i < historia.getEstados().size(); i++) {
-            //si el estado de una materia de la historia es regular
-            if ((historia.getEstados().get(i).getCondicion().toString()).equals("regular")) {
-                //ver cuales son sus correlativas| y si no tiene correlativas? ay
-                correlativas = MateriaManager.buscarCorrelativas(historia.getEstados().get(i).getCodMateria());
-                //ver si las correlativas las tiene aprobadas
+        
+        for (Estado estado : historiasAcademicas.get(nroRegistro).getEstados().values()) {
+            if(estado.getCondicion().equals(Condicion.regular)) {
+                correlativas = MateriaManager.buscarCorrelativas(estado.getCodMateria());
+                
                 if (cumpleRequisitos(correlativas, historia)) {
-                    //contar la cantidad de correlativas
-                    cant = correlativas.size();
-                    ranking.put(MateriaManager.buscarMateria(historia.getEstados().get(i).getCodMateria()), cant);
+                    ranking.put(MateriaManager.buscarMateria(estado.getCodMateria()), correlativas.size());
                 }
             }
-
         }
         return ranking;
-
     }
     
     public static boolean cumpleRequisitos(ArrayList<Materia> codCorrelativas, HistoriaAcademica historia) {
