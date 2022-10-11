@@ -11,7 +11,7 @@ import com.mycompany.tp_maquina_is2.Logica.Transferencia.Experiencia;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.Materia;
 import java.time.LocalDate;
 import java.util.ArrayList;
-
+import java.util.HashMap;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -20,14 +20,14 @@ import javax.swing.table.DefaultTableModel;
  * @author juan_
  */
 public class AgregarExpPanel extends javax.swing.JPanel {
-    private int nroRegistro;
-    ArrayList<Examen> examenes=ExamenManager.examenesEstudiante(nroRegistro);
+    private int cod_historia_usuario;
+    ArrayList<Examen> examenes=ExamenManager.examenesEstudiante(cod_historia_usuario);
 
     /**
      * Creates new form AgregarExpPanel
      */
-    public AgregarExpPanel(int nroRegistro) {
-        this.nroRegistro=nroRegistro;
+    public AgregarExpPanel(int cod_historia_usuario) {
+        this.cod_historia_usuario=cod_historia_usuario;
         initComponents();
         this.PanelDatosExp.setVisible(false);
         LlenarTablaExamenes();
@@ -279,6 +279,11 @@ public class AgregarExpPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_TablaExamenesMouseClicked
 
     public void LlenarTablaExamenes(){
+        /*aux.add(new Examen(LocalDate.now(),12,1,20,10));
+        mat.put(20,new Materia(20,"Calculo","",new ArrayList<Materia>()));
+        Examen e1= new Examen(LocalDate.now(),12,1,20,10);
+        e1.setExperiencia(new Experiencia(1,2,3,""));
+        aux.add(e1);*/
         DefaultTableModel modelo = (DefaultTableModel) TablaExamenes.getModel();
         Object [] lista=new Object[40];
         for(Examen e : examenes)
