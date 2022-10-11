@@ -22,7 +22,6 @@ import javax.swing.table.DefaultTableModel;
 public class AgregarExpPanel extends javax.swing.JPanel {
     private int cod_historia_usuario;
     ArrayList<Examen> examenes=ExamenManager.examenesEstudiante(cod_historia_usuario);
-    ArrayList<Materia> materias= MateriaManager.obtenerMaterias();
 
     /**
      * Creates new form AgregarExpPanel
@@ -251,18 +250,16 @@ public class AgregarExpPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ConfirmarDatosExpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarDatosExpActionPerformed
-      try{
-            Integer DiasDeEstudioo=Integer.parseInt(DiasDeEstudio.getText().trim());
+      int diasEstudio=0;
+        try{
+            diasEstudio=Integer.parseInt(DiasDeEstudio.getText().trim());
         }catch(Exception e){
                JOptionPane.showMessageDialog(null, "Error en los dias de estudio");
                 }
-            int Dificultad=SliderDif.getValue();
-            int Dedicacion=SliderDedi.getValue();
-            int cod_examen = (Integer)TablaExamenes.getValueAt(TablaExamenes.getSelectedRow(),0);
-        //Obtener el examen del cual voy a agregarle la experiencia y agregarla    
-        //Examen e=new Examen();
-        //e.setExperiencia(new Experiencia(Dificultad,DiasDeEstudioo,dedicacion,cod_examen);
-        //ExamenManager.agregarExpExamen();
+        int dificultad=SliderDif.getValue();
+        int dedicacion=SliderDedi.getValue();
+        String codExamen = (String)TablaExamenes.getValueAt(TablaExamenes.getSelectedRow(),0);
+        ExamenManager.agregarExperiencia(new Experiencia(dificultad,diasEstudio,dedicacion,codExamen));
     }//GEN-LAST:event_ConfirmarDatosExpActionPerformed
 
     private void SliderDifStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_SliderDifStateChanged
@@ -292,7 +289,7 @@ public class AgregarExpPanel extends javax.swing.JPanel {
         for(Examen e : examenes)
         {
             if(e.getExperiencia()==null)
-                modelo.addRow(new Object []{e.getCodMateria(),materias.get(e.getCodMateria()).getNombre(),e.getFecha().toString()});
+                modelo.addRow(new Object []{e.getCodMateria(),MateriaManager.buscarMateria(e.getCodMateria()).getNombre(),e.getFecha().toString()});
             }
         }
 
