@@ -49,7 +49,16 @@ public abstract class MateriaManager {
     public static ArrayList<Materia> buscarCorrelativas(int codigo) {
         return materias.get(codigo).getCorrelativas(); //obtengo las correlativas de una materia
     }
-
+    public static Integer esCorrelativaDe(int codigo){
+       int cantidad=0;
+       for(Materia materia : materias.values()){ //por cada materia
+           //si en las correlativas de una materia esta la mat
+           if( materia.getCorrelativas().contains((buscarMateria(codigo))) )
+               cantidad++; 
+       }
+    return  cantidad;
+    }
+    
     public static Materia buscarMateria(int codigo) {
         return materias.get(codigo);
     }

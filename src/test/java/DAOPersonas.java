@@ -18,10 +18,10 @@ import java.util.Map;
  * @author ginop
  */
 public class DAOPersonas {
-    private static final String DB_NAME = "prueba1";
+    private static final String DB_NAME = "finalDB";
     private static final String DB_URL = "jdbc:postgresql://localhost:5432/" + DB_NAME;
     private static final String DB_USER = "postgres";
-    private static final String DB_PWD = "admin";
+    private static final String DB_PWD = "gino";
         
     public static void main(String[]args) {
         Conexion conexion = new Conexion(DB_NAME, DB_URL, DB_USER, DB_PWD);

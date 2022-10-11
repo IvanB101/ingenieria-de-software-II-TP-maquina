@@ -48,8 +48,8 @@ public class DAOHistoriaTest {
          estaditos.add(e3);
           estaditos.add(e4);
            estaditos.add(e5);
-        HistoriaAcademica h1 = new HistoriaAcademica("LICENCIATURA EN CIENCIAS DE LA COMPUTACIÓN",4128100,"32/12",new ArrayList(),estaditos);
-        hisDAO.create(h1); 
+        //HistoriaAcademica h1 = new HistoriaAcademica("LICENCIATURA EN CIENCIAS DE LA COMPUTACIÓN",4128100,"32/12",new ArrayList(),estaditos);
+        //hisDAO.create(h1); 
         //delete
         //hisDAO.delete(3010820);
         
