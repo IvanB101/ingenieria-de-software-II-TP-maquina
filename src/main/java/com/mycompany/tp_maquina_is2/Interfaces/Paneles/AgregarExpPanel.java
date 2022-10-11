@@ -9,6 +9,8 @@ import com.mycompany.tp_maquina_is2.Logica.Managers.MateriaManager;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.Examen;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.Experiencia;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.Materia;
+import java.awt.Color;
+import java.awt.Font;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,6 +30,11 @@ public class AgregarExpPanel extends javax.swing.JPanel {
     public AgregarExpPanel(int cod_historia_usuario) {
         this.cod_historia_usuario=cod_historia_usuario;
         initComponents();
+        TablaExamenes.getTableHeader().setFont(new Font("Segoe UI",Font.BOLD,12));
+        TablaExamenes.getTableHeader().setOpaque(true);
+        TablaExamenes.getTableHeader().setBackground(new Color(0,153,153));
+        TablaExamenes.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.getViewport().setBackground(new Color(255,255,255)); //tabla color blanc
         this.PanelDatosExp.setVisible(false);
         LlenarTablaExamenes();
     }
@@ -68,7 +75,7 @@ public class AgregarExpPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Codigo", "Nombre", "Fecha"
+                "CODIGO", "NOMBRE", "FECHA"
             }
         ) {
             Class[] types = new Class [] {
@@ -86,6 +93,10 @@ public class AgregarExpPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        TablaExamenes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        TablaExamenes.setFocusable(false);
+        TablaExamenes.setRowHeight(25);
+        TablaExamenes.setSelectionBackground(new java.awt.Color(118, 35, 47));
         TablaExamenes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TablaExamenesMouseClicked(evt);
@@ -111,24 +122,25 @@ public class AgregarExpPanel extends javax.swing.JPanel {
                         .addGap(27, 27, 27)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelExamRendidosLayout.createSequentialGroup()
-                        .addGap(124, 124, 124)
+                        .addGap(118, 118, 118)
                         .addComponent(jLabel1)))
                 .addContainerGap(47, Short.MAX_VALUE))
         );
         panelExamRendidosLayout.setVerticalGroup(
             panelExamRendidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelExamRendidosLayout.createSequentialGroup()
-                .addGap(49, 49, 49)
+                .addGap(73, 73, 73)
                 .addComponent(jLabel1)
-                .addGap(30, 30, 30)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
 
         PanelDatosExp.setBackground(new java.awt.Color(255, 255, 255));
 
         SliderDif.setMaximum(10);
         SliderDif.setValue(5);
+        SliderDif.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         SliderDif.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 SliderDifStateChanged(evt);
@@ -137,23 +149,26 @@ public class AgregarExpPanel extends javax.swing.JPanel {
 
         SliderDedi.setMaximum(10);
         SliderDedi.setValue(5);
+        SliderDedi.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         SliderDedi.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 SliderDediStateChanged(evt);
             }
         });
 
-        DificultadL.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        DificultadL.setText("Dificultad");
+        DificultadL.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        DificultadL.setText("Dificultad:");
 
-        DificultadL1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        DificultadL1.setText("Dias de Estudio");
+        DificultadL1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        DificultadL1.setText("Días de Estudio:");
 
-        DificultadL2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        DificultadL2.setText("Dedicacion");
+        DificultadL2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        DificultadL2.setText("Dedicación:");
 
         ConfirmarDatosExp.setBackground(new java.awt.Color(102, 255, 102));
+        ConfirmarDatosExp.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         ConfirmarDatosExp.setText("Confirmar Experiencia");
+        ConfirmarDatosExp.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         ConfirmarDatosExp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ConfirmarDatosExpActionPerformed(evt);
@@ -177,47 +192,53 @@ public class AgregarExpPanel extends javax.swing.JPanel {
         PanelDatosExpLayout.setHorizontalGroup(
             PanelDatosExpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelDatosExpLayout.createSequentialGroup()
-                .addContainerGap(138, Short.MAX_VALUE)
+                .addContainerGap(60, Short.MAX_VALUE)
                 .addGroup(PanelDatosExpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelDatosExpLayout.createSequentialGroup()
-                        .addGroup(PanelDatosExpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(DificultadL1)
-                            .addComponent(SliderDedi, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(SliderDif, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(DificultadL)
-                            .addComponent(ConfirmarDatosExp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(DificultadL2)
-                            .addComponent(DiasDeEstudio))
+                        .addGroup(PanelDatosExpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(DificultadL, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(DificultadL1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(DificultadL2, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGroup(PanelDatosExpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(PanelDatosExpLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(PanelDatosExpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(SliderDedi, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(SliderDif, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(ConfirmarDatosExp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(PanelDatosExpLayout.createSequentialGroup()
+                                .addGap(15, 15, 15)
+                                .addComponent(DiasDeEstudio, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(115, 115, 115))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelDatosExpLayout.createSequentialGroup()
-                        .addComponent(Datos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(205, 205, 205))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelDatosExpLayout.createSequentialGroup()
                         .addComponent(DatosDed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(205, 205, 205))))
+                        .addGap(204, 204, 204))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelDatosExpLayout.createSequentialGroup()
+                        .addComponent(Datos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(203, 203, 203))))
         );
         PanelDatosExpLayout.setVerticalGroup(
             PanelDatosExpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelDatosExpLayout.createSequentialGroup()
-                .addGap(79, 79, 79)
-                .addComponent(DificultadL)
-                .addGap(28, 28, 28)
-                .addComponent(SliderDif, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(129, 129, 129)
+                .addGroup(PanelDatosExpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(DificultadL)
+                    .addComponent(SliderDif, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Datos, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Datos, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(DificultadL1)
-                .addGap(27, 27, 27)
-                .addComponent(DiasDeEstudio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(DificultadL2)
-                .addGap(23, 23, 23)
-                .addComponent(SliderDedi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(PanelDatosExpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(DiasDeEstudio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(DificultadL1))
+                .addGap(37, 37, 37)
+                .addGroup(PanelDatosExpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(DificultadL2)
+                    .addComponent(SliderDedi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(DatosDed, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addComponent(DatosDed, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(ConfirmarDatosExp, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(57, 57, 57))
+                .addGap(136, 136, 136))
         );
 
         javax.swing.GroupLayout ContenedorLayout = new javax.swing.GroupLayout(Contenedor);
@@ -240,7 +261,7 @@ public class AgregarExpPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Contenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 929, Short.MAX_VALUE)
+            .addComponent(Contenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 983, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -283,6 +304,7 @@ public class AgregarExpPanel extends javax.swing.JPanel {
     public void LlenarTablaExamenes(){
         ArrayList<Examen> examenes=ExamenManager.examenesEstudiante(cod_historia_usuario);
         DefaultTableModel modelo = (DefaultTableModel) TablaExamenes.getModel();
+        modelo.setRowCount(0);
         Object [] lista=new Object[40];
         for(Examen e : examenes)
         {
