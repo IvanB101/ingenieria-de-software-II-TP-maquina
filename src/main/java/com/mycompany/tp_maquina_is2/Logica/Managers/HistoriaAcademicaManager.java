@@ -41,6 +41,17 @@ public abstract class HistoriaAcademicaManager {
 
         return historiaAcademicaDAOImp.create(historiaAcademica);
     }
+    
+    public static boolean modificar(HistoriaAcademica historiaAcademica) {
+        return eliminar(historiaAcademica.getNroRegEstudiante()) && agregar(historiaAcademica);
+    }
+    
+    public static boolean eliminar(int nroRegistro) {
+        historiasAcademicas.remove(nroRegistro);
+        
+        return historiaAcademicaDAOImp.delete(nroRegistro);
+    }
+    
     //CONTAR DE QUE MATERIAS ES CORRELATIVA
     public static HashMap<Materia, Integer> listaExamenes(int nroRegistro) {
         HistoriaAcademica historia = historiasAcademicas.get(nroRegistro);
@@ -71,4 +82,7 @@ public abstract class HistoriaAcademicaManager {
         return true;
     }
 
+    public static HistoriaAcademica buscar(int nroRegistro) {
+        return historiasAcademicas.get(nroRegistro);
+    }
 }

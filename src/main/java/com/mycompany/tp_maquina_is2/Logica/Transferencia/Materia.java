@@ -15,6 +15,7 @@ public class Materia {
     private int codigo;
     private String nombre;
     private ArrayList<Materia> correlativas;
+    private ArrayList<Integer> dependientes;
     private ArrayList<Integer> codMesas;
     private String codPlanDeEstudios;
     private ArrayList<Integer> codEstados;
