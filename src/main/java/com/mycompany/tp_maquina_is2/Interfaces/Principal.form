@@ -415,9 +415,15 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="PrincipalL1" min="-2" pref="419" max="-2" attributes="0"/>
-                          <Component id="PrincipalL" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                              <Component id="PrincipalL1" min="-2" pref="419" max="-2" attributes="0"/>
+                              <Component id="PrincipalL" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="jLabel1" min="-2" pref="475" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace min="-2" pref="232" max="-2" attributes="0"/>
                   </Group>
@@ -430,7 +436,9 @@
                       <Component id="PrincipalL" min="-2" pref="37" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="PrincipalL1" min="-2" pref="45" max="-2" attributes="0"/>
-                      <EmptySpace pref="348" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jLabel1" min="-2" pref="291" max="-2" attributes="0"/>
+                      <EmptySpace pref="51" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -450,6 +458,14 @@
                   <Font name="Segoe UI" size="20" style="0"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Seleccione la operacion que desee realizar"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel1">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="2" name="C:\Users\juan_\Desktop\Universidad\5) Ing. Software II\Practico Integrador\TP_Maquina_IS2\src\main\java\com\mycompany\tp_maquina_is2\Interfaces\logo_imagen.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="jLabel1"/>
               </Properties>
             </Component>
           </SubComponents>
