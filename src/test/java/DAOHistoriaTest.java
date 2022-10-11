@@ -36,12 +36,19 @@ public class DAOHistoriaTest {
         HistoriaAcademicaDAOImp hisDAO = new HistoriaAcademicaDAOImp(conexion);
         //create
         Condicion c1 = null;
-        Estado e1 = new Estado(10,3010820,c1.parse("aprobado")); //funciona
-        Estado e2 = new Estado(16,3010820,c1.parse("regular"));
+        Estado e2 = new Estado(16,4128100,c1.parse("regular")); //correlativas 1
+        Estado e3 = new Estado(1,4128100,c1.parse("regular")); //correlativas 0
+        
+        Estado e4 = new Estado(283,4128100,c1.parse("regular")); //correlativas 2
+        Estado e5 = new Estado(206,4128100,c1.parse("aprobado")); 
+        Estado e1 = new Estado(10,4128100,c1.parse("aprobado")); 
         ArrayList<Estado> estaditos = new ArrayList();
         estaditos.add(e1);
         estaditos.add(e2);
-        HistoriaAcademica h1 = new HistoriaAcademica("LICENCIATURA EN CIENCIAS DE LA COMPUTACIÓN",3010820,"32/12",new ArrayList(),estaditos);
+         estaditos.add(e3);
+          estaditos.add(e4);
+           estaditos.add(e5);
+        HistoriaAcademica h1 = new HistoriaAcademica("LICENCIATURA EN CIENCIAS DE LA COMPUTACIÓN",4128100,"32/12",new ArrayList(),estaditos);
         hisDAO.create(h1); 
         //delete
         //hisDAO.delete(3010820);

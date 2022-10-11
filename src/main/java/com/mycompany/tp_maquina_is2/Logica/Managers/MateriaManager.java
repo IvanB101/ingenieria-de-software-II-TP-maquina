@@ -32,9 +32,13 @@ public abstract class MateriaManager {
     }
 
     public static ArrayList<Materia> buscarCorrelativas(int codigo){
-            return materias.get(codigo).getCorrelativas(); //obtengo las correlativas de una materia
+        return materias.get(codigo).getCorrelativas(); //obtengo las correlativas de una materia
+    }
+    public static Materia buscarMateria(int codigo){
+        return materias.get(codigo);
     }
     public static ArrayList<Materia> obtenerMaterias(){
         return (ArrayList)materias.values();
     }
+    
 }
