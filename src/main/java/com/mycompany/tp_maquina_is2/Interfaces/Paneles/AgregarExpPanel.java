@@ -304,7 +304,7 @@ public class AgregarExpPanel extends javax.swing.JPanel {
     public void LlenarTablaExamenes(){
         ArrayList<Examen> examenes=ExamenManager.examenesEstudiante(cod_historia_usuario);
         DefaultTableModel modelo = (DefaultTableModel) TablaExamenes.getModel();
-        modelo.setRowCount(0);
+        //modelo.setRowCount(0);
         Object [] lista=new Object[40];
         for(Examen e : examenes)
         {
