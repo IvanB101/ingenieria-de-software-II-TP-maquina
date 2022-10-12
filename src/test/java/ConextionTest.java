@@ -19,7 +19,7 @@ import java.sql.Connection;
  */
 public class ConextionTest {
 
-    private static final String DB_NAME = "prueba2";
+    private static final String DB_NAME = "finalDB";
     private static final String DB_URL = "jdbc:postgresql://localhost:5432/" + DB_NAME;
     private static final String DB_USER = "postgres";
     private static final String DB_PWD = "admin";
@@ -34,11 +34,11 @@ public class ConextionTest {
             MateriaManager.init(conexion);
             PlanEstudiosManager.init(conexion);
             
-            // Excel.cargarPlanEstudios(new File("LIC. 32_12.xls"));
+            Excel.cargarPlanEstudios(new File("LIC. 32_12.xls"));
             
             // Excel.cargarHistoriaAcademica(3010820, "32/12", new File("historia-gino.xls"));
             
-            System.out.println(HistoriaAcademicaManager.eliminar(3010820));
+            //System.out.println(HistoriaAcademicaManager.eliminar(3010820));
         } catch (Exception e) {
             e.printStackTrace();
         }
