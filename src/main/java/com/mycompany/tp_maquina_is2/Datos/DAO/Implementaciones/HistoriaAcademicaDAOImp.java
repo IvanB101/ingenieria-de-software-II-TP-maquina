@@ -23,19 +23,17 @@ import javax.swing.JOptionPane;
  */
 public class HistoriaAcademicaDAOImp implements HistoriaAcademicaDAOInter {
 
-    Connection con;
+    Conexion conexion;
 
     public HistoriaAcademicaDAOImp(Conexion conexion) {
-        try {
-            con = conexion.getInstance();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-        }
+        this.conexion = conexion;
     }
 
     @Override
     public boolean create(HistoriaAcademica historiaAcademica) {
         try {
+            Connection con = conexion.getConnection();
+            
             PreparedStatement ps;
 
             // Carga de la historia academica
@@ -71,6 +69,8 @@ public class HistoriaAcademicaDAOImp implements HistoriaAcademicaDAOInter {
         HashMap<Integer, HistoriaAcademica> historiasAcademicas = new HashMap<>();
 
         try {
+            Connection con = conexion.getConnection();
+            
             /* Realiza un ensamble de las tablas HistoriaAcademica y Estado para tener todos los
             estados de una historia academica seguidos en el ResultSet. Ademas, se realiza un ensamble
             con Materia para poder diferenciar dos historias academicas del mismo estudiante en
@@ -171,6 +171,8 @@ public class HistoriaAcademicaDAOImp implements HistoriaAcademicaDAOInter {
 
         // Control existencia de la historia academica con código a eliminar
         try {
+            Connection con = conexion.getConnection();
+            
             ps = con.prepareStatement("SELECT * FROM HistoriaAcademica WHERE Estudiante_nroRegistro=?");
             ps.setInt(1, nroRegistro);
             ResultSet rs = ps.executeQuery();
@@ -182,6 +184,8 @@ public class HistoriaAcademicaDAOImp implements HistoriaAcademicaDAOInter {
         }
 
         try {
+            Connection con = conexion.getConnection();
+            
             ps = con.prepareStatement("DELETE FROM HistoriaAcademica WHERE Estudiante_nroRegistro=?");
             ps.setInt(1, nroRegistro);
             ps.executeUpdate();

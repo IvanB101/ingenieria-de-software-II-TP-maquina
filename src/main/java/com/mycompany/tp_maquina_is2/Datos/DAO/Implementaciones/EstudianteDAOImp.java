@@ -20,19 +20,17 @@ import javax.swing.JOptionPane;
  */
 public class EstudianteDAOImp implements EstudianteDAOInter {
 
-    Connection con;
+    Conexion conexion;
 
     public EstudianteDAOImp(Conexion conexion) {
-        try {
-            con = conexion.getInstance();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-        }
+        this.conexion = conexion;
     }
 
     @Override
     public boolean create(Estudiante estudiante) {
         try {
+            Connection con = conexion.getConnection();
+            
             // Insercion de los datos correspondientes a Persona
             PreparedStatement ps = con.prepareStatement("INSERT INTO Persona (codigo, dni, nombre, apellido) VALUES (?,?,?,?)");
 
@@ -63,6 +61,8 @@ public class EstudianteDAOImp implements EstudianteDAOInter {
         HashMap<Integer, Estudiante> estudiantes = new HashMap<>();
 
         try {
+            Connection con = conexion.getConnection();
+            
             PreparedStatement ps = con.prepareStatement("SELECT nroRegistro, codigo, nombre, apellido,"
                     + " dni FROM Estudiante, Persona WHERE Persona_codigo = codigo");
             ResultSet rs = ps.executeQuery();
@@ -109,6 +109,8 @@ public class EstudianteDAOImp implements EstudianteDAOInter {
         }
         */
         try {
+            Connection con = conexion.getConnection();
+            
             ps = con.prepareStatement("DELETE FROM Persona WHERE codigo=?");
             ps.setString(1, codigo);
             ps.executeUpdate();

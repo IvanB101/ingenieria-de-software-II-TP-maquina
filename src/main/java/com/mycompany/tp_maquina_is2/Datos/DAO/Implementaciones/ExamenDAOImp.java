@@ -22,19 +22,17 @@ import javax.swing.JOptionPane;
  */
 public class ExamenDAOImp implements ExamenDAOInter {
 
-    Connection con;
+    Conexion conexion;
 
     public ExamenDAOImp(Conexion conexion) {
-        try {
-            con = conexion.getInstance();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-        }
+        this.conexion = conexion;
     }
 
     @Override
     public boolean create(Examen examen) {
         try {
+            Connection con = conexion.getConnection();
+            
             PreparedStatement ps = con.prepareStatement("INSERT INTO Examen (codigo, fecha, "
                     + "turno, nota, Materia_codigo, HistoriaAcademica_Estudiante_nroRegistro) VALUES (?,?,?,?,?,?)");
 
@@ -72,6 +70,8 @@ public class ExamenDAOImp implements ExamenDAOInter {
     public HashMap<String, Examen> read() {
         HashMap<String, Examen> examenes = new HashMap<>();
         try {
+            Connection con = conexion.getConnection();
+            
             PreparedStatement ps = con.prepareStatement("SELECT codigo, fecha, turno, nota, Materia_codigo,HistoriaAcademica_Estudiante_nroRegistro, dificultad, dedicacion, dias "
                     + "FROM Examen, Experiencia "
                     + "WHERE codigo = Examen_codigo");
@@ -138,6 +138,8 @@ public class ExamenDAOImp implements ExamenDAOInter {
         
         // Control existencia del examen con código a eliminar
         try {
+            Connection con = conexion.getConnection();
+            
             ps = con.prepareStatement("SELECT * FROM Examen WHERE codigo=?");
             ps.setString(1, codigo);
             ResultSet rs = ps.executeQuery();
@@ -148,6 +150,8 @@ public class ExamenDAOImp implements ExamenDAOInter {
         }
 
         try {
+            Connection con = conexion.getConnection();
+            
             /* Tambien se borrara la experiencia correspondiente al examen ya que posee la opcion
             ON DELETE CASCADE */
             ps = con.prepareStatement("DELETE FROM Examen WHERE codigo=?");

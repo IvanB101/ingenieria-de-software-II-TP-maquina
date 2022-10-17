@@ -20,19 +20,17 @@ import javax.swing.JOptionPane;
  */
 public class NoDocenteDAOImp implements NoDocenteDAOInter {
 
-    Connection con;
+    Conexion conexion;
 
     public NoDocenteDAOImp(Conexion conexion) {
-        try {
-            con = conexion.getInstance();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-        }
+        this.conexion = conexion;
     }
 
     @Override
     public boolean create(NoDocente noDocente) {
         try {
+            Connection con = conexion.getConnection();
+            
             PreparedStatement ps = con.prepareStatement("INSERT INTO Persona (codigo, dni, nombre, apellido) VALUES (?,?,?,?)");
 
             ps.setString(1, noDocente.getCodigo());
@@ -60,6 +58,8 @@ public class NoDocenteDAOImp implements NoDocenteDAOInter {
         HashMap<Integer, NoDocente> noDocentes = new HashMap<>();
 
         try {
+            Connection con = conexion.getConnection();
+            
             PreparedStatement ps = con.prepareStatement("SELECT nroLegajo, codigo, nombre, apellido,"
                     + " dni FROM NoDocente, Persona WHERE Persona_codigo = codigo");
             ResultSet rs = ps.executeQuery();
@@ -94,6 +94,8 @@ public class NoDocenteDAOImp implements NoDocenteDAOInter {
         String codigo = "n" + nroLegajo;
         // Control existencia del consumo con código a eliminar
         try {
+            Connection con = conexion.getConnection();
+            
             ps = con.prepareStatement("SELECT * FROM Persona WHERE codigo=?");
             ps.setString(1, codigo);
             ResultSet rs = ps.executeQuery();
@@ -104,6 +106,8 @@ public class NoDocenteDAOImp implements NoDocenteDAOInter {
         }
 
         try {
+            Connection con = conexion.getConnection();
+            
             ps = con.prepareStatement("DELETE FROM Persona WHERE codigo=?");
             ps.setString(1, codigo);
             ps.executeUpdate();

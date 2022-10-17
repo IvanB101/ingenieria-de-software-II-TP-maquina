@@ -35,9 +35,9 @@
             <version>42.3.2</version>
         </dependency>
         <dependency>
-            <groupId>unknown.binary</groupId>
+            <groupId>org.netbeans.external</groupId>
             <artifactId>AbsoluteLayout</artifactId>
-            <version>SNAPSHOT</version>
+            <version>RELEASE150</version>
         </dependency>
     </dependencies>
 </project>

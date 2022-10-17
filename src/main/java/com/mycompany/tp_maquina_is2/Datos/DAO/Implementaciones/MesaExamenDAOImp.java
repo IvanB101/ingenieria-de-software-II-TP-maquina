@@ -21,19 +21,17 @@ import javax.swing.JOptionPane;
  */
 public class MesaExamenDAOImp implements MesaExamenDAOInter {
 
-    Connection con;
+    Conexion conexion;
 
     public MesaExamenDAOImp(Conexion conexion) {
-        try {
-            con = conexion.getInstance();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-        }
+        this.conexion = conexion;
     }
 
     @Override
     public boolean create(MesaExamen mesaExamen) {
         try {
+            Connection con = conexion.getConnection();
+            
             PreparedStatement ps = con.prepareStatement("INSERT INTO MesaExamen (codigo, turno, anio, Materia_codigo) VALUES (?,?,?,?)");
 
             ps.setInt(1, mesaExamen.getCodigo());
@@ -56,6 +54,8 @@ public class MesaExamenDAOImp implements MesaExamenDAOInter {
         HashMap<Integer, MesaExamen> mesasExamenes = new HashMap();
 
         try {
+            Connection con = conexion.getConnection();
+            
             /*Se realiza un ensamble de las tablas MesaExamen e Inscripciones para que obtener
             los datos de una mesa junto con las incripciones a la misma*/
             PreparedStatement ps = con.prepareStatement("SELECT codigo, turno, anio, Materia_codigo, Estudiante_nroRegistro "
@@ -137,6 +137,8 @@ public class MesaExamenDAOImp implements MesaExamenDAOInter {
     public boolean delete(int codigo) {
         PreparedStatement ps;
         try {
+            Connection con = conexion.getConnection();
+            
             ps = con.prepareStatement("SELECT * FROM MesaExamen WHERE codigo=?");
             ps.setInt(1, codigo);
             ResultSet rs = ps.executeQuery();
@@ -147,6 +149,8 @@ public class MesaExamenDAOImp implements MesaExamenDAOInter {
             return false;
         }
         try {
+            Connection con = conexion.getConnection();
+            
             ps = con.prepareStatement("DELETE FROM MesaExamen WHERE codigo=?");
             ps.setInt(1, codigo);
             ps.executeUpdate();

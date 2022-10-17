@@ -20,19 +20,17 @@ import javax.swing.JOptionPane;
  */
 public class PlanEstudiosDAOImp implements PlanEstudiosDAOInter {
 
-    Connection con;
+    Conexion conexion;
 
     public PlanEstudiosDAOImp(Conexion conexion) {
-        try {
-            con = conexion.getInstance();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-        }
+        this.conexion = conexion;
     }
 
     @Override
     public boolean create(PlanEstudios planEstudios) {
         try {
+            Connection con = conexion.getConnection();
+            
             PreparedStatement ps = con.prepareStatement("INSERT INTO PlanEstudios (codigo) VALUES (?)");
 
             ps.setString(1, planEstudios.getCodigo());
@@ -47,9 +45,12 @@ public class PlanEstudiosDAOImp implements PlanEstudiosDAOInter {
 
     @Override
     public HashMap<String, PlanEstudios> read() {
+        
         HashMap<String, PlanEstudios> planesDeEstudios = new HashMap<>();
 
         try {
+            Connection con = conexion.getConnection();
+            
             PreparedStatement ps = con.prepareStatement("SELECT * FROM PlanEstudios");
             ResultSet rs = ps.executeQuery();
 
@@ -78,6 +79,8 @@ public class PlanEstudiosDAOImp implements PlanEstudiosDAOInter {
         PreparedStatement ps;
         
         try {
+            Connection con = conexion.getConnection();
+            
             // Comprobacion existencia del plan de estudios a eliminar
             ps = con.prepareStatement("SELECT * FROM PlanEstudios WHERE codigo=?");
             ps.setString(1, codigo);
@@ -90,6 +93,8 @@ public class PlanEstudiosDAOImp implements PlanEstudiosDAOInter {
         }
         
         try {
+            Connection con = conexion.getConnection();
+            
             ps = con.prepareStatement("DELETE FROM PlanEstudios WHERE codigo=?");
             ps.setString(1, codigo);
             ps.executeUpdate();

@@ -21,19 +21,17 @@ import javax.swing.JOptionPane;
  */
 public class MateriaDAOImp implements MateriaDAOInter {
 
-    Connection con;
+    Conexion conexion;
 
     public MateriaDAOImp(Conexion conexion) {
-        try {
-            con = conexion.getInstance();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-        }
+        this.conexion = conexion;
     }
 
     @Override
     public boolean create(Materia materia) {
         try {
+            Connection con = conexion.getConnection();
+            
             PreparedStatement ps = con.prepareStatement("INSERT INTO Materia (codigo, nombre, PlanEstudios_codigo) VALUES (?,?,?)");
             ps.setInt(1, materia.getCodigo());
             ps.setString(2, materia.getNombre());
@@ -61,6 +59,8 @@ public class MateriaDAOImp implements MateriaDAOInter {
         HashMap<Integer, Materia> materias = new HashMap();//todas las mat de todos los planes
         ArrayList<Integer> codCorrelativas = new ArrayList(); // todos los codigos de las correlativas
         try {
+            Connection con = conexion.getConnection();
+            
             // Carga de las materias sin sus correlativas
             PreparedStatement ps = con.prepareStatement("SELECT * from Materia");
             ResultSet rs = ps.executeQuery();
@@ -98,6 +98,8 @@ public class MateriaDAOImp implements MateriaDAOInter {
     public boolean delete(int codigo) {
         PreparedStatement ps;
         try {
+            Connection con = conexion.getConnection();
+            
             ps = con.prepareStatement("SELECT * FROM Materia WHERE codigo=?");
             ps.setInt(1, codigo);
             ResultSet rs = ps.executeQuery();
@@ -108,6 +110,8 @@ public class MateriaDAOImp implements MateriaDAOInter {
         }
 
         try {
+            Connection con = conexion.getConnection();
+            
             ps = con.prepareStatement("DELETE FROM Materia WHERE codigo=?");
             ps.setInt(1, codigo);
             ps.executeUpdate();
