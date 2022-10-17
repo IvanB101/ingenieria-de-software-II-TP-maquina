@@ -30,7 +30,7 @@ public class EstudianteDAOImp implements EstudianteDAOInter {
     public boolean create(Estudiante estudiante) {
         try {
             Connection con = conexion.getConnection();
-            
+
             // Insercion de los datos correspondientes a Persona
             PreparedStatement ps = con.prepareStatement("INSERT INTO Persona (codigo, dni, nombre, apellido) VALUES (?,?,?,?)");
 
@@ -40,7 +40,7 @@ public class EstudianteDAOImp implements EstudianteDAOInter {
             ps.setString(4, estudiante.getApellido());
 
             ps.executeUpdate();
-            
+
             // Insercion de los datos correspondientes a Estudiante
             ps = con.prepareStatement("INSERT INTO Estudiante (nroRegistro, Persona_codigo) VALUES (?,?)");
 
@@ -62,7 +62,7 @@ public class EstudianteDAOImp implements EstudianteDAOInter {
 
         try {
             Connection con = conexion.getConnection();
-            
+
             PreparedStatement ps = con.prepareStatement("SELECT nroRegistro, codigo, nombre, apellido,"
                     + " dni FROM Estudiante, Persona WHERE Persona_codigo = codigo");
             ResultSet rs = ps.executeQuery();
@@ -107,15 +107,15 @@ public class EstudianteDAOImp implements EstudianteDAOInter {
             JOptionPane.showMessageDialog(null, "No hay ningún estudiante cargado con el código: " + codigo);
             return false;
         }
-        */
+         */
         try {
             Connection con = conexion.getConnection();
-            
+
             ps = con.prepareStatement("DELETE FROM Persona WHERE codigo=?");
             ps.setString(1, codigo);
             ps.executeUpdate();
         } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, ex.getMessage());
+            JOptionPane.showMessageDialog(null, ex.getMessage());
             return false;
         }
 
