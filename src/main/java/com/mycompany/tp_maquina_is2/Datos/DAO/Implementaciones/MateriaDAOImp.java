@@ -31,19 +31,21 @@ public class MateriaDAOImp implements MateriaDAOInter {
     public boolean create(Materia materia) {
         try {
             Connection con = conexion.getConnection();
-            
+
+            // Carga de los datos de la materia
             PreparedStatement ps = con.prepareStatement("INSERT INTO Materia (codigo, nombre, PlanEstudios_codigo) VALUES (?,?,?)");
-            ps.setInt(1, materia.getCodigo());
+            ps.setString(1, materia.getCodigo());
             ps.setString(2, materia.getNombre());
             ps.setString(3, materia.getCodPlanDeEstudios());
 
             ps.executeUpdate();
 
+            // Carga de las correlativas en caso de que las tenga
             if (!materia.getCorrelativas().isEmpty()) {
-                for (int k = 0; k < materia.getCorrelativas().size(); k++) {
+                for (String codCorrelativa : materia.getCorrelativas()) {
                     ps = con.prepareStatement("INSERT INTO Correlativas (correlativa_codigo, materia_codigo) VALUES (?,?)");
-                    ps.setInt(1, materia.getCorrelativas().get(k).getCodigo());
-                    ps.setInt(2, materia.getCodigo());
+                    ps.setString(1, codCorrelativa);
+                    ps.setString(2, materia.getCodigo());
                     ps.executeUpdate();
                 }
             }
@@ -55,28 +57,31 @@ public class MateriaDAOImp implements MateriaDAOInter {
     }
 
     @Override
-    public HashMap<Integer, Materia> read() {
-        HashMap<Integer, Materia> materias = new HashMap();//todas las mat de todos los planes
-        ArrayList<Integer> codCorrelativas = new ArrayList(); // todos los codigos de las correlativas
+    public HashMap<String, Materia> read() {
+        HashMap<String, Materia> materias = new HashMap();//todas las mat de todos los planes
+        ArrayList<String> codCorrelativas = new ArrayList(); // todos los codigos de las correlativas
+
         try {
             Connection con = conexion.getConnection();
-            
+
             // Carga de las materias sin sus correlativas
             PreparedStatement ps = con.prepareStatement("SELECT * from Materia");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                materias.put(rs.getInt("codigo"), new Materia(
-                        rs.getInt("codigo"),
-                        rs.getString("nombre"),
-                        rs.getString("PlanEstudios_codigo"),
-                        new ArrayList()));
+                materias.put(rs.getString("codigo") + "-" + rs.getString("PlanEstudios_codigo"),
+                        new Materia(
+                                rs.getString("codigo"),
+                                rs.getString("nombre"),
+                                rs.getString("PlanEstudios_codigo"),
+                                new ArrayList()));
             }
 
             // Carga de las correlativas de cada materia
             ps = con.prepareStatement("SELECT * from Correlativas");
             rs = ps.executeQuery();
             while (rs.next()) {
-                materias.get(rs.getInt("Materia_codigo")).getCorrelativas().add(materias.get(rs.getInt("Correlativa_codigo")));
+                materias.get(rs.getString("Materia_codigo")).getCorrelativas().add(
+                        rs.getString("Correlativa_codigo"));
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
@@ -86,8 +91,8 @@ public class MateriaDAOImp implements MateriaDAOInter {
     }
 
     @Override
-    public boolean update(int codigo, Materia materia) {
-        if (delete(codigo)) {
+    public boolean update(String codigo, String codPlanEstudios, Materia materia) {
+        if (delete(codigo, codPlanEstudios)) {
             return create(materia);
         }
 
@@ -95,25 +100,30 @@ public class MateriaDAOImp implements MateriaDAOInter {
     }
 
     @Override
-    public boolean delete(int codigo) {
+    public boolean delete(String codigo, String codPlanEstudios) {
         PreparedStatement ps;
         try {
             Connection con = conexion.getConnection();
-            
-            ps = con.prepareStatement("SELECT * FROM Materia WHERE codigo=?");
-            ps.setInt(1, codigo);
+
+            ps = con.prepareStatement("SELECT * FROM Materia WHERE codigo=? AND PlanEstudios_codigo=?");
+            ps.setString(1, codigo);
+            ps.setString(2, codPlanEstudios);
+
             ResultSet rs = ps.executeQuery();
             rs.next();
             rs.getString(1);
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "No hay ninguna Materia cargada con el código: " + codigo);
+            return false;
         }
 
         try {
             Connection con = conexion.getConnection();
-            
-            ps = con.prepareStatement("DELETE FROM Materia WHERE codigo=?");
-            ps.setInt(1, codigo);
+
+            ps = con.prepareStatement("SELECT * FROM Materia WHERE codigo=? AND PlanEstudios_codigo=?");
+            ps.setString(1, codigo);
+            ps.setString(2, codPlanEstudios);
+
             ps.executeUpdate();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
@@ -121,17 +131,5 @@ public class MateriaDAOImp implements MateriaDAOInter {
         }
 
         return true;
-    }
-
-    public ArrayList<Materia> buscarMat(Materia[] materias, ArrayList<Integer> codigos) {
-        ArrayList<Materia> correlativas = new ArrayList();
-        for (int i = 0; i < materias.length; i++) {
-            for (int j = 0; i < codigos.size(); j++) {
-                if (materias[i].getCodigo() == codigos.get(j)) {
-                    correlativas.add(materias[i]);
-                }
-            }
-        }
-        return correlativas;
     }
 }

@@ -24,14 +24,6 @@ public class ConextionTest {
     public static void main(String[] args) {
 
         try {
-            String tablas = "", line;
-            BufferedReader reader = new BufferedReader(new FileReader(new File(
-                    "src\\main\\java\\com\\mycompany\\tp_maquina_is2\\Datos\\tablas.sql")));
-
-            while ((line = reader.readLine()) != null) {
-                tablas += line;
-                System.out.println(line);
-            }
             /*
             EstudianteManager.init(conexion);
             ExamenManager.init(conexion);

@@ -22,11 +22,11 @@ codigo varchar(50) NOT NULL,
 PRIMARY KEY (codigo));
 
 CREATE TABLE IF NOT EXISTS Materia(
-codigo int NOT NULL, 
+codigo varchar(20) NOT NULL, 
 nombre varchar(100) NOT NULL, 
 PlanEstudios_codigo varchar(50) NOT NULL, 
 FOREIGN KEY (PlanEstudios_codigo) REFERENCES PlanEstudios(codigo), 
-PRIMARY KEY (codigo));
+PRIMARY KEY (codigo, PlanEstudios_codigo));
 
 CREATE TABLE IF NOT EXISTS HistoriaAcademica(
 propuesta varchar(50) NOT NULL, 
@@ -37,8 +37,8 @@ FOREIGN KEY (PlanEstudios_codigo) REFERENCES PlanEstudios(codigo),
 PRIMARY KEY (Estudiante_nroRegistro, PlanEstudios_codigo));
 
 CREATE TABLE IF NOT EXISTS Correlativas(
-Correlativa_codigo int NOT NULL, 
-Materia_codigo int NOT NULL, 
+Correlativa_codigo varchar(20) NOT NULL, 
+Materia_codigo varchar(20) NOT NULL, 
 FOREIGN KEY (Materia_codigo) REFERENCES Materia(codigo) ON DELETE CASCADE, 
 FOREIGN KEY (Correlativa_codigo) REFERENCES Materia(codigo) ON DELETE CASCADE, 
 PRIMARY KEY (Materia_codigo, Correlativa_codigo));

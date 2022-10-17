@@ -15,9 +15,9 @@ public interface MateriaDAOInter {
 
     public boolean create(Materia materia);
 
-    public HashMap<Integer, Materia> read();
+    public HashMap<String, Materia> read();
 
-    public boolean update(int codigo, Materia materia);
+    public boolean update(String codigo, String codPlanEstudios, Materia materia);
 
-    public boolean delete(int codigo);
+    public boolean delete(String codigo, String codPlanEstudios);
 }
