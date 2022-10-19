@@ -5,7 +5,6 @@
 package com.mycompany.tp_maquina_is2.Datos.DAO.Interfaces;
 
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.Materia;
-import java.util.HashMap;
 
 /**
  *
@@ -15,7 +14,7 @@ public interface MateriaDAOInter {
 
     public boolean create(Materia materia);
 
-    public HashMap<String, Materia> read();
+    public Materia read(String codigo, String codPlanEstudios);
 
     public boolean update(String codigo, String codPlanEstudios, Materia materia);
 

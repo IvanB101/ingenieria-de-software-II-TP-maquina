@@ -5,7 +5,6 @@
 package com.mycompany.tp_maquina_is2.Datos.DAO.Interfaces;
 
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.MesaExamen;
-import java.util.HashMap;
 
 /**
  *
@@ -15,9 +14,9 @@ public interface MesaExamenDAOInter {
 
     public boolean create(MesaExamen mesaExamen);
 
-    public HashMap<Integer, MesaExamen> read();
+    public MesaExamen read();
 
-    public boolean update(int codigo, MesaExamen mesaExamen);
+    public boolean update(MesaExamen actual, MesaExamen nueva);
 
     public boolean delete(int codigo);
 }

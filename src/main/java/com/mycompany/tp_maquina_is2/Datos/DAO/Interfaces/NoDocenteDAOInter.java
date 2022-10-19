@@ -5,7 +5,6 @@
 package com.mycompany.tp_maquina_is2.Datos.DAO.Interfaces;
 
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.NoDocente;
-import java.util.HashMap;
 
 /**
  *
@@ -15,7 +14,7 @@ public interface NoDocenteDAOInter {
 
     public boolean create(NoDocente noDocente);
 
-    public HashMap<Integer, NoDocente> read();
+    public NoDocente read(int nroLegajo);
 
     public boolean update(int codigo, NoDocente noDocente);
 

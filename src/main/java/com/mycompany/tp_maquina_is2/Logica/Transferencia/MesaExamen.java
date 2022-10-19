@@ -12,25 +12,18 @@ import java.util.ArrayList;
  */
 public class MesaExamen {
 
-    private int codigo;
     private int turno;
     private int anio;
     private ArrayList<Integer> codInscriptos;
-    private int codMateria;
+    private String codMateria;
+    private String codPlanEstudios;
 
-    public MesaExamen(int codigo, int turno, int anio, int codMateria) {
-        this.codigo = codigo;
+    public MesaExamen(int turno, int anio, ArrayList<Integer> codInscriptos, String codMateria, String codPlanEstudios) {
         this.turno = turno;
         this.anio = anio;
+        this.codInscriptos = codInscriptos;
         this.codMateria = codMateria;
-    }
-
-    public int getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
+        this.codPlanEstudios = codPlanEstudios;
     }
 
     public int getTurno() {
@@ -57,11 +50,19 @@ public class MesaExamen {
         this.codInscriptos = codInscriptos;
     }
 
-    public int getCodMateria() {
+    public String getCodMateria() {
         return codMateria;
     }
 
-    public void setCodMateria(int codMateria) {
+    public void setCodMateria(String codMateria) {
         this.codMateria = codMateria;
+    }
+
+    public String getCodPlanEstudios() {
+        return codPlanEstudios;
+    }
+
+    public void setCodPlanEstudios(String codPlanEstudios) {
+        this.codPlanEstudios = codPlanEstudios;
     }
 }

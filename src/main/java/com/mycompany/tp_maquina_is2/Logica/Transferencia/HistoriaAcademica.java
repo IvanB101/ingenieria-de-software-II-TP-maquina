@@ -13,28 +13,17 @@ import java.util.HashMap;
  */
 public class HistoriaAcademica {
 
-    private String propuesta;
-    private int codEstudiante;
+    private int nroRegEstudiante;
     private HashMap<Integer, Estado> estados;
     private ArrayList<Integer> codExamenes;
     private String codPlanDeEstudios;
     private ArrayList<Integer> codMateriasExamenes;
     private ArrayList<Integer> codMateriasEstados;
 
-    public HistoriaAcademica(String propuesta, int nroRegEstudiante, String codPlanDeEstudios,
-            ArrayList<Integer> codMateriasEstados, HashMap<Integer, Estado> estados) {
-        this.propuesta = propuesta;
-        this.codEstudiante = nroRegEstudiante;
-        this.codPlanDeEstudios = codPlanDeEstudios;
-        this.codMateriasEstados = codMateriasEstados;
-        this.estados = estados;
-    }
-
-    public HistoriaAcademica(String propuesta, int codEstudiante, HashMap<Integer, Estado> estados,
+    public HistoriaAcademica(int nroRegEstudiante, HashMap<Integer, Estado> estados,
             ArrayList<Integer> codExamenes, String codPlanDeEstudios, ArrayList<Integer> codMateriasExamenes,
             ArrayList<Integer> codMateriasEstados) {
-        this.propuesta = propuesta;
-        this.codEstudiante = codEstudiante;
+        this.nroRegEstudiante = nroRegEstudiante;
         this.estados = estados;
         this.codExamenes = codExamenes;
         this.codPlanDeEstudios = codPlanDeEstudios;
@@ -42,16 +31,12 @@ public class HistoriaAcademica {
         this.codMateriasEstados = codMateriasEstados;
     }
 
-    public String getPropuesta() {
-        return propuesta;
-    }
-
     public int getNroRegEstudiante() {
-        return codEstudiante;
+        return nroRegEstudiante;
     }
 
-    public void setCodEstudiante(int codEstudiante) {
-        this.codEstudiante = codEstudiante;
+    public void setNroRegEstudiante(int codEstudiante) {
+        this.nroRegEstudiante = codEstudiante;
     }
 
     public ArrayList<Integer> getCodExamenes() {
@@ -68,10 +53,6 @@ public class HistoriaAcademica {
 
     public void setCodPlanDeEstudios(String codPlanDeEstudios) {
         this.codPlanDeEstudios = codPlanDeEstudios;
-    }
-
-    public void setPropuesta(String propuesta) {
-        this.propuesta = propuesta;
     }
 
     public HashMap<Integer, Estado> getEstados() {
@@ -100,7 +81,7 @@ public class HistoriaAcademica {
 
     @Override
     public String toString() {
-        String ret = "NroRegistro: " + codEstudiante + " | Plan de Estudios: " + codPlanDeEstudios
+        String ret = "NroRegistro: " + nroRegEstudiante + " | Plan de Estudios: " + codPlanDeEstudios
                 + "\nEstados:\n";
 
         for (Estado estado : estados.values()) {

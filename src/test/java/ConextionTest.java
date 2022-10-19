@@ -24,6 +24,9 @@ public class ConextionTest {
     public static void main(String[] args) {
 
         try {
+            Conexion conexion = Conexion.getInstance();
+            
+            conexion.init();
             /*
             EstudianteManager.init(conexion);
             ExamenManager.init(conexion);

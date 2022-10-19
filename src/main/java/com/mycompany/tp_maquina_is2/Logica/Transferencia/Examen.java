@@ -14,20 +14,19 @@ public class Examen {
 
     private LocalDate fecha;
     private float nota;
-    private String codigo;
     private int turno;
-    private int codMateria;
-    private int nroRegitroEstudiante;
+    private String codMateria;
+    // Codigo de la forma nroRegistro-codPlanEstudios
+    private String codHistoriaAcademica;
     private Experiencia experiencia;
 
-    public Examen(LocalDate fecha, int turno, float nota, int codMateria, int nroRegistroEstudiante) {
+    public Examen(LocalDate fecha, int turno, float nota, String codMateria, String codHistoriaAcademica) {
         //dia-año-codmat-codhistoria
-        this.codigo = "" + fecha.getDayOfYear() + "-" + fecha.getYear() + "-" + codMateria + "-" + nroRegistroEstudiante;
         this.fecha = fecha;
         this.nota = nota;
         this.turno = turno;
         this.codMateria = codMateria;
-        this.nroRegitroEstudiante = nroRegistroEstudiante;
+        this.codHistoriaAcademica = codHistoriaAcademica;
     }
 
     public LocalDate getFecha() {
@@ -54,22 +53,6 @@ public class Examen {
         this.turno = turno;
     }
 
-    public int getCodMateria() {
-        return codMateria;
-    }
-
-    public void setCodMateria(int codMateria) {
-        this.codMateria = codMateria;
-    }
-
-    public int getNroRegitroEstudiante() {
-        return nroRegitroEstudiante;
-    }
-
-    public void setNroRegitroEstudiante(int codHistoriaAcademica) {
-        this.nroRegitroEstudiante = codHistoriaAcademica;
-    }
-
     public Experiencia getExperiencia() {
         return experiencia;
     }
@@ -79,16 +62,28 @@ public class Examen {
     }
 
     public String getCodigo() {
-        return codigo;
+        return codHistoriaAcademica + "-" + codMateria + "-" + fecha;
     }
 
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
+    public String getCodMateria() {
+        return codMateria;
+    }
+
+    public void setCodMateria(String codMateria) {
+        this.codMateria = codMateria;
+    }
+
+    public String getCodHistoriaAcademica() {
+        return codHistoriaAcademica;
+    }
+
+    public void setCodHistoriaAcademica(String codHistoriaAcademica) {
+        this.codHistoriaAcademica = codHistoriaAcademica;
     }
 
     @Override
     public String toString() {
-        return "Nro Registro: " + nroRegitroEstudiante + " | Codigo Materia: " + codMateria
-                + " | Turno: " + turno + " | Codigo: " + codigo + " | Nota: " + nota + " | Experiencia: " + experiencia;
+        return "Nro Registro: " + codHistoriaAcademica + " | Codigo Materia: " + codMateria
+                + " | Turno: " + turno + " | Codigo: " + codMateria + " | Nota: " + nota + " | Experiencia: " + experiencia;
     }
 }

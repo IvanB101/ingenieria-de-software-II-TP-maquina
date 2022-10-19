@@ -26,12 +26,12 @@ public class Estado {
     }
     
     private int codMateria;
-    private int codHistoriaAcademica;
+    private int nroRegistroHistoria;
     private Condicion condicion;
 
-    public Estado(int codMateria, int codHistoriaAcademica, Condicion condicion) {
+    public Estado(int codMateria, int nroRegistroHistoria, Condicion condicion) {
         this.codMateria = codMateria;
-        this.codHistoriaAcademica = codHistoriaAcademica;
+        this.nroRegistroHistoria = nroRegistroHistoria;
         this.condicion = condicion;
     }
 
@@ -43,12 +43,12 @@ public class Estado {
         this.codMateria = codMateria;
     }
 
-    public int getCodHistoriaAcademica() {
-        return codHistoriaAcademica;
+    public int getNroRegistroHistoria() {
+        return nroRegistroHistoria;
     }
 
-    public void setCodHistoriaAcademica(int codHistoriaAcademica) {
-        this.codHistoriaAcademica = codHistoriaAcademica;
+    public void setNroRegistroHistoria(int nroRegistroHistoria) {
+        this.nroRegistroHistoria = nroRegistroHistoria;
     }
     
     public Condicion getCondicion() {
@@ -61,6 +61,6 @@ public class Estado {
 
     @Override
     public String toString() {
-        return "nroReg: " + codHistoriaAcademica + " | codMat: " + codMateria + " | Estado: " + condicion;
+        return "nroReg: " + nroRegistroHistoria + " | codMat: " + codMateria + " | Estado: " + condicion;
     }
 }

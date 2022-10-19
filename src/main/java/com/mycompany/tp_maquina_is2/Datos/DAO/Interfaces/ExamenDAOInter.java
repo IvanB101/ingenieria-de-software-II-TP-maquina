@@ -5,15 +5,18 @@
 package com.mycompany.tp_maquina_is2.Datos.DAO.Interfaces;
 
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.Examen;
-import java.util.HashMap;
 
 /**
  *
  * @author ivanb
  */
 public interface ExamenDAOInter {
+
     public boolean create(Examen examen);
-    public HashMap<String, Examen> read();
+
+    public Examen read(String codMateria, int nroRegistro, String codPlanEstudios);
+
     public boolean update(String codigo, Examen examen);
+
     public boolean delete(String codigo);
 }

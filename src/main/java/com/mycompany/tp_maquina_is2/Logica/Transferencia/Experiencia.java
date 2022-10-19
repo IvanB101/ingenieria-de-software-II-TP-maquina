@@ -12,6 +12,7 @@ public class Experiencia {
     private int dificultad;
     private int dias;
     private int dedicacion;
+    // Codigo de la forma Nro_Registro_estudiante-Codigo_planEstudios-Codigo_materia-fecha
     private String codExamen;
 
     public Experiencia(int dificultad, int dias, int dedicacion, String codExamen) {

@@ -14,18 +14,28 @@ public class Materia {
 
     private String codigo;
     private String nombre;
-    private ArrayList<String> correlativas;
-    private ArrayList<String> dependientes;
-    private ArrayList<Integer> codMesas;
     private String codPlanDeEstudios;
+    private ArrayList<String> correlativas;
+    // Materias que tienen a esta como correlativa
+    private ArrayList<String> dependientes;
+    // Codigo de la forma mes-anio
+    private ArrayList<String> codMesas;
+    // Numero de registro del estudiante con la historia academica que contiene al estado
     private ArrayList<Integer> codEstados;
+    // Idem anterior
     private ArrayList<Integer> codExamenes;
 
-    public Materia(String codigo, String nombre, String codigoPlan, ArrayList<String> correlativas) {
+    public Materia(String codigo, String nombre, String codPlanDeEstudios, ArrayList<String> correlativas,
+            ArrayList<String> dependientes, ArrayList<String> codMesas, ArrayList<Integer> codEstados,
+            ArrayList<Integer> codExamenes) {
         this.codigo = codigo;
         this.nombre = nombre;
+        this.codPlanDeEstudios = codPlanDeEstudios;
         this.correlativas = correlativas;
-        this.codPlanDeEstudios = codigoPlan;
+        this.dependientes = dependientes;
+        this.codMesas = codMesas;
+        this.codEstados = codEstados;
+        this.codExamenes = codExamenes;
     }
 
     public String getCodigo() {
@@ -42,14 +52,6 @@ public class Materia {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public ArrayList<Integer> getCodMesas() {
-        return codMesas;
-    }
-
-    public void setCodMesas(ArrayList<Integer> codMesas) {
-        this.codMesas = codMesas;
     }
 
     public String getCodPlanDeEstudios() {
@@ -91,15 +93,23 @@ public class Materia {
     public void setDependientes(ArrayList<String> dependientes) {
         this.dependientes = dependientes;
     }
-    
+
+    public ArrayList<String> getCodMesas() {
+        return codMesas;
+    }
+
+    public void setCodMesas(ArrayList<String> codMesas) {
+        this.codMesas = codMesas;
+    }
+
     @Override
     public String toString() {
         String ret = "Codigo: " + codigo + " | Nombre: " + nombre + " | Correlativas: ";
         //ArrayList<String>codCorrelativas = new ArrayList<>();
-        for(int i =0; i<correlativas.size();i++){
+        for (int i = 0; i < correlativas.size(); i++) {
             ret = ret + (correlativas.get(i));
         }
-        
+
         return ret;
     }
 }

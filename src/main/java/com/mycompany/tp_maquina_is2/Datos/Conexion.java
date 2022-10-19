@@ -19,14 +19,15 @@ import java.sql.Statement;
  */
 public class Conexion {
 
-    private String DB_NAME;
-    private String DB_URL;
-    private String DB_USER;
-    private String DB_PWD;
+    private final String DB_NAME;
+    private final String DB_URL;
+    private final String DB_USER;
+    private final String DB_PWD;
 
     private static Conexion conexion;
 
     private Conexion() throws IOException {
+        // Archivo con los datos referentes a la conexion
         BufferedReader reader = new BufferedReader(new FileReader(new File(
                 "src\\main\\java\\com\\mycompany\\tp_maquina_is2\\Datos\\conexion.txt")));
 
@@ -45,13 +46,14 @@ public class Conexion {
     }
 
     public Connection getConnection() throws SQLException {
-        // Creacion de las tablas si no han sido creadas
-        createTables();
-
         return DriverManager.getConnection(DB_URL, DB_USER, DB_PWD);
     }
 
-    private void createTables() throws SQLException {
+    /**
+     * Inicializa la base de datos a la que se esta conectando
+     * @throws SQLException 
+     */
+    public void init() throws SQLException {
         try {
             Statement query = conexion.getConnection().createStatement();
 
@@ -62,7 +64,7 @@ public class Conexion {
             while ((line = reader.readLine()) != null) {
                 tablas += line;
             }
-
+            
             query.execute(tablas);
         } catch (IOException e) {
             System.out.println("Problema en la lectura del archivo con las tablas");
