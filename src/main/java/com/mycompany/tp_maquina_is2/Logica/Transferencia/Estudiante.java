@@ -42,10 +42,12 @@ public class Estudiante extends Persona {
 
     public void setNroRegistro(int nroRegistro) {
         this.nroRegistro = nroRegistro;
+        
+        super.setCodigo("e" + nroRegistro);
     }
 
     @Override
     public String toString() {
-        return super.toString();
+        return super.toString() + "Nro Registro: " + nroRegistro;
     }
 }
