@@ -7,6 +7,7 @@ package com.mycompany.tp_maquina_is2.Datos.DAO.Implementaciones;
 import com.mycompany.tp_maquina_is2.Datos.Conexion;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.Estudiante;
 import java.io.IOException;
+import java.sql.SQLException;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
@@ -35,7 +36,7 @@ public class EstudianteDAOImpTest {
 
             System.out.println("create");
 
-            assertTrue(estudianteDAOImp.create(estudiante));
+            estudianteDAOImp.create(estudiante);
 
             System.out.println("read");
 
@@ -56,24 +57,30 @@ public class EstudianteDAOImpTest {
             estudiante.setNombre(estudiante.getNombre() + 1);
             estudiante.setApellido(estudiante.getApellido() + 1);
 
-            if (estudianteDAOImp.update(nroRegistro, estudiante)) {
-                result = estudianteDAOImp.read(estudiante.getNroRegistro());
-                
-                assertEquals(estudiante.getNroRegistro(), result.getNroRegistro());
-                assertEquals(estudiante.getDni(), result.getDni());
-                assertEquals(estudiante.getNombre(), result.getNombre());
-                assertEquals(estudiante.getApellido(), result.getApellido());
-                assertEquals(estudiante.getCodigo(), result.getCodigo());
-            } else {
-                fail();
-            }
+            estudianteDAOImp.update(nroRegistro, estudiante);
+            
+            result = estudianteDAOImp.read(estudiante.getNroRegistro());
+
+            assertEquals(estudiante.getNroRegistro(), result.getNroRegistro());
+            assertEquals(estudiante.getDni(), result.getDni());
+            assertEquals(estudiante.getNombre(), result.getNombre());
+            assertEquals(estudiante.getApellido(), result.getApellido());
+            assertEquals(estudiante.getCodigo(), result.getCodigo());
 
             System.out.println("delete");
+            estudianteDAOImp.delete(estudiante.getNroRegistro());
 
-            assertTrue(estudianteDAOImp.delete(estudiante.getNroRegistro())
-                    && ((estudianteDAOImp.read(estudiante.getNroRegistro())) == null));
+            try {
+                estudianteDAOImp.read(estudiante.getNroRegistro());
+            } catch (SQLException e) {
+                System.out.println(e.getErrorCode());
+                assertEquals(e.getErrorCode(),1);
+            }
         } catch (IOException e) {
             System.out.println("Error en conexion con base de datos");
+            fail();
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
             fail();
         }
     }

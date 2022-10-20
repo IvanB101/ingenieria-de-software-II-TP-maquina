@@ -32,7 +32,7 @@ public class ExamenDAOImp implements ExamenDAOInter {
     public boolean create(Examen examen) {
         try {
             Connection con = conexion.getConnection();
-            
+
             PreparedStatement ps = con.prepareStatement("INSERT INTO Examen (codigo, fecha, "
                     + "turno, nota, Materia_codigo, HistoriaAcademica_Estudiante_nroRegistro) VALUES (?,?,?,?,?,?)");
 
@@ -44,12 +44,12 @@ public class ExamenDAOImp implements ExamenDAOInter {
             ps.setInt(6, examen.getNroRegitroEstudiante());
 
             Experiencia experiencia = examen.getExperiencia();
-            
+
             ps.executeUpdate();
             if (experiencia == null) {
                 return true;
             }
-            
+
             ps = con.prepareStatement("INSERT INTO Experiencia (Examen_codigo, dificultad, dedicacion, dias) VALUES (?,?,?,?)");
 
             ps.setString(1, experiencia.getCodExamen());
@@ -58,11 +58,11 @@ public class ExamenDAOImp implements ExamenDAOInter {
             ps.setInt(4, experiencia.getDias());
 
             ps.executeUpdate();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage());
+        } catch (SQLException e) {
+            System.out.println(e);
             return false;
         }
-
+        
         return true;
     }
 
@@ -71,7 +71,7 @@ public class ExamenDAOImp implements ExamenDAOInter {
         HashMap<String, Examen> examenes = new HashMap<>();
         try {
             Connection con = conexion.getConnection();
-            
+
             PreparedStatement ps = con.prepareStatement("SELECT codigo, fecha, turno, nota, Materia_codigo,HistoriaAcademica_Estudiante_nroRegistro, dificultad, dedicacion, dias "
                     + "FROM Examen, Experiencia "
                     + "WHERE codigo = Examen_codigo");
@@ -92,14 +92,14 @@ public class ExamenDAOImp implements ExamenDAOInter {
                         rs.getString("codigo")));
                 examenes.put(rs.getString("codigo"), examen);
             }
-            
+
             ps = con.prepareStatement("SELECT codigo, fecha, turno, nota, Materia_codigo,HistoriaAcademica_Estudiante_nroRegistro "
                     + "FROM Examen "
                     + "EXCEPT "
                     + "SELECT codigo, fecha, turno, nota, Materia_codigo,HistoriaAcademica_Estudiante_nroRegistro "
                     + "FROM Examen,Experiencia WHERE codigo = Examen_codigo");
             rs = ps.executeQuery();
-            
+
             // Agregado de examenes que no poseen experiencia
             while (rs.next()) {
                 examenes.put(rs.getString("codigo"), new Examen(
@@ -119,27 +119,28 @@ public class ExamenDAOImp implements ExamenDAOInter {
 
     @Override
     public boolean update(String codigo, Examen examen) {
-        if(delete(codigo)) {
+        if (delete(codigo)) {
             return create(examen);
         }
-        
+
         return false;
     }
-    
+
     @Override
     /**
-    * Elimina el examen con el codigo dado de la base de datos, en el caso de que el examen
-    * posea una experiencia asociada, esta tambien sera eliminada
-    * @param codigo correspondiente al codigo del examen a eliminar
-    * @return boolean correspondiente al exito de la operacion
-    */
+     * Elimina el examen con el codigo dado de la base de datos, en el caso de
+     * que el examen posea una experiencia asociada, esta tambien sera eliminada
+     *
+     * @param codigo correspondiente al codigo del examen a eliminar
+     * @return boolean correspondiente al exito de la operacion
+     */
     public boolean delete(String codigo) {
         PreparedStatement ps;
-        
+
         // Control existencia del examen con código a eliminar
         try {
             Connection con = conexion.getConnection();
-            
+
             ps = con.prepareStatement("SELECT * FROM Examen WHERE codigo=?");
             ps.setString(1, codigo);
             ResultSet rs = ps.executeQuery();
@@ -151,7 +152,7 @@ public class ExamenDAOImp implements ExamenDAOInter {
 
         try {
             Connection con = conexion.getConnection();
-            
+
             /* Tambien se borrara la experiencia correspondiente al examen ya que posee la opcion
             ON DELETE CASCADE */
             ps = con.prepareStatement("DELETE FROM Examen WHERE codigo=?");

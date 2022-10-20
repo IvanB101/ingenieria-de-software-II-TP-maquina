@@ -5,6 +5,7 @@
 package com.mycompany.tp_maquina_is2.Datos.DAO.Interfaces;
 
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.Materia;
+import java.sql.SQLException;
 
 /**
  *
@@ -12,11 +13,11 @@ import com.mycompany.tp_maquina_is2.Logica.Transferencia.Materia;
  */
 public interface MateriaDAOInter {
 
-    public boolean create(Materia materia);
+    public void create(Materia materia) throws SQLException;
 
-    public Materia read(String codigo, String codPlanEstudios);
+    public Materia read(String codigo, String codPlanEstudios) throws SQLException;
 
-    public boolean update(String codigo, String codPlanEstudios, Materia materia);
+    public void update(String codigo, String codPlanEstudios, Materia materia) throws SQLException;
 
-    public boolean delete(String codigo, String codPlanEstudios);
+    public void delete(String codigo, String codPlanEstudios) throws SQLException;
 }

@@ -25,37 +25,30 @@ public class EstudianteDAOImp implements EstudianteDAOInter {
     }
 
     @Override
-    public boolean create(Estudiante estudiante) {
-        try {
-            Connection con = conexion.getConnection();
+    public void create(Estudiante estudiante) throws SQLException {
+        Connection con = conexion.getConnection();
 
-            // Insercion de los datos correspondientes a Persona
-            PreparedStatement ps = con.prepareStatement("INSERT INTO Persona (codigo, dni, nombre, apellido) VALUES (?,?,?,?)");
+        // Insercion de los datos correspondientes a Persona
+        PreparedStatement ps = con.prepareStatement("INSERT INTO Persona (codigo, dni, nombre, apellido) VALUES (?,?,?,?)");
 
-            ps.setString(1, estudiante.getCodigo());
-            ps.setInt(2, estudiante.getDni());
-            ps.setString(3, estudiante.getNombre());
-            ps.setString(4, estudiante.getApellido());
+        ps.setString(1, estudiante.getCodigo());
+        ps.setInt(2, estudiante.getDni());
+        ps.setString(3, estudiante.getNombre());
+        ps.setString(4, estudiante.getApellido());
 
-            ps.executeUpdate();
+        ps.executeUpdate();
 
-            // Insercion de los datos correspondientes a Estudiante
-            ps = con.prepareStatement("INSERT INTO Estudiante (nroRegistro, Persona_codigo) VALUES (?,?)");
+        // Insercion de los datos correspondientes a Estudiante
+        ps = con.prepareStatement("INSERT INTO Estudiante (nroRegistro, Persona_codigo) VALUES (?,?)");
 
-            ps.setInt(1, estudiante.getNroRegistro());
-            ps.setString(2, estudiante.getCodigo());
+        ps.setInt(1, estudiante.getNroRegistro());
+        ps.setString(2, estudiante.getCodigo());
 
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e.getErrorCode() + ": " + e.getMessage());
-            return false;
-        }
-
-        return true;
+        ps.executeUpdate();
     }
 
     @Override
-    public Estudiante read(int nroRegistro) {
+    public Estudiante read(int nroRegistro) throws SQLException {
         try {
             Connection con = conexion.getConnection();
 
@@ -71,75 +64,50 @@ public class EstudianteDAOImp implements EstudianteDAOInter {
                     rs.getString("nombre"),
                     rs.getString("apellido"),
                     rs.getInt("dni"));
+
         } catch (SQLException e) {
-            System.out.println(e.getErrorCode() + ": " + e.getMessage());
-            return null;
+            switch (e.getMessage()) {
+                case "ResultSet not positioned properly, perhaps you need to call next.":
+                    throw new SQLException("No hay estudiante con nro registro: " + nroRegistro + " cargado", "", 1);
+                default:
+                    throw e;
+            }
         }
     }
 
     @Override
-    public boolean update(int nroRegistro, Estudiante estudiante) {
-        try {
-            Connection con = conexion.getConnection();
+    public void update(int nroRegistro, Estudiante estudiante) throws SQLException {
+        Connection con = conexion.getConnection();
 
-            PreparedStatement ps = con.prepareStatement("UPDATE Persona "
-                    + "SET codigo=?, dni=?, nombre=?, apellido=?"
-                    + "WHERE codigo=?;"
-                    + "UPDATE Estudiante "
-                    + "SET nroRegistro=?, Persona_codigo=?"
-                    + "WHERE nroRegistro=?");
+        PreparedStatement ps = con.prepareStatement("UPDATE Persona "
+                + "SET codigo=?, dni=?, nombre=?, apellido=?"
+                + "WHERE codigo=?;"
+                + "UPDATE Estudiante "
+                + "SET nroRegistro=?, Persona_codigo=?"
+                + "WHERE nroRegistro=?");
 
-            ps.setString(1, estudiante.getCodigo());
-            ps.setInt(2, estudiante.getDni());
-            ps.setString(3, estudiante.getNombre());
-            ps.setString(4, estudiante.getApellido());
-            ps.setString(5, "e" + nroRegistro);
-            ps.setInt(6, estudiante.getNroRegistro());
-            ps.setString(7, estudiante.getCodigo());
-            ps.setInt(8, nroRegistro);
+        ps.setString(1, estudiante.getCodigo());
+        ps.setInt(2, estudiante.getDni());
+        ps.setString(3, estudiante.getNombre());
+        ps.setString(4, estudiante.getApellido());
+        ps.setString(5, "e" + nroRegistro);
+        ps.setInt(6, estudiante.getNroRegistro());
+        ps.setString(7, estudiante.getCodigo());
+        ps.setInt(8, nroRegistro);
 
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e.getErrorCode() + ": " + e.getMessage());
-            return false;
-        }
-
-        return true;
+        ps.executeUpdate();
     }
 
     @Override
-    public boolean delete(int nroRegistro) {
-        PreparedStatement ps;
+    public void delete(int nroRegistro) throws SQLException {
         String codigo = "e" + nroRegistro;
 
-        try {
-            Connection con = conexion.getConnection();
+        Connection con = conexion.getConnection();
 
-            ps = con.prepareStatement("SELECT * FROM Persona WHERE codigo=?");
-            ps.setString(1, codigo);
+        PreparedStatement ps = con.prepareStatement("DELETE FROM Persona WHERE codigo=?");
+        ps.setString(1, codigo);
 
-            ResultSet rs = ps.executeQuery();
-
-            rs.next();
-            rs.getString(1);
-        } catch (SQLException e) {
-            System.out.println("No hay un estudiante cargado con el nro de registro: " + nroRegistro);
-            return false;
-        }
-
-        try {
-            Connection con = conexion.getConnection();
-
-            ps = con.prepareStatement("DELETE FROM Persona WHERE codigo=?");
-            ps.setString(1, codigo);
-
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e.getErrorCode() + ": " + e.getMessage());
-            return false;
-        }
-
-        return true;
+        ps.executeUpdate();
     }
 
 }
