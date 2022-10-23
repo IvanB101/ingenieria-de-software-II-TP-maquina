@@ -14,7 +14,6 @@ public class Examen {
 
     private LocalDate fecha;
     private float nota;
-    private int turno;
     private String codMateria;
     // Codigo de la forma nroRegistro-codPlanEstudios
     private String codHistoriaAcademica;
@@ -24,7 +23,6 @@ public class Examen {
         //dia-año-codmat-codhistoria
         this.fecha = fecha;
         this.nota = nota;
-        this.turno = turno;
         this.codMateria = codMateria;
         this.codHistoriaAcademica = codHistoriaAcademica;
     }
@@ -43,14 +41,6 @@ public class Examen {
 
     public void setNota(float nota) {
         this.nota = nota;
-    }
-
-    public int getTurno() {
-        return turno;
-    }
-
-    public void setTurno(int turno) {
-        this.turno = turno;
     }
 
     public Experiencia getExperiencia() {
@@ -84,6 +74,24 @@ public class Examen {
     @Override
     public String toString() {
         return "Nro Registro: " + codHistoriaAcademica + " | Codigo Materia: " + codMateria
-                + " | Turno: " + turno + " | Codigo: " + codMateria + " | Nota: " + nota + " | Experiencia: " + experiencia;
+                + " | Codigo: " + codMateria + " | Nota: " + nota + " | Experiencia: " + experiencia;
+    }
+    
+    @Override
+    public boolean equals(Object object) {
+        if (object.getClass() != this.getClass()) {
+            return false;
+        }
+
+        boolean ret = fecha.isEqual(((Examen)object).getFecha())
+                && nota == ((Examen)object).getNota()
+                && codMateria.equals(((Examen)object).getCodMateria())
+                && codHistoriaAcademica.equals(((Examen)object).getCodHistoriaAcademica());
+        
+        if(experiencia != null) {
+            ret = ret && experiencia.equals(((Examen)object).getExperiencia());
+        }
+        
+        return ret;
     }
 }

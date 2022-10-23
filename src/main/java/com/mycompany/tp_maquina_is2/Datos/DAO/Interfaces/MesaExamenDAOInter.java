@@ -5,6 +5,7 @@
 package com.mycompany.tp_maquina_is2.Datos.DAO.Interfaces;
 
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.MesaExamen;
+import java.sql.SQLException;
 
 /**
  *
@@ -12,11 +13,11 @@ import com.mycompany.tp_maquina_is2.Logica.Transferencia.MesaExamen;
  */
 public interface MesaExamenDAOInter {
 
-    public boolean create(MesaExamen mesaExamen);
+    public void create(MesaExamen mesaExamen) throws SQLException;
 
-    public MesaExamen read();
+    public MesaExamen read(String codigo) throws SQLException;
 
-    public boolean update(MesaExamen actual, MesaExamen nueva);
+    public void update(MesaExamen actual, MesaExamen nueva) throws SQLException;
 
-    public boolean delete(int codigo);
+    public void delete(int codigo) throws SQLException;
 }

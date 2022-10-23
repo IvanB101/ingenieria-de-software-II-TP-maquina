@@ -7,20 +7,16 @@ package com.mycompany.tp_maquina_is2.Logica.Managers;
 import com.mycompany.tp_maquina_is2.Datos.Conexion;
 import com.mycompany.tp_maquina_is2.Datos.DAO.Implementaciones.PlanEstudiosDAOImp;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.PlanEstudios;
-import java.util.HashMap;
 
 /**
  *
  * @author ivanb
  */
 public abstract class PlanEstudiosManager {
-    private static HashMap<String, PlanEstudios> planesEstudios;
     private static PlanEstudiosDAOImp planEstudiosDAOImp;
     
     public static void init(Conexion conexion) {
         planEstudiosDAOImp = new PlanEstudiosDAOImp(conexion);
-        
-        planesEstudios = planEstudiosDAOImp.read();
     }
     
     /**

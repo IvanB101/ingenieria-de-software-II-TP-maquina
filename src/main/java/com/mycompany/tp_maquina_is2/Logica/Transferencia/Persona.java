@@ -57,4 +57,17 @@ public abstract class Persona {
     public String toString() {
         return "Nombre y Apellido: " + nombre + " " + apellido + " DNI: " + dni;
     }
+    
+    @Override
+    public boolean equals(Object object) {
+        if (object.getClass() != this.getClass()) {
+            return false;
+        }
+
+        return codigo.equals(((Persona)object).getCodigo())
+                && nombre.equals(((Persona)object).getNombre())
+                && apellido.equals(((Persona)object).getApellido())
+                && dni == ((Persona)object).getDni();
+    }
+    
 }

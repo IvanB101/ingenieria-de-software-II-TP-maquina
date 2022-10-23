@@ -20,8 +20,9 @@ public class PlanEstudios {
         this.nroRegistroEstudiantes = nroRegistroEstudiantes;
     }
 
-    public PlanEstudios(String codigo) {
+    public PlanEstudios(String codigo, String propuesta) {
         this.codigo = codigo;
+        this.propuesta = propuesta;
     }
     
     public String getCodigo() {
@@ -65,5 +66,15 @@ public class PlanEstudios {
         }
         
         return ret;
+    }
+    
+    @Override
+    public boolean equals(Object object) {
+        if (object.getClass() != this.getClass()) {
+            return false;
+        }
+
+        return codigo.equals(((PlanEstudios)object).getCodigo())
+                && propuesta.equals(((PlanEstudios)object).getPropuesta());
     }
 }

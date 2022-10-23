@@ -11,8 +11,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -27,84 +25,54 @@ public class PlanEstudiosDAOImp implements PlanEstudiosDAOInter {
     }
 
     @Override
-    public boolean create(PlanEstudios planEstudios) {
-        try {
-            Connection con = conexion.getConnection();
-            
-            PreparedStatement ps = con.prepareStatement("INSERT INTO PlanEstudios (codigo) VALUES (?)");
+    public void create(PlanEstudios planEstudios) throws SQLException {
+        Connection con = conexion.getConnection();
 
-            ps.setString(1, planEstudios.getCodigo());
-            ps.executeUpdate();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-            return false;
-        }
+        PreparedStatement ps = con.prepareStatement("INSERT INTO PlanEstudios (codigo, propuesta) VALUES (?,?)");
 
-        return true;
+        ps.setString(1, planEstudios.getCodigo());
+        ps.setString(2, planEstudios.getPropuesta());
+        ps.executeUpdate();
     }
 
     @Override
-    public HashMap<String, PlanEstudios> read() {
-        
-        HashMap<String, PlanEstudios> planesDeEstudios = new HashMap<>();
+    public PlanEstudios read(String codigo) throws SQLException {
 
-        try {
-            Connection con = conexion.getConnection();
-            
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM PlanEstudios");
-            ResultSet rs = ps.executeQuery();
+        Connection con = conexion.getConnection();
 
-            while (rs.next()) {
-                planesDeEstudios.put(rs.getString("codigo"), new PlanEstudios(rs.getString("codigo")));
-            }
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-            return null;
-        }
+        PreparedStatement ps = con.prepareStatement("SELECT * FROM PlanEstudios WHERE codigo=?");
+        ps.setString(1, codigo);
 
-        return planesDeEstudios;
+        ResultSet rs = ps.executeQuery();
+
+        rs.next();
+
+        return new PlanEstudios(rs.getString("codigo"), rs.getString("propuesta"));
     }
 
     @Override
-    public boolean update(String codigo, PlanEstudios planEstudios) {
-        if (delete(codigo)) {
-            return create(planEstudios);
-        }
-        
-        return false;
+    public void update(String codigo, PlanEstudios planEstudios) throws SQLException {
+        Connection con = conexion.getConnection();
+
+        PreparedStatement ps = con.prepareStatement("UPDATE PlanEstudios "
+                + "SET codigo=?, propuesta=?"
+                + "WHERE codigo=?");
+
+        ps.setString(1, planEstudios.getCodigo());
+        ps.setString(2, planEstudios.getPropuesta());
+        ps.setString(3, codigo);
+
+        ps.executeUpdate();
     }
 
     @Override
-    public boolean delete(String codigo) {
-        PreparedStatement ps;
-        
-        try {
-            Connection con = conexion.getConnection();
-            
-            // Comprobacion existencia del plan de estudios a eliminar
-            ps = con.prepareStatement("SELECT * FROM PlanEstudios WHERE codigo=?");
-            ps.setString(1, codigo);
-            ResultSet rs = ps.executeQuery();
-            rs.next();
-            rs.getString(1);
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "No hay ningun plan cargado con el código: " + codigo);
-            return false;
-        }
-        
-        try {
-            Connection con = conexion.getConnection();
-            
-            ps = con.prepareStatement("DELETE FROM PlanEstudios WHERE codigo=?");
-            ps.setString(1, codigo);
-            ps.executeUpdate();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null,
-                    "No se pudo eliminar el plan de estudios");
-            return false;
-        }
+    public void delete(String codigo) throws SQLException {
 
-        return true;
+        Connection con = conexion.getConnection();
+
+        PreparedStatement ps = con.prepareStatement("DELETE FROM PlanEstudios WHERE codigo=?");
+        ps.setString(1, codigo);
+        ps.executeUpdate();
     }
 
 }

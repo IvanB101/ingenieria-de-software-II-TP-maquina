@@ -59,4 +59,15 @@ public class Experiencia {
         return "Dificultad:"+dificultad+ " | Dias: " + dias + " | Dedicacion: " + dedicacion +" | Cod examen: "+codExamen; 
     }
 
+    @Override
+    public boolean equals(Object object) {
+        if (object.getClass() != this.getClass()) {
+            return false;
+        }
+
+        return dificultad == ((Experiencia)object).getDificultad()
+                && dedicacion == ((Experiencia)object).getDedicacion()
+                && dias == ((Experiencia)object).getDias()
+                && codExamen.equals(((Experiencia)object).getCodExamen());
+    }
 }

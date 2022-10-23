@@ -5,20 +5,17 @@
 package com.mycompany.tp_maquina_is2.Datos.DAO.Implementaciones;
 
 import com.mycompany.tp_maquina_is2.Datos.Conexion;
-import com.mycompany.tp_maquina_is2.Logica.Transferencia.Estudiante;
+import com.mycompany.tp_maquina_is2.Logica.Transferencia.PlanEstudios;
 import java.io.IOException;
 import java.sql.SQLException;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
-import org.junit.jupiter.api.TestMethodOrder;
 
 /**
  *
  * @author ivanb
  */
-@TestMethodOrder(OrderAnnotation.class)
-public class EstudianteDAOImpTest {
+public class PlanEstudiosDAOImpTest {
 
     /**
      * Test of all methods, of class EstudianteDAOImp.
@@ -26,43 +23,38 @@ public class EstudianteDAOImpTest {
     @Test
     public void testEstudianteDAOImp() {
         try {
-            EstudianteDAOImp estudianteDAOImp = new EstudianteDAOImp(Conexion.getInstance());
-            Estudiante estudiante = new Estudiante(
-                    7229,
-                    "Ivan",
-                    "Brocas",
-                    43092790);
+            PlanEstudiosDAOImp planEstudiosDAOImp = new PlanEstudiosDAOImp(Conexion.getInstance());
+            PlanEstudios planEstudios = new PlanEstudios("32/23", "Ingeniería en Informática");
 
             System.out.println("create");
-
-            estudianteDAOImp.create(estudiante);
+            
+            planEstudiosDAOImp.create(planEstudios);
 
             System.out.println("read");
+            
+            PlanEstudios result = planEstudiosDAOImp.read(planEstudios.getCodigo());
 
-            Estudiante result = estudianteDAOImp.read(estudiante.getNroRegistro());
-
-            assertTrue(estudiante.equals(result));
+            assertTrue(planEstudios.equals(result));
 
             System.out.println("update");
-
-            int nroRegistro = estudiante.getNroRegistro();
-
-            estudiante.setNroRegistro(estudiante.getNroRegistro() + 1);
-            estudiante.setDni(estudiante.getDni() + 1);
-            estudiante.setNombre(estudiante.getNombre() + 1);
-            estudiante.setApellido(estudiante.getApellido() + 1);
-
-            estudianteDAOImp.update(nroRegistro, estudiante);
             
-            result = estudianteDAOImp.read(estudiante.getNroRegistro());
+            String codigo = planEstudios.getCodigo();
 
-            assertTrue(estudiante.equals(result));
+            planEstudios.setCodigo("123");
+            planEstudios.setPropuesta("Ingeniería en Computación");
+            
+            planEstudiosDAOImp.update(codigo, planEstudios);
 
+            result = planEstudiosDAOImp.read(planEstudios.getCodigo());
+            
+            assertTrue(planEstudios.equals(result));
+            
             System.out.println("delete");
-            estudianteDAOImp.delete(estudiante.getNroRegistro());
+            
+            planEstudiosDAOImp.delete(planEstudios.getCodigo());
 
             try {
-                estudianteDAOImp.read(estudiante.getNroRegistro());
+                planEstudiosDAOImp.read(planEstudios.getCodigo());
                 
                 // En caso de que haya podido leer el estudiante no ha sido borrado
                 fail();
@@ -77,5 +69,5 @@ public class EstudianteDAOImpTest {
             fail();
         }
     }
-
+    
 }

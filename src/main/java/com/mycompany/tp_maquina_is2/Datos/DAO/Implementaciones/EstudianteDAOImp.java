@@ -49,30 +49,20 @@ public class EstudianteDAOImp implements EstudianteDAOInter {
 
     @Override
     public Estudiante read(int nroRegistro) throws SQLException {
-        try {
-            Connection con = conexion.getConnection();
+        Connection con = conexion.getConnection();
 
-            PreparedStatement ps = con.prepareStatement("SELECT nroRegistro, codigo, nombre, apellido, dni "
-                    + "FROM Estudiante, Persona "
-                    + "WHERE Persona_codigo=codigo AND nroRegistro=?");
-            ps.setInt(1, nroRegistro);
-            ResultSet rs = ps.executeQuery();
+        PreparedStatement ps = con.prepareStatement("SELECT nroRegistro, codigo, nombre, apellido, dni "
+                + "FROM Estudiante, Persona "
+                + "WHERE Persona_codigo=codigo AND nroRegistro=?");
+        ps.setInt(1, nroRegistro);
+        ResultSet rs = ps.executeQuery();
 
-            rs.next();
-            return new Estudiante(
-                    rs.getInt("nroRegistro"),
-                    rs.getString("nombre"),
-                    rs.getString("apellido"),
-                    rs.getInt("dni"));
-
-        } catch (SQLException e) {
-            switch (e.getMessage()) {
-                case "ResultSet not positioned properly, perhaps you need to call next.":
-                    throw new SQLException("No hay estudiante con nro registro: " + nroRegistro + " cargado", "", 1);
-                default:
-                    throw e;
-            }
-        }
+        rs.next();
+        return new Estudiante(
+                rs.getInt("nroRegistro"),
+                rs.getString("nombre"),
+                rs.getString("apellido"),
+                rs.getInt("dni"));
     }
 
     @Override
