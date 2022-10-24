@@ -12,8 +12,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -28,108 +26,103 @@ public class MateriaDAOImp implements MateriaDAOInter {
     }
 
     @Override
-    public boolean create(Materia materia) {
-        try {
-            Connection con = conexion.getConnection();
+    public void create(Materia materia) throws SQLException {
+        Connection con = conexion.getConnection();
 
-            // Carga de los datos de la materia
-            PreparedStatement ps = con.prepareStatement("INSERT INTO Materia (codigo, nombre, PlanEstudios_codigo) VALUES (?,?,?)");
-            ps.setString(1, materia.getCodigo());
-            ps.setString(2, materia.getNombre());
+        // Carga de los datos de la materia
+        PreparedStatement ps = con.prepareStatement("INSERT INTO Materia (codigo, nombre, PlanEstudios_codigo) VALUES (?,?,?)");
+        ps.setString(1, materia.getCodigo());
+        ps.setString(2, materia.getNombre());
+        ps.setString(3, materia.getCodPlanDeEstudios());
+
+        ps.executeUpdate();
+
+        // Carga de las correlativas en caso de que las tenga
+        for (String codCorrelativa : materia.getCorrelativas()) {
+            ps = con.prepareStatement("INSERT INTO Correlativas (correlativa_codigo, materia_codigo, PlanEstudios_codigo) VALUES (?,?,?)");
+            ps.setString(1, codCorrelativa);
+            ps.setString(2, materia.getCodigo());
             ps.setString(3, materia.getCodPlanDeEstudios());
 
             ps.executeUpdate();
-
-            // Carga de las correlativas en caso de que las tenga
-            if (!materia.getCorrelativas().isEmpty()) {
-                for (String codCorrelativa : materia.getCorrelativas()) {
-                    ps = con.prepareStatement("INSERT INTO Correlativas (correlativa_codigo, materia_codigo) VALUES (?,?)");
-                    ps.setString(1, codCorrelativa);
-                    ps.setString(2, materia.getCodigo());
-                    ps.executeUpdate();
-                }
-            }
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-            return false;
         }
-        return true;
     }
 
     @Override
-    public HashMap<String, Materia> read() {
-        HashMap<String, Materia> materias = new HashMap();//todas las mat de todos los planes
-        ArrayList<String> codCorrelativas = new ArrayList(); // todos los codigos de las correlativas
+    public Materia read(String codigo, String codPlanEstudios) throws SQLException {
+        Connection con = conexion.getConnection();
 
-        try {
-            Connection con = conexion.getConnection();
+        PreparedStatement ps = con.prepareStatement("SELECT * from Materia "
+                + "WHERE codigo=? AND PlanEstudios_codigo");
 
-            // Carga de las materias sin sus correlativas
-            PreparedStatement ps = con.prepareStatement("SELECT * from Materia");
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                materias.put(rs.getString("codigo") + "-" + rs.getString("PlanEstudios_codigo"),
-                        new Materia(
-                                rs.getString("codigo"),
-                                rs.getString("nombre"),
-                                rs.getString("PlanEstudios_codigo"),
-                                new ArrayList()));
-            }
+        ResultSet rs = ps.executeQuery();
 
-            // Carga de las correlativas de cada materia
-            ps = con.prepareStatement("SELECT * from Correlativas");
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                materias.get(rs.getString("Materia_codigo")).getCorrelativas().add(
-                        rs.getString("Correlativa_codigo"));
-            }
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-            return null;
+        rs.next();
+        String nombre = rs.getString("nombre");
+
+        // Carga de lso codigos de las correlativas de la materia
+        ps = con.prepareStatement("SELECT Correlativa_codigo from Correlativas"
+                + "WHERE Materia_codigo=? AND PlanEstudios_codigo=?");
+        ps.setString(1, codigo);
+        ps.setString(2, codPlanEstudios);
+
+        rs = ps.executeQuery();
+
+        ArrayList<String> correlativas = new ArrayList<>();
+        while (rs.next()) {
+            correlativas.add(rs.getString("Correlativa_codigo"));
         }
-        return materias;
+
+        // Carga de los codigos dependientes de la materia
+        ps = con.prepareStatement("SELECT Correlativa_codigo from Correlativas"
+                + "WHERE Correlativa_codigo=? AND PlanEstudios_codigo=?");
+        ps.setString(1, codigo);
+        ps.setString(2, codPlanEstudios);
+
+        rs = ps.executeQuery();
+
+        ArrayList<String> dependientes = new ArrayList<>();
+        while (rs.next()) {
+            dependientes.add(rs.getString("Materia_codigo"));
+        }
+
+        return new Materia(codigo, nombre, codPlanEstudios, correlativas, dependientes);
+    }
+
+    /**
+     * Solamente se puede cambiar el nombre de la materia mediante este metodo,
+     * el cambio en otros campos produciria problemas con las llaves foraneas en
+     * la tabla Correlativas
+     *
+     * @param codigo de la materia que se desea modificar
+     * @param codPlanEstudios de la materia que se desea modificar
+     * @param materia objeto con la informacion nueva de la materia
+     * @throws SQLException
+     */
+    @Override
+    public void update(String codigo, String codPlanEstudios, Materia materia) throws SQLException {
+        Connection con = conexion.getConnection();
+
+        PreparedStatement ps = con.prepareStatement("UPDATE Materia "
+                + "SET nombre=? "
+                + "WHERE codigo=? AND PlanEstudios_codigo=?");
+        ps.setString(1, materia.getCodigo());
+        ps.setString(2, codigo);
+        ps.setString(3, codPlanEstudios);
+
+        ps.executeUpdate();
     }
 
     @Override
-    public boolean update(String codigo, String codPlanEstudios, Materia materia) {
-        if (delete(codigo, codPlanEstudios)) {
-            return create(materia);
-        }
+    public void delete(String codigo, String codPlanEstudios) throws SQLException {
 
-        return false;
-    }
+        Connection con = conexion.getConnection();
 
-    @Override
-    public boolean delete(String codigo, String codPlanEstudios) {
-        PreparedStatement ps;
-        try {
-            Connection con = conexion.getConnection();
+        PreparedStatement ps = con.prepareStatement("DELETE FROM Materia "
+                + "WHERE codigo=? AND PlanEstudios_codigo=?");
+        ps.setString(1, codigo);
+        ps.setString(2, codPlanEstudios);
 
-            ps = con.prepareStatement("SELECT * FROM Materia WHERE codigo=? AND PlanEstudios_codigo=?");
-            ps.setString(1, codigo);
-            ps.setString(2, codPlanEstudios);
-
-            ResultSet rs = ps.executeQuery();
-            rs.next();
-            rs.getString(1);
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "No hay ninguna Materia cargada con el código: " + codigo);
-            return false;
-        }
-
-        try {
-            Connection con = conexion.getConnection();
-
-            ps = con.prepareStatement("SELECT * FROM Materia WHERE codigo=? AND PlanEstudios_codigo=?");
-            ps.setString(1, codigo);
-            ps.setString(2, codPlanEstudios);
-
-            ps.executeUpdate();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-            return false;
-        }
-
-        return true;
+        ps.executeUpdate();
     }
 }

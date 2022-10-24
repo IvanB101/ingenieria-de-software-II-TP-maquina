@@ -38,6 +38,14 @@ public class Materia {
         this.codExamenes = codExamenes;
     }
 
+    public Materia(String codigo, String nombre, String codPlanDeEstudios, ArrayList<String> correlativas, ArrayList<String> dependientes) {
+        this.codigo = codigo;
+        this.nombre = nombre;
+        this.codPlanDeEstudios = codPlanDeEstudios;
+        this.correlativas = correlativas;
+        this.dependientes = dependientes;
+    }
+
     public String getCodigo() {
         return codigo;
     }
@@ -112,4 +120,38 @@ public class Materia {
 
         return ret;
     }
+    @Override
+    public boolean equals(Object object) {
+        if (object.getClass() != this.getClass()) {
+            return false;
+        }
+        
+        boolean ret = codigo.equals(((Materia)object).getCodigo())
+                && codPlanDeEstudios.equals(((Materia)object).codPlanDeEstudios)
+                && nombre.equals(((Materia)object).getNombre());
+        
+        if(!ret) {
+            return false;
+        }
+
+        if(correlativas.size() != ((Materia)object).getCorrelativas().size()
+                || dependientes.size() != ((Materia)object).getDependientes().size()) {
+            return false;
+        }
+        
+        for (String correlativa : ((Materia)object).getCorrelativas()) {
+            if(!correlativas.contains(correlativa)) {
+                return false;
+            }
+        }
+        
+        for (String dependiente : ((Materia)object).getDependientes()) {
+            if(!dependiente.contains(dependiente)) {
+                return false;
+            }
+        }
+        
+        return true;
+    }
+    
 }
