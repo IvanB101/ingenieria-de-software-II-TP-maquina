@@ -26,14 +26,14 @@ CREATE TABLE IF NOT EXISTS Materia(
 codigo varchar(20) NOT NULL, 
 nombre varchar(100) NOT NULL, 
 PlanEstudios_codigo varchar(50) NOT NULL, 
-FOREIGN KEY (PlanEstudios_codigo) REFERENCES PlanEstudios(codigo), 
+FOREIGN KEY (PlanEstudios_codigo) REFERENCES PlanEstudios(codigo) ON DELETE CASCADE ON UPDATE CASCADE, 
 PRIMARY KEY (codigo, PlanEstudios_codigo));
 
 CREATE TABLE IF NOT EXISTS HistoriaAcademica( 
 Estudiante_nroRegistro int NOT NULL, 
 PlanEstudios_codigo varchar(30) NOT NULL, 
-FOREIGN KEY (Estudiante_nroRegistro) REFERENCES Estudiante(nroRegistro), 
-FOREIGN KEY (PlanEstudios_codigo) REFERENCES PlanEstudios(codigo), 
+FOREIGN KEY (Estudiante_nroRegistro) REFERENCES Estudiante(nroRegistro) ON DELETE CASCADE ON UPDATE CASCADE, 
+FOREIGN KEY (PlanEstudios_codigo) REFERENCES PlanEstudios(codigo) ON DELETE CASCADE ON UPDATE CASCADE, 
 PRIMARY KEY (Estudiante_nroRegistro, PlanEstudios_codigo));
 
 CREATE TABLE IF NOT EXISTS Correlativas(
@@ -44,7 +44,7 @@ FOREIGN KEY (Materia_codigo, PlanEstudios_codigo)
 		REFERENCES Materia(codigo, PlanEstudios_codigo) ON DELETE CASCADE ON UPDATE CASCADE, 
 FOREIGN KEY (Correlativa_codigo, PlanEstudios_codigo) 
 		REFERENCES Materia(codigo, PlanEstudios_codigo) ON DELETE CASCADE ON UPDATE CASCADE, 
-FOREIGN KEY (PlanEstudios_codigo) REFERENCES PlanEstudios(codigo), 
+FOREIGN KEY (PlanEstudios_codigo) REFERENCES PlanEstudios(codigo) ON DELETE CASCADE ON UPDATE CASCADE, 
 PRIMARY KEY (Materia_codigo, Correlativa_codigo, PlanEstudios_codigo));
 
 CREATE TABLE IF NOT EXISTS Estado(

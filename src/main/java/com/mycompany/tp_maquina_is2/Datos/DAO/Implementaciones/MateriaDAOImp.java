@@ -53,7 +53,9 @@ public class MateriaDAOImp implements MateriaDAOInter {
         Connection con = conexion.getConnection();
 
         PreparedStatement ps = con.prepareStatement("SELECT * from Materia "
-                + "WHERE codigo=? AND PlanEstudios_codigo");
+                + "WHERE codigo=? AND PlanEstudios_codigo=?");
+        ps.setString(1, codigo);
+        ps.setString(2, codPlanEstudios);
 
         ResultSet rs = ps.executeQuery();
 
@@ -61,7 +63,8 @@ public class MateriaDAOImp implements MateriaDAOInter {
         String nombre = rs.getString("nombre");
 
         // Carga de lso codigos de las correlativas de la materia
-        ps = con.prepareStatement("SELECT Correlativa_codigo from Correlativas"
+        ps = con.prepareStatement("SELECT correlativa_codigo "
+                + "FROM correlativas "
                 + "WHERE Materia_codigo=? AND PlanEstudios_codigo=?");
         ps.setString(1, codigo);
         ps.setString(2, codPlanEstudios);
@@ -74,8 +77,9 @@ public class MateriaDAOImp implements MateriaDAOInter {
         }
 
         // Carga de los codigos dependientes de la materia
-        ps = con.prepareStatement("SELECT Correlativa_codigo from Correlativas"
-                + "WHERE Correlativa_codigo=? AND PlanEstudios_codigo=?");
+        ps = con.prepareStatement("SELECT Materia_codigo "
+                + "FROM Correlativas "
+                + "WHERE correlativa_codigo=? AND PlanEstudios_codigo=?");
         ps.setString(1, codigo);
         ps.setString(2, codPlanEstudios);
 
@@ -89,26 +93,17 @@ public class MateriaDAOImp implements MateriaDAOInter {
         return new Materia(codigo, nombre, codPlanEstudios, correlativas, dependientes);
     }
 
-    /**
-     * Solamente se puede cambiar el nombre de la materia mediante este metodo,
-     * el cambio en otros campos produciria problemas con las llaves foraneas en
-     * la tabla Correlativas
-     *
-     * @param codigo de la materia que se desea modificar
-     * @param codPlanEstudios de la materia que se desea modificar
-     * @param materia objeto con la informacion nueva de la materia
-     * @throws SQLException
-     */
     @Override
     public void update(String codigo, String codPlanEstudios, Materia materia) throws SQLException {
         Connection con = conexion.getConnection();
 
         PreparedStatement ps = con.prepareStatement("UPDATE Materia "
-                + "SET nombre=? "
+                + "SET nombre=?, codigo=? "
                 + "WHERE codigo=? AND PlanEstudios_codigo=?");
-        ps.setString(1, materia.getCodigo());
-        ps.setString(2, codigo);
-        ps.setString(3, codPlanEstudios);
+        ps.setString(1, materia.getNombre());
+        ps.setString(2, materia.getCodigo());
+        ps.setString(3, codigo);
+        ps.setString(4, codPlanEstudios);
 
         ps.executeUpdate();
     }
@@ -120,6 +115,7 @@ public class MateriaDAOImp implements MateriaDAOInter {
 
         PreparedStatement ps = con.prepareStatement("DELETE FROM Materia "
                 + "WHERE codigo=? AND PlanEstudios_codigo=?");
+
         ps.setString(1, codigo);
         ps.setString(2, codPlanEstudios);
 
