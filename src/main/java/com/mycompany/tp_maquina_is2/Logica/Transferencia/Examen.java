@@ -19,7 +19,7 @@ public class Examen {
     private String codHistoriaAcademica;
     private Experiencia experiencia;
 
-    public Examen(LocalDate fecha, int turno, float nota, String codMateria, String codHistoriaAcademica) {
+    public Examen(LocalDate fecha, float nota, String codMateria, String codHistoriaAcademica) {
         //dia-año-codmat-codhistoria
         this.fecha = fecha;
         this.nota = nota;
@@ -76,22 +76,26 @@ public class Examen {
         return "Nro Registro: " + codHistoriaAcademica + " | Codigo Materia: " + codMateria
                 + " | Codigo: " + codMateria + " | Nota: " + nota + " | Experiencia: " + experiencia;
     }
-    
+
     @Override
     public boolean equals(Object object) {
         if (object.getClass() != this.getClass()) {
             return false;
         }
 
-        boolean ret = fecha.isEqual(((Examen)object).getFecha())
-                && nota == ((Examen)object).getNota()
-                && codMateria.equals(((Examen)object).getCodMateria())
-                && codHistoriaAcademica.equals(((Examen)object).getCodHistoriaAcademica());
-        
-        if(experiencia != null) {
-            ret = ret && experiencia.equals(((Examen)object).getExperiencia());
+        if (!fecha.isEqual(((Examen) object).getFecha())
+                && nota == ((Examen) object).getNota()
+                && codMateria.equals(((Examen) object).getCodMateria())
+                && codHistoriaAcademica.equals(((Examen) object).getCodHistoriaAcademica())) {
+            return false;
         }
         
-        return ret;
+        if (experiencia != null) {
+            if(!experiencia.equals(((Examen) object).getExperiencia())) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

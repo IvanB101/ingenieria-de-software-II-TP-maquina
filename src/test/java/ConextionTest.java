@@ -1,5 +1,6 @@
 
 import com.mycompany.tp_maquina_is2.Datos.Conexion;
+import java.time.LocalDate;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -13,8 +14,10 @@ public class ConextionTest {
 
     public static void main(String[] args) {
 
+        LocalDate date = LocalDate.now();
+        
+        System.out.println(date);
         try {
-            Conexion.getInstance().init();
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -17,8 +17,8 @@ public interface HistoriaAcademicaDAOInter {
 
     public HistoriaAcademica read(int nroRegistro, String codPlanEstudios) throws SQLException;
 
-    public void update(int codigo, String codPlanEstudios, HistoriaAcademica historiaAcademica) throws SQLException;
+    public void update(int nroRegistro, String codPlanEstudios, HistoriaAcademica historiaAcademica) throws SQLException;
 
-    public void delete(int codigo, String codPlanEstudios) throws SQLException;
+    public void delete(int nroRegistro, String codPlanEstudios) throws SQLException;
 
 }

@@ -14,13 +14,13 @@ import java.util.HashMap;
 public class HistoriaAcademica {
 
     private int nroRegEstudiante;
-    private HashMap<Integer, Estado> estados;
+    private HashMap<String, Estado> estados;
     private ArrayList<Integer> codExamenes;
     private String codPlanDeEstudios;
     private ArrayList<Integer> codMateriasExamenes;
     private ArrayList<Integer> codMateriasEstados;
 
-    public HistoriaAcademica(int nroRegEstudiante, HashMap<Integer, Estado> estados,
+    public HistoriaAcademica(int nroRegEstudiante, HashMap<String, Estado> estados,
             ArrayList<Integer> codExamenes, String codPlanDeEstudios, ArrayList<Integer> codMateriasExamenes,
             ArrayList<Integer> codMateriasEstados) {
         this.nroRegEstudiante = nroRegEstudiante;
@@ -31,6 +31,9 @@ public class HistoriaAcademica {
         this.codMateriasEstados = codMateriasEstados;
     }
 
+    public String getCodigo() {
+        return nroRegEstudiante + codPlanDeEstudios; 
+    }
     public int getNroRegEstudiante() {
         return nroRegEstudiante;
     }
@@ -55,11 +58,11 @@ public class HistoriaAcademica {
         this.codPlanDeEstudios = codPlanDeEstudios;
     }
 
-    public HashMap<Integer, Estado> getEstados() {
+    public HashMap<String, Estado> getEstados() {
         return estados;
     }
 
-    public void setEstados(HashMap<Integer, Estado> estados) {
+    public void setEstados(HashMap<String, Estado> estados) {
         this.estados = estados;
     }
 

@@ -9,11 +9,12 @@ package com.mycompany.tp_maquina_is2.Logica.Transferencia;
  * @author ivanb
  */
 public class Estado {
+
     public enum Condicion {
         regular, cursando, aprobado, libre;
-        
+
         public static Condicion parse(String text) {
-            if(regular.name().equalsIgnoreCase(text)) {
+            if (regular.name().equalsIgnoreCase(text)) {
                 return regular;
             } else if (cursando.name().equalsIgnoreCase(text)) {
                 return cursando;
@@ -24,15 +25,19 @@ public class Estado {
             }
         }
     }
-    
+
     private int codMateria;
-    private int nroRegistroHistoria;
+    private String codHistoriaAcademica;
     private Condicion condicion;
 
-    public Estado(int codMateria, int nroRegistroHistoria, Condicion condicion) {
+    public Estado(int codMateria, String codHitoriaAcademica, Condicion condicion) {
         this.codMateria = codMateria;
-        this.nroRegistroHistoria = nroRegistroHistoria;
+        this.codHistoriaAcademica = codHitoriaAcademica;
         this.condicion = condicion;
+    }
+
+    public String getCodigo() {
+        return codHistoriaAcademica + codMateria;
     }
 
     public int getCodMateria() {
@@ -43,14 +48,6 @@ public class Estado {
         this.codMateria = codMateria;
     }
 
-    public int getNroRegistroHistoria() {
-        return nroRegistroHistoria;
-    }
-
-    public void setNroRegistroHistoria(int nroRegistroHistoria) {
-        this.nroRegistroHistoria = nroRegistroHistoria;
-    }
-    
     public Condicion getCondicion() {
         return condicion;
     }
@@ -59,8 +56,16 @@ public class Estado {
         this.condicion = condicion;
     }
 
+    public String getCodHistoriaAcademica() {
+        return codHistoriaAcademica;
+    }
+
+    public void setCodHistoriaAcademica(String codHitoriaAcademica) {
+        this.codHistoriaAcademica = codHitoriaAcademica;
+    }
+
     @Override
     public String toString() {
-        return "nroReg: " + nroRegistroHistoria + " | codMat: " + codMateria + " | Estado: " + condicion;
+        return "codHistoriaAcademica: " + codHistoriaAcademica + " | codMat: " + codMateria + " | Estado: " + condicion;
     }
 }

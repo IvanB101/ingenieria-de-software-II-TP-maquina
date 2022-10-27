@@ -30,47 +30,40 @@ public class HistoriaAcademicaDAOImp implements HistoriaAcademicaDAOInter {
     }
 
     @Override
-    public boolean create(HistoriaAcademica historiaAcademica) {
-        try {
-            Connection con = conexion.getConnection();
-            
-            PreparedStatement ps;
+    public void create(HistoriaAcademica historiaAcademica) throws SQLException {
+        Connection con = conexion.getConnection();
 
-            // Carga de la historia academica
-            ps = con.prepareStatement("INSERT INTO HistoriaAcademica (propuesta, Estudiante_nroRegistro, "
-                    + "PlanEstudios_codigo) VALUES (?,?,?)");
+        PreparedStatement ps;
+        
+        String codPlanEstudios = historiaAcademica.getCodPlanDeEstudios();
 
-            ps.setString(1, historiaAcademica.getPropuesta());
-            ps.setInt(2, historiaAcademica.getNroRegEstudiante());
-            ps.setString(3, historiaAcademica.getCodPlanDeEstudios());
+        // Carga de la historia academica
+        ps = con.prepareStatement("INSERT INTO HistoriaAcademica (Estudiante_nroRegistro, "
+                + "PlanEstudios_codigo) VALUES (?,?)");
+
+        ps.setInt(1, historiaAcademica.getNroRegEstudiante());
+        ps.setString(2, codPlanEstudios);
+
+        ps.executeUpdate();
+
+        ps = con.prepareStatement("INSERT INTO Estado (regularidad, Materia_codigo, "
+                + "HistoriaAcademica_Estudiante_nroRegistro,PlanEstudios_codigo) VALUES (?,?,?,?)");
+        // Carga de los estados de la historia academica
+        for (Estado estado : historiaAcademica.getEstados().values()) {
+            ps.setString(1, estado.getCondicion().toString());
+            ps.setInt(2, estado.getCodMateria());
+            ps.setInt(3, estado.getNroRegistroHistoria());
+            ps.setString(4, codPlanEstudios);
 
             ps.executeUpdate();
-
-            ps = con.prepareStatement("INSERT INTO Estado (regularidad, Materia_codigo, "
-                    + "HistoriaAcademica_Estudiante_nroRegistro) VALUES (?,?,?)");
-            // Carga de los estados de la historia academica
-            for (Estado estado : historiaAcademica.getEstados().values()) {
-                ps.setString(1, estado.getCondicion().toString());
-                ps.setInt(2, estado.getCodMateria());
-                ps.setInt(3, estado.getCodHistoriaAcademica());
-
-                ps.executeUpdate();
-            }
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-            return false;
         }
-
-        return true;
     }
 
     @Override
-    public HashMap<Integer, HistoriaAcademica> read() {
-        HashMap<Integer, HistoriaAcademica> historiasAcademicas = new HashMap<>();
-
+    public HistoriaAcademica read(int nroRegistro, String codPlanEstudios) throws SQLException {
         try {
             Connection con = conexion.getConnection();
-            
+
             /* Realiza un ensamble de las tablas HistoriaAcademica y Estado para tener todos los
             estados de una historia academica seguidos en el ResultSet. Ademas, se realiza un ensamble
             con Materia para poder diferenciar dos historias academicas del mismo estudiante en
@@ -157,7 +150,7 @@ public class HistoriaAcademicaDAOImp implements HistoriaAcademicaDAOInter {
     }
 
     @Override
-    public boolean update(int nroRegistro, HistoriaAcademica historiaAcademica) {
+    public void update(int nroRegistro, String codPlanEstudios, HistoriaAcademica historiaAcademica) throws SQLException {
         if (delete(nroRegistro)) {
             return create(historiaAcademica);
         }
@@ -166,13 +159,13 @@ public class HistoriaAcademicaDAOImp implements HistoriaAcademicaDAOInter {
     }
 
     @Override
-    public boolean delete(int nroRegistro) {
+    public void delete(int nroRegistro, String codPlanEstudios) throws SQLException {
         PreparedStatement ps;
 
         // Control existencia de la historia academica con código a eliminar
         try {
             Connection con = conexion.getConnection();
-            
+
             ps = con.prepareStatement("SELECT * FROM HistoriaAcademica WHERE Estudiante_nroRegistro=?");
             ps.setInt(1, nroRegistro);
             ResultSet rs = ps.executeQuery();
@@ -185,7 +178,7 @@ public class HistoriaAcademicaDAOImp implements HistoriaAcademicaDAOInter {
 
         try {
             Connection con = conexion.getConnection();
-            
+
             ps = con.prepareStatement("DELETE FROM HistoriaAcademica WHERE Estudiante_nroRegistro=?");
             ps.setInt(1, nroRegistro);
             ps.executeUpdate();

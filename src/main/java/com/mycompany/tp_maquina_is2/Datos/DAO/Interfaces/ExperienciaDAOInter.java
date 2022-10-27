@@ -4,20 +4,20 @@
  */
 package com.mycompany.tp_maquina_is2.Datos.DAO.Interfaces;
 
-import com.mycompany.tp_maquina_is2.Logica.Transferencia.Examen;
+import com.mycompany.tp_maquina_is2.Logica.Transferencia.Experiencia;
 import java.sql.SQLException;
 
 /**
  *
  * @author ivanb
  */
-public interface ExamenDAOInter {
+public interface ExperienciaDAOInter {
 
-    public void create(Examen examen) throws SQLException;
+    public void create(Experiencia experiencia) throws SQLException;
 
-    public Examen read(String codigo) throws SQLException;
+    public Experiencia read(String codigo) throws SQLException;
 
-    public void update(String codigo, Examen examen) throws SQLException;
+    public void update(String codigo, Experiencia experiencia) throws SQLException;
 
     public void delete(String codigo) throws SQLException;
 }
