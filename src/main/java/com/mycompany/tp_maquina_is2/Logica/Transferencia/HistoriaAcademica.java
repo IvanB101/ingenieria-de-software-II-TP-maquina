@@ -31,6 +31,11 @@ public class HistoriaAcademica {
         this.codMateriasEstados = codMateriasEstados;
     }
 
+    public HistoriaAcademica(int nroRegEstudiante, String codPlanDeEstudios) {
+        this.nroRegEstudiante = nroRegEstudiante;
+        this.codPlanDeEstudios = codPlanDeEstudios;
+    }
+
     public String getCodigo() {
         return nroRegEstudiante + codPlanDeEstudios; 
     }
