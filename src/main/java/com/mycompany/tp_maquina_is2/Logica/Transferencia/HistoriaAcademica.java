@@ -34,10 +34,11 @@ public class HistoriaAcademica {
     public HistoriaAcademica(int nroRegEstudiante, String codPlanDeEstudios) {
         this.nroRegEstudiante = nroRegEstudiante;
         this.codPlanDeEstudios = codPlanDeEstudios;
+        this.estados = new HashMap<>();
     }
 
     public String getCodigo() {
-        return nroRegEstudiante + codPlanDeEstudios; 
+        return nroRegEstudiante + "-" + codPlanDeEstudios; 
     }
     public int getNroRegEstudiante() {
         return nroRegEstudiante;
@@ -97,5 +98,15 @@ public class HistoriaAcademica {
         }
 
         return ret;
+    }
+    
+    @Override
+    public boolean equals(Object object) {
+        if (object.getClass() != this.getClass()) {
+            return false;
+        }
+
+        return !(nroRegEstudiante != ((HistoriaAcademica)object).getNroRegEstudiante()
+                || !codPlanDeEstudios.equals(((HistoriaAcademica)object).getCodPlanDeEstudios()));
     }
 }

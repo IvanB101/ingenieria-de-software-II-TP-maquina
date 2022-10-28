@@ -26,25 +26,25 @@ public class Estado {
         }
     }
 
-    private int codMateria;
+    private String codMateria;
     private String codHistoriaAcademica;
     private Condicion condicion;
 
-    public Estado(int codMateria, String codHitoriaAcademica, Condicion condicion) {
+    public Estado(String codMateria, String codHitoriaAcademica, Condicion condicion) {
         this.codMateria = codMateria;
         this.codHistoriaAcademica = codHitoriaAcademica;
         this.condicion = condicion;
     }
 
     public String getCodigo() {
-        return codHistoriaAcademica + codMateria;
+        return codHistoriaAcademica + "-" + codMateria;
     }
 
-    public int getCodMateria() {
+    public String getCodMateria() {
         return codMateria;
     }
 
-    public void setCodMateria(int codMateria) {
+    public void setCodMateria(String codMateria) {
         this.codMateria = codMateria;
     }
 

@@ -26,6 +26,10 @@ public class MesaExamen {
         this.codPlanEstudios = codPlanEstudios;
     }
 
+    public String getCodigo() {
+        return codPlanEstudios + "-" + codMateria + "-" + anio + "-" + turno;
+    }
+
     public int getTurno() {
         return turno;
     }
@@ -64,5 +68,31 @@ public class MesaExamen {
 
     public void setCodPlanEstudios(String codPlanEstudios) {
         this.codPlanEstudios = codPlanEstudios;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (object.getClass() != this.getClass()) {
+            return false;
+        }
+
+        if (turno != ((MesaExamen) object).getTurno()
+                || anio != ((MesaExamen) object).getAnio()
+                || !codMateria.equals(((MesaExamen) object).getCodMateria())
+                || !codPlanEstudios.equals(((MesaExamen) object).getCodPlanEstudios())) {
+            return false;
+        }
+
+        if (((MesaExamen) object).getCodInscriptos().size() != codInscriptos.size()) {
+            return false;
+        }
+
+        for (Integer codInscripto : ((MesaExamen) object).getCodInscriptos()) {
+            if (!codInscriptos.contains(codInscripto)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

@@ -7,7 +7,6 @@ package com.mycompany.tp_maquina_is2.Datos.DAO.Implementaciones;
 import com.mycompany.tp_maquina_is2.Datos.Conexion;
 import com.mycompany.tp_maquina_is2.Datos.DAO.Interfaces.ExamenDAOInter;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.Examen;
-import com.mycompany.tp_maquina_is2.Logica.Transferencia.Experiencia;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -35,15 +34,14 @@ public class ExamenDAOImp implements ExamenDAOInter {
         String[] datos = examen.getCodHistoriaAcademica().split("-");
         int nroRegistro = Integer.parseInt(datos[0]);
 
-        PreparedStatement ps = con.prepareStatement("INSERT INTO Examen (codigo, fecha, nota, "
-                + "Materia_codigo, HistoriaAcademica_Estudiante_nroRegistro, PlanEstudios_codigo) VALUES (?,?,?,?,?,?)");
+        PreparedStatement ps = con.prepareStatement("INSERT INTO Examen (fecha, nota, "
+                + "Materia_codigo, HistoriaAcademica_Estudiante_nroRegistro, PlanEstudios_codigo) VALUES (?,?,?,?,?)");
 
-        ps.setString(1, examen.getCodigo());
-        ps.setDate(2, Date.valueOf(examen.getFecha()));
-        ps.setFloat(3, examen.getNota());
-        ps.setString(4, examen.getCodMateria());
-        ps.setInt(5, nroRegistro);
-        ps.setString(6, datos[1]);
+        ps.setDate(1, Date.valueOf(examen.getFecha()));
+        ps.setFloat(2, examen.getNota());
+        ps.setString(3, examen.getCodMateria());
+        ps.setInt(4, nroRegistro);
+        ps.setString(5, datos[1]);
 
         ps.executeUpdate();
     }
@@ -59,7 +57,7 @@ public class ExamenDAOImp implements ExamenDAOInter {
         PreparedStatement ps = con.prepareStatement("SELECT * "
                 + "FROM Examen "
                 + "WHERE Materia_codigo=? AND HistoriaAcademica_Estudiante_nroRegistro=? "
-                + "AND PlanEstudios_codigo=? AND Examen_fecha=?");
+                + "AND PlanEstudios_codigo=? AND fecha=?");
         ps.setString(1, codMateria);
         ps.setInt(2, Integer.parseInt(datos[0]));
         ps.setString(3, datos[1]);
@@ -67,26 +65,7 @@ public class ExamenDAOImp implements ExamenDAOInter {
         ResultSet rs = ps.executeQuery();
 
         rs.next();
-        Examen examen = new Examen(fecha, rs.getFloat("nota"), codMateria, datos[0] + datos[1]);
-
-        ps = con.prepareStatement("SELECT * FROM Experiencia"
-                + "WHERE Materia_codigo=? AND HistoriaAcademica_Estudiante_nroRegistro=? "
-                + "AND PlanEstudios_codigo=? AND Examen_fecha=?");
-        ps.setString(1, codMateria);
-        ps.setInt(2, Integer.parseInt(datos[0]));
-        ps.setString(3, datos[1]);
-        ps.setDate(4, Date.valueOf(fecha));
-        rs = ps.executeQuery();
-
-        if (rs.next()) {
-            examen.setExperiencia(new Experiencia(
-                    rs.getInt("dificultad"),
-                    rs.getInt("dias"),
-                    rs.getInt("dedicacion"),
-                    examen.getCodigo()));
-        }
-
-        return examen;
+        return new Examen(fecha, rs.getFloat("nota"), codMateria, datos[0] + datos[1]);
     }
 
     @Override
@@ -101,7 +80,7 @@ public class ExamenDAOImp implements ExamenDAOInter {
         PreparedStatement ps = con.prepareStatement("UPDATE Examen "
                 + "SET fecha=?, nota=? "
                 + "WHERE Materia_codigo=? AND HistoriaAcademica_Estudiante_nroRegistro=? "
-                + "AND PlanEstudios_codigo=? AND Examen_fecha=?");
+                + "AND PlanEstudios_codigo=? AND fecha=?");
 
         ps.setDate(1, Date.valueOf(examen.getFecha()));
         ps.setFloat(2, examen.getNota());
@@ -122,9 +101,9 @@ public class ExamenDAOImp implements ExamenDAOInter {
 
         Connection con = conexion.getConnection();
 
-        PreparedStatement ps = con.prepareStatement("DELETE FROM Examen"
+        PreparedStatement ps = con.prepareStatement("DELETE FROM Examen "
                 + "WHERE Materia_codigo=? AND HistoriaAcademica_Estudiante_nroRegistro=? "
-                + "AND PlanEstudios_codigo=? AND Examen_fecha=?");
+                + "AND PlanEstudios_codigo=? AND fecha=?");
         ps.setString(1, codMateria);
         ps.setInt(2, Integer.parseInt(datos[0]));
         ps.setString(3, datos[1]);

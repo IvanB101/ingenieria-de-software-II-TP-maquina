@@ -12,8 +12,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -28,139 +26,89 @@ public class MesaExamenDAOImp implements MesaExamenDAOInter {
     }
 
     @Override
-    public boolean create(MesaExamen mesaExamen) {
-        try {
-            Connection con = conexion.getConnection();
-            
-            PreparedStatement ps = con.prepareStatement("INSERT INTO MesaExamen (codigo, turno, anio, Materia_codigo) VALUES (?,?,?,?)");
+    public void create(MesaExamen mesaExamen) throws SQLException {
+        Connection con = conexion.getConnection();
 
-            ps.setInt(1, mesaExamen.getCodigo());
-            ps.setInt(2, mesaExamen.getTurno());
-            ps.setInt(3, mesaExamen.getAnio());
-            ps.setInt(4, mesaExamen.getCodMateria());
+        PreparedStatement ps = con.prepareStatement("INSERT INTO MesaExamen (Materia_PlanEstudios_codigo, turno, anio, Materia_codigo) VALUES (?,?,?,?)");
 
-            ps.executeUpdate();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-            return false;
-        }
+        ps.setString(1, mesaExamen.getCodPlanEstudios());
+        ps.setInt(2, mesaExamen.getTurno());
+        ps.setInt(3, mesaExamen.getAnio());
+        ps.setString(4, mesaExamen.getCodMateria());
 
-        return true;
+        ps.executeUpdate();
     }
 
     @Override
-    public HashMap<Integer, MesaExamen> read() {
-        ArrayList<Integer> aux = new ArrayList();
-        HashMap<Integer, MesaExamen> mesasExamenes = new HashMap();
+    public MesaExamen read(String codigo) throws SQLException {
+        ArrayList<Integer> nroInscriptos = new ArrayList();
 
-        try {
-            Connection con = conexion.getConnection();
-            
-            /*Se realiza un ensamble de las tablas MesaExamen e Inscripciones para que obtener
-            los datos de una mesa junto con las incripciones a la misma*/
-            PreparedStatement ps = con.prepareStatement("SELECT codigo, turno, anio, Materia_codigo, Estudiante_nroRegistro "
-                    + "FROM MesaExamen, Inscripciones "
-                    + "WHERE MesaExamen_codigo = codigo");
-            ResultSet rs = ps.executeQuery();
+        String[] datos = codigo.split("-");
+        String codPlanEstudios = datos[0], codMateria = datos[1];
+        int anio = Integer.parseInt(datos[2]), turno = Integer.parseInt(datos[3]);
 
-            // Inicializacion de la primera mesa
-            if(!rs.next()) {
-                return new HashMap<>();
-            }
-            MesaExamen mesa = new MesaExamen(
-                    rs.getInt("codigo"),
-                    rs.getInt("turno"),
-                    rs.getInt("anio"),
-                    rs.getInt("Materia_codigo"));
-            // Inicializacion de la lista de codigos de estudiantes inscriptos a la mesa
-            ArrayList<Integer> inscriptos = new ArrayList<>();
-            inscriptos.add(rs.getInt("Estudiante_nroRegistro"));
+        Connection con = conexion.getConnection();
 
-            while (rs.next()) {
-                // Cuando cambia el codigo de la mesa sabemos que se pasa a otra mesa
-                if (mesa.getCodigo() != rs.getInt("codigo")) {
-                    // Se añaden los datos acumulados en las variables declaradas anteriormente
-                    mesa.setCodInscriptos(inscriptos);
-                    mesasExamenes.put(mesa.getCodigo(), mesa);
+        PreparedStatement ps = con.prepareStatement("SELECT * "
+                + "FROM MesaExamen "
+                + "WHERE turno=? AND anio=? AND Materia_codigo=? "
+                + "AND Materia_PlanEstudios_codigo=?");
+        ps.setInt(1, turno);
+        ps.setInt(2, anio);
+        ps.setString(3, codMateria);
+        ps.setString(4, codPlanEstudios);
 
-                    // Se cargan los datos correspondientes a la nueva mesa
-                    mesa = new MesaExamen(
-                            rs.getInt("codigo"),
-                            rs.getInt("turno"),
-                            rs.getInt("anio"),
-                            rs.getInt("Materia_codigo"));
+        ResultSet rs = ps.executeQuery();
 
-                    // Se reinicia la lista de codigos de inscriptos
-                    inscriptos = new ArrayList<>();
-                    inscriptos.add(rs.getInt("Estudiante_nroRegistro"));
-                } else {
-                    // Si no cambio la mesa se acumulan los codigos de inscriptos
-                    inscriptos.add(rs.getInt("Estudiante_nroRegistro"));
-                }
-            }
+        rs.next();
+        rs.getInt("turno");
 
-            // Se agregan los datos correspondientes a la ultima mesa
-            mesa.setCodInscriptos(inscriptos);
-            mesasExamenes.put(mesa.getCodigo(), mesa);
+        ps = con.prepareStatement("SELECT FROM Inscripcion "
+                + "WHERE MesaExamen_turno=? AND MesaExamen_anio=? AND MesaExamen_Materia_codigo=? "
+                + "AND MesaExamen_Materia_PlanEstudios_codigo=?");
+        ps.setInt(1, turno);
+        ps.setInt(2, anio);
+        ps.setString(3, codMateria);
+        ps.setString(4, codPlanEstudios);
 
-            // Se realiza otra consulta para las mesas que no tengan ningun inscripto
-            ps = con.prepareStatement("SELECT codigo, turno, anio, Materia_codigo, Estudiante_nroRegistro "
-                    + "FROM MesaExamen, Inscripciones "
-                    + "WHERE codigo NOT IN "
-                    + "(SELECT codigo FROM MesaExamen, Inscripciones WHERE MesaExamen_codigo = codigo)");
-            rs = ps.executeQuery();
-
-            while (rs.next()) {
-                mesasExamenes.put(rs.getInt("codigo"), new MesaExamen(
-                        rs.getInt("codigo"),
-                        rs.getInt("turno"),
-                        rs.getInt("anio"),
-                        rs.getInt("Materia_codigo")));
-            }
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-            return null;
+        rs = ps.executeQuery();
+        
+        while(rs.next()) {
+            nroInscriptos.add(rs.getInt("Estudiante_nroRegistro"));
         }
 
-        return mesasExamenes;
+        return new MesaExamen(turno, anio, nroInscriptos, codMateria, codPlanEstudios);
     }
 
     @Override
-    public boolean update(int codigo, MesaExamen mesaExamen) {
-        if (delete(codigo)) {
-            return create(mesaExamen);
-        }
-        return false;
+    public void update(String codigo, MesaExamen mesaExamen) throws SQLException {
     }
 
     @Override
-    public boolean delete(int codigo) {
-        PreparedStatement ps;
-        try {
-            Connection con = conexion.getConnection();
-            
-            ps = con.prepareStatement("SELECT * FROM MesaExamen WHERE codigo=?");
-            ps.setInt(1, codigo);
-            ResultSet rs = ps.executeQuery();
-            rs.next();
-            rs.getString(1);
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "No hay ninguna mesa cargada con el código: " + codigo);
-            return false;
-        }
-        try {
-            Connection con = conexion.getConnection();
-            
-            ps = con.prepareStatement("DELETE FROM MesaExamen WHERE codigo=?");
-            ps.setInt(1, codigo);
-            ps.executeUpdate();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null,
-                    "No se pudo eliminar la mesa de examenes");
-            return false;
-        }
+    public void delete(String codigo) throws SQLException {
+        String[] datos = codigo.split("-");
+        String codPlanEstudios = datos[0], codMateria = datos[1];
+        int anio = Integer.parseInt(datos[2]), turno = Integer.parseInt(datos[3]);
 
-        return true;
+        Connection con = conexion.getConnection();
+
+        PreparedStatement ps = con.prepareStatement("DELETE FROM MesaExamen "
+                + "WHERE turno=? AND anio=? AND Materia_codigo=? "
+                + "AND Materia_PlanEstudios_codigo=?");
+        ps.setInt(1, turno);
+        ps.setInt(2, anio);
+        ps.setString(3, codMateria);
+        ps.setString(4, codPlanEstudios);
+        
+        ps.executeUpdate();
+    }
+    
+    public void createInscripcion(String codigo, int nroRegistro) {
+        // TODO
+    }
+    
+    public void deleteInscricion(String codigo, int nroRegistro) {
+        // TODO
     }
 
 }

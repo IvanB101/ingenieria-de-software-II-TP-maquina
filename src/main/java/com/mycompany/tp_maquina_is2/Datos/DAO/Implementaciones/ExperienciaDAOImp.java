@@ -60,15 +60,17 @@ public class ExperienciaDAOImp implements ExperienciaDAOInter {
 
         Connection con = conexion.getConnection();
 
-        PreparedStatement ps = con.prepareStatement("SELECT * FROM Experiencia"
-                + "WHERE Materia_codigo=? AND HistoriaAcademica_Estudiante_nroRegistro=? "
-                + "AND PlanEstudios_codigo=? AND Examen_fecha=?");
+        PreparedStatement ps = con.prepareStatement("SELECT * FROM Experiencia "
+                + "WHERE Examen_Materia_codigo=? AND Examen_HistoriaAcademica_Estudiante_nroRegistro=? "
+                + "AND Examen_PlanEstudios_codigo=? AND Examen_fecha=?");
         ps.setString(1, codMateria);
         ps.setInt(2, nroRegistro);
         ps.setString(3, datos[1]);
         ps.setDate(4, Date.valueOf(fecha));
         ResultSet rs = ps.executeQuery();
 
+        rs.next();
+        
         return new Experiencia(
                 rs.getInt("dificultad"),
                 rs.getInt("dias"),
@@ -87,8 +89,8 @@ public class ExperienciaDAOImp implements ExperienciaDAOInter {
 
         PreparedStatement ps = con.prepareStatement("UPDATE Experiencia "
                 + "SET dificultad=?, dias=?, dedicacion=?"
-                + "WHERE Materia_codigo=? AND HistoriaAcademica_Estudiante_nroRegistro=? "
-                + "AND PlanEstudios_codigo=? AND Examen_fecha=?");
+                + "WHERE Examen_Materia_codigo=? AND Examen_HistoriaAcademica_Estudiante_nroRegistro=? "
+                + "AND Examen_PlanEstudios_codigo=? AND Examen_fecha=?");
 
         ps.setInt(1, experiencia.getDificultad());
         ps.setInt(2, experiencia.getDias());
@@ -110,9 +112,9 @@ public class ExperienciaDAOImp implements ExperienciaDAOInter {
 
         Connection con = conexion.getConnection();
 
-        PreparedStatement ps = con.prepareStatement("DELETE FROM Experiencia"
-                + "WHERE Materia_codigo=? AND HistoriaAcademica_Estudiante_nroRegistro=? "
-                + "AND PlanEstudios_codigo=? AND Examen_fecha=?");
+        PreparedStatement ps = con.prepareStatement("DELETE FROM Experiencia "
+                + "WHERE Examen_Materia_codigo=? AND Examen_HistoriaAcademica_Estudiante_nroRegistro=? "
+                + "AND Examen_PlanEstudios_codigo=? AND Examen_fecha=?");
         ps.setString(1, codMateria);
         ps.setInt(2, Integer.parseInt(datos[0]));
         ps.setString(3, datos[1]);

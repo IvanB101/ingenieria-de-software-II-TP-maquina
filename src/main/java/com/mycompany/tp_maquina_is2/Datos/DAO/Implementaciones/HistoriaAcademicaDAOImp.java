@@ -6,16 +6,11 @@ package com.mycompany.tp_maquina_is2.Datos.DAO.Implementaciones;
 
 import com.mycompany.tp_maquina_is2.Datos.Conexion;
 import com.mycompany.tp_maquina_is2.Datos.DAO.Interfaces.HistoriaAcademicaDAOInter;
-import com.mycompany.tp_maquina_is2.Logica.Transferencia.Estado;
-import com.mycompany.tp_maquina_is2.Logica.Transferencia.Estado.Condicion;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.HistoriaAcademica;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -45,8 +40,8 @@ public class HistoriaAcademicaDAOImp implements HistoriaAcademicaDAOInter {
     public HistoriaAcademica read(int nroRegistro, String codPlanEstudios) throws SQLException {
         Connection con = conexion.getConnection();
         
-        PreparedStatement ps = con.prepareStatement("INSERT INTO HistoriaAcademica (Estudiante_nroRegistro, "
-                + "PlanEstudios_codigo) VALUES (?,?)");
+        PreparedStatement ps = con.prepareStatement("SELECT * FROM HistoriaAcademica "
+                + "WHERE Estudiante_nroRegistro=? AND PlanEstudios_codigo=?");
         ps.setInt(1, nroRegistro);
         ps.setString(2, codPlanEstudios);
         
@@ -54,22 +49,12 @@ public class HistoriaAcademicaDAOImp implements HistoriaAcademicaDAOInter {
         
         rs.next();
 
-        return new HistoriaAcademica(nroRegistro, codPlanEstudios);
+        return new HistoriaAcademica(rs.getInt("Estudiante_nroRegistro"), codPlanEstudios);
     }
 
     @Override
     public void update(int nroRegistro, String codPlanEstudios, HistoriaAcademica historiaAcademica) throws SQLException {
-        Connection con = conexion.getConnection();
-        
-        PreparedStatement ps = con.prepareStatement("UPDATE HistoriaAcademica "
-                + "SET Estudiante_nroRegistro=?, PlanEstudios_codigo=? "
-                + "WHERE Estudiante_nroRegistro=?, PlanEstudios_codigo=?");
-        ps.setInt(1, historiaAcademica.getNroRegEstudiante());
-        ps.setString(2, historiaAcademica.getCodPlanDeEstudios());
-        ps.setInt(3, nroRegistro);
-        ps.setString(4, codPlanEstudios);
-        
-        ps.executeUpdate();
+        // El metodo no hace nada porque la tabla HistoriaAcademica solamente cuenta con llaves foraneas
     }
 
     @Override
@@ -77,7 +62,7 @@ public class HistoriaAcademicaDAOImp implements HistoriaAcademicaDAOInter {
         Connection con = conexion.getConnection();
         
         PreparedStatement ps = con.prepareStatement("DELETE FROM HistoriaAcademica "
-                + "WHERE Estudiante_nroRegistro=?, PlanEstudios_codigo=?");
+                + "WHERE Estudiante_nroRegistro=? AND PlanEstudios_codigo=?");
         
         ps.setInt(1, nroRegistro);
         ps.setString(2, codPlanEstudios);

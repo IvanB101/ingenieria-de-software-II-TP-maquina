@@ -46,6 +46,16 @@ public class Materia {
         this.dependientes = dependientes;
     }
 
+    public Materia(String codigo, String nombre, String codPlanDeEstudios) {
+        this.codigo = codigo;
+        this.nombre = nombre;
+        this.codPlanDeEstudios = codPlanDeEstudios;
+        this.correlativas = new ArrayList<>();
+        this.dependientes = new ArrayList<>();
+    }
+    
+    
+
     public String getCodigo() {
         return codigo;
     }
