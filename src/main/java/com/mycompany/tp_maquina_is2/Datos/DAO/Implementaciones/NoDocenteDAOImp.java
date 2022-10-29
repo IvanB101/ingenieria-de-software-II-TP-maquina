@@ -11,109 +11,93 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
-import javax.swing.JOptionPane;
 
 /**
  *
  * @author ivanb
  */
 public class NoDocenteDAOImp implements NoDocenteDAOInter {
-
-    Connection con;
+    
+    Conexion conexion;
 
     public NoDocenteDAOImp(Conexion conexion) {
-        try {
-            con = conexion.getInstance();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-        }
+        this.conexion = conexion;
     }
 
     @Override
-    public boolean create(NoDocente noDocente) {
-        try {
-            PreparedStatement ps = con.prepareStatement("INSERT INTO Persona (codigo, dni, nombre, apellido) VALUES (?,?,?,?)");
+    public void create(NoDocente noDocente) throws SQLException {
+        Connection con = conexion.getConnection();
 
-            ps.setString(1, noDocente.getCodigo());
-            ps.setInt(2, noDocente.getDni());
-            ps.setString(3, noDocente.getNombre());
-            ps.setString(4, noDocente.getApellido());
+        // Insercion de los datos correspondientes a Persona
+        PreparedStatement ps = con.prepareStatement("INSERT INTO Persona (codigo, dni, nombre, apellido) VALUES (?,?,?,?)");
 
-            ps.executeUpdate();
-            ps = con.prepareStatement("INSERT INTO NoDocente (nroLegajo, Persona_codigo) VALUES (?,?)");
+        ps.setString(1, noDocente.getCodigo());
+        ps.setInt(2, noDocente.getDni());
+        ps.setString(3, noDocente.getNombre());
+        ps.setString(4, noDocente.getApellido());
 
-            ps.setInt(1, noDocente.getNroLegajo());
-            ps.setString(2, noDocente.getCodigo());
+        ps.executeUpdate();
 
-            ps.executeUpdate();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-            return false;
-        }
+        // Insercion de los datos correspondientes a Estudiante
+        ps = con.prepareStatement("INSERT INTO NoDocente (nroLegajo, Persona_codigo) VALUES (?,?)");
 
-        return true;
+        ps.setInt(1, noDocente.getNroLegajo());
+        ps.setString(2, noDocente.getCodigo());
+
+        ps.executeUpdate();
     }
 
     @Override
-    public HashMap<Integer, NoDocente> read() {
-        HashMap<Integer, NoDocente> noDocentes = new HashMap<>();
+    public NoDocente read(int nroLegajo) throws SQLException {
+        Connection con = conexion.getConnection();
 
-        try {
-            PreparedStatement ps = con.prepareStatement("SELECT nroLegajo, codigo, nombre, apellido,"
-                    + " dni FROM NoDocente, Persona WHERE Persona_codigo = codigo");
-            ResultSet rs = ps.executeQuery();
+        PreparedStatement ps = con.prepareStatement("SELECT nroLegajo, codigo, nombre, apellido, dni "
+                + "FROM NoDocente, Persona "
+                + "WHERE Persona_codigo=codigo AND nroLegajo=?");
+        ps.setInt(1, nroLegajo);
+        ResultSet rs = ps.executeQuery();
 
-            while (rs.next()) {
-                noDocentes.put(rs.getInt("nroLegajo"), new NoDocente(
-                        rs.getInt("nroLegajo"),
-                        rs.getString("nombre"),
-                        rs.getString("apellido"),
-                        rs.getInt("dni")));
-            }
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-            return null;
-        }
-
-        return noDocentes;
+        rs.next();
+        return new NoDocente(
+                rs.getInt("nroLegajo"),
+                rs.getString("nombre"),
+                rs.getString("apellido"),
+                rs.getInt("dni"));
     }
 
     @Override
-    public boolean update(int nroLegajo, NoDocente noDocente) {
-        if (delete(nroLegajo)) {
-            return create(noDocente);
-        }
+    public void update(int nroLegajo, NoDocente noDocente) throws SQLException {
+        Connection con = conexion.getConnection();
 
-        return false;
+        PreparedStatement ps = con.prepareStatement("UPDATE Persona "
+                + "SET codigo=?, dni=?, nombre=?, apellido=?"
+                + "WHERE codigo=?;"
+                + "UPDATE NoDocente "
+                + "SET nroLegajo=?, Persona_codigo=?"
+                + "WHERE nroLegajo=?");
+
+        ps.setString(1, noDocente.getCodigo());
+        ps.setInt(2, noDocente.getDni());
+        ps.setString(3, noDocente.getNombre());
+        ps.setString(4, noDocente.getApellido());
+        ps.setString(5, "n" + nroLegajo);
+        ps.setInt(6, noDocente.getNroLegajo());
+        ps.setString(7, noDocente.getCodigo());
+        ps.setInt(8, nroLegajo);
+
+        ps.executeUpdate();
     }
 
     @Override
-    public boolean delete(int nroLegajo) {
-        PreparedStatement ps;
+    public void delete(int nroLegajo) throws SQLException {
         String codigo = "n" + nroLegajo;
-        // Control existencia del consumo con código a eliminar
-        try {
-            ps = con.prepareStatement("SELECT * FROM Persona WHERE codigo=?");
-            ps.setString(1, codigo);
-            ResultSet rs = ps.executeQuery();
-            rs.next();
-            rs.getString(1);
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "No hay ningún noDocente cargado con el código: " + codigo);
-        }
 
-        try {
-            ps = con.prepareStatement("DELETE FROM Persona WHERE codigo=?");
-            ps.setString(1, codigo);
-            ps.executeUpdate();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null,
-                    "El noDocente no puede ser eliminado");
-            return false;
-        }
+        Connection con = conexion.getConnection();
 
-        return true;
+        PreparedStatement ps = con.prepareStatement("DELETE FROM Persona WHERE codigo=?");
+        ps.setString(1, codigo);
+
+        ps.executeUpdate();
     }
 
 }

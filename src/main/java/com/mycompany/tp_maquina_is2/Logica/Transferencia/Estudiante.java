@@ -11,8 +11,9 @@ import java.util.ArrayList;
  * @author ivanb
  */
 public class Estudiante extends Persona {
+
     private int nroRegistro;
-    private ArrayList<Integer> codHistoriasAcademicas;
+    private ArrayList<String> codPlanHistoriasAcademicas;
     private ArrayList<Integer> codMesasInscriptas;
 
     public Estudiante(int nroRegistro, String nombre, String apellido, int dni) {
@@ -20,12 +21,12 @@ public class Estudiante extends Persona {
         this.nroRegistro = nroRegistro;
     }
 
-    public ArrayList<Integer> getCodHistoriasAcademicas() {
-        return codHistoriasAcademicas;
+    public ArrayList<String> getCodPlanHistoriasAcademicas() {
+        return codPlanHistoriasAcademicas;
     }
 
-    public void setCodHistoriasAcademicas(ArrayList<Integer> codHistoriasAcademicas) {
-        this.codHistoriasAcademicas = codHistoriasAcademicas;
+    public void setCodPlanHistoriasAcademicas(ArrayList<String> codHistoriasAcademicas) {
+        this.codPlanHistoriasAcademicas = codHistoriasAcademicas;
     }
 
     public ArrayList<Integer> getCodMesasInscriptas() {
@@ -42,10 +43,22 @@ public class Estudiante extends Persona {
 
     public void setNroRegistro(int nroRegistro) {
         this.nroRegistro = nroRegistro;
+
+        super.setCodigo("e" + nroRegistro);
     }
 
     @Override
     public String toString() {
-        return super.toString();
+        return super.toString() + "Nro Registro: " + nroRegistro;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (object.getClass() != this.getClass()) {
+            return false;
+        }
+
+        return nroRegistro == ((Estudiante) object).getNroRegistro()
+                && super.equals(object);
     }
 }

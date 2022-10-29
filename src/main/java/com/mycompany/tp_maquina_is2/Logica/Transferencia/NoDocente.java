@@ -23,5 +23,7 @@ public class NoDocente extends Persona {
 
     public void setNroLegajo(int nroLegajo) {
         this.nroLegajo = nroLegajo;
+        
+        super.setCodigo("n" + nroLegajo);
     }
 }

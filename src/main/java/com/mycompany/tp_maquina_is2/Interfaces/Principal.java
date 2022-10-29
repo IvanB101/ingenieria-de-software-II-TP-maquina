@@ -16,6 +16,7 @@ import com.mycompany.tp_maquina_is2.Logica.Transferencia.Estudiante;
 import com.mycompany.tp_maquina_is2.Logica.Util.Excel;
 import java.awt.Color;
 import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,15 +29,9 @@ import javax.swing.JPanel;
  * @author ivanb
  */
 public class Principal extends javax.swing.JFrame {
-    private static final String DB_NAME = "finalDB";
-    private static final String DB_URL = "jdbc:postgresql://localhost:5432/" + DB_NAME;
-    private static final String DB_USER = "postgres";
-    private static final String DB_PWD = "admin";
-    private Conexion conn;
-    private Estudiante user=new Estudiante(3010820,"Gino","Paoletti",44075067);
-    private int xMouse,yMouse;
-    
-    
+
+    private Estudiante user = new Estudiante(3010820, "Gino", "Paoletti", 44075067);
+    private int xMouse, yMouse;
 
     /**
      * Creates new form Principal
@@ -44,19 +39,19 @@ public class Principal extends javax.swing.JFrame {
     public Principal() {
         initComponents();
         this.setLocationRelativeTo(null);
-        this.conn = new Conexion(DB_NAME, DB_URL, DB_USER, DB_PWD);
-        
+
         try {
-            // Conexion con la base de datos
-            conn.getInstance();
-        } catch (SQLException ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            Conexion conn = Conexion.getInstance();
+            
+            // Inicializacion de Managers
+            MateriaManager.init(conn);
+            ExamenManager.init(conn);
+            EstudianteManager.init(conn);
+            HistoriaAcademicaManager.init(conn);
+            PlanEstudiosManager.init(conn);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Ha habido un problema conectando a la Base de Datos");
         }
-        MateriaManager.init(conn);
-        ExamenManager.init(conn);
-        EstudianteManager.init(conn);
-        HistoriaAcademicaManager.init(conn);
-        PlanEstudiosManager.init(conn);
     }
 
     /**
@@ -137,7 +132,7 @@ public class Principal extends javax.swing.JFrame {
         insertButtonL.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         insertButtonL.setForeground(new java.awt.Color(255, 255, 255));
         insertButtonL.setText("Cargar historia academica");
-        insertButtonL.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        insertButtonL.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         javax.swing.GroupLayout insertButtonPLayout = new javax.swing.GroupLayout(insertButtonP);
         insertButtonP.setLayout(insertButtonPLayout);
@@ -176,7 +171,7 @@ public class Principal extends javax.swing.JFrame {
         deleteButtonL.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         deleteButtonL.setForeground(new java.awt.Color(255, 255, 255));
         deleteButtonL.setText("Ver Lista Finales");
-        deleteButtonL.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        deleteButtonL.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         javax.swing.GroupLayout deleteButtonPLayout = new javax.swing.GroupLayout(deleteButtonP);
         deleteButtonP.setLayout(deleteButtonPLayout);
@@ -215,7 +210,7 @@ public class Principal extends javax.swing.JFrame {
         tablesButtonL.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         tablesButtonL.setForeground(new java.awt.Color(255, 255, 255));
         tablesButtonL.setText("Estadisticas");
-        tablesButtonL.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        tablesButtonL.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         javax.swing.GroupLayout tablesButtonPLayout = new javax.swing.GroupLayout(tablesButtonP);
         tablesButtonP.setLayout(tablesButtonPLayout);
@@ -254,7 +249,7 @@ public class Principal extends javax.swing.JFrame {
         queryButtonL.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         queryButtonL.setForeground(new java.awt.Color(255, 255, 255));
         queryButtonL.setText("Añadir Experiencia examen");
-        queryButtonL.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        queryButtonL.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         javax.swing.GroupLayout AñadirExpLayout = new javax.swing.GroupLayout(AñadirExp);
         AñadirExp.setLayout(AñadirExpLayout);
@@ -311,49 +306,25 @@ public class Principal extends javax.swing.JFrame {
 
         Cambiable.setBackground(new java.awt.Color(255, 255, 255));
         Cambiable.setPreferredSize(new java.awt.Dimension(950, 500));
+        Cambiable.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         PrincipalL.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
         PrincipalL.setText("Bienvenido al sistema de asistencia universitaria");
+        Cambiable.add(PrincipalL, new org.netbeans.lib.awtextra.AbsoluteConstraints(265, 60, -1, 37));
 
         PrincipalL1.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
         PrincipalL1.setText("Seleccione la operacion que desee realizar");
+        Cambiable.add(PrincipalL1, new org.netbeans.lib.awtextra.AbsoluteConstraints(265, 103, 419, 45));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\juan_\\Desktop\\Universidad\\5) Ing. Software II\\Practico Integrador\\TP_Maquina_IS2\\src\\main\\java\\com\\mycompany\\tp_maquina_is2\\Interfaces\\logo_imagen.png")); // NOI18N
         jLabel1.setText("jLabel1");
-
-        javax.swing.GroupLayout CambiableLayout = new javax.swing.GroupLayout(Cambiable);
-        Cambiable.setLayout(CambiableLayout);
-        CambiableLayout.setHorizontalGroup(
-            CambiableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(CambiableLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(CambiableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(CambiableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(PrincipalL1, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(PrincipalL))
-                    .addGroup(CambiableLayout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 475, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(4, 4, 4)))
-                .addGap(232, 232, 232))
-        );
-        CambiableLayout.setVerticalGroup(
-            CambiableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(CambiableLayout.createSequentialGroup()
-                .addGap(60, 60, 60)
-                .addComponent(PrincipalL, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(PrincipalL1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(51, Short.MAX_VALUE))
-        );
+        Cambiable.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(209, 154, 475, 291));
 
         javax.swing.GroupLayout ContenedorLayout = new javax.swing.GroupLayout(Contenedor);
         Contenedor.setLayout(ContenedorLayout);
         ContenedorLayout.setHorizontalGroup(
             ContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(MenuTop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(Cambiable, javax.swing.GroupLayout.DEFAULT_SIZE, 920, Short.MAX_VALUE)
+            .addComponent(Cambiable, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         ContenedorLayout.setVerticalGroup(
             ContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -378,7 +349,6 @@ public class Principal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
     private void changePane(JPanel jPanel) {
         Cambiable.setLayout(new java.awt.CardLayout());
         Cambiable.removeAll();
@@ -387,7 +357,7 @@ public class Principal extends javax.swing.JFrame {
         Cambiable.repaint();
     }
     private void insertButtonPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_insertButtonPMouseClicked
-       int returnVal = Archivo.showOpenDialog(this);
+        int returnVal = Archivo.showOpenDialog(this);
         if (returnVal == Archivo.APPROVE_OPTION) {
             File file = Archivo.getSelectedFile();
             if (Excel.cargarHistoriaAcademica(user.getNroRegistro(), "32/12", file)) {
@@ -398,8 +368,8 @@ public class Principal extends javax.swing.JFrame {
         } else {
         }
     }//GEN-LAST:event_insertButtonPMouseClicked
-        
-    
+
+
     private void insertButtonPMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_insertButtonPMouseEntered
         // TODO add your handling code here:
     }//GEN-LAST:event_insertButtonPMouseEntered
@@ -433,7 +403,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_tablesButtonPMouseExited
 
     private void AñadirExpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AñadirExpMouseClicked
-       changePane(new AgregarExpPanel(user.getNroRegistro()));
+        changePane(new AgregarExpPanel(user.getNroRegistro()));
     }//GEN-LAST:event_AñadirExpMouseClicked
 
     private void AñadirExpMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AñadirExpMouseEntered
@@ -453,29 +423,29 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_closeButtonPMouseEntered
 
     private void closeButtonPMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeButtonPMouseExited
-       closeButtonP.setBackground(new Color(118,35,47));
+        closeButtonP.setBackground(new Color(118, 35, 47));
     }//GEN-LAST:event_closeButtonPMouseExited
 
     private void MenuTopMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuTopMouseDragged
-       int x = evt.getXOnScreen(), y = evt.getYOnScreen();
+        int x = evt.getXOnScreen(), y = evt.getYOnScreen();
         this.setLocation(x - xMouse, y - yMouse);
     }//GEN-LAST:event_MenuTopMouseDragged
 
     private void MenuTopMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuTopMousePressed
-       xMouse = evt.getX();
+        xMouse = evt.getX();
         yMouse = evt.getY();
     }//GEN-LAST:event_MenuTopMousePressed
 
     private void ArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ArchivoActionPerformed
-        }
+    }
 
-        public void archivoExcel(File file){
-            if(file.getName().equals("historia_academica.xls")){
-                JOptionPane.showMessageDialog(null, "Archivo seleccionado correctamente!");
-                Excel.cargarHistoriaAcademica(user.getNroRegistro(),"32/12", file);
-            }else{
-                JOptionPane.showMessageDialog(null, "Archivo seleccionado invalido");
-            }
+    public void archivoExcel(File file) {
+        if (file.getName().equals("historia_academica.xls")) {
+            JOptionPane.showMessageDialog(null, "Archivo seleccionado correctamente!");
+            Excel.cargarHistoriaAcademica(user.getNroRegistro(), "32/12", file);
+        } else {
+            JOptionPane.showMessageDialog(null, "Archivo seleccionado invalido");
+        }
     }//GEN-LAST:event_ArchivoActionPerformed
 
     /**
@@ -498,7 +468,7 @@ public class Principal extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
+
         //</editor-fold>
 
         /* Create and display the form */

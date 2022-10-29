@@ -5,17 +5,16 @@
 package com.mycompany.tp_maquina_is2.Datos.DAO.Interfaces;
 
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.PlanEstudios;
-import java.util.HashMap;
-
+import java.sql.SQLException;
 
 public interface PlanEstudiosDAOInter {
 
-    public boolean create(PlanEstudios planEstudios);
+    public void create(PlanEstudios planEstudios) throws SQLException;
 
-    public HashMap<String, PlanEstudios> read();
+    public PlanEstudios read(String codigo) throws SQLException;
 
-    public boolean update(String codigo, PlanEstudios planEstudios);
+    public void update(String codigo, PlanEstudios planEstudios) throws SQLException;
 
-    public boolean delete(String codigo);
-    
+    public void delete(String codigo) throws SQLException;
+
 }

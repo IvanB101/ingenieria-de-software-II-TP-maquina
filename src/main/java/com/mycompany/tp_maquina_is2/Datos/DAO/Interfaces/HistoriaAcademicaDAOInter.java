@@ -5,7 +5,7 @@
 package com.mycompany.tp_maquina_is2.Datos.DAO.Interfaces;
 
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.HistoriaAcademica;
-import java.util.HashMap;
+import java.sql.SQLException;
 
 /**
  *
@@ -13,12 +13,12 @@ import java.util.HashMap;
  */
 public interface HistoriaAcademicaDAOInter {
 
-    public boolean create(HistoriaAcademica historiaAcademica);
+    public void create(HistoriaAcademica historiaAcademica) throws SQLException;
 
-    public HashMap<Integer, HistoriaAcademica> read();
+    public HistoriaAcademica read(int nroRegistro, String codPlanEstudios) throws SQLException;
 
-    public boolean update(int codigo, HistoriaAcademica historiaAcademica);
+    public void update(int nroRegistro, String codPlanEstudios, HistoriaAcademica historiaAcademica) throws SQLException;
 
-    public boolean delete(int codigo);
+    public void delete(int nroRegistro, String codPlanEstudios) throws SQLException;
 
 }

@@ -11,8 +11,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,104 +18,86 @@ import javax.swing.JOptionPane;
  */
 public class EstudianteDAOImp implements EstudianteDAOInter {
 
-    Connection con;
+    Conexion conexion;
 
     public EstudianteDAOImp(Conexion conexion) {
-        try {
-            con = conexion.getInstance();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-        }
+        this.conexion = conexion;
     }
 
     @Override
-    public boolean create(Estudiante estudiante) {
-        try {
-            // Insercion de los datos correspondientes a Persona
-            PreparedStatement ps = con.prepareStatement("INSERT INTO Persona (codigo, dni, nombre, apellido) VALUES (?,?,?,?)");
+    public void create(Estudiante estudiante) throws SQLException {
+        Connection con = conexion.getConnection();
 
-            ps.setString(1, estudiante.getCodigo());
-            ps.setInt(2, estudiante.getDni());
-            ps.setString(3, estudiante.getNombre());
-            ps.setString(4, estudiante.getApellido());
+        // Insercion de los datos correspondientes a Persona
+        PreparedStatement ps = con.prepareStatement("INSERT INTO Persona (codigo, dni, nombre, apellido) VALUES (?,?,?,?)");
 
-            ps.executeUpdate();
-            
-            // Insercion de los datos correspondientes a Estudiante
-            ps = con.prepareStatement("INSERT INTO Estudiante (nroRegistro, Persona_codigo) VALUES (?,?)");
+        ps.setString(1, estudiante.getCodigo());
+        ps.setInt(2, estudiante.getDni());
+        ps.setString(3, estudiante.getNombre());
+        ps.setString(4, estudiante.getApellido());
 
-            ps.setInt(1, estudiante.getNroRegistro());
-            ps.setString(2, estudiante.getCodigo());
+        ps.executeUpdate();
 
-            ps.executeUpdate();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-            return false;
-        }
+        // Insercion de los datos correspondientes a Estudiante
+        ps = con.prepareStatement("INSERT INTO Estudiante (nroRegistro, Persona_codigo) VALUES (?,?)");
 
-        return true;
+        ps.setInt(1, estudiante.getNroRegistro());
+        ps.setString(2, estudiante.getCodigo());
+
+        ps.executeUpdate();
     }
 
     @Override
-    public HashMap<Integer, Estudiante> read() {
-        HashMap<Integer, Estudiante> estudiantes = new HashMap<>();
+    public Estudiante read(int nroRegistro) throws SQLException {
+        Connection con = conexion.getConnection();
 
-        try {
-            PreparedStatement ps = con.prepareStatement("SELECT nroRegistro, codigo, nombre, apellido,"
-                    + " dni FROM Estudiante, Persona WHERE Persona_codigo = codigo");
-            ResultSet rs = ps.executeQuery();
+        PreparedStatement ps = con.prepareStatement("SELECT nroRegistro, codigo, nombre, apellido, dni "
+                + "FROM Estudiante, Persona "
+                + "WHERE Persona_codigo=codigo AND nroRegistro=?");
+        ps.setInt(1, nroRegistro);
+        ResultSet rs = ps.executeQuery();
 
-            while (rs.next()) {
-                estudiantes.put(rs.getInt("nroRegistro"), new Estudiante(
-                        rs.getInt("nroRegistro"),
-                        rs.getString("nombre"),
-                        rs.getString("apellido"),
-                        rs.getInt("dni")));
-            }
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-            return null;
-        }
-
-        return estudiantes;
+        rs.next();
+        return new Estudiante(
+                rs.getInt("nroRegistro"),
+                rs.getString("nombre"),
+                rs.getString("apellido"),
+                rs.getInt("dni"));
     }
 
     @Override
-    public boolean update(int nroRegistro, Estudiante estudiante) {
-        if (delete(nroRegistro)) {
-            return create(estudiante);
-        }
+    public void update(int nroRegistro, Estudiante estudiante) throws SQLException {
+        Connection con = conexion.getConnection();
 
-        return false;
+        PreparedStatement ps = con.prepareStatement("UPDATE Persona "
+                + "SET codigo=?, dni=?, nombre=?, apellido=?"
+                + "WHERE codigo=?;"
+                + "UPDATE Estudiante "
+                + "SET nroRegistro=?, Persona_codigo=?"
+                + "WHERE nroRegistro=?");
+
+        ps.setString(1, estudiante.getCodigo());
+        ps.setInt(2, estudiante.getDni());
+        ps.setString(3, estudiante.getNombre());
+        ps.setString(4, estudiante.getApellido());
+        ps.setString(5, "e" + nroRegistro);
+        ps.setInt(6, estudiante.getNroRegistro());
+        ps.setString(7, estudiante.getCodigo());
+        ps.setInt(8, nroRegistro);
+
+        ps.executeUpdate();
     }
 
     @Override
-    public boolean delete(int nroRegistro) {
-        PreparedStatement ps;
+    public void delete(int nroRegistro) throws SQLException {
         String codigo = "e" + nroRegistro;
 
-        /* Control existencia del estudiante con código a eliminar
-        try {
-            ps = con.prepareStatement("SELECT * FROM Personas WHERE codigo=?");
-            ps.setString(1, codigo);
-            ResultSet rs = ps.executeQuery();
-            rs.next();
-            rs.getString(1);
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "No hay ningún estudiante cargado con el código: " + codigo);
-            return false;
-        }
-        */
-        try {
-            ps = con.prepareStatement("DELETE FROM Persona WHERE codigo=?");
-            ps.setString(1, codigo);
-            ps.executeUpdate();
-        } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, ex.getMessage());
-            return false;
-        }
+        Connection con = conexion.getConnection();
 
-        return true;
+        PreparedStatement ps = con.prepareStatement("DELETE FROM Persona WHERE codigo=?");
+        ps.setString(1, codigo);
+
+        ps.executeUpdate();
     }
 
 }

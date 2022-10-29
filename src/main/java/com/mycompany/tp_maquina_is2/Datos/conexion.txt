@@ -1,0 +1,11 @@
+prueba1
+jdbc:postgresql://localhost:5432/
+postgres
+admin
+
+Los anteriores son
+
+nombre
+url (sin nombre)
+user
+password
