@@ -115,6 +115,18 @@ public class MateriaDAOImpTest {
         }
     }
 
+    @Test
+    public void testmateriasFromPlanEstudios() {
+        try {
+            System.out.println("materiasFromPlanEstudios");
+            
+            materiaDAOImp.materiasFromPlanEstudios(codPlanEstudios);
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+            failTest();
+        }
+    }
+
     private void failTest() {
         try {
             planEstudiosDAOImp.delete(planEstudios.getCodigo());
@@ -124,7 +136,7 @@ public class MateriaDAOImpTest {
             materiaDAOImp.delete(correlativa.getCodigo(), codPlanEstudios);
 
             materiaDAOImp.delete(dependiente.getCodigo(), codPlanEstudios);
-        } catch (Exception e) {
+        } catch (SQLException e) {
         }
 
         fail();

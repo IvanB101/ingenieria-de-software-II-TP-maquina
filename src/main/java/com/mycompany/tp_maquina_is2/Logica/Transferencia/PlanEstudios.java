@@ -5,24 +5,27 @@
 package com.mycompany.tp_maquina_is2.Logica.Transferencia;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class PlanEstudios {
     private String codigo;
     private String propuesta;
-    private ArrayList<String> codMaterias;
+    private HashMap<String, Materia> materias;
     private ArrayList<Integer> nroRegistroEstudiantes;
 
-    public PlanEstudios(String codigo, String propuesta, ArrayList<String> codMaterias, ArrayList<Integer> nroRegistroEstudiantes) {
+    public PlanEstudios(String codigo, String propuesta, HashMap<String, Materia> materias, ArrayList<Integer> nroRegistroEstudiantes) {
         this.codigo = codigo;
         this.propuesta = propuesta;
-        this.codMaterias = codMaterias;
+        this.materias = materias;
         this.nroRegistroEstudiantes = nroRegistroEstudiantes;
     }
 
     public PlanEstudios(String codigo, String propuesta) {
         this.codigo = codigo;
         this.propuesta = propuesta;
+        this.nroRegistroEstudiantes = new ArrayList<>();
+        this.materias = new HashMap<>();
     }
     
     public String getCodigo() {
@@ -49,19 +52,19 @@ public class PlanEstudios {
         this.propuesta = propuesta;
     }
 
-    public ArrayList<String> getCodMaterias() {
-        return codMaterias;
+    public HashMap<String, Materia> getMaterias() {
+        return materias;
     }
 
-    public void setCodMaterias(ArrayList<String> codMaterias) {
-        this.codMaterias = codMaterias;
+    public void setMaterias(HashMap<String, Materia> materias) {
+        this.materias = materias;
     }
     
     @Override
     public String toString() {
         String ret = "Codigo: " + codigo + "\nCodigos Materias:";
         
-        for (String codMateria : codMaterias) {
+        for (String codMateria : materias.keySet()) {
             ret += "\n" + codMateria;
         }
         

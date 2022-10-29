@@ -20,13 +20,6 @@ public abstract class PlanEstudiosManager {
     }
     
     /**
-     * Completa las asociaciones que no se leen directamente de la base de datos
-     */
-    public static void initAsociaciones() {
-        // numero registro estudiantes
-    }
-    
-    /**
      * @param codPlanEstudios codigo del plan de estudios
      * @param codMateria codigo de la materia
      * @return true si la materia pertenece al plan de estudios, false en otro caso

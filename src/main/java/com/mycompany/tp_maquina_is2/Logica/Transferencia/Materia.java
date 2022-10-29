@@ -53,8 +53,6 @@ public class Materia {
         this.correlativas = new ArrayList<>();
         this.dependientes = new ArrayList<>();
     }
-    
-    
 
     public String getCodigo() {
         return codigo;

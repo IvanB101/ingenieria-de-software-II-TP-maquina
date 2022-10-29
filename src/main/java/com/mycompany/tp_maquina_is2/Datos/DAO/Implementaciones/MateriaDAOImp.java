@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
@@ -120,5 +121,41 @@ public class MateriaDAOImp implements MateriaDAOInter {
         ps.setString(2, codPlanEstudios);
 
         ps.executeUpdate();
+    }
+
+    public HashMap<String, Materia> materiasFromPlanEstudios(String codPlanEstudios) throws SQLException {
+        HashMap<String, Materia> materias = new HashMap<>();
+
+        Connection con = conexion.getConnection();
+
+        PreparedStatement ps = con.prepareStatement("SELECT * FROM Materia "
+                + "WHERE PlanEstudios_codigo=?");
+        ps.setString(1, codPlanEstudios);
+
+        ResultSet rs = ps.executeQuery();
+
+        // Creacion de materias con datos basicos
+        while (rs.next()) {
+            String codigo = rs.getString("codigo");
+
+            materias.put(codigo, new Materia(codigo, rs.getString("nombre"), codPlanEstudios));
+        }
+
+        ps = con.prepareStatement("SELECT * FROM Correlativas "
+                + "WHERE PlanEstudios_codigo=?");
+        ps.setString(1, codPlanEstudios);
+
+        rs = ps.executeQuery();
+
+        // Carga de correlatividades entre materias
+        while (rs.next()) {
+            String codCorrelativa = rs.getString("Correlativa_codigo"),
+                    codDependiente = rs.getString("Materia_codigo");
+            
+            materias.get(codDependiente).getCorrelativas().add(codCorrelativa);
+            materias.get(codCorrelativa).getCorrelativas().add(codDependiente);
+        }
+
+        return materias;
     }
 }
