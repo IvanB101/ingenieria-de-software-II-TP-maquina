@@ -13,7 +13,7 @@ import com.mycompany.tp_maquina_is2.Logica.Managers.HistoriaAcademicaManager;
 import com.mycompany.tp_maquina_is2.Logica.Managers.MateriaManager;
 import com.mycompany.tp_maquina_is2.Logica.Managers.PlanEstudiosManager;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.Estudiante;
-import com.mycompany.tp_maquina_is2.Logica.Util.Excel;
+import com.mycompany.tp_maquina_is2.Logica.Util.ArchivosManager;
 import java.awt.Color;
 import java.io.File;
 import java.io.IOException;
@@ -360,7 +360,7 @@ public class Principal extends javax.swing.JFrame {
         int returnVal = Archivo.showOpenDialog(this);
         if (returnVal == Archivo.APPROVE_OPTION) {
             File file = Archivo.getSelectedFile();
-            if (Excel.cargarHistoriaAcademica(user.getNroRegistro(), "32/12", file)) {
+            if (ArchivosManager.cargarHistoriaAcademica(user.getNroRegistro(), "32/12", file)) {
                 JOptionPane.showMessageDialog(null, "Historia cargada correctamente");
             } else {
                 JOptionPane.showMessageDialog(null, "Ha habido un problema con la carga de la historia");
@@ -442,7 +442,7 @@ public class Principal extends javax.swing.JFrame {
     public void archivoExcel(File file) {
         if (file.getName().equals("historia_academica.xls")) {
             JOptionPane.showMessageDialog(null, "Archivo seleccionado correctamente!");
-            Excel.cargarHistoriaAcademica(user.getNroRegistro(), "32/12", file);
+            ArchivosManager.cargarHistoriaAcademica(user.getNroRegistro(), "32/12", file);
         } else {
             JOptionPane.showMessageDialog(null, "Archivo seleccionado invalido");
         }
