@@ -13,6 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 /**
  *
@@ -29,8 +30,6 @@ public class ExamenDAOImp implements ExamenDAOInter {
     @Override
     public void create(Examen examen) throws SQLException {
         Connection con = conexion.getConnection();
-        // Cambiar llave de la tabla de Historia Academica, tambien tiene que tener el codigo
-        // del plan de estudios
         String[] datos = examen.getCodHistoriaAcademica().split("-");
         int nroRegistro = Integer.parseInt(datos[0]);
 
@@ -65,7 +64,7 @@ public class ExamenDAOImp implements ExamenDAOInter {
         ResultSet rs = ps.executeQuery();
 
         rs.next();
-        return new Examen(fecha, rs.getFloat("nota"), codMateria, datos[0] + datos[1]);
+        return new Examen(fecha, rs.getFloat("nota"), codMateria, datos[0] + "-" + datos[1]);
     }
 
     @Override
@@ -110,6 +109,28 @@ public class ExamenDAOImp implements ExamenDAOInter {
         ps.setDate(4, Date.valueOf(fecha));
 
         ps.executeUpdate();
+    }
+    
+    public ArrayList<Examen> getExamenesEstudiante(int nroRegistro) throws SQLException {
+        ArrayList<Examen> examenes = new ArrayList<>();
+        
+        Connection con = conexion.getConnection();
+
+        PreparedStatement ps = con.prepareStatement("SELECT * FROM Examen "
+                + "WHERE HistoriaAcademica_Estudiante_nroRegistro=? ");
+        ps.setInt(1, nroRegistro);
+        
+        ResultSet rs = ps.executeQuery();
+        
+        while(rs.next()) {
+            Date fecha = rs.getDate("fecha");
+            examenes.add(new Examen(LocalDate.parse(fecha.toString()),
+                    rs.getFloat("nota"),
+                    rs.getString("Materia_codigo"),
+                    nroRegistro + "-" + rs.getString("PlanEstudios_codigo")));
+        }
+        
+        return examenes;
     }
 
 }

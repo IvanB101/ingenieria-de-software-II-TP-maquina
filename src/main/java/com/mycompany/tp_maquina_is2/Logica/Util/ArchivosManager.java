@@ -38,7 +38,8 @@ public class ArchivosManager {
     /**
      *
      * @param file el archivo excel con el plan de estudios a cargar
-     * @throws com.mycompany.tp_maquina_is2.Logica.Excepciones.ManagementException
+     * @throws
+     * com.mycompany.tp_maquina_is2.Logica.Excepciones.ManagementException
      */
     public static void cargarPlanEstudios(File file) throws ManagementException {
         try {
@@ -51,7 +52,7 @@ public class ArchivosManager {
             Iterator rowIterator = sheet0.rowIterator();
 
             if (!avanzarIteradorFilasHasta(rowIterator, "Carrera")) {
-                throw new ManagementException("Historia Academica invalida");
+                throw new ManagementException("Plan de Estudios invalido");
             }
 
             HSSFRow row = (HSSFRow) rowIterator.next();
@@ -61,7 +62,7 @@ public class ArchivosManager {
             // Carga de la propuesta del plan de estudios
             HSSFCell cell = (HSSFCell) cellIterator.next();
             String propuesta = cell.toString();
-            
+
             // Carga del codigo del plan de estudios
             cell = (HSSFCell) cellIterator.next();
             String codigo = cell.toString();
@@ -69,10 +70,9 @@ public class ArchivosManager {
             /* Se mantiene una LinkedList para mantener el orden y evitar conflictos con las correlativas 
             en la posterior carga en la base de datos */
             LinkedList<Materia> materiasLista = new LinkedList<>();
-            
 
             if (!avanzarIteradorFilasHasta(rowIterator, "Nombre")) {
-                throw new ManagementException("Historia Academica invalida");
+                throw new ManagementException("Plan de Estudios invalido");
             }
 
             String[] datos = new String[7];
@@ -94,16 +94,26 @@ public class ArchivosManager {
                 if (!datos[5].equals("No tiene") && !datos[5].equals("")) {
                     String[] codCorrelativas = datos[5].split("-");
 
-                    correlativas.addAll(Arrays.asList(codCorrelativas));
+                    for (String codCorrelativa : codCorrelativas) {
+                        if (codCorrelativa.contains(".")) {
+                            codCorrelativa = (String) codCorrelativa.subSequence(0, codCorrelativa.indexOf("."));
+                        }
+                        
+                        correlativas.add(codCorrelativa);
+                    }
                 }
 
-                Materia materia = new Materia(
-                        datos[1],
+                String codMateria = datos[1];
+                if (codMateria.contains(".")) {
+                    codMateria = (String) codMateria.subSequence(0, codMateria.indexOf("."));
+                }
+
+                materiasLista.add(new Materia(
+                        codMateria,
                         datos[0],
                         codigo,
                         correlativas,
-                        new ArrayList<>());
-                materiasLista.add(materia);
+                        new ArrayList<>()));
             }
 
             PlanEstudiosManager.agregar(new PlanEstudios(codigo, propuesta), materiasLista);
@@ -164,11 +174,12 @@ public class ArchivosManager {
 
             Estado estado = new Estado(
                     codMateria,
-                    nroRegistro + codPlanEstudios,
+                    nroRegistro + "-" + codPlanEstudios,
                     formatCondicion(datos[2], datos[4]));
 
             // Carga de los estados
             while (rowIterator.hasNext()) {
+                
                 if (datos[2].equals("Examen")) {
                     String[] temp = datos[1].split("/");
 
@@ -176,7 +187,7 @@ public class ArchivosManager {
                             LocalDate.of(Integer.parseInt(temp[2]), Integer.parseInt(temp[1]), Integer.parseInt(temp[0])),
                             Float.parseFloat(datos[3]),
                             codigoMateria(datos[0]),
-                            nroRegistro + codPlanEstudios);
+                            nroRegistro + "-" + codPlanEstudios);
 
                     examenes.add(examen);
                     codExamenes.add(examen.getCodigo());
@@ -208,7 +219,7 @@ public class ArchivosManager {
 
                     estado = new Estado(
                             codigoMateria(datos[0]),
-                            nroRegistro + codPlanEstudios,
+                            nroRegistro + "-" + codPlanEstudios,
                             formatCondicion(datos[2], datos[4]));
                 } else {
                     /* Si la materia esta aprobada, el resultados de otras actividades de la misma materia 
@@ -224,32 +235,21 @@ public class ArchivosManager {
 
             if (datos[2].equals("Examen")) {
                 String[] temp = datos[1].split("/");
-
+                
                 examenes.add(new Examen(
                         LocalDate.of(Integer.parseInt(temp[2]), Integer.parseInt(temp[1]), Integer.parseInt(temp[0])),
                         Float.parseFloat(datos[3]),
                         codigoMateria(datos[0]),
-                        nroRegistro + codPlanEstudios));
+                        nroRegistro + "-" + codPlanEstudios));
             }
             // Carga de los datos sacados del excel
-            if (HistoriaAcademicaManager.buscar(nroRegistro, codPlanEstudios) == null) {
-                HistoriaAcademicaManager.agregar(new HistoriaAcademica(nroRegistro, codPlanEstudios, estados,
-                        codExamenes, codMateriasExamenes));
-
-                ExamenManager.agregar(examenes);
-            } else {
-                HistoriaAcademicaManager.modificar(new HistoriaAcademica(nroRegistro, codPlanEstudios, estados,
-                        codExamenes, codMateriasExamenes));
-
-                ExamenManager.agregar(examenes);
-            }
-
+            HistoriaAcademicaManager.cargar(new HistoriaAcademica(nroRegistro, codPlanEstudios, estados,
+                    codExamenes, codMateriasExamenes));
+            ExamenManager.cargar(examenes);
         } catch (IOException e) {
             throw new ManagementException("Error en la lectura del archivo .xlsx");
         } catch (ManagementException e) {
             throw e;
-        } catch (NumberFormatException e) {
-            throw new ManagementException("Formato invalido");
         }
     }
 

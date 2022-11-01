@@ -7,20 +7,16 @@ package com.mycompany.tp_maquina_is2.Interfaces;
 import com.mycompany.tp_maquina_is2.Datos.Conexion;
 import com.mycompany.tp_maquina_is2.Interfaces.Paneles.AgregarExpPanel;
 import com.mycompany.tp_maquina_is2.Interfaces.Paneles.ListaPanel;
+import com.mycompany.tp_maquina_is2.Logica.Excepciones.ManagementException;
 import com.mycompany.tp_maquina_is2.Logica.Managers.EstudianteManager;
 import com.mycompany.tp_maquina_is2.Logica.Managers.ExamenManager;
 import com.mycompany.tp_maquina_is2.Logica.Managers.HistoriaAcademicaManager;
-import com.mycompany.tp_maquina_is2.Logica.Managers.MateriaManager;
 import com.mycompany.tp_maquina_is2.Logica.Managers.PlanEstudiosManager;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.Estudiante;
 import com.mycompany.tp_maquina_is2.Logica.Util.ArchivosManager;
 import java.awt.Color;
 import java.io.File;
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -42,9 +38,8 @@ public class Principal extends javax.swing.JFrame {
 
         try {
             Conexion conn = Conexion.getInstance();
-            
+
             // Inicializacion de Managers
-            MateriaManager.init(conn);
             ExamenManager.init(conn);
             EstudianteManager.init(conn);
             HistoriaAcademicaManager.init(conn);
@@ -360,10 +355,12 @@ public class Principal extends javax.swing.JFrame {
         int returnVal = Archivo.showOpenDialog(this);
         if (returnVal == Archivo.APPROVE_OPTION) {
             File file = Archivo.getSelectedFile();
-            if (ArchivosManager.cargarHistoriaAcademica(user.getNroRegistro(), "32/12", file)) {
+            try {
+                ArchivosManager.cargarHistoriaAcademica(user.getNroRegistro(), "32/12", file);
+
                 JOptionPane.showMessageDialog(null, "Historia cargada correctamente");
-            } else {
-                JOptionPane.showMessageDialog(null, "Ha habido un problema con la carga de la historia");
+            } catch (ManagementException e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
             }
         } else {
         }
@@ -379,7 +376,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_insertButtonPMouseExited
 
     private void deleteButtonPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteButtonPMouseClicked
-        changePane(new ListaPanel(user.getNroRegistro()));
+        changePane(new ListaPanel(user.getNroRegistro(), "32/12"));
     }//GEN-LAST:event_deleteButtonPMouseClicked
 
     private void deleteButtonPMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteButtonPMouseEntered
@@ -437,15 +434,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_MenuTopMousePressed
 
     private void ArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ArchivoActionPerformed
-    }
 
-    public void archivoExcel(File file) {
-        if (file.getName().equals("historia_academica.xls")) {
-            JOptionPane.showMessageDialog(null, "Archivo seleccionado correctamente!");
-            ArchivosManager.cargarHistoriaAcademica(user.getNroRegistro(), "32/12", file);
-        } else {
-            JOptionPane.showMessageDialog(null, "Archivo seleccionado invalido");
-        }
     }//GEN-LAST:event_ArchivoActionPerformed
 
     /**
@@ -462,10 +451,12 @@ public class Principal extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Principal.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 

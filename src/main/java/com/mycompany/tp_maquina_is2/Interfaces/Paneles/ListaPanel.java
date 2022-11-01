@@ -4,6 +4,7 @@
  */
 package com.mycompany.tp_maquina_is2.Interfaces.Paneles;
 
+import com.mycompany.tp_maquina_is2.Logica.Excepciones.ManagementException;
 import com.mycompany.tp_maquina_is2.Logica.Managers.HistoriaAcademicaManager;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.Materia;
 import java.awt.Color;
@@ -12,6 +13,7 @@ import java.awt.Font;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -20,43 +22,49 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ListaPanel extends javax.swing.JPanel {
 
-    private int cod_historia_usuario;
+    private int nroRegistro;
+    private String codPlanEstudios;
 
     /**
      * Creates new form ListaPanel
      */
-    public ListaPanel(int cod_historia_usuario) {
-        this.cod_historia_usuario = cod_historia_usuario;
+    public ListaPanel(int nroRegistro, String codPlanEstudios) {
+        this.nroRegistro = nroRegistro;
+        this.codPlanEstudios = codPlanEstudios;
         initComponents();
-        TablaMaterias.getTableHeader().setFont(new Font("Segoe UI",Font.BOLD,12));
+        TablaMaterias.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
         TablaMaterias.getTableHeader().setOpaque(true);
-        TablaMaterias.getTableHeader().setBackground(new Color(0,153,153));
-        jScrollPane1.getViewport().setBackground(new Color(255,255,255)); //tabla color blanco
+        TablaMaterias.getTableHeader().setBackground(new Color(0, 153, 153));
+        jScrollPane1.getViewport().setBackground(new Color(255, 255, 255)); //tabla color blanco
         TablaMaterias.getTableHeader().setReorderingAllowed(false);
-        
-        
+
         listaFinales();
 
     }
 
     public void listaFinales() {
-        HashMap<Materia, Integer> materias = HistoriaAcademicaManager.listaExamenes(cod_historia_usuario);
-        DefaultTableModel modelo = (DefaultTableModel) TablaMaterias.getModel();
-        Set<Materia> keys2 = materias.keySet();
+        try {
+            HashMap<Materia, Integer> materias = HistoriaAcademicaManager.listaExamenes(nroRegistro, codPlanEstudios);
+            DefaultTableModel modelo = (DefaultTableModel) TablaMaterias.getModel();
+            Set<Materia> keys2 = materias.keySet();
 
-        ArrayList<Materia> keys = new ArrayList<>();
+            ArrayList<Materia> keys = new ArrayList<>();
 
-        for (Materia materia : keys2) {
-            keys.add(materia);
+            for (Materia materia : keys2) {
+                keys.add(materia);
+            }
+
+            keys.sort((c1, c2) -> {
+                return materias.get(c2).compareTo(materias.get(c1));
+            });
+
+            for (Materia key : keys) {
+                modelo.addRow(new Object[]{key.getCodigo(), key.getNombre(), materias.get(key)});
+            }
+        } catch (ManagementException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
 
-        keys.sort((c1, c2) -> {
-            return materias.get(c2).compareTo(materias.get(c1));
-        });
-
-        for (Materia key : keys) {
-            modelo.addRow(new Object[] { key.getCodigo(), key.getNombre(), materias.get(key) });
-        }
     }
 
     /**
@@ -146,7 +154,7 @@ public class ListaPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton1ActionPerformed
-       
+
     }// GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

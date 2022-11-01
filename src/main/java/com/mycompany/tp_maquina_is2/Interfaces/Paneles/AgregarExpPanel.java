@@ -4,16 +4,15 @@
  */
 package com.mycompany.tp_maquina_is2.Interfaces.Paneles;
 
+import com.mycompany.tp_maquina_is2.Logica.Excepciones.ManagementException;
 import com.mycompany.tp_maquina_is2.Logica.Managers.ExamenManager;
-import com.mycompany.tp_maquina_is2.Logica.Managers.MateriaManager;
+import com.mycompany.tp_maquina_is2.Logica.Managers.PlanEstudiosManager;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.Examen;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.Experiencia;
-import com.mycompany.tp_maquina_is2.Logica.Transferencia.Materia;
 import java.awt.Color;
 import java.awt.Font;
-import java.time.LocalDate;
+import java.awt.HeadlessException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -22,23 +21,23 @@ import javax.swing.table.DefaultTableModel;
  * @author juan_
  */
 public class AgregarExpPanel extends javax.swing.JPanel {
-    private int cod_historia_usuario;
+
+    private int nroRegistro;
 
     /**
      * Creates new form AgregarExpPanel
      */
-    public AgregarExpPanel(int cod_historia_usuario) {
-        this.cod_historia_usuario=cod_historia_usuario;
+    public AgregarExpPanel(int nroRegistro) {
+        this.nroRegistro = nroRegistro;
         initComponents();
-        TablaExamenes.getTableHeader().setFont(new Font("Segoe UI",Font.BOLD,12));
+        TablaExamenes.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
         TablaExamenes.getTableHeader().setOpaque(true);
-        TablaExamenes.getTableHeader().setBackground(new Color(0,153,153));
+        TablaExamenes.getTableHeader().setBackground(new Color(0, 153, 153));
         TablaExamenes.getTableHeader().setReorderingAllowed(false);
-        jScrollPane1.getViewport().setBackground(new Color(255,255,255)); //tabla color blanc
+        jScrollPane1.getViewport().setBackground(new Color(255, 255, 255)); //tabla color blanc
         this.PanelDatosExp.setVisible(false);
         LlenarTablaExamenes();
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -270,19 +269,19 @@ public class AgregarExpPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ConfirmarDatosExpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarDatosExpActionPerformed
-      int diasEstudio=0;
-        try{
-            diasEstudio=Integer.parseInt(DiasDeEstudio.getText().trim());
-            int dificultad=SliderDif.getValue();
-            int dedicacion=SliderDedi.getValue();
-            String codExamen = (String)TablaExamenes.getValueAt(TablaExamenes.getSelectedRow(),0);
-            ExamenManager.agregarExperiencia(new Experiencia(dificultad,diasEstudio,dedicacion,codExamen));
+        int diasEstudio = 0;
+        try {
+            diasEstudio = Integer.parseInt(DiasDeEstudio.getText().trim());
+            int dificultad = SliderDif.getValue();
+            int dedicacion = SliderDedi.getValue();
+            String codExamen = (String) TablaExamenes.getValueAt(TablaExamenes.getSelectedRow(), 0);
+            ExamenManager.agregarExperiencia(new Experiencia(dificultad, diasEstudio, dedicacion, codExamen));
             JOptionPane.showMessageDialog(null, "Experiencia cargada exitosamente!.");
             LlenarTablaExamenes();
-            
-        }catch(Exception e){
-               JOptionPane.showMessageDialog(null, "Error en los dias de estudio");
-                }
+
+        } catch (ManagementException | HeadlessException | NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
     }//GEN-LAST:event_ConfirmarDatosExpActionPerformed
 
     private void SliderDifStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_SliderDifStateChanged
@@ -290,7 +289,7 @@ public class AgregarExpPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_SliderDifStateChanged
 
     private void SliderDediStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_SliderDediStateChanged
-       DatosDed.setText(String.valueOf(SliderDedi.getValue()));
+        DatosDed.setText(String.valueOf(SliderDedi.getValue()));
     }//GEN-LAST:event_SliderDediStateChanged
 
     private void DiasDeEstudioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DiasDeEstudioActionPerformed
@@ -298,20 +297,29 @@ public class AgregarExpPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_DiasDeEstudioActionPerformed
 
     private void TablaExamenesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaExamenesMouseClicked
-       PanelDatosExp.setVisible(true);
+        PanelDatosExp.setVisible(true);
     }//GEN-LAST:event_TablaExamenesMouseClicked
 
-    public void LlenarTablaExamenes(){
-        ArrayList<Examen> examenes=ExamenManager.examenesEstudiante(cod_historia_usuario);
-        DefaultTableModel modelo = (DefaultTableModel) TablaExamenes.getModel();
-        //modelo.setRowCount(0);
-        Object [] lista=new Object[40];
-        for(Examen e : examenes)
-        {
-            if(e.getExperiencia()==null)
-                modelo.addRow(new Object []{e.getCodigo(),MateriaManager.buscarMateria(e.getCodMateria()).getNombre(),e.getFecha().toString()});
+    public void LlenarTablaExamenes() {
+        try {
+            ArrayList<Examen> examenes = ExamenManager.examenesEstudiante(nroRegistro);
+            DefaultTableModel modelo = (DefaultTableModel) TablaExamenes.getModel();
+            //modelo.setRowCount(0);
+            Object[] lista = new Object[40];
+            for (Examen examen : examenes) {
+                if (examen.getExperiencia() == null) {
+                    String[]datos = examen.getCodHistoriaAcademica().split("-");
+                    
+                    modelo.addRow(new Object[]{examen.getCodigo(),
+                        PlanEstudiosManager.buscarMateria(examen.getCodMateria(), datos[1]).getNombre(),
+                        examen.getFecha().toString()});
+                }
             }
+        } catch (ManagementException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
+
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ConfirmarDatosExp;
