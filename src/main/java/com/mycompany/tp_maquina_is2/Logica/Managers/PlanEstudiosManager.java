@@ -5,32 +5,112 @@
 package com.mycompany.tp_maquina_is2.Logica.Managers;
 
 import com.mycompany.tp_maquina_is2.Datos.Conexion;
+import com.mycompany.tp_maquina_is2.Datos.DAO.Implementaciones.MateriaDAOImp;
 import com.mycompany.tp_maquina_is2.Datos.DAO.Implementaciones.PlanEstudiosDAOImp;
+import com.mycompany.tp_maquina_is2.Logica.Excepciones.ManagementException;
+import com.mycompany.tp_maquina_is2.Logica.Transferencia.Materia;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.PlanEstudios;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  *
  * @author ivanb
  */
 public abstract class PlanEstudiosManager {
+
     private static PlanEstudiosDAOImp planEstudiosDAOImp;
-    
+    private static MateriaDAOImp materiaDAOImp;
+
+    private static PlanEstudios planEstudios;
+
     public static void init(Conexion conexion) {
         planEstudiosDAOImp = new PlanEstudiosDAOImp(conexion);
+
+        materiaDAOImp = new MateriaDAOImp(conexion);
     }
-    
+
     /**
      * @param codPlanEstudios codigo del plan de estudios
      * @param codMateria codigo de la materia
-     * @return true si la materia pertenece al plan de estudios, false en otro caso
-    */
-    public static boolean comprobarMateria(String codPlanEstudios, int codMateria) {
-        return planesEstudios.get(codPlanEstudios).getCodMaterias().indexOf(codMateria) != -1;
+     * @return true si la materia pertenece al plan de estudios, false en otro
+     * caso
+     * @throws
+     * com.mycompany.tp_maquina_is2.Logica.Excepciones.ManagementException
+     */
+    public static boolean comprobarMateria(String codPlanEstudios, String codMateria) throws ManagementException {
+        buscar(codPlanEstudios);
+        
+        return (planEstudios.getMaterias().get(codMateria) != null);
+    }
+
+    public static PlanEstudios buscar(String codPlanEstudios) throws ManagementException {
+        try {
+            if (planEstudios == null || !planEstudios.getCodigo().equals(codPlanEstudios)) {
+                planEstudios = planEstudiosDAOImp.read(codPlanEstudios);
+
+                planEstudios.setMaterias(materiaDAOImp.materiasFromPlanEstudios(codPlanEstudios));
+            }
+
+            return planEstudios;
+        } catch (SQLException e) {
+            if (e.getMessage().equals("ResultSet not positioned properly, perhaps you need to call next.")) {
+                throw new ManagementException("No hay un plan de estudios con el codigo " + codPlanEstudios + " cargado");
+            }
+        }
+
+        return null;
+    }
+
+    public static void agregar(PlanEstudios nuevo, LinkedList<Materia> materias) throws ManagementException {
+        try {
+            planEstudiosDAOImp.create(nuevo);
+
+            for (Materia materia : materias) {
+                try {
+                    System.out.println(materia);
+                    materiaDAOImp.create(materia);
+                } catch (SQLException e) {
+                    throw new ManagementException("Error en carga de materia con codigo: " + materia.getCodigo()
+                    + "\n" + e.getMessage());
+                }
+            }
+        } catch (SQLException e) {
+            if(e.getMessage().contains("llave duplicada")) {
+                throw new ManagementException("Ya existe un plan de estudios con el codigo: " + nuevo.getCodigo());
+            } else {
+                throw new ManagementException(e.getMessage());
+            }
+        }
     }
     
-    public static boolean agregar(PlanEstudios planEstudios) {
-        planesEstudios.put(planEstudios.getCodigo(), planEstudios);
+    public static void modificar(String codigo, PlanEstudios modificado) {
+        // TODO
+    }
+    
+    public static ArrayList<String> getCodCorrelativas(String codMateria, String codPlanEstudios) throws ManagementException {
+        buscar(codPlanEstudios);
         
-        return planEstudiosDAOImp.create(planEstudios);
+        return planEstudios.getMaterias().get(codMateria).getCorrelativas();
+    }
+    
+    public static Materia buscarMateria(String codMateria, String codPlanEstudios) throws ManagementException {
+        buscar(codPlanEstudios);
+        
+        return planEstudios.getMaterias().get(codMateria);
+    }
+    
+    public static int getCantidadDependientes(String codMateria, String codPlanEstudios) throws ManagementException {
+        buscar(codPlanEstudios);
+        
+        int cantidad = 0;
+        for(Materia materia : planEstudios.getMaterias().values()) {
+            if (materia.getCorrelativas().contains(codMateria)) {
+                cantidad++;
+            }
+        }
+        
+        return cantidad;
     }
 }

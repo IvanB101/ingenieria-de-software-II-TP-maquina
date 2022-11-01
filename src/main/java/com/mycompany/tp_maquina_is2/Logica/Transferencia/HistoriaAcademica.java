@@ -14,21 +14,17 @@ import java.util.HashMap;
 public class HistoriaAcademica {
 
     private int nroRegEstudiante;
-    private HashMap<String, Estado> estados;
-    private ArrayList<Integer> codExamenes;
     private String codPlanDeEstudios;
-    private ArrayList<Integer> codMateriasExamenes;
-    private ArrayList<Integer> codMateriasEstados;
+    private HashMap<String, Estado> estados;
+    private ArrayList<String> codExamenes;
+    private ArrayList<String> codMateriasExamenes;
 
-    public HistoriaAcademica(int nroRegEstudiante, HashMap<String, Estado> estados,
-            ArrayList<Integer> codExamenes, String codPlanDeEstudios, ArrayList<Integer> codMateriasExamenes,
-            ArrayList<Integer> codMateriasEstados) {
+    public HistoriaAcademica(int nroRegEstudiante, String codPlanDeEstudios, HashMap<String, Estado> estados, ArrayList<String> codExamenes, ArrayList<String> codMateriasExamenes) {
         this.nroRegEstudiante = nroRegEstudiante;
+        this.codPlanDeEstudios = codPlanDeEstudios;
         this.estados = estados;
         this.codExamenes = codExamenes;
-        this.codPlanDeEstudios = codPlanDeEstudios;
         this.codMateriasExamenes = codMateriasExamenes;
-        this.codMateriasEstados = codMateriasEstados;
     }
 
     public HistoriaAcademica(int nroRegEstudiante, String codPlanDeEstudios) {
@@ -48,14 +44,6 @@ public class HistoriaAcademica {
         this.nroRegEstudiante = codEstudiante;
     }
 
-    public ArrayList<Integer> getCodExamenes() {
-        return codExamenes;
-    }
-
-    public void setCodExamenes(ArrayList<Integer> codExamenes) {
-        this.codExamenes = codExamenes;
-    }
-
     public String getCodPlanDeEstudios() {
         return codPlanDeEstudios;
     }
@@ -72,20 +60,20 @@ public class HistoriaAcademica {
         this.estados = estados;
     }
 
-    public ArrayList<Integer> getCodMateriasExamenes() {
+    public ArrayList<String> getCodExamenes() {
+        return codExamenes;
+    }
+
+    public void setCodExamenes(ArrayList<String> codExamenes) {
+        this.codExamenes = codExamenes;
+    }
+
+    public ArrayList<String> getCodMateriasExamenes() {
         return codMateriasExamenes;
     }
 
-    public void setCodMateriasExamenes(ArrayList<Integer> codMateriasExamenes) {
+    public void setCodMateriasExamenes(ArrayList<String> codMateriasExamenes) {
         this.codMateriasExamenes = codMateriasExamenes;
-    }
-
-    public ArrayList<Integer> getCodMateriasEstados() {
-        return codMateriasEstados;
-    }
-
-    public void setCodMateriasEstados(ArrayList<Integer> codMateriasEstados) {
-        this.codMateriasEstados = codMateriasEstados;
     }
 
     @Override

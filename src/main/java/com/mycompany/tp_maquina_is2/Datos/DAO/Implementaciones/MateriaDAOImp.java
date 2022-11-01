@@ -153,7 +153,7 @@ public class MateriaDAOImp implements MateriaDAOInter {
                     codDependiente = rs.getString("Materia_codigo");
             
             materias.get(codDependiente).getCorrelativas().add(codCorrelativa);
-            materias.get(codCorrelativa).getCorrelativas().add(codDependiente);
+            materias.get(codCorrelativa).getDependientes().add(codDependiente);
         }
 
         return materias;

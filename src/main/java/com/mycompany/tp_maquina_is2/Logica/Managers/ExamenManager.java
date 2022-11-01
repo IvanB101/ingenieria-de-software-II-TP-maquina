@@ -6,9 +6,11 @@ package com.mycompany.tp_maquina_is2.Logica.Managers;
 
 import com.mycompany.tp_maquina_is2.Datos.Conexion;
 import com.mycompany.tp_maquina_is2.Datos.DAO.Implementaciones.ExamenDAOImp;
-import java.util.HashMap;
+import com.mycompany.tp_maquina_is2.Datos.DAO.Implementaciones.ExperienciaDAOImp;
+import com.mycompany.tp_maquina_is2.Logica.Excepciones.ManagementException;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.Examen;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.Experiencia;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,45 +20,46 @@ import java.util.List;
  */
 public abstract class ExamenManager {
 
-    private static HashMap<String, Examen> examenes;
     private static ExamenDAOImp examenDAOImp;
+    private static ExperienciaDAOImp experienciaDAOImp;
 
     public static void init(Conexion conexion) {
         examenDAOImp = new ExamenDAOImp(conexion);
-        
-        examenes = examenDAOImp.read();
+
+        experienciaDAOImp = new ExperienciaDAOImp(conexion);
     }
 
-    public static ArrayList<Examen> examenesEstudiante(int nroRegistro) {
-        ArrayList<Examen> aux = new ArrayList<>();
-        
-        for (Examen examen : examenes.values()) {
-            if (examen.getNroRegitroEstudiante() == nroRegistro) {
-                aux.add(examen);
-            }
+    public static ArrayList<Examen> examenesEstudiante(int nroRegistro) throws ManagementException {
+        try {
+            return examenDAOImp.getExamenesEstudiante(nroRegistro);
+        } catch (SQLException e) {
+            throw new ManagementException(e.getMessage());
         }
-        
-        return aux;
     }
 
-    public static boolean agregar(List<Examen> examenes) {
+    public static void cargar(List<Examen> examenes) throws ManagementException {
         for (Examen examen : examenes) {
-            if(!examenDAOImp.create(examen)) {
-                return false;
+            try {
+                examenDAOImp.create(examen);
+            } catch (SQLException e) {
+                if(e.getMessage().contains("llave duplicada")) {
+                    try {
+                        examenDAOImp.update(examen.getCodigo(), examen);
+                    } catch (SQLException e2) {
+                        throw new ManagementException(e2.getMessage());
+                    }
+                } else {
+                    throw new ManagementException(e.getMessage());
+                }
             }
         }
-
-        return true;
     }
 
-    public static boolean agregar(Examen examen) {
-        return examenDAOImp.create(examen);
-    }
-    
-    public static boolean agregarExperiencia(Experiencia experiencia) {
-        Examen examen = examenes.get(experiencia.getCodExamen());
-        examen.setExperiencia(experiencia);
-        
-        return examenDAOImp.update(examen.getCodigo(), examen);
+    public static void agregarExperiencia(Experiencia experiencia) throws ManagementException {
+        try {
+            experienciaDAOImp.create(experiencia);
+        } catch (Exception e) {
+            throw new ManagementException(e.getMessage());
+        }
     }
 }
