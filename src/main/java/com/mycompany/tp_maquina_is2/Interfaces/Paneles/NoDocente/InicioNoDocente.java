@@ -4,7 +4,9 @@
  */
 package com.mycompany.tp_maquina_is2.Interfaces.Paneles.NoDocente;
 
+import com.mycompany.tp_maquina_is2.Interfaces.Paneles.NoDocente.ABMPlanDeEstudios.ABMPlanEstudios;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
@@ -18,6 +20,14 @@ public class InicioNoDocente extends javax.swing.JPanel {
     public InicioNoDocente() {
         initComponents();
     }
+    
+    private void changePane(JPanel jPanel) {
+        contenedor.setLayout(new java.awt.CardLayout());
+        contenedor.removeAll();
+        contenedor.add(jPanel);
+        contenedor.revalidate();
+        contenedor.repaint();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -28,30 +38,30 @@ public class InicioNoDocente extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Cambiable = new javax.swing.JPanel();
+        contenedor = new javax.swing.JPanel();
         PrincipalL = new javax.swing.JLabel();
         PrincipalL1 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         MenuTop = new javax.swing.JPanel();
-        insertButtonP = new javax.swing.JPanel();
-        insertButtonL = new javax.swing.JLabel();
-        tablesButtonP = new javax.swing.JPanel();
-        tablesButtonL = new javax.swing.JLabel();
+        planEstudiosBP = new javax.swing.JPanel();
+        planEstudiosBL = new javax.swing.JLabel();
+        estadisticasBP = new javax.swing.JPanel();
+        estadisticasBL = new javax.swing.JLabel();
 
-        Cambiable.setBackground(new java.awt.Color(255, 255, 255));
-        Cambiable.setPreferredSize(new java.awt.Dimension(950, 500));
-        Cambiable.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        contenedor.setBackground(new java.awt.Color(255, 255, 255));
+        contenedor.setPreferredSize(new java.awt.Dimension(950, 500));
+        contenedor.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         PrincipalL.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
         PrincipalL.setText("Bienvenido al sistema de asistencia universitaria");
-        Cambiable.add(PrincipalL, new org.netbeans.lib.awtextra.AbsoluteConstraints(265, 60, -1, 37));
+        contenedor.add(PrincipalL, new org.netbeans.lib.awtextra.AbsoluteConstraints(265, 60, -1, 37));
 
         PrincipalL1.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
         PrincipalL1.setText("Seleccione la operacion que desee realizar");
-        Cambiable.add(PrincipalL1, new org.netbeans.lib.awtextra.AbsoluteConstraints(265, 103, 419, 45));
+        contenedor.add(PrincipalL1, new org.netbeans.lib.awtextra.AbsoluteConstraints(265, 103, 419, 45));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/tp_maquina_is2/Interfaces/logo_imagen.png"))); // NOI18N
-        Cambiable.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(209, 154, 475, 291));
+        contenedor.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(209, 154, 475, 291));
 
         MenuTop.setBackground(new java.awt.Color(118, 35, 47));
         MenuTop.setToolTipText("");
@@ -67,83 +77,83 @@ public class InicioNoDocente extends javax.swing.JPanel {
         });
         MenuTop.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        insertButtonP.setBackground(new java.awt.Color(118, 35, 47));
-        insertButtonP.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        insertButtonP.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        insertButtonP.addMouseListener(new java.awt.event.MouseAdapter() {
+        planEstudiosBP.setBackground(new java.awt.Color(118, 35, 47));
+        planEstudiosBP.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        planEstudiosBP.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        planEstudiosBP.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                insertButtonPMouseClicked(evt);
+                planEstudiosBPMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                insertButtonPMouseEntered(evt);
+                planEstudiosBPMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                insertButtonPMouseExited(evt);
+                planEstudiosBPMouseExited(evt);
             }
         });
 
-        insertButtonL.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        insertButtonL.setForeground(new java.awt.Color(255, 255, 255));
-        insertButtonL.setText("Planes de Estudios");
-        insertButtonL.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        planEstudiosBL.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        planEstudiosBL.setForeground(new java.awt.Color(255, 255, 255));
+        planEstudiosBL.setText("Planes de Estudios");
+        planEstudiosBL.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        javax.swing.GroupLayout insertButtonPLayout = new javax.swing.GroupLayout(insertButtonP);
-        insertButtonP.setLayout(insertButtonPLayout);
-        insertButtonPLayout.setHorizontalGroup(
-            insertButtonPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(insertButtonPLayout.createSequentialGroup()
+        javax.swing.GroupLayout planEstudiosBPLayout = new javax.swing.GroupLayout(planEstudiosBP);
+        planEstudiosBP.setLayout(planEstudiosBPLayout);
+        planEstudiosBPLayout.setHorizontalGroup(
+            planEstudiosBPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(planEstudiosBPLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(insertButtonL)
+                .addComponent(planEstudiosBL)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        insertButtonPLayout.setVerticalGroup(
-            insertButtonPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(insertButtonPLayout.createSequentialGroup()
+        planEstudiosBPLayout.setVerticalGroup(
+            planEstudiosBPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(planEstudiosBPLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(insertButtonL)
+                .addComponent(planEstudiosBL)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        MenuTop.add(insertButtonP, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, 170, -1));
+        MenuTop.add(planEstudiosBP, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, 170, -1));
 
-        tablesButtonP.setBackground(new java.awt.Color(118, 35, 47));
-        tablesButtonP.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        tablesButtonP.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        tablesButtonP.addMouseListener(new java.awt.event.MouseAdapter() {
+        estadisticasBP.setBackground(new java.awt.Color(118, 35, 47));
+        estadisticasBP.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        estadisticasBP.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        estadisticasBP.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tablesButtonPMouseClicked(evt);
+                estadisticasBPMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                tablesButtonPMouseEntered(evt);
+                estadisticasBPMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                tablesButtonPMouseExited(evt);
+                estadisticasBPMouseExited(evt);
             }
         });
 
-        tablesButtonL.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        tablesButtonL.setForeground(new java.awt.Color(255, 255, 255));
-        tablesButtonL.setText("Estadisticas");
-        tablesButtonL.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        estadisticasBL.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        estadisticasBL.setForeground(new java.awt.Color(255, 255, 255));
+        estadisticasBL.setText("Estadisticas");
+        estadisticasBL.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        javax.swing.GroupLayout tablesButtonPLayout = new javax.swing.GroupLayout(tablesButtonP);
-        tablesButtonP.setLayout(tablesButtonPLayout);
-        tablesButtonPLayout.setHorizontalGroup(
-            tablesButtonPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tablesButtonPLayout.createSequentialGroup()
+        javax.swing.GroupLayout estadisticasBPLayout = new javax.swing.GroupLayout(estadisticasBP);
+        estadisticasBP.setLayout(estadisticasBPLayout);
+        estadisticasBPLayout.setHorizontalGroup(
+            estadisticasBPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(estadisticasBPLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(tablesButtonL)
+                .addComponent(estadisticasBL)
                 .addContainerGap(18, Short.MAX_VALUE))
         );
-        tablesButtonPLayout.setVerticalGroup(
-            tablesButtonPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tablesButtonPLayout.createSequentialGroup()
+        estadisticasBPLayout.setVerticalGroup(
+            estadisticasBPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(estadisticasBPLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(tablesButtonL)
+                .addComponent(estadisticasBL)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        MenuTop.add(tablesButtonP, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 10, 120, -1));
+        MenuTop.add(estadisticasBP, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 10, 120, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -155,7 +165,7 @@ public class InicioNoDocente extends javax.swing.JPanel {
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(MenuTop, javax.swing.GroupLayout.PREFERRED_SIZE, 920, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(Cambiable, javax.swing.GroupLayout.PREFERRED_SIZE, 920, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(contenedor, javax.swing.GroupLayout.PREFERRED_SIZE, 920, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
@@ -166,34 +176,34 @@ public class InicioNoDocente extends javax.swing.JPanel {
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(MenuTop, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(2, 2, 2)
-                    .addComponent(Cambiable, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(contenedor, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void insertButtonPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_insertButtonPMouseClicked
+    private void planEstudiosBPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_planEstudiosBPMouseClicked
+        changePane(new ABMPlanEstudios());
+    }//GEN-LAST:event_planEstudiosBPMouseClicked
+
+    private void planEstudiosBPMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_planEstudiosBPMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_planEstudiosBPMouseEntered
+
+    private void planEstudiosBPMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_planEstudiosBPMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_planEstudiosBPMouseExited
+
+    private void estadisticasBPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_estadisticasBPMouseClicked
         JOptionPane.showMessageDialog(null, "En construccion");
-    }//GEN-LAST:event_insertButtonPMouseClicked
+    }//GEN-LAST:event_estadisticasBPMouseClicked
 
-    private void insertButtonPMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_insertButtonPMouseEntered
+    private void estadisticasBPMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_estadisticasBPMouseEntered
         // TODO add your handling code here:
-    }//GEN-LAST:event_insertButtonPMouseEntered
+    }//GEN-LAST:event_estadisticasBPMouseEntered
 
-    private void insertButtonPMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_insertButtonPMouseExited
+    private void estadisticasBPMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_estadisticasBPMouseExited
         // TODO add your handling code here:
-    }//GEN-LAST:event_insertButtonPMouseExited
-
-    private void tablesButtonPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablesButtonPMouseClicked
-        JOptionPane.showMessageDialog(null, "En construccion");
-    }//GEN-LAST:event_tablesButtonPMouseClicked
-
-    private void tablesButtonPMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablesButtonPMouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tablesButtonPMouseEntered
-
-    private void tablesButtonPMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablesButtonPMouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tablesButtonPMouseExited
+    }//GEN-LAST:event_estadisticasBPMouseExited
 
     private void MenuTopMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuTopMouseDragged
 
@@ -205,14 +215,14 @@ public class InicioNoDocente extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel Cambiable;
     private javax.swing.JPanel MenuTop;
     private javax.swing.JLabel PrincipalL;
     private javax.swing.JLabel PrincipalL1;
-    private javax.swing.JLabel insertButtonL;
-    private javax.swing.JPanel insertButtonP;
+    private javax.swing.JPanel contenedor;
+    private javax.swing.JLabel estadisticasBL;
+    private javax.swing.JPanel estadisticasBP;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel tablesButtonL;
-    private javax.swing.JPanel tablesButtonP;
+    private javax.swing.JLabel planEstudiosBL;
+    private javax.swing.JPanel planEstudiosBP;
     // End of variables declaration//GEN-END:variables
 }
