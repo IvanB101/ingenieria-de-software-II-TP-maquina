@@ -9,6 +9,7 @@ import com.mycompany.tp_maquina_is2.Logica.Managers.HistoriaAcademicaManager;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.Materia;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,6 +18,7 @@ import java.util.HashMap;
 import java.util.Set;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 /**
  *
@@ -39,8 +41,8 @@ public class ListaPanel extends javax.swing.JPanel {
         TablaMaterias.getTableHeader().setBackground(new Color(0, 153, 153));
         jScrollPane1.getViewport().setBackground(new Color(255, 255, 255)); //tabla color blanco
         TablaMaterias.getTableHeader().setReorderingAllowed(false);
-
-        //listaFinales();
+        ActionEvent evt = null;
+        ComboBoxCriterioActionPerformed(evt);
     }
 
     /* public void listaFinales() {
@@ -158,13 +160,16 @@ public class ListaPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ComboBoxCriterioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBoxCriterioActionPerformed
-        String criterio = ComboBoxCriterio.getSelectedItem().toString();
         DefaultTableModel modelo = (DefaultTableModel) TablaMaterias.getModel();
+        JTableHeader header=TablaMaterias.getTableHeader();
+        modelo.setRowCount(0);
+        String criterio = ComboBoxCriterio.getSelectedItem().toString();
         try {
             HashMap<Materia, Object> materias = HistoriaAcademicaManager.listaExamenes(nroRegistro, codPlanEstudios, criterio);
             Set<Materia> keys2 = materias.keySet();
             ArrayList<Materia> keys = new ArrayList<>();
             if (criterio.equals("Correlativas")) {
+                header.getColumnModel().getColumn(2).setHeaderValue("Correlativas");
                 for (Materia materia : keys2) {
                     keys.add(materia);
                 }
@@ -178,6 +183,7 @@ public class ListaPanel extends javax.swing.JPanel {
 
             }//fin if correlativas
             if (criterio.equals("Dificultad")) {
+                header.getColumnModel().getColumn(2).setHeaderValue("Dificultad Promedio");
                 for (Materia materia : keys2) {
                     keys.add(materia);
                 }
