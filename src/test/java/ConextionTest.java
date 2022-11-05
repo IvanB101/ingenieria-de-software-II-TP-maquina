@@ -33,7 +33,7 @@ public class ConextionTest {
 
             EstudianteManager.agregar(new Estudiante(3010820, "Gino", "Paoletti", 44075067));
         } catch (IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
     }
 }

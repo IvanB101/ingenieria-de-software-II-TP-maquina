@@ -10,6 +10,7 @@ import com.mycompany.tp_maquina_is2.Datos.DAO.Implementaciones.HistoriaAcademica
 import com.mycompany.tp_maquina_is2.Logica.Excepciones.ManagementException;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.Estado;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.Estado.Condicion;
+import com.mycompany.tp_maquina_is2.Logica.Transferencia.Experiencia;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.HistoriaAcademica;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.Materia;
 import java.sql.SQLException;
@@ -98,24 +99,33 @@ public abstract class HistoriaAcademicaManager {
         }
     }
 
-    //CONTAR DE QUE MATERIAS ES CORRELATIVA
-    public static HashMap<Materia, Integer> listaExamenes(int nroRegistro, String codPlanEstudios) throws ManagementException {
+    
+    public static HashMap<Materia, Object> listaExamenes(int nroRegistro, String codPlanEstudios, String criterio) throws ManagementException {
+        double dificultadPromedio;
         HistoriaAcademica historia = buscar(nroRegistro, codPlanEstudios);
-
-        HashMap<Materia, Integer> ranking = new HashMap<>();
+        HashMap<Materia, Object> ranking = new HashMap<>();
         ArrayList<String> codCorrelativas = new ArrayList();
-
         for (Estado estado : historia.getEstados().values()) {
-
             String codMateria = estado.getCodMateria();
-
             if (estado.getCondicion().equals(Condicion.regular)) {
                 //correlativas de una materia regular
                 codCorrelativas = PlanEstudiosManager.getCodCorrelativas(codMateria, codPlanEstudios);
                 if (cumpleRequisitos(codCorrelativas, historia)) {
-                    //busco en cuantas materias es correlativa
-                    ranking.put(PlanEstudiosManager.buscarMateria(codMateria, codPlanEstudios),
+                    if(criterio.equals("Correlativas")){
+                        //busco en cuantas materias es correlativa
+                        ranking.put(PlanEstudiosManager.buscarMateria(codMateria, codPlanEstudios),
                             PlanEstudiosManager.getCantidadDependientes(codMateria, codPlanEstudios));
+                    }
+                    if(criterio.equals("Dificultad")){
+                        //saco la dificultad promedio de una materia, entrada: todas las exp de una materia
+                        if((ExamenManager.getExperiencias(codMateria).size())==0){ //si la materia no tiene experiencias
+                            ranking.put(PlanEstudiosManager.buscarMateria(codMateria, codPlanEstudios),0.0); //0.0 PQ ES DOUBLE!!!!!!
+                        }else{
+                        dificultadPromedio=promedioDificultad(ExamenManager.getExperiencias(codMateria));
+                        ranking.put(PlanEstudiosManager.buscarMateria(codMateria, codPlanEstudios),dificultadPromedio);
+                        }
+                    }  
+                    
                 }
             }
         }
@@ -123,6 +133,7 @@ public abstract class HistoriaAcademicaManager {
         return ranking;
     }
 
+  
     public static boolean cumpleRequisitos(ArrayList<String> codCorrelativas, HistoriaAcademica historia) {
         for (String correlativa : codCorrelativas) {
             if (!historia.getEstados().get(correlativa).getCondicion().equals(Condicion.aprobado)) {
@@ -131,6 +142,16 @@ public abstract class HistoriaAcademicaManager {
         }
 
         return true;
+    }
+    
+    public static double promedioDificultad(ArrayList<Experiencia> experiencias){
+        int cant=0;
+        for (Experiencia exp : experiencias){
+            cant+=exp.getDificultad();
+        }
+       
+        return cant/experiencias.size();
+    
     }
 
     public static HistoriaAcademica buscar(int nroRegistro, String codPlanEstudios) throws ManagementException {

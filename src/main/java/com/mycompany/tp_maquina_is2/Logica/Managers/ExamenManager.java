@@ -62,4 +62,14 @@ public abstract class ExamenManager {
             throw new ManagementException(e.getMessage());
         }
     }
+    
+    
+    public static ArrayList<Experiencia> getExperiencias(String codMateria) throws ManagementException{
+       try {
+            return experienciaDAOImp.getExperienciasDAO(codMateria);
+        } catch (Exception e) {
+            throw new ManagementException(e.getMessage());
+        }
+    
+    }
 }

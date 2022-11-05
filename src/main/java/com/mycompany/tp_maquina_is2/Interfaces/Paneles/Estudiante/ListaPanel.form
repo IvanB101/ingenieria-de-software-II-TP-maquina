@@ -61,7 +61,7 @@
                   <Table columnCount="3" rowCount="0">
                     <Column editable="false" title="CODIGO" type="java.lang.Integer"/>
                     <Column editable="false" title="NOMBRE" type="java.lang.String"/>
-                    <Column editable="false" title="CORRELATIVAS" type="java.lang.Integer"/>
+                    <Column editable="false" title="CORRELATIVAS" type="java.lang.Object"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -84,7 +84,7 @@
                   </TableColumnModel>
                 </Property>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                  <Color id="Cursor Por defecto"/>
+                  <Color id="Default Cursor"/>
                 </Property>
                 <Property name="focusable" type="boolean" value="false"/>
                 <Property name="rowHeight" type="int" value="25"/>
@@ -104,22 +104,23 @@
               <Font name="Segoe UI" size="14" style="0"/>
             </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="6">
+              <StringArray count="4">
                 <StringItem index="0" value="Correlativas"/>
                 <StringItem index="1" value="Tiempo"/>
-                <StringItem index="2" value="Proximidad a cursar"/>
-                <StringItem index="3" value="Profundidad a cursar"/>
-                <StringItem index="4" value="Vencimiento de regularidad"/>
-                <StringItem index="5" value="Dificultad"/>
+                <StringItem index="2" value="Vencimiento de regularidad"/>
+                <StringItem index="3" value="Dificultad"/>
               </StringArray>
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Cursor Por defecto"/>
+              <Color id="Default Cursor"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ComboBoxCriterioActionPerformed"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>

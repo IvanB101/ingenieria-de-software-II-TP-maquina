@@ -58,7 +58,6 @@ public class InicioEstudiante extends javax.swing.JPanel {
         Cambiable = new javax.swing.JPanel();
         PrincipalL = new javax.swing.JLabel();
         PrincipalL1 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
         MenuTop = new javax.swing.JPanel();
         insertButtonP = new javax.swing.JPanel();
         insertButtonL = new javax.swing.JLabel();
@@ -82,9 +81,6 @@ public class InicioEstudiante extends javax.swing.JPanel {
         PrincipalL1.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
         PrincipalL1.setText("Seleccione la operacion que desee realizar");
         Cambiable.add(PrincipalL1, new org.netbeans.lib.awtextra.AbsoluteConstraints(265, 103, 419, 45));
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/tp_maquina_is2/Interfaces/logo_imagen.png"))); // NOI18N
-        Cambiable.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(209, 154, 475, 291));
 
         add(Cambiable, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 62, 920, 560));
 
@@ -348,7 +344,6 @@ public class InicioEstudiante extends javax.swing.JPanel {
     private javax.swing.JPanel deleteButtonP;
     private javax.swing.JLabel insertButtonL;
     private javax.swing.JPanel insertButtonP;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel queryButtonL;
     private javax.swing.JLabel tablesButtonL;
     private javax.swing.JPanel tablesButtonP;
