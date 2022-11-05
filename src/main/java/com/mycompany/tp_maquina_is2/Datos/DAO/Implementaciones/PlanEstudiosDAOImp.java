@@ -11,6 +11,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.LinkedList;
 
 /**
  *
@@ -73,6 +75,22 @@ public class PlanEstudiosDAOImp implements PlanEstudiosDAOInter {
         PreparedStatement ps = con.prepareStatement("DELETE FROM PlanEstudios WHERE codigo=?");
         ps.setString(1, codigo);
         ps.executeUpdate();
+    }
+    
+    public LinkedList<PlanEstudios> read() throws SQLException {
+        LinkedList<PlanEstudios> planes = new LinkedList<>();
+        
+        Connection con = conexion.getConnection();
+
+        PreparedStatement ps = con.prepareStatement("SELECT * FROM PlanEstudios");
+        
+        ResultSet rs = ps.executeQuery();
+        
+        while(rs.next()) {
+            planes.add(new PlanEstudios(rs.getString("codigo"), rs.getString("propuesta")));
+        }
+        
+        return planes;
     }
 
 }

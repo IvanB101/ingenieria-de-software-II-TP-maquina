@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package com.mycompany.tp_maquina_is2.Interfaces.Paneles;
+package com.mycompany.tp_maquina_is2.Interfaces.Paneles.Estudiante;
 
 import com.mycompany.tp_maquina_is2.Logica.Excepciones.ManagementException;
 import com.mycompany.tp_maquina_is2.Logica.Managers.HistoriaAcademicaManager;
@@ -110,7 +110,7 @@ public class ListaPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        TablaMaterias.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        TablaMaterias.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         TablaMaterias.setFocusable(false);
         TablaMaterias.setRowHeight(25);
         TablaMaterias.setSelectionBackground(new java.awt.Color(118, 35, 47));
@@ -126,7 +126,7 @@ public class ListaPanel extends javax.swing.JPanel {
         ComboBoxCriterio.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         ComboBoxCriterio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Correlativas", "Tiempo", "Proximidad a cursar", "Profundidad a cursar", "Vencimiento de regularidad", "Dificultad" }));
         ComboBoxCriterio.setBorder(null);
-        ComboBoxCriterio.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        ComboBoxCriterio.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         PanelCambiable.add(ComboBoxCriterio, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 80, 170, -1));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N

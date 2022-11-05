@@ -82,17 +82,18 @@ public abstract class HistoriaAcademicaManager {
         }
     }
 
-    public static void eliminar(int nroRegistro, String codPlanEstudios) {
+    public static void eliminar(int nroRegistro, String codPlanEstudios) throws ManagementException {
         try {
             historiaAcademicaDAOImp.read(nroRegistro, codPlanEstudios);
-
             
+            historiaAcademicaDAOImp.delete(nroRegistro, codPlanEstudios);
         } catch (SQLException e) {
-            if(e.getMessage().contains("llave duplicada")) {
-                try {
-                    historiaAcademicaDAOImp.delete(nroRegistro, codPlanEstudios);
-                } catch (SQLException e2) {
-                }
+            if(e.getMessage().equals("ResultSet not positioned properly, perhaps you need to call next.")) {
+                throw new ManagementException("No hay una historia academica con codigo: "
+                        + nroRegistro + "-" + codPlanEstudios);
+            } else {
+                System.out.println(e);
+                throw new ManagementException("Ha ocurrido un error");
             }
         }
     }

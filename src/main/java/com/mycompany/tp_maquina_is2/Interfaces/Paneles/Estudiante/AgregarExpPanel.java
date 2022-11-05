@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package com.mycompany.tp_maquina_is2.Interfaces.Paneles;
+package com.mycompany.tp_maquina_is2.Interfaces.Paneles.Estudiante;
 
 import com.mycompany.tp_maquina_is2.Logica.Excepciones.ManagementException;
 import com.mycompany.tp_maquina_is2.Logica.Managers.ExamenManager;
@@ -92,7 +92,7 @@ public class AgregarExpPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        TablaExamenes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        TablaExamenes.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         TablaExamenes.setFocusable(false);
         TablaExamenes.setRowHeight(25);
         TablaExamenes.setSelectionBackground(new java.awt.Color(118, 35, 47));
@@ -139,7 +139,7 @@ public class AgregarExpPanel extends javax.swing.JPanel {
 
         SliderDif.setMaximum(10);
         SliderDif.setValue(5);
-        SliderDif.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        SliderDif.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         SliderDif.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 SliderDifStateChanged(evt);
@@ -148,7 +148,7 @@ public class AgregarExpPanel extends javax.swing.JPanel {
 
         SliderDedi.setMaximum(10);
         SliderDedi.setValue(5);
-        SliderDedi.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        SliderDedi.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         SliderDedi.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 SliderDediStateChanged(evt);
@@ -167,7 +167,7 @@ public class AgregarExpPanel extends javax.swing.JPanel {
         ConfirmarDatosExp.setBackground(new java.awt.Color(102, 255, 102));
         ConfirmarDatosExp.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         ConfirmarDatosExp.setText("Confirmar Experiencia");
-        ConfirmarDatosExp.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        ConfirmarDatosExp.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         ConfirmarDatosExp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ConfirmarDatosExpActionPerformed(evt);
