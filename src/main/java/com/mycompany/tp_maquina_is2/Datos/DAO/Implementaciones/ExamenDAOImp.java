@@ -111,13 +111,15 @@ public class ExamenDAOImp implements ExamenDAOInter {
         ps.executeUpdate();
     }
     
-    public ArrayList<Examen> getExamenesEstudiante(int nroRegistro) throws SQLException {
+    public ArrayList<Examen> getExamenesEstudianteSinExp(int nroRegistro) throws SQLException {
         ArrayList<Examen> examenes = new ArrayList<>();
         
         Connection con = conexion.getConnection();
 
-        PreparedStatement ps = con.prepareStatement("SELECT * FROM Examen "
-                + "WHERE HistoriaAcademica_Estudiante_nroRegistro=? ");
+        PreparedStatement ps = con.prepareStatement("select fecha,nota,materia_codigo,planestudios_codigo from examen,experiencia " +
+"EXCEPT " + "select fecha,nota,materia_codigo,planestudios_codigo from examen,experiencia where examen_materia_codigo=materia_codigo "
+                + "and examen_historiaacademica_estudiante_nroregistro=historiaacademica_estudiante_nroregistro "
+                + "and examen_planestudios_codigo=planestudios_codigo and fecha=examen_fecha ");
         ps.setInt(1, nroRegistro);
         
         ResultSet rs = ps.executeQuery();

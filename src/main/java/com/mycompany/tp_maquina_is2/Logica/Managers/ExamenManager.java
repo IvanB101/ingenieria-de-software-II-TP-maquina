@@ -29,9 +29,9 @@ public abstract class ExamenManager {
         experienciaDAOImp = new ExperienciaDAOImp(conexion);
     }
 
-    public static ArrayList<Examen> examenesEstudiante(int nroRegistro) throws ManagementException {
+    public static ArrayList<Examen> examenesEstudianteSinExp(int nroRegistro) throws ManagementException {
         try {
-            return examenDAOImp.getExamenesEstudiante(nroRegistro);
+            return examenDAOImp.getExamenesEstudianteSinExp(nroRegistro);
         } catch (SQLException e) {
             throw new ManagementException(e.getMessage());
         }
@@ -58,6 +58,20 @@ public abstract class ExamenManager {
     public static void agregarExperiencia(Experiencia experiencia) throws ManagementException {
         try {
             experienciaDAOImp.create(experiencia);
+        } catch (Exception e) {
+            throw new ManagementException(e.getMessage());
+        }
+    }
+    public static void ModificarExperiencia(String codigo,Experiencia experiencia) throws ManagementException {
+        try {
+            experienciaDAOImp.update(codigo, experiencia);
+        } catch (Exception e) {
+            throw new ManagementException(e.getMessage());
+        }
+    }
+     public static void EliminarExperiencia(String codigo) throws ManagementException {
+        try {
+            experienciaDAOImp.delete(codigo);
         } catch (Exception e) {
             throw new ManagementException(e.getMessage());
         }
