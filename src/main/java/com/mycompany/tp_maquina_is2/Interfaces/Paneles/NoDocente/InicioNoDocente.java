@@ -59,8 +59,6 @@ public class InicioNoDocente extends javax.swing.JPanel {
         PrincipalL1.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
         PrincipalL1.setText("Seleccione la operacion que desee realizar");
         contenedor.add(PrincipalL1, new org.netbeans.lib.awtextra.AbsoluteConstraints(265, 103, 419, 45));
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/tp_maquina_is2/Interfaces/logo_imagen.png"))); // NOI18N
         contenedor.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(209, 154, 475, 291));
 
         MenuTop.setBackground(new java.awt.Color(118, 35, 47));
