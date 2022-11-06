@@ -41,7 +41,6 @@ public class InicioNoDocente extends javax.swing.JPanel {
         contenedor = new javax.swing.JPanel();
         PrincipalL = new javax.swing.JLabel();
         PrincipalL1 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
         MenuTop = new javax.swing.JPanel();
         planEstudiosBP = new javax.swing.JPanel();
         planEstudiosBL = new javax.swing.JLabel();
@@ -59,7 +58,6 @@ public class InicioNoDocente extends javax.swing.JPanel {
         PrincipalL1.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
         PrincipalL1.setText("Seleccione la operacion que desee realizar");
         contenedor.add(PrincipalL1, new org.netbeans.lib.awtextra.AbsoluteConstraints(265, 103, 419, 45));
-        contenedor.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(209, 154, 475, 291));
 
         MenuTop.setBackground(new java.awt.Color(118, 35, 47));
         MenuTop.setToolTipText("");
@@ -219,7 +217,6 @@ public class InicioNoDocente extends javax.swing.JPanel {
     private javax.swing.JPanel contenedor;
     private javax.swing.JLabel estadisticasBL;
     private javax.swing.JPanel estadisticasBP;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel planEstudiosBL;
     private javax.swing.JPanel planEstudiosBP;
     // End of variables declaration//GEN-END:variables
