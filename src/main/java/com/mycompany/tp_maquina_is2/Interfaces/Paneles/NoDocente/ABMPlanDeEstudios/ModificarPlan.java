@@ -21,8 +21,17 @@ import javax.swing.table.DefaultTableModel;
 public class ModificarPlan extends javax.swing.JPanel {
 
     private String codPlanEstudios;
+    private String codigoMateria;
     private Color activo;
     private Color inactivo;
+    private int operacion;
+    private Materia materia;
+
+    private static final String LABELM = "Seleccione la materia que desea ";
+
+    private static final int MODIFICAR = 1;
+    private static final int CREAR = 0;
+    private static final int ELIMINAR = 2;
 
     /**
      * Creates new form ModificarPlan
@@ -31,9 +40,10 @@ public class ModificarPlan extends javax.swing.JPanel {
         initComponents();
 
         this.codPlanEstudios = codPlanEstudios;
-        
+
         this.activo = new Color(51, 51, 51);
         this.inactivo = new Color(165, 165, 165);
+        this.operacion = MODIFICAR;
 
         codigoTF.setText(codPlanEstudios);
         try {
@@ -43,6 +53,11 @@ public class ModificarPlan extends javax.swing.JPanel {
 
         sepCodigo.setVisible(false);
         sepPropuesta.setVisible(false);
+        sepCodigoMateria.setVisible(false);
+        sepNombre.setVisible(false);
+        sepCorrelativa.setVisible(false);
+
+        materiaP.setVisible(false);
 
         llenarTablaMaterias();
     }
@@ -66,11 +81,16 @@ public class ModificarPlan extends javax.swing.JPanel {
         codigoMateriaTF = new javax.swing.JTextField();
         PrincipalL5 = new javax.swing.JLabel();
         modificarMateriaBP = new javax.swing.JPanel();
-        modificarMateriaBL = new javax.swing.JLabel();
+        agregar = new javax.swing.JLabel();
         sepNombre = new javax.swing.JSeparator();
         sepCodigoMateria = new javax.swing.JSeparator();
         nombreTF = new javax.swing.JTextField();
-        PrincipalL1 = new javax.swing.JLabel();
+        PrincipalL8 = new javax.swing.JLabel();
+        sepCorrelativa = new javax.swing.JSeparator();
+        correlativaTF = new javax.swing.JTextField();
+        agregarCorrelativaBP = new javax.swing.JPanel();
+        agregarCorrelativaBL = new javax.swing.JLabel();
+        seleccionMateria = new javax.swing.JLabel();
         PrincipalL2 = new javax.swing.JLabel();
         propuestaTF = new javax.swing.JTextField();
         sepPropuesta = new javax.swing.JSeparator();
@@ -80,6 +100,14 @@ public class ModificarPlan extends javax.swing.JPanel {
         modificarBL = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaMaterias = new javax.swing.JTable();
+        crearMBP = new javax.swing.JPanel();
+        crearMBL = new javax.swing.JLabel();
+        modificarMBP = new javax.swing.JPanel();
+        modificarMBL = new javax.swing.JLabel();
+        eliminarMBP = new javax.swing.JPanel();
+        eliminarMBL = new javax.swing.JLabel();
+        PrincipalL7 = new javax.swing.JLabel();
+        PrincipalL9 = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -90,7 +118,7 @@ public class ModificarPlan extends javax.swing.JPanel {
         PrincipalL.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         PrincipalL.setForeground(new java.awt.Color(165, 165, 165));
         PrincipalL.setText("Propuesta:");
-        contenedor.add(PrincipalL, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, 30));
+        contenedor.add(PrincipalL, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, 30));
 
         materiaP.setBackground(new java.awt.Color(255, 255, 255));
         materiaP.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -133,12 +161,12 @@ public class ModificarPlan extends javax.swing.JPanel {
             tablaCorrelativas.getColumnModel().getColumn(1).setResizable(false);
         }
 
-        materiaP.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 300, 320, 200));
+        materiaP.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 250, 380, 200));
 
         PrincipalL3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         PrincipalL3.setForeground(new java.awt.Color(165, 165, 165));
-        PrincipalL3.setText("Seleccione una materia para eliminarla");
-        materiaP.add(PrincipalL3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 260, -1, 37));
+        PrincipalL3.setText("Seleccione una correlativa para eliminarla");
+        materiaP.add(PrincipalL3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 220, -1, 30));
 
         PrincipalL4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         PrincipalL4.setForeground(new java.awt.Color(165, 165, 165));
@@ -184,10 +212,10 @@ public class ModificarPlan extends javax.swing.JPanel {
             }
         });
 
-        modificarMateriaBL.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        modificarMateriaBL.setForeground(new java.awt.Color(255, 255, 255));
-        modificarMateriaBL.setText("Modificar");
-        modificarMateriaBL.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        agregar.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        agregar.setForeground(new java.awt.Color(255, 255, 255));
+        agregar.setText("Modificar");
+        agregar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         javax.swing.GroupLayout modificarMateriaBPLayout = new javax.swing.GroupLayout(modificarMateriaBP);
         modificarMateriaBP.setLayout(modificarMateriaBPLayout);
@@ -195,18 +223,18 @@ public class ModificarPlan extends javax.swing.JPanel {
             modificarMateriaBPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(modificarMateriaBPLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(modificarMateriaBL)
+                .addComponent(agregar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         modificarMateriaBPLayout.setVerticalGroup(
             modificarMateriaBPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(modificarMateriaBPLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(modificarMateriaBL)
+                .addComponent(agregar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        materiaP.add(modificarMateriaBP, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 130, 90, -1));
+        materiaP.add(modificarMateriaBP, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 470, 90, -1));
         materiaP.add(sepNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 100, 290, -1));
         materiaP.add(sepCodigoMateria, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, 290, -1));
 
@@ -229,17 +257,82 @@ public class ModificarPlan extends javax.swing.JPanel {
         });
         materiaP.add(nombreTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 290, 30));
 
-        contenedor.add(materiaP, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 0, 470, 560));
+        PrincipalL8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        PrincipalL8.setForeground(new java.awt.Color(165, 165, 165));
+        PrincipalL8.setText("Correlativa:");
+        materiaP.add(PrincipalL8, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, 70, 30));
+        materiaP.add(sepCorrelativa, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 200, 180, -1));
 
-        PrincipalL1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        PrincipalL1.setForeground(new java.awt.Color(165, 165, 165));
-        PrincipalL1.setText("Seleccione si desea modificar una materia");
-        contenedor.add(PrincipalL1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, -1, 37));
+        correlativaTF.setBackground(new java.awt.Color(255, 255, 255));
+        correlativaTF.setFont(new java.awt.Font("Segoe UI Symbol", 0, 14)); // NOI18N
+        correlativaTF.setForeground(new java.awt.Color(165, 165, 165));
+        correlativaTF.setText("codigo");
+        correlativaTF.setBorder(null);
+        correlativaTF.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                correlativaTFFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                correlativaTFFocusLost(evt);
+            }
+        });
+        correlativaTF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                correlativaTFActionPerformed(evt);
+            }
+        });
+        materiaP.add(correlativaTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 170, 180, 30));
+
+        agregarCorrelativaBP.setBackground(new java.awt.Color(118, 35, 47));
+        agregarCorrelativaBP.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        agregarCorrelativaBP.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        agregarCorrelativaBP.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                agregarCorrelativaBPMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                agregarCorrelativaBPMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                agregarCorrelativaBPMouseExited(evt);
+            }
+        });
+
+        agregarCorrelativaBL.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        agregarCorrelativaBL.setForeground(new java.awt.Color(255, 255, 255));
+        agregarCorrelativaBL.setText("Agregar");
+        agregarCorrelativaBL.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        javax.swing.GroupLayout agregarCorrelativaBPLayout = new javax.swing.GroupLayout(agregarCorrelativaBP);
+        agregarCorrelativaBP.setLayout(agregarCorrelativaBPLayout);
+        agregarCorrelativaBPLayout.setHorizontalGroup(
+            agregarCorrelativaBPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(agregarCorrelativaBPLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(agregarCorrelativaBL)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        agregarCorrelativaBPLayout.setVerticalGroup(
+            agregarCorrelativaBPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(agregarCorrelativaBPLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(agregarCorrelativaBL)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        materiaP.add(agregarCorrelativaBP, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 160, 90, -1));
+
+        contenedor.add(materiaP, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 0, 470, 520));
+
+        seleccionMateria.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        seleccionMateria.setForeground(new java.awt.Color(165, 165, 165));
+        seleccionMateria.setText("Seleccione si desea modificar una materia");
+        contenedor.add(seleccionMateria, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, -1, 37));
 
         PrincipalL2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         PrincipalL2.setForeground(new java.awt.Color(165, 165, 165));
         PrincipalL2.setText("Codigo:");
-        contenedor.add(PrincipalL2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, 30));
+        contenedor.add(PrincipalL2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, -1, 30));
 
         propuestaTF.setBackground(new java.awt.Color(255, 255, 255));
         propuestaTF.setFont(new java.awt.Font("Segoe UI Symbol", 0, 14)); // NOI18N
@@ -258,9 +351,9 @@ public class ModificarPlan extends javax.swing.JPanel {
                 propuestaTFActionPerformed(evt);
             }
         });
-        contenedor.add(propuestaTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 360, 30));
-        contenedor.add(sepPropuesta, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 360, -1));
-        contenedor.add(sepCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, 360, -1));
+        contenedor.add(propuestaTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 360, 30));
+        contenedor.add(sepPropuesta, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 360, -1));
+        contenedor.add(sepCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 80, 360, -1));
 
         codigoTF.setBackground(new java.awt.Color(255, 255, 255));
         codigoTF.setFont(new java.awt.Font("Segoe UI Symbol", 0, 14)); // NOI18N
@@ -279,7 +372,7 @@ public class ModificarPlan extends javax.swing.JPanel {
                 codigoTFActionPerformed(evt);
             }
         });
-        contenedor.add(codigoTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, 360, 30));
+        contenedor.add(codigoTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, 360, 30));
 
         modificarBP.setBackground(new java.awt.Color(118, 35, 47));
         modificarBP.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -318,7 +411,7 @@ public class ModificarPlan extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        contenedor.add(modificarBP, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 130, 90, -1));
+        contenedor.add(modificarBP, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 140, 90, -1));
 
         tablaMaterias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -360,13 +453,148 @@ public class ModificarPlan extends javax.swing.JPanel {
             tablaMaterias.getColumnModel().getColumn(2).setHeaderValue("Correlativas");
         }
 
-        contenedor.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 430, 270));
+        contenedor.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 430, 240));
 
-        add(contenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, 560));
+        crearMBP.setBackground(new java.awt.Color(118, 35, 47));
+        crearMBP.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        crearMBP.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        crearMBP.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                crearMBPMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                crearMBPMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                crearMBPMouseExited(evt);
+            }
+        });
+
+        crearMBL.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        crearMBL.setForeground(new java.awt.Color(255, 255, 255));
+        crearMBL.setText("Añadir");
+        crearMBL.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        javax.swing.GroupLayout crearMBPLayout = new javax.swing.GroupLayout(crearMBP);
+        crearMBP.setLayout(crearMBPLayout);
+        crearMBPLayout.setHorizontalGroup(
+            crearMBPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(crearMBPLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(crearMBL)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        crearMBPLayout.setVerticalGroup(
+            crearMBPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(crearMBPLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(crearMBL)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        contenedor.add(crearMBP, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 470, 90, -1));
+
+        modificarMBP.setBackground(new java.awt.Color(118, 35, 47));
+        modificarMBP.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        modificarMBP.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        modificarMBP.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                modificarMBPMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                modificarMBPMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                modificarMBPMouseExited(evt);
+            }
+        });
+
+        modificarMBL.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        modificarMBL.setForeground(new java.awt.Color(255, 255, 255));
+        modificarMBL.setText("Modificar");
+        modificarMBL.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        javax.swing.GroupLayout modificarMBPLayout = new javax.swing.GroupLayout(modificarMBP);
+        modificarMBP.setLayout(modificarMBPLayout);
+        modificarMBPLayout.setHorizontalGroup(
+            modificarMBPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(modificarMBPLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(modificarMBL)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        modificarMBPLayout.setVerticalGroup(
+            modificarMBPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(modificarMBPLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(modificarMBL)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        contenedor.add(modificarMBP, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 470, 90, -1));
+
+        eliminarMBP.setBackground(new java.awt.Color(118, 35, 47));
+        eliminarMBP.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        eliminarMBP.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        eliminarMBP.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                eliminarMBPMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                eliminarMBPMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                eliminarMBPMouseExited(evt);
+            }
+        });
+
+        eliminarMBL.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        eliminarMBL.setForeground(new java.awt.Color(255, 255, 255));
+        eliminarMBL.setText("Eliminar");
+        eliminarMBL.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        javax.swing.GroupLayout eliminarMBPLayout = new javax.swing.GroupLayout(eliminarMBP);
+        eliminarMBP.setLayout(eliminarMBPLayout);
+        eliminarMBPLayout.setHorizontalGroup(
+            eliminarMBPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(eliminarMBPLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(eliminarMBL)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        eliminarMBPLayout.setVerticalGroup(
+            eliminarMBPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(eliminarMBPLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(eliminarMBL)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        contenedor.add(eliminarMBP, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 470, 90, -1));
+
+        PrincipalL7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        PrincipalL7.setForeground(new java.awt.Color(165, 165, 165));
+        PrincipalL7.setText("Seleccione una operacion");
+        contenedor.add(PrincipalL7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 430, -1, 37));
+
+        PrincipalL9.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        PrincipalL9.setForeground(new java.awt.Color(128, 128, 128));
+        PrincipalL9.setText("Plan de Estudios");
+        contenedor.add(PrincipalL9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 320, 30));
+
+        add(contenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, 520));
     }// </editor-fold>//GEN-END:initComponents
 
     private void tablaCorrelativasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaCorrelativasMouseClicked
-        
+        if (JOptionPane.showConfirmDialog(this, "Esta seguro de que desea borrar la correlativa (codigo: "
+                + tablaCorrelativas.getValueAt(tablaCorrelativas.getSelectedRow(), 0)) == JOptionPane.OK_OPTION) {
+            materia.getCorrelativas().remove(materia.getCorrelativas().
+                    indexOf(tablaCorrelativas.getValueAt(tablaCorrelativas.getSelectedRow(), 0)));
+
+            DefaultTableModel modelo = (DefaultTableModel) tablaCorrelativas.getModel();
+
+            modelo.removeRow(tablaCorrelativas.getSelectedRow());
+        }
     }//GEN-LAST:event_tablaCorrelativasMouseClicked
 
     private void propuestaTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_propuestaTFActionPerformed
@@ -386,7 +614,7 @@ public class ModificarPlan extends javax.swing.JPanel {
             } catch (ManagementException e) {
             }
         }
-        
+
         sepPropuesta.setVisible(false);
         propuestaTF.setForeground(inactivo);
     }//GEN-LAST:event_propuestaTFFocusLost
@@ -401,7 +629,7 @@ public class ModificarPlan extends javax.swing.JPanel {
         if (codigoTF.getText().equals("")) {
             codigoTF.setText(codPlanEstudios);
         }
-        
+
         sepCodigo.setVisible(false);
         codigoTF.setForeground(inactivo);
     }//GEN-LAST:event_codigoTFFocusLost
@@ -423,23 +651,85 @@ public class ModificarPlan extends javax.swing.JPanel {
     }//GEN-LAST:event_modificarBPMouseExited
 
     private void tablaMateriasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMateriasMouseClicked
-        llenarTablaCorrelativas((String) tablaMaterias.getValueAt(tablaMaterias.getSelectedRow(), 0));
+        if (operacion == MODIFICAR) {
+            llenarTablaCorrelativas((String) tablaMaterias.getValueAt(tablaMaterias.getSelectedRow(), 0));
+
+            materiaP.setVisible(true);
+
+            codigoMateriaTF.setText(materia.getCodigo());
+            nombreTF.setText(materia.getNombre());
+        } else if (operacion == ELIMINAR) {
+            if (JOptionPane.showConfirmDialog(this, "Esta seguro de que desea borrar la materia (codigo: "
+                    + tablaMaterias.getValueAt(tablaMaterias.getSelectedRow(), 0) + "),\n se borrara toda la informacion"
+                    + "relacionada la misma") == JOptionPane.OK_OPTION) {
+                try {
+                    PlanEstudiosManager.eliminarMateria((String) tablaMaterias.getValueAt(tablaMaterias.getSelectedRow(), 0), codPlanEstudios);
+
+                    llenarTablaMaterias();
+                } catch (ManagementException e) {
+                    JOptionPane.showMessageDialog(null, e.getMessage());
+                }
+            }
+        }
     }//GEN-LAST:event_tablaMateriasMouseClicked
 
     private void codigoMateriaTFFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_codigoMateriaTFFocusGained
-        // TODO add your handling code here:
+        codigoMateriaTF.setForeground(activo);
+        codigoMateriaTF.selectAll();
+        sepCodigoMateria.setVisible(true);
     }//GEN-LAST:event_codigoMateriaTFFocusGained
 
     private void codigoMateriaTFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_codigoMateriaTFFocusLost
-        // TODO add your handling code here:
+        if (operacion == MODIFICAR) {
+            if (codigoMateriaTF.getText().equals("")) {
+                codigoMateriaTF.setText(materia.getCodigo());
+            }
+        }
+
+        sepCodigoMateria.setVisible(false);
+        codigoMateriaTF.setForeground(inactivo);
     }//GEN-LAST:event_codigoMateriaTFFocusLost
 
     private void codigoMateriaTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_codigoMateriaTFActionPerformed
-        // TODO add your handling code here:
+        nombreTF.requestFocus();
     }//GEN-LAST:event_codigoMateriaTFActionPerformed
 
     private void modificarMateriaBPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_modificarMateriaBPMouseClicked
-        // TODO add your handling code here:
+        if (operacion == MODIFICAR) {
+            try {
+                materia.setNombre(nombreTF.getText());
+                materia.setCodigo(codigoMateriaTF.getText());
+
+                PlanEstudiosManager.modificarMateria(codigoMateria, codPlanEstudios, materia);
+
+                JOptionPane.showMessageDialog(null, "Materia modificada con éxito");
+
+                llenarTablaMaterias();
+
+                materiaP.setVisible(false);
+            } catch (ManagementException e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            }
+        } else {
+            if (nombreTF.getText().equals("")) {
+                JOptionPane.showMessageDialog(null, "Ingrese el nombre de la materia");
+            } else if (codigoMateriaTF.getText().equals("")) {
+                JOptionPane.showMessageDialog(null, "Ingrese el codigo de la materia");
+            } else {
+                materia.setNombre(nombreTF.getText());
+                materia.setCodigo(codigoMateriaTF.getText());
+
+                try {
+                    PlanEstudiosManager.agregarMateria(materia);
+                } catch (ManagementException e) {
+                    JOptionPane.showMessageDialog(null, e.getMessage());
+                }
+
+                llenarTablaMaterias();
+
+                materiaP.setVisible(false);
+            }
+        }
     }//GEN-LAST:event_modificarMateriaBPMouseClicked
 
     private void modificarMateriaBPMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_modificarMateriaBPMouseEntered
@@ -451,55 +741,190 @@ public class ModificarPlan extends javax.swing.JPanel {
     }//GEN-LAST:event_modificarMateriaBPMouseExited
 
     private void nombreTFFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nombreTFFocusGained
-        // TODO add your handling code here:
+        nombreTF.setForeground(activo);
+        nombreTF.selectAll();
+        sepNombre.setVisible(true);
     }//GEN-LAST:event_nombreTFFocusGained
 
     private void nombreTFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nombreTFFocusLost
-        // TODO add your handling code here:
+        if (operacion == MODIFICAR) {
+            if (nombreTF.getText().equals("")) {
+                nombreTF.setText(materia.getNombre());
+            }
+        }
+
+        sepNombre.setVisible(false);
+        nombreTF.setForeground(inactivo);
     }//GEN-LAST:event_nombreTFFocusLost
 
     private void nombreTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreTFActionPerformed
-        // TODO add your handling code here:
+        correlativaTF.requestFocus();
     }//GEN-LAST:event_nombreTFActionPerformed
 
-    public void modificarMateria() {
-        // TODO
+    private void crearMBPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_crearMBPMouseClicked
+        operacion = CREAR;
+
+        // Reseteo de los campos a llenar
+        codigoMateriaTF.setText("");
+        nombreTF.setText("");
+        correlativaTF.setText("");
+
+        DefaultTableModel modelo = (DefaultTableModel) tablaCorrelativas.getModel();
+        modelo.setRowCount(0);
+
+        materia = new Materia("", "", codPlanEstudios);
+
+        materiaP.setVisible(true);
+
+        agregar.setText("Añadir");
+
+        seleccionMateria.setText("");
+    }//GEN-LAST:event_crearMBPMouseClicked
+
+    private void crearMBPMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_crearMBPMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_crearMBPMouseEntered
+
+    private void crearMBPMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_crearMBPMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_crearMBPMouseExited
+
+    private void modificarMBPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_modificarMBPMouseClicked
+        if (operacion == CREAR) {
+            materiaP.setVisible(false);
+        }
+
+        operacion = MODIFICAR;
+
+        agregar.setText("Modificar");
+
+        seleccionMateria.setText(LABELM + "modificar");
+    }//GEN-LAST:event_modificarMBPMouseClicked
+
+    private void modificarMBPMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_modificarMBPMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_modificarMBPMouseEntered
+
+    private void modificarMBPMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_modificarMBPMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_modificarMBPMouseExited
+
+    private void eliminarMBPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eliminarMBPMouseClicked
+        operacion = ELIMINAR;
+
+        materiaP.setVisible(false);
+
+        seleccionMateria.setText(LABELM + "eliminar");
+    }//GEN-LAST:event_eliminarMBPMouseClicked
+
+    private void eliminarMBPMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eliminarMBPMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_eliminarMBPMouseEntered
+
+    private void eliminarMBPMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eliminarMBPMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_eliminarMBPMouseExited
+
+    private void correlativaTFFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_correlativaTFFocusGained
+        if (correlativaTF.getText().equals("codigo")) {
+            correlativaTF.setText("");
+        }
+
+        correlativaTF.setForeground(activo);
+        correlativaTF.selectAll();
+        sepCorrelativa.setVisible(true);
+    }//GEN-LAST:event_correlativaTFFocusGained
+
+    private void correlativaTFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_correlativaTFFocusLost
+        if (correlativaTF.getText().equals("")) {
+            correlativaTF.setText("codigo");
+        }
+
+        sepCorrelativa.setVisible(false);
+        correlativaTF.setForeground(inactivo);
+    }//GEN-LAST:event_correlativaTFFocusLost
+
+    private void correlativaTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_correlativaTFActionPerformed
+        agregarCorrelativa();
+    }//GEN-LAST:event_correlativaTFActionPerformed
+
+    private void agregarCorrelativaBPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agregarCorrelativaBPMouseClicked
+        agregarCorrelativa();
+    }//GEN-LAST:event_agregarCorrelativaBPMouseClicked
+
+    private void agregarCorrelativaBPMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agregarCorrelativaBPMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_agregarCorrelativaBPMouseEntered
+
+    private void agregarCorrelativaBPMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agregarCorrelativaBPMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_agregarCorrelativaBPMouseExited
+
+    public void agregarCorrelativa() {
+        try {
+            String codMateria = correlativaTF.getText();
+            Materia correlativa;
+
+            if (correlativaTF.getText().equals("codigo")) {
+                JOptionPane.showMessageDialog(null, "Introduzca el codigo de una materia");
+            } else if ((correlativa = PlanEstudiosManager.buscarMateria(correlativaTF.getText(), codPlanEstudios)) == null) {
+                JOptionPane.showMessageDialog(null, "No hay materia con codigo: " + codMateria);
+            } else if (materia.getCorrelativas().contains(correlativa.getCodigo())) {
+                JOptionPane.showMessageDialog(null, "Ya hay una correlativa con codigo: " + codMateria);
+            } else {
+                materia.getCorrelativas().add(codMateria);
+
+                DefaultTableModel modelo = (DefaultTableModel) tablaCorrelativas.getModel();
+
+                modelo.addRow(new Object[]{codMateria, correlativa.getNombre()});
+
+                correlativaTF.setText("");
+            }
+        } catch (ManagementException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
     }
-    
+
     public void modificarPlan() {
         try {
             PlanEstudiosManager.modificar(codPlanEstudios, new PlanEstudios(codigoTF.getText(), propuestaTF.getText()));
-            
+
             JOptionPane.showMessageDialog(null, "Modificación realizada con éxito");
         } catch (ManagementException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
-    
+
     public void llenarTablaMaterias() {
         try {
             HashMap<String, Materia> materias = PlanEstudiosManager.getMateriasDePlan(codPlanEstudios);
             DefaultTableModel modelo = (DefaultTableModel) tablaMaterias.getModel();
 
-            for (Materia materia : materias.values()) {
-                modelo.addRow(new Object[]{materia.getCodigo(), materia.getNombre(), String.join(", ", materia.getCorrelativas())});
+            modelo.setRowCount(0);
+
+            for (Materia temp : materias.values()) {
+                modelo.addRow(new Object[]{temp.getCodigo(), temp.getNombre(), String.join(", ", temp.getCorrelativas())});
             }
         } catch (ManagementException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
 
     }
-    
+
     public void llenarTablaCorrelativas(String codMateria) {
         try {
-            LinkedList<Materia> materias = PlanEstudiosManager.getMaterias(codPlanEstudios, 
+            // Materia para matener la informacion modificada
+            materia = PlanEstudiosManager.buscarMateria(codMateria, codPlanEstudios).copy();
+            codigoMateria = codMateria;
+
+            LinkedList<Materia> materias = PlanEstudiosManager.getMaterias(codPlanEstudios,
                     PlanEstudiosManager.getCodCorrelativas(codMateria, codPlanEstudios));
             DefaultTableModel modelo = (DefaultTableModel) tablaCorrelativas.getModel();
 
             modelo.setRowCount(0);
-            
-            for (Materia materia : materias) {
-                modelo.addRow(new Object[]{materia.getCodigo(), materia.getNombre(), String.join(", ", materia.getCorrelativas())});
+
+            for (Materia temp : materias) {
+                modelo.addRow(new Object[]{temp.getCodigo(), temp.getNombre()});
             }
         } catch (ManagementException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -508,25 +933,38 @@ public class ModificarPlan extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel PrincipalL;
-    private javax.swing.JLabel PrincipalL1;
     private javax.swing.JLabel PrincipalL2;
     private javax.swing.JLabel PrincipalL3;
     private javax.swing.JLabel PrincipalL4;
     private javax.swing.JLabel PrincipalL5;
+    private javax.swing.JLabel PrincipalL7;
+    private javax.swing.JLabel PrincipalL8;
+    private javax.swing.JLabel PrincipalL9;
+    private javax.swing.JLabel agregar;
+    private javax.swing.JLabel agregarCorrelativaBL;
+    private javax.swing.JPanel agregarCorrelativaBP;
     private javax.swing.JTextField codigoMateriaTF;
     private javax.swing.JTextField codigoTF;
     private javax.swing.JPanel contenedor;
+    private javax.swing.JTextField correlativaTF;
+    private javax.swing.JLabel crearMBL;
+    private javax.swing.JPanel crearMBP;
+    private javax.swing.JLabel eliminarMBL;
+    private javax.swing.JPanel eliminarMBP;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel materiaP;
     private javax.swing.JLabel modificarBL;
     private javax.swing.JPanel modificarBP;
-    private javax.swing.JLabel modificarMateriaBL;
+    private javax.swing.JLabel modificarMBL;
+    private javax.swing.JPanel modificarMBP;
     private javax.swing.JPanel modificarMateriaBP;
     private javax.swing.JTextField nombreTF;
     private javax.swing.JTextField propuestaTF;
+    private javax.swing.JLabel seleccionMateria;
     private javax.swing.JSeparator sepCodigo;
     private javax.swing.JSeparator sepCodigoMateria;
+    private javax.swing.JSeparator sepCorrelativa;
     private javax.swing.JSeparator sepNombre;
     private javax.swing.JSeparator sepPropuesta;
     private javax.swing.JTable tablaCorrelativas;

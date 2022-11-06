@@ -118,6 +118,20 @@ public class Materia {
         this.codMesas = codMesas;
     }
 
+    public Materia copy() {
+        ArrayList<String> corr = new ArrayList<>();
+        ArrayList<String> dep = new ArrayList<>();
+
+        for (String correlativa : correlativas) {
+            corr.add(correlativa);
+        }
+        for (String dependiente : dependientes) {
+            dep.add(dependiente);
+        }
+
+        return new Materia(codigo, nombre, codPlanDeEstudios, corr, dep);
+    }
+
     @Override
     public String toString() {
         String ret = "Codigo: " + codigo + " | Nombre: " + nombre + " | Correlativas: ";
@@ -128,38 +142,39 @@ public class Materia {
 
         return ret;
     }
+
     @Override
     public boolean equals(Object object) {
         if (object.getClass() != this.getClass()) {
             return false;
         }
-        
-        boolean ret = codigo.equals(((Materia)object).getCodigo())
-                && codPlanDeEstudios.equals(((Materia)object).codPlanDeEstudios)
-                && nombre.equals(((Materia)object).getNombre());
-        
-        if(!ret) {
+
+        boolean ret = codigo.equals(((Materia) object).getCodigo())
+                && codPlanDeEstudios.equals(((Materia) object).codPlanDeEstudios)
+                && nombre.equals(((Materia) object).getNombre());
+
+        if (!ret) {
             return false;
         }
 
-        if(correlativas.size() != ((Materia)object).getCorrelativas().size()
-                || dependientes.size() != ((Materia)object).getDependientes().size()) {
+        if (correlativas.size() != ((Materia) object).getCorrelativas().size()
+                || dependientes.size() != ((Materia) object).getDependientes().size()) {
             return false;
         }
-        
-        for (String correlativa : ((Materia)object).getCorrelativas()) {
-            if(!correlativas.contains(correlativa)) {
+
+        for (String correlativa : ((Materia) object).getCorrelativas()) {
+            if (!correlativas.contains(correlativa)) {
                 return false;
             }
         }
-        
-        for (String dependiente : ((Materia)object).getDependientes()) {
-            if(!dependiente.contains(dependiente)) {
+
+        for (String dependiente : ((Materia) object).getDependientes()) {
+            if (!dependiente.contains(dependiente)) {
                 return false;
             }
         }
-        
+
         return true;
     }
-    
+
 }

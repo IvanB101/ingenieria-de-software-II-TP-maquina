@@ -151,11 +151,35 @@ public class MateriaDAOImp implements MateriaDAOInter {
         while (rs.next()) {
             String codCorrelativa = rs.getString("Correlativa_codigo"),
                     codDependiente = rs.getString("Materia_codigo");
-            
+
             materias.get(codDependiente).getCorrelativas().add(codCorrelativa);
             materias.get(codCorrelativa).getDependientes().add(codDependiente);
         }
 
         return materias;
+    }
+
+    public void eliminarCorrelativa(String codMateria, String codCorrrelativa, String codigoPlanEstudios) throws SQLException {
+        Connection con = conexion.getConnection();
+
+        PreparedStatement ps = con.prepareStatement("DELETE FROM Correlativas "
+                + "WHERE Materia_codigo=? AND Correlativa_codigo=? AND PlanEstudios_codigo=?");
+        ps.setString(1, codMateria);
+        ps.setString(2, codCorrrelativa);
+        ps.setString(3, codigoPlanEstudios);
+
+        ps.executeUpdate();
+    }
+
+    public void agregarCorrelativa(String codMateria, String codCorrrelativa, String codigoPlanEstudios) throws SQLException {
+        Connection con = conexion.getConnection();
+
+        PreparedStatement ps = con.prepareStatement("INSERT INTO Correlativas (correlativa_codigo, "
+                + "materia_codigo, PlanEstudios_codigo) VALUES (?,?,?)");
+        ps.setString(1, codCorrrelativa);
+        ps.setString(2, codMateria);
+        ps.setString(3, codigoPlanEstudios);
+
+        ps.executeUpdate();
     }
 }
