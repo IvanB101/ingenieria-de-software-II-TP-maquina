@@ -313,7 +313,7 @@ public class InicioEstudiante extends javax.swing.JPanel {
     }//GEN-LAST:event_tablesButtonPMouseExited
 
     private void AñadirExpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AñadirExpMouseClicked
-        changePane(new AgregarExpPanel(user.getNroRegistro()));
+        changePane(new ABMExpPanel(user.getNroRegistro()));
     }//GEN-LAST:event_AñadirExpMouseClicked
 
     private void AñadirExpMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AñadirExpMouseEntered

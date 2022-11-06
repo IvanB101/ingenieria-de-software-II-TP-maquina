@@ -7,6 +7,7 @@ package com.mycompany.tp_maquina_is2.Datos.DAO.Implementaciones;
 import com.mycompany.tp_maquina_is2.Datos.Conexion;
 import com.mycompany.tp_maquina_is2.Datos.DAO.Interfaces.ExamenDAOInter;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.Examen;
+import com.mycompany.tp_maquina_is2.Logica.Transferencia.Experiencia;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -116,13 +117,16 @@ public class ExamenDAOImp implements ExamenDAOInter {
         
         Connection con = conexion.getConnection();
 
-        PreparedStatement ps = con.prepareStatement("select fecha,nota,materia_codigo,planestudios_codigo from examen,experiencia " +
-"EXCEPT " + "select fecha,nota,materia_codigo,planestudios_codigo from examen,experiencia where examen_materia_codigo=materia_codigo "
-                + "and examen_historiaacademica_estudiante_nroregistro=historiaacademica_estudiante_nroregistro "
-                + "and examen_planestudios_codigo=planestudios_codigo and fecha=examen_fecha ");
-        ps.setInt(1, nroRegistro);
+        PreparedStatement ps = con.prepareStatement("SELECT fecha,nota,materia_codigo,planestudios_codigo from examen,experiencia " +
+"EXCEPT " + "SELECT fecha,nota,materia_codigo,planestudios_codigo from examen,experiencia where examen_materia_codigo=materia_codigo "
+                + "and examen_historiaacademica_estudiante_nroregistro="+nroRegistro
+                + " and examen_planestudios_codigo=planestudios_codigo and fecha=examen_fecha ");
         
         ResultSet rs = ps.executeQuery();
+        if (!rs.isBeforeFirst()){
+            ps=con.prepareStatement("SELECT fecha,nota,materia_codigo,planestudios_codigo from examen");
+            rs=ps.executeQuery();
+        }
         
         while(rs.next()) {
             Date fecha = rs.getDate("fecha");
@@ -130,6 +134,30 @@ public class ExamenDAOImp implements ExamenDAOInter {
                     rs.getFloat("nota"),
                     rs.getString("Materia_codigo"),
                     nroRegistro + "-" + rs.getString("PlanEstudios_codigo")));
+        }
+        
+        return examenes;
+    }
+    
+    public ArrayList<Examen> getExamenesEstudianteConExp(int nroRegistro) throws SQLException {
+        ArrayList<Examen> examenes = new ArrayList<>();
+        Examen aux;
+        Connection con = conexion.getConnection();
+
+        PreparedStatement ps = con.prepareStatement("SELECT fecha,nota,materia_codigo,planestudios_codigo,dificultad,dedicacion,dias from examen,experiencia where examen_materia_codigo=materia_codigo "
+                + "and examen_historiaacademica_estudiante_nroregistro="+nroRegistro
+                + " and examen_planestudios_codigo=planestudios_codigo and fecha=examen_fecha ");
+        
+        ResultSet rs = ps.executeQuery();
+        
+        while(rs.next()) {
+            Date fecha = rs.getDate("fecha");
+            aux=new Examen(LocalDate.parse(fecha.toString()),
+                    rs.getFloat("nota"),
+                    rs.getString("Materia_codigo"),
+                    nroRegistro + "-" + rs.getString("PlanEstudios_codigo"));
+            aux.setExperiencia(new Experiencia(rs.getInt("dificultad"),rs.getInt("dias"),rs.getInt("dedicacion"),nroRegistro+"-"+rs.getString("PlanEstudios_codigo")+"-"+rs.getString("Materia_codigo")+"-"+fecha.toString()));
+            examenes.add(aux);
         }
         
         return examenes;

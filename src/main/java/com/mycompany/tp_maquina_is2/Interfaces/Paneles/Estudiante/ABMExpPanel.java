@@ -20,7 +20,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author juan_
  */
-public class AgregarExpPanel extends javax.swing.JPanel {
+public class ABMExpPanel extends javax.swing.JPanel {
 
     private int nroRegistro;
     private int caso;
@@ -28,7 +28,7 @@ public class AgregarExpPanel extends javax.swing.JPanel {
     /**
      * Creates new form AgregarExpPanel
      */
-    public AgregarExpPanel(int nroRegistro) {
+    public ABMExpPanel(int nroRegistro) {
         this.nroRegistro = nroRegistro;
         initComponents();
         TablaExamenes.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
@@ -82,17 +82,9 @@ public class AgregarExpPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "", "", ""
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, true, true
-            };
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
             }
-        });
+        ));
         TablaExamenes.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         TablaExamenes.setFocusable(false);
         TablaExamenes.setRowHeight(25);
@@ -267,7 +259,7 @@ public class AgregarExpPanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(BotConfirmarBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(7, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         PanelDatosExp.setBackground(new java.awt.Color(255, 255, 255));
@@ -399,7 +391,7 @@ public class AgregarExpPanel extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Contenedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(Contenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 516, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -503,16 +495,22 @@ public class AgregarExpPanel extends javax.swing.JPanel {
     public void LlenarTablaExamenesSinExp() {
         try {
             ArrayList<Examen> examenes = ExamenManager.examenesEstudianteSinExp(nroRegistro);
-            DefaultTableModel modelo = (DefaultTableModel) TablaExamenes.getModel();
+            DefaultTableModel modelo = new DefaultTableModel(){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }};
             modelo.setRowCount(0);
+            modelo.addColumn("Codigo Examen");
+            modelo.addColumn("Nombre Materia");
+            modelo.addColumn("Fecha Examen");
             for (Examen examen : examenes) {
-                if (examen.getExperiencia() == null) {
-                    String[]datos = examen.getCodHistoriaAcademica().split("-");
-                    modelo.addRow(new Object[]{examen.getCodigo(),
-                        PlanEstudiosManager.buscarMateria(examen.getCodMateria(), datos[1]).getNombre(),
+                String[]datos = examen.getCodHistoriaAcademica().split("-");
+                modelo.addRow(new Object[]{examen.getCodigo(),
+                    PlanEstudiosManager.buscarMateria(examen.getCodMateria(), datos[1]).getNombre(),
                         examen.getFecha().toString()});
-                }
             }
+            TablaExamenes.setModel(modelo);
         } catch (ManagementException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
@@ -521,18 +519,26 @@ public class AgregarExpPanel extends javax.swing.JPanel {
 
         public void LlenarTablaExamenesConExp() {
         try {
-            TablaExamenes.repaint();
-            ArrayList<Examen> examenes = ExamenManager.examenesEstudiante(nroRegistro);
-            DefaultTableModel modelo = (DefaultTableModel) TablaExamenes.getModel();
+            ArrayList<Examen> examenes = ExamenManager.examenesEstudianteConExp(nroRegistro);
+            DefaultTableModel modelo = new DefaultTableModel(){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }};
+            modelo.setRowCount(0);
+            modelo.addColumn("Codigo");
+            modelo.addColumn("Nombre");
+            modelo.addColumn("Fecha");
+            modelo.addColumn("Dificultad");
+            modelo.addColumn("Dias de estudio");
+            modelo.addColumn("Dedicacion");
             for (Examen examen : examenes) {
-                if (examen.getExperiencia() != null) {
                     String[]datos = examen.getCodHistoriaAcademica().split("-");
-                    
                     modelo.addRow(new Object[]{examen.getCodigo(),
                         PlanEstudiosManager.buscarMateria(examen.getCodMateria(), datos[1]).getNombre(),
                         examen.getFecha().toString(),examen.getExperiencia().getDificultad(),examen.getExperiencia().getDias(),examen.getExperiencia().getDedicacion()});
-                }
             }
+            TablaExamenes.setModel(modelo);
         } catch (ManagementException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }

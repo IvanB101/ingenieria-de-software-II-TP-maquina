@@ -5,7 +5,7 @@
 package com.mycompany.tp_maquina_is2.Interfaces;
 
 import com.mycompany.tp_maquina_is2.Datos.Conexion;
-import com.mycompany.tp_maquina_is2.Interfaces.Paneles.Estudiante.AgregarExpPanel;
+import com.mycompany.tp_maquina_is2.Interfaces.Paneles.Estudiante.ABMExpPanel;
 import com.mycompany.tp_maquina_is2.Interfaces.Paneles.Estudiante.InicioEstudiante;
 import com.mycompany.tp_maquina_is2.Interfaces.Paneles.Estudiante.ListaPanel;
 import com.mycompany.tp_maquina_is2.Logica.Excepciones.ManagementException;

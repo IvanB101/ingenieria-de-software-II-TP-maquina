@@ -36,6 +36,13 @@ public abstract class ExamenManager {
             throw new ManagementException(e.getMessage());
         }
     }
+    public static ArrayList<Examen> examenesEstudianteConExp(int nroRegistro) throws ManagementException {
+        try {
+            return examenDAOImp.getExamenesEstudianteConExp(nroRegistro);
+        } catch (SQLException e) {
+            throw new ManagementException(e.getMessage());
+        }
+    }
 
     public static void cargar(List<Examen> examenes) throws ManagementException {
         for (Examen examen : examenes) {
