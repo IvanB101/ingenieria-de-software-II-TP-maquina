@@ -69,6 +69,23 @@ public abstract class ExamenManager {
             throw new ManagementException(e.getMessage());
         }
     }
+
+    
+    //debería controlar el plan de estudios? creo que no pq c1 es la misma para tods
+    public static ArrayList<Experiencia> getExperiencias(String codMateria) throws ManagementException{
+       try {
+            return experienciaDAOImp.getExperienciasDAO(codMateria);
+        } catch (Exception e) {
+            throw new ManagementException(e.getMessage());
+        }
+    
+    }
+    
+    
+    public static ArrayList<Experiencia> getExperienciasAprobados(String codMateria) throws ManagementException{
+        try {
+            return experienciaDAOImp.getExperienciasAprobadosDAO(codMateria);
+
     public static void ModificarExperiencia(String codigo,Experiencia experiencia) throws ManagementException {
         try {
             experienciaDAOImp.update(codigo, experiencia);
@@ -79,6 +96,7 @@ public abstract class ExamenManager {
      public static void EliminarExperiencia(String codigo) throws ManagementException {
         try {
             experienciaDAOImp.delete(codigo);
+
         } catch (Exception e) {
             throw new ManagementException(e.getMessage());
         }
