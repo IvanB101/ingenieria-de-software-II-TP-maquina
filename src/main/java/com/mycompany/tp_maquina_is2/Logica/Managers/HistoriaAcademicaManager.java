@@ -65,7 +65,7 @@ public abstract class HistoriaAcademicaManager {
                         try {
                             estadoDAOImp.create(estado);
                         } catch (SQLException e2) {
-                            if(e2.getMessage().contains("llave duplicada")) {
+                            if (e2.getMessage().contains("llave duplicada")) {
                                 try {
                                     estadoDAOImp.update(estado.getCodigo(), estado);
                                 } catch (SQLException e3) {
@@ -86,10 +86,10 @@ public abstract class HistoriaAcademicaManager {
     public static void eliminar(int nroRegistro, String codPlanEstudios) throws ManagementException {
         try {
             historiaAcademicaDAOImp.read(nroRegistro, codPlanEstudios);
-            
+
             historiaAcademicaDAOImp.delete(nroRegistro, codPlanEstudios);
         } catch (SQLException e) {
-            if(e.getMessage().equals("ResultSet not positioned properly, perhaps you need to call next.")) {
+            if (e.getMessage().equals("ResultSet not positioned properly, perhaps you need to call next.")) {
                 throw new ManagementException("No hay una historia academica con codigo: "
                         + nroRegistro + "-" + codPlanEstudios);
             } else {
@@ -99,9 +99,9 @@ public abstract class HistoriaAcademicaManager {
         }
     }
 
-    
-    public static HashMap<Materia, Object> listaExamenes(int nroRegistro, String codPlanEstudios, String criterio) throws ManagementException {
+    public static HashMap<Materia, Object> listaExamenes(int nroRegistro, String codPlanEstudios, String criterio, int dias) throws ManagementException {
         double dificultadPromedio;
+        int aprobados = 0;
         HistoriaAcademica historia = buscar(nroRegistro, codPlanEstudios);
         HashMap<Materia, Object> ranking = new HashMap<>();
         ArrayList<String> codCorrelativas = new ArrayList();
@@ -111,29 +111,37 @@ public abstract class HistoriaAcademicaManager {
                 //correlativas de una materia regular
                 codCorrelativas = PlanEstudiosManager.getCodCorrelativas(codMateria, codPlanEstudios);
                 if (cumpleRequisitos(codCorrelativas, historia)) {
-                    if(criterio.equals("Correlativas")){
+                    if (criterio.equals("Correlativas")) {
                         //busco en cuantas materias es correlativa
                         ranking.put(PlanEstudiosManager.buscarMateria(codMateria, codPlanEstudios),
-                            PlanEstudiosManager.getCantidadDependientes(codMateria, codPlanEstudios));
-                    }
-                    if(criterio.equals("Dificultad")){
+                                PlanEstudiosManager.getCantidadDependientes(codMateria, codPlanEstudios));
+                    }//fin correlativas
+                    if (criterio.equals("Dificultad")) {
                         //saco la dificultad promedio de una materia, entrada: todas las exp de una materia
-                        if((ExamenManager.getExperiencias(codMateria).size())==0){ //si la materia no tiene experiencias
-                            ranking.put(PlanEstudiosManager.buscarMateria(codMateria, codPlanEstudios),0.0); //0.0 PQ ES DOUBLE!!!!!!
-                        }else{
-                        dificultadPromedio=promedioDificultad(ExamenManager.getExperiencias(codMateria));
-                        ranking.put(PlanEstudiosManager.buscarMateria(codMateria, codPlanEstudios),dificultadPromedio);
+                        if ((ExamenManager.getExperiencias(codMateria).size()) == 0) { //si la materia no tiene experiencias
+                            ranking.put(PlanEstudiosManager.buscarMateria(codMateria, codPlanEstudios), 0.0); //0.0 PQ ES DOUBLE!!!!!!
+                        } else {
+                            dificultadPromedio = promedioDificultad(ExamenManager.getExperiencias(codMateria));
+                            ranking.put(PlanEstudiosManager.buscarMateria(codMateria, codPlanEstudios), dificultadPromedio);
                         }
-                    }  
-                    
+                    }//fin dificultad  
+                    if(criterio.equals("Tiempo")){
+                    if ((ExamenManager.getExperienciasAprobados(codMateria).size()) == 0) {//si no hay experiencias de aprobados
+                        ranking.put(PlanEstudiosManager.buscarMateria(codMateria, codPlanEstudios), 0);
+                    } else {
+                        aprobados = cantidadAprobadosUnaMateria(ExamenManager.getExperienciasAprobados(codMateria), dias);
+                        ranking.put(PlanEstudiosManager.buscarMateria(codMateria, codPlanEstudios), aprobados);
+                    }
+                    }//fin tiempo
                 }
             }
         }
-        
+
         return ranking;
     }
 
-  
+   
+
     public static boolean cumpleRequisitos(ArrayList<String> codCorrelativas, HistoriaAcademica historia) {
         for (String correlativa : codCorrelativas) {
             if (!historia.getEstados().get(correlativa).getCondicion().equals(Condicion.aprobado)) {
@@ -143,15 +151,26 @@ public abstract class HistoriaAcademicaManager {
 
         return true;
     }
-    
-    public static double promedioDificultad(ArrayList<Experiencia> experiencias){
-        int cant=0;
-        for (Experiencia exp : experiencias){
-            cant+=exp.getDificultad();
+
+    public static double promedioDificultad(ArrayList<Experiencia> experiencias) {
+        int cant = 0;
+        for (Experiencia exp : experiencias) {
+            cant += exp.getDificultad();
         }
-       
-        return cant/experiencias.size();
-    
+
+        return cant / experiencias.size();
+
+    }
+
+    public static int cantidadAprobadosUnaMateria(ArrayList<Experiencia> experiencias, int dias) {
+        int cant = 0;
+        for (Experiencia exp : experiencias) {
+            if (exp.getDias() <= dias) {
+                cant++;
+            }
+        }
+        return cant;
+
     }
 
     public static HistoriaAcademica buscar(int nroRegistro, String codPlanEstudios) throws ManagementException {
@@ -159,10 +178,10 @@ public abstract class HistoriaAcademicaManager {
             if (historiasAcademica == null || historiasAcademica.getNroRegEstudiante() != nroRegistro
                     || !historiasAcademica.getCodPlanDeEstudios().equals(codPlanEstudios)) {
                 historiasAcademica = historiaAcademicaDAOImp.read(nroRegistro, codPlanEstudios);
-                
+
                 historiasAcademica.setEstados(estadoDAOImp.getEstadosHistoria(nroRegistro, codPlanEstudios));
             }
-            
+
             return historiasAcademica;
         } catch (SQLException e) {
             if (e.getMessage().equals("ResultSet not positioned properly, perhaps you need to call next.")) {
