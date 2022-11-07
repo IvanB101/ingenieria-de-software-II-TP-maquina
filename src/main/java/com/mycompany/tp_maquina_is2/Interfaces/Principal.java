@@ -23,7 +23,7 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author ivanb
+ * @author ivanb tebo y tebiense
  */
 public class Principal extends javax.swing.JFrame {
 
