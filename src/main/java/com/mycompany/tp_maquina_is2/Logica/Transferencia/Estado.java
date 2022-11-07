@@ -4,6 +4,8 @@
  */
 package com.mycompany.tp_maquina_is2.Logica.Transferencia;
 
+import java.time.LocalDate;
+
 /**
  *
  * @author ivanb
@@ -29,11 +31,13 @@ public class Estado {
     private String codMateria;
     private String codHistoriaAcademica;
     private Condicion condicion;
+    private LocalDate fecha;
 
-    public Estado(String codMateria, String codHitoriaAcademica, Condicion condicion) {
+    public Estado(String codMateria, String codHistoriaAcademica, Condicion condicion, LocalDate fecha) {
         this.codMateria = codMateria;
-        this.codHistoriaAcademica = codHitoriaAcademica;
+        this.codHistoriaAcademica = codHistoriaAcademica;
         this.condicion = condicion;
+        this.fecha = fecha;
     }
 
     public String getCodigo() {
@@ -64,8 +68,29 @@ public class Estado {
         this.codHistoriaAcademica = codHitoriaAcademica;
     }
 
+    public LocalDate getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(LocalDate fecha) {
+        this.fecha = fecha;
+    }
+
     @Override
     public String toString() {
-        return "codHistoriaAcademica: " + codHistoriaAcademica + " | codMat: " + codMateria + " | Estado: " + condicion;
+        return "codHistoriaAcademica: " + codHistoriaAcademica + " | codMat: " + codMateria
+                + " | Estado: " + condicion + " | Fecha: " + fecha;
+    }
+    
+    @Override
+    public boolean equals(Object object) {
+        if (object.getClass() != this.getClass()) {
+            return false;
+        }
+
+        return codMateria.equals(((Estado)object).getCodMateria())
+                && codHistoriaAcademica.equals(((Estado)object).getCodHistoriaAcademica())
+                && condicion.equals(((Estado)object).getCondicion())
+                && (fecha + "").equals(((Estado)object).getFecha() + "");
     }
 }

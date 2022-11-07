@@ -1,14 +1,12 @@
 
 import com.mycompany.tp_maquina_is2.Datos.Conexion;
-import com.mycompany.tp_maquina_is2.Logica.Excepciones.ManagementException;
 import com.mycompany.tp_maquina_is2.Logica.Managers.EstudianteManager;
 import com.mycompany.tp_maquina_is2.Logica.Managers.ExamenManager;
 import com.mycompany.tp_maquina_is2.Logica.Managers.HistoriaAcademicaManager;
 import com.mycompany.tp_maquina_is2.Logica.Managers.PlanEstudiosManager;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.Estudiante;
-import com.mycompany.tp_maquina_is2.Logica.Util.ArchivosManager;
-import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -18,12 +16,15 @@ import java.io.IOException;
  *
  * @author ivanb
  */
-public class ConextionTest {
+public class Inicializacion {
 
     public static void main(String[] args) {
 
         try {
             Conexion conn = Conexion.getInstance();
+            
+            // Incializacion de la base de datos
+            conn.init();
 
             // Inicializacion de Managers
             ExamenManager.init(conn);
@@ -31,8 +32,9 @@ public class ConextionTest {
             HistoriaAcademicaManager.init(conn);
             PlanEstudiosManager.init(conn);
 
+            // Carga de datos de prueba
             EstudianteManager.agregar(new Estudiante(3010820, "Gino", "Paoletti", 44075067));
-        } catch (IOException e) {
+        } catch (IOException | SQLException e) {
             e.printStackTrace();
         }
     }

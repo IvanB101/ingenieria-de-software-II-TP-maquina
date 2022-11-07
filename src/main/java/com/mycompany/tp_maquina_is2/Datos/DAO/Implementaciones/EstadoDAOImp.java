@@ -8,9 +8,11 @@ import com.mycompany.tp_maquina_is2.Datos.Conexion;
 import com.mycompany.tp_maquina_is2.Datos.DAO.Interfaces.EstadoDAOInter;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.Estado;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.HashMap;
 
 /**
@@ -29,15 +31,16 @@ public class EstadoDAOImp implements EstadoDAOInter {
     public void create(Estado estado) throws SQLException {
         Connection con = conexion.getConnection();
 
-        String[] datos = estado.getCodHistoriaAcademica().split("-");
+        String[]datos = estado.getCodHistoriaAcademica().split("-");
         int nroRegistro = Integer.parseInt(datos[0]);
 
         PreparedStatement ps = con.prepareStatement("INSERT INTO Estado (regularidad, Materia_codigo, "
-                + "HistoriaAcademica_Estudiante_nroRegistro, PlanEstudios_codigo) VALUES(?,?,?,?)");
+                + "HistoriaAcademica_Estudiante_nroRegistro, PlanEstudios_codigo, fecha) VALUES(?,?,?,?,?)");
         ps.setString(1, estado.getCondicion().toString());
         ps.setString(2, estado.getCodMateria());
         ps.setInt(3, nroRegistro);
         ps.setString(4, datos[1]);
+        ps.setDate(5, Date.valueOf(estado.getFecha()));
 
         ps.executeUpdate();
     }
@@ -60,8 +63,9 @@ public class EstadoDAOImp implements EstadoDAOInter {
 
         rs.next();
 
-        return new Estado(datos[2], datos[0] + datos[1],
-                Estado.Condicion.parse(rs.getString("regularidad")));
+        return new Estado(datos[2], datos[0] + "-" + datos[1],
+                Estado.Condicion.parse(rs.getString("regularidad")),
+                LocalDate.parse(rs.getDate("fecha") + ""));
     }
 
     @Override
@@ -72,13 +76,14 @@ public class EstadoDAOImp implements EstadoDAOInter {
         int nroRegistro = Integer.parseInt(datos[0]);
 
         PreparedStatement ps = con.prepareStatement("UPDATE Estado "
-                + "SET regularidad=? "
+                + "SET regularidad=?, fecha=?"
                 + "WHERE Materia_codigo=? AND HistoriaAcademica_Estudiante_nroRegistro=? "
                 + "AND PlanEstudios_codigo=?");
         ps.setString(1, estado.getCondicion().toString());
-        ps.setString(2, datos[2]);
-        ps.setInt(3, nroRegistro);
-        ps.setString(4, datos[1]);
+        ps.setDate(2, Date.valueOf(estado.getFecha()));
+        ps.setString(3, datos[2]);
+        ps.setInt(4, nroRegistro);
+        ps.setString(5, datos[1]);
 
         ps.executeUpdate();
     }
@@ -116,7 +121,8 @@ public class EstadoDAOImp implements EstadoDAOInter {
         while (rs.next()) {
             String codMateria = rs.getString("Materia_codigo");
             estados.put(codMateria, new Estado(codMateria, nroRegistro + "-" + codPlanEstudios,
-                    Estado.Condicion.parse(rs.getString("regularidad"))));
+                    Estado.Condicion.parse(rs.getString("regularidad")),
+                    LocalDate.parse(rs.getDate("fecha") + "")));
         }
 
         return estados;
