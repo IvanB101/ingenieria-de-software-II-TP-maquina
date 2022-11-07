@@ -103,12 +103,43 @@ public class MesaExamenDAOImp implements MesaExamenDAOInter {
         ps.executeUpdate();
     }
     
-    public void createInscripcion(String codigo, int nroRegistro) {
-        // TODO
+    public void createInscripcion(String codigo, int nroRegistro) throws SQLException {
+        String[] datos = codigo.split("-");
+        String codPlanEstudios = datos[0], codMateria = datos[1];
+        int anio = Integer.parseInt(datos[2]), turno = Integer.parseInt(datos[3]);
+        
+        Connection con = conexion.getConnection();
+
+        PreparedStatement ps = con.prepareStatement("INSERT INTO Inscripcion (estudiante_nroregistro, mesaexamen_turno, mesaexamen_anio, mesaexamen_materia_codigo,mesaexamen_materia_PlanEstudios_codigo) VALUES (?,?,?,?)");
+
+        ps.setInt(1,nroRegistro);
+        ps.setInt(2,turno);
+        ps.setInt(3,anio);
+        ps.setString(4, codMateria);
+        ps.setString(5,codPlanEstudios);
+       
+
+        ps.executeUpdate();
     }
     
-    public void deleteInscricion(String codigo, int nroRegistro) {
-        // TODO
+    public void deleteInscripcion(String codigo, int nroRegistro) throws SQLException {
+        String[] datos = codigo.split("-");
+        String codPlanEstudios = datos[0], codMateria = datos[1];
+        int anio = Integer.parseInt(datos[2]), turno = Integer.parseInt(datos[3]);
+        Connection con = conexion.getConnection();
+        
+        PreparedStatement ps = con.prepareStatement("DELETE FROM MesaExamen "
+                + "WHERE estudiante_nroregistro=? AND mesaexamen_turno=? AND mesaexamen_anio=? AND mesaexamen_materia_codigo=? "
+                + "AND mesaexamen_materia_PlanEstudios_codigo=?");
+        
+        
+        ps.setInt(1,nroRegistro);
+        ps.setInt(2,turno);
+        ps.setInt(3,anio);
+        ps.setString(4, codMateria);
+        ps.setString(5,codPlanEstudios);
+        
+        ps.executeUpdate();
     }
 
 }
