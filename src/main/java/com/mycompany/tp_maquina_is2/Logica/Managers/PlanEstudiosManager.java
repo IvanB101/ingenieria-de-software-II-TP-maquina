@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -33,18 +35,20 @@ public abstract class PlanEstudiosManager {
         materiaDAOImp = new MateriaDAOImp(conexion);
     }
 
-    /**
+    /** Comprueba si una materia esta un plan de estudios, lanza una excepcion en el caso
+     * de que la materia con el codigo dado no este
      * @param codPlanEstudios codigo del plan de estudios
      * @param codMateria codigo de la materia
-     * @return true si la materia pertenece al plan de estudios, false en otro
-     * caso
      * @throws
      * com.mycompany.tp_maquina_is2.Logica.Excepciones.ManagementException
      */
-    public static boolean comprobarMateria(String codPlanEstudios, String codMateria) throws ManagementException {
+    public static void comprobarMateria(String codPlanEstudios, String codMateria) throws ManagementException {
         buscar(codPlanEstudios);
-
-        return (planEstudios.getMaterias().get(codMateria) != null);
+        
+        if (planEstudios.getMaterias().get(codMateria) == null){
+            throw new ManagementException("Materia con codigo " + codMateria + " no esta en el plan de estudios"
+                            + " con codigo " + codPlanEstudios + ", o el plan de estudios no se encuentra cargado");
+        }
     }
 
     /**
@@ -109,6 +113,8 @@ public abstract class PlanEstudiosManager {
     public static void modificar(String codigo, PlanEstudios modificado) throws ManagementException {
         try {
             planEstudiosDAOImp.update(codigo, modificado);
+            
+            planEstudios = null;
         } catch (SQLException e) {
             throw new ManagementException(e.getMessage());
         }   
@@ -125,6 +131,8 @@ public abstract class PlanEstudiosManager {
             planEstudiosDAOImp.read(codigo);
 
             planEstudiosDAOImp.delete(codigo);
+            
+            planEstudios = null;
         } catch (SQLException e) {
             if (e.getMessage().equals("ResultSet not positioned properly, perhaps you need to call next.")) {
                 throw new ManagementException("No hay plan de estudios con codigo: " + codigo);
@@ -163,6 +171,84 @@ public abstract class PlanEstudiosManager {
         buscar(codPlanEstudios);
 
         return planEstudios.getMaterias().get(codMateria);
+    }
+    
+    /**
+     * Metodo para modificar la informacion referente a una materia
+     * @param codMateria codigo de la materia
+     * @param codPlanEstudios codigo del plan de estudios al que pertence la materia
+     * @param modificada materia con la informacion modificada
+     * @throws com.mycompany.tp_maquina_is2.Logica.Excepciones.ManagementException
+     */
+    public static void modificarMateria(String codMateria, String codPlanEstudios, Materia modificada) throws ManagementException {
+        try {
+            // Control de existencia de la materia
+            Materia materia = buscarMateria(codMateria, codPlanEstudios);
+            
+            if(!codMateria.equals(modificada.getCodigo()) && buscarMateria(modificada.getCodigo(), codPlanEstudios) != null) {
+                throw new ManagementException("Ya existe otra materia con codigo: " + modificada.getCodigo());
+            }
+            
+            materiaDAOImp.update(codMateria, codPlanEstudios, modificada);
+            
+            for (String codCorrelativa : modificada.getCorrelativas()) {
+                if(!materia.getCorrelativas().contains(codCorrelativa)) {
+                    materiaDAOImp.agregarCorrelativa(modificada.getCodigo(), codCorrelativa, codPlanEstudios);
+                }
+            }
+            
+            for(String codCorrelativa : materia.getCorrelativas()) {
+                if(!modificada.getCorrelativas().contains(codCorrelativa)) {
+                    materiaDAOImp.eliminarCorrelativa(modificada.getCodigo(), codCorrelativa, codPlanEstudios);
+                }
+            }
+            
+            planEstudios = null;
+        } catch (SQLException e) {
+            System.out.println(e);
+            throw new ManagementException("Ha ocurrido un error");
+        }
+    }
+    
+    /**
+     * Metodo para agregar una materia individual
+     * @param materia materia a agregar
+     * @throws ManagementException 
+     */
+    public static void agregarMateria(Materia materia) throws ManagementException {
+        if(buscarMateria(materia.getCodigo(), materia.getCodPlanDeEstudios()) != null) {
+            throw new ManagementException("Ya existe una materia con el codigo: " + materia.getCodigo());
+        } else {
+            try {
+                materiaDAOImp.create(materia);
+                
+                planEstudios = null;
+            } catch (SQLException e) {
+                System.out.println(e);
+                throw new ManagementException("Ha ocurrido un error en la carga de la materia");
+            }
+        }
+    }
+    
+    /**
+     * Metodo para eliminar una materia de un plan de estudios
+     * @param codMateria codigo de la materia a eliminar
+     * @param codPlanEstudios codigo del plan de estudios de la materia
+     * @throws ManagementException 
+     */
+    public static void eliminarMateria(String codMateria, String codPlanEstudios) throws ManagementException {
+        try {
+            if(buscarMateria(codMateria, codPlanEstudios) == null) {
+                throw new ManagementException("No hay materia con codigo: " + codMateria);
+            }
+            
+            materiaDAOImp.delete(codMateria, codPlanEstudios);
+            
+            planEstudios = null;
+        } catch (SQLException e) {
+            System.out.println(e);
+            throw new ManagementException("No se ha podido eliminar la materia");
+        }
     }
     
     public static LinkedList<Materia> getMaterias(String codigo, List<String> codMaterias) throws ManagementException {

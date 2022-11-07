@@ -29,9 +29,16 @@ public abstract class ExamenManager {
         experienciaDAOImp = new ExperienciaDAOImp(conexion);
     }
 
-    public static ArrayList<Examen> examenesEstudiante(int nroRegistro) throws ManagementException {
+    public static ArrayList<Examen> examenesEstudianteSinExp(int nroRegistro) throws ManagementException {
         try {
-            return examenDAOImp.getExamenesEstudiante(nroRegistro);
+            return examenDAOImp.getExamenesEstudianteSinExp(nroRegistro);
+        } catch (SQLException e) {
+            throw new ManagementException(e.getMessage());
+        }
+    }
+    public static ArrayList<Examen> examenesEstudianteConExp(int nroRegistro) throws ManagementException {
+        try {
+            return examenDAOImp.getExamenesEstudianteConExp(nroRegistro);
         } catch (SQLException e) {
             throw new ManagementException(e.getMessage());
         }
@@ -62,6 +69,7 @@ public abstract class ExamenManager {
             throw new ManagementException(e.getMessage());
         }
     }
+
     
     //debería controlar el plan de estudios? creo que no pq c1 es la misma para tods
     public static ArrayList<Experiencia> getExperiencias(String codMateria) throws ManagementException{
@@ -77,6 +85,18 @@ public abstract class ExamenManager {
     public static ArrayList<Experiencia> getExperienciasAprobados(String codMateria) throws ManagementException{
         try {
             return experienciaDAOImp.getExperienciasAprobadosDAO(codMateria);
+
+    public static void ModificarExperiencia(String codigo,Experiencia experiencia) throws ManagementException {
+        try {
+            experienciaDAOImp.update(codigo, experiencia);
+        } catch (Exception e) {
+            throw new ManagementException(e.getMessage());
+        }
+    }
+     public static void EliminarExperiencia(String codigo) throws ManagementException {
+        try {
+            experienciaDAOImp.delete(codigo);
+
         } catch (Exception e) {
             throw new ManagementException(e.getMessage());
         }

@@ -89,7 +89,7 @@ public class ExperienciaDAOImp implements ExperienciaDAOInter {
         Connection con = conexion.getConnection();
 
         PreparedStatement ps = con.prepareStatement("UPDATE Experiencia "
-                + "SET dificultad=?, dias=?, dedicacion=?"
+                + "SET dificultad=?, dias=?, dedicacion=? "
                 + "WHERE Examen_Materia_codigo=? AND Examen_HistoriaAcademica_Estudiante_nroRegistro=? "
                 + "AND Examen_PlanEstudios_codigo=? AND Examen_fecha=?");
 
