@@ -432,7 +432,8 @@ public class ABMExpPanel extends javax.swing.JPanel {
     private void TablaExamenesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaExamenesMouseClicked
         if(caso==1 || caso==3){
             PanelDatosExp.setVisible(true);
-        }
+        }else
+            BotConfirmarBorrar.setVisible(true);
     }//GEN-LAST:event_TablaExamenesMouseClicked
 
     private void BotConfirmarBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotConfirmarBorrarActionPerformed
@@ -449,7 +450,6 @@ public class ABMExpPanel extends javax.swing.JPanel {
 
     private void AgregarButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AgregarButtonMouseClicked
         BotConfirmarBorrar.setVisible(false);
-        PanelDatosExp.setVisible(true);
         LlenarTablaExamenesSinExp();
         caso=1;
     }//GEN-LAST:event_AgregarButtonMouseClicked
@@ -464,7 +464,6 @@ public class ABMExpPanel extends javax.swing.JPanel {
 
     private void EliminarButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EliminarButtonMouseClicked
         PanelDatosExp.setVisible(false);
-        BotConfirmarBorrar.setVisible(true);
         LlenarTablaExamenesConExp();
         caso=2;
     }//GEN-LAST:event_EliminarButtonMouseClicked

@@ -136,6 +136,8 @@ public class ListaPanel extends javax.swing.JPanel {
         textfieldias = new javax.swing.JTextField();
         labeldias = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        Inscripcion = new javax.swing.JPanel();
+        estudianteBL = new javax.swing.JLabel();
 
         PanelCambiable.setBackground(new java.awt.Color(255, 255, 255));
         PanelCambiable.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -167,6 +169,11 @@ public class ListaPanel extends javax.swing.JPanel {
         TablaMaterias.setFocusable(false);
         TablaMaterias.setRowHeight(25);
         TablaMaterias.setSelectionBackground(new java.awt.Color(118, 35, 47));
+        TablaMaterias.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaMateriasMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(TablaMaterias);
         if (TablaMaterias.getColumnModel().getColumnCount() > 0) {
             TablaMaterias.getColumnModel().getColumn(0).setResizable(false);
@@ -179,6 +186,7 @@ public class ListaPanel extends javax.swing.JPanel {
         ComboBoxCriterio.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         ComboBoxCriterio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Correlativas", "Tiempo", "Vencimiento", "Dificultad" }));
         ComboBoxCriterio.setBorder(null);
+        ComboBoxCriterio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Correlativas", "Tiempo", "Proximidad a cursar", "Profundidad a cursar", "Vencimiento de regularidad", "Dificultad" }));
         ComboBoxCriterio.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         ComboBoxCriterio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -213,6 +221,44 @@ public class ListaPanel extends javax.swing.JPanel {
             }
         });
         PanelCambiable.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 210, 160, 20));
+        Inscripcion.setBackground(new java.awt.Color(118, 35, 47));
+        Inscripcion.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Inscripcion.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        Inscripcion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                InscripcionMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                InscripcionMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                InscripcionMouseExited(evt);
+            }
+        });
+
+        estudianteBL.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        estudianteBL.setForeground(new java.awt.Color(255, 255, 255));
+        estudianteBL.setText("Inscribirse a examen");
+        estudianteBL.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        javax.swing.GroupLayout InscripcionLayout = new javax.swing.GroupLayout(Inscripcion);
+        Inscripcion.setLayout(InscripcionLayout);
+        InscripcionLayout.setHorizontalGroup(
+            InscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(InscripcionLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(estudianteBL)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        InscripcionLayout.setVerticalGroup(
+            InscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(InscripcionLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(estudianteBL)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        PanelCambiable.add(Inscripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 440, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -253,13 +299,32 @@ public class ListaPanel extends javax.swing.JPanel {
         }
         this.listaFinales(dias);
     }//GEN-LAST:event_jButton1ActionPerformed
+    private void TablaMateriasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaMateriasMouseClicked
+        Inscripcion.setVisible(true);
+    }//GEN-LAST:event_TablaMateriasMouseClicked
+
+    private void InscripcionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_InscripcionMouseClicked
+       
+    }//GEN-LAST:event_InscripcionMouseClicked
+
+    private void InscripcionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_InscripcionMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_InscripcionMouseEntered
+
+    private void InscripcionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_InscripcionMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_InscripcionMouseExited
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> ComboBoxCriterio;
+    private javax.swing.JPanel Inscripcion;
     private javax.swing.JPanel PanelCambiable;
     private javax.swing.JTable TablaMaterias;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel estudianteBL;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
