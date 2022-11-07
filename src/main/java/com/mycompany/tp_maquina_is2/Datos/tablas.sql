@@ -49,6 +49,7 @@ PRIMARY KEY (Materia_codigo, Correlativa_codigo, PlanEstudios_codigo));
 
 CREATE TABLE IF NOT EXISTS Estado(
 regularidad varchar(20) NOT NULL, 
+fecha date NOT NULL,
 Materia_codigo varchar(20) NOT NULL, 
 HistoriaAcademica_Estudiante_nroRegistro int NOT NULL, 
 PlanEstudios_codigo varchar(30) NOT NULL,

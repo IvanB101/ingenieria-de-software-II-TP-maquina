@@ -35,18 +35,20 @@ public abstract class PlanEstudiosManager {
         materiaDAOImp = new MateriaDAOImp(conexion);
     }
 
-    /**
+    /** Comprueba si una materia esta un plan de estudios, lanza una excepcion en el caso
+     * de que la materia con el codigo dado no este
      * @param codPlanEstudios codigo del plan de estudios
      * @param codMateria codigo de la materia
-     * @return true si la materia pertenece al plan de estudios, false en otro
-     * caso
      * @throws
      * com.mycompany.tp_maquina_is2.Logica.Excepciones.ManagementException
      */
-    public static boolean comprobarMateria(String codPlanEstudios, String codMateria) throws ManagementException {
+    public static void comprobarMateria(String codPlanEstudios, String codMateria) throws ManagementException {
         buscar(codPlanEstudios);
-
-        return (planEstudios.getMaterias().get(codMateria) != null);
+        
+        if (planEstudios.getMaterias().get(codMateria) == null){
+            throw new ManagementException("Materia con codigo " + codMateria + " no esta en el plan de estudios"
+                            + " con codigo " + codPlanEstudios + ", o el plan de estudios no se encuentra cargado");
+        }
     }
 
     /**

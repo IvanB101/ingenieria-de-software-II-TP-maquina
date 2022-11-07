@@ -19,7 +19,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.FormatFlagsConversionMismatchException;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -98,7 +97,7 @@ public class ArchivosManager {
                         if (codCorrelativa.contains(".")) {
                             codCorrelativa = (String) codCorrelativa.subSequence(0, codCorrelativa.indexOf("."));
                         }
-                        
+
                         correlativas.add(codCorrelativa);
                     }
                 }
@@ -167,21 +166,21 @@ public class ArchivosManager {
             // Comprobacion de que la materia este en el plan de estudios
             String codMateria = codigoMateria(datos[0]);
 
-            if (!PlanEstudiosManager.comprobarMateria(codPlanEstudios, codMateria)) {
-                throw new ManagementException("Materia con codigo " + codMateria + " no esta en el plan de estudios"
-                        + " con codigo " + codPlanEstudios + ", o el plan de estudios no se encuentra cargado");
-            }
+            PlanEstudiosManager.comprobarMateria(codPlanEstudios, codMateria);
+
+            String[] temp = datos[1].split("/");
 
             Estado estado = new Estado(
                     codMateria,
                     nroRegistro + "-" + codPlanEstudios,
-                    formatCondicion(datos[2], datos[4]));
+                    formatCondicion(datos[2], datos[4]),
+                    LocalDate.of(Integer.parseInt(temp[2]), Integer.parseInt(temp[1]), Integer.parseInt(temp[0])));
 
             // Carga de los estados
             while (rowIterator.hasNext()) {
-                
+
                 if (datos[2].equals("Examen")) {
-                    String[] temp = datos[1].split("/");
+                    temp = datos[1].split("/");
 
                     Examen examen = new Examen(
                             LocalDate.of(Integer.parseInt(temp[2]), Integer.parseInt(temp[1]), Integer.parseInt(temp[0])),
@@ -208,11 +207,11 @@ public class ArchivosManager {
                 // Comprobacion de que la materia este en el plan de estudios
                 codMateria = codigoMateria(datos[0]);
 
-                if (!PlanEstudiosManager.comprobarMateria(codPlanEstudios, codMateria)) {
-                    throw new ManagementException("Materia con codigo " + codMateria + " no esta en el plan de estudios"
-                            + " con codigo " + codPlanEstudios + ", o el plan de estudios no se encuentra cargado");
-                }
+                PlanEstudiosManager.comprobarMateria(codPlanEstudios, codMateria);
 
+                temp = datos[1].split("/");
+
+                LocalDate fecha = LocalDate.of(Integer.parseInt(temp[2]), Integer.parseInt(temp[1]), Integer.parseInt(temp[0]));
                 // Si cambia la materia de la fila del excel se carga el estado y se pasa a cargar el siguiente
                 if (!codigoMateria(datos[0]).equals(estado.getCodMateria())) {
                     estados.put(estado.getCodMateria(), estado);
@@ -220,12 +219,19 @@ public class ArchivosManager {
                     estado = new Estado(
                             codigoMateria(datos[0]),
                             nroRegistro + "-" + codPlanEstudios,
-                            formatCondicion(datos[2], datos[4]));
+                            formatCondicion(datos[2], datos[4]),
+                            fecha);
                 } else {
                     /* Si la materia esta aprobada, el resultados de otras actividades de la misma materia 
                     no cambia el resultado final del estudiante en la materia */
                     if (!estado.getCondicion().equals(Condicion.aprobado)) {
-                        estado.setCondicion(compararCondicion(estado.getCondicion(), formatCondicion(datos[2], datos[4])));
+                        Condicion condicion = formatCondicion(datos[2], datos[4]);
+                        
+                        if (!combinarCondicion(estado.getCondicion(), condicion).equals(estado.getCondicion())) {
+                            estado.setCondicion(condicion);
+                            // En caso de actualizar la condicion, también se actualiza la fecha del estado
+                            estado.setFecha(fecha);
+                        }
                     }
                 }
             }
@@ -234,8 +240,8 @@ public class ArchivosManager {
             estados.put(estado.getCodMateria(), estado);
 
             if (datos[2].equals("Examen")) {
-                String[] temp = datos[1].split("/");
-                
+                temp = datos[1].split("/");
+
                 examenes.add(new Examen(
                         LocalDate.of(Integer.parseInt(temp[2]), Integer.parseInt(temp[1]), Integer.parseInt(temp[0])),
                         Float.parseFloat(datos[3]),
@@ -329,7 +335,15 @@ public class ArchivosManager {
         return ret;
     }
 
-    private static Condicion compararCondicion(Condicion cond1, Condicion cond2) {
+    /**
+     * Metodo para generar la condicion del alumno a partir de dos condiciones
+     * de la misma materia
+     *
+     * @param cond1 primera condicion a juntar
+     * @param cond2 segunda condicion a juntar
+     * @return condicion resultante de ambas condiciones de entrada
+     */
+    private static Condicion combinarCondicion(Condicion cond1, Condicion cond2) {
         Condicion ret = Condicion.libre;
 
         if (cond1.equals(Condicion.aprobado) || cond2.equals(Condicion.aprobado)) {
@@ -340,7 +354,6 @@ public class ArchivosManager {
             ret = Condicion.cursando;
         }
 
-        // System.out.println("Condicion 1: " + cond1 + " Condicion 2: " + cond2 + " Condicion final: " + ret);
         return ret;
     }
 }
