@@ -82,6 +82,7 @@ public class MesaExamenDAOImp implements MesaExamenDAOInter {
 
     @Override
     public void update(String codigo, MesaExamen mesaExamen) throws SQLException {
+        //TODO
     }
 
     @Override
@@ -110,7 +111,7 @@ public class MesaExamenDAOImp implements MesaExamenDAOInter {
         
         Connection con = conexion.getConnection();
 
-        PreparedStatement ps = con.prepareStatement("INSERT INTO Inscripcion (estudiante_nroregistro, mesaexamen_turno, mesaexamen_anio, mesaexamen_materia_codigo,mesaexamen_materia_PlanEstudios_codigo) VALUES (?,?,?,?)");
+        PreparedStatement ps = con.prepareStatement("INSERT INTO Inscripcion (estudiante_nroregistro, mesaexamen_turno, mesaexamen_anio, mesaexamen_materia_codigo,mesaexamen_materia_PlanEstudios_codigo) VALUES (?,?,?,?,?)");
 
         ps.setInt(1,nroRegistro);
         ps.setInt(2,turno);
@@ -128,7 +129,7 @@ public class MesaExamenDAOImp implements MesaExamenDAOInter {
         int anio = Integer.parseInt(datos[2]), turno = Integer.parseInt(datos[3]);
         Connection con = conexion.getConnection();
         
-        PreparedStatement ps = con.prepareStatement("DELETE FROM MesaExamen "
+        PreparedStatement ps = con.prepareStatement("DELETE FROM Inscripcion "
                 + "WHERE estudiante_nroregistro=? AND mesaexamen_turno=? AND mesaexamen_anio=? AND mesaexamen_materia_codigo=? "
                 + "AND mesaexamen_materia_PlanEstudios_codigo=?");
         

@@ -411,6 +411,9 @@ public class ABMExpPanel extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "Experiencia modificada exitosamente!.");
                 LlenarTablaExamenesConExp();
             }
+            SliderDedi.setValue(5);
+            SliderDif.setValue(5);
+            DiasDeEstudio.setText("");
 
         } catch (ManagementException | HeadlessException | NumberFormatException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -478,7 +481,6 @@ public class ABMExpPanel extends javax.swing.JPanel {
 
     private void ModificarButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ModificarButtonMouseClicked
         BotConfirmarBorrar.setVisible(false);
-        PanelDatosExp.setVisible(true);
         LlenarTablaExamenesConExp();
         caso=3;
     }//GEN-LAST:event_ModificarButtonMouseClicked

@@ -18,6 +18,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Set;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
@@ -27,8 +28,8 @@ import javax.swing.table.JTableHeader;
  */
 public class ListaPanel extends javax.swing.JPanel {
 
-    private int nroRegistro=3010820;
-    private String codPlanEstudios="32/12";
+    private int nroRegistro;
+    private String codPlanEstudios;
 
     /**
      * Creates new form ListaPanel
@@ -276,6 +277,14 @@ public class ListaPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+     private void changePane(JPanel jPanel) {
+        PanelCambiable.setLayout(new java.awt.CardLayout());
+        PanelCambiable.removeAll();
+        PanelCambiable.add(jPanel);
+        PanelCambiable.revalidate();
+        PanelCambiable.repaint();
+    }
+    
     private void ComboBoxCriterioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBoxCriterioActionPerformed
          if (ComboBoxCriterio.getSelectedItem().toString().equals("Tiempo")) {
             labeldias.setVisible(true);
@@ -304,7 +313,7 @@ public class ListaPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_TablaMateriasMouseClicked
 
     private void InscripcionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_InscripcionMouseClicked
-       
+        changePane(new InscripcionPanel(nroRegistro,codPlanEstudios,(String)TablaMaterias.getValueAt(TablaMaterias.getSelectedRow(),0)));
     }//GEN-LAST:event_InscripcionMouseClicked
 
     private void InscripcionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_InscripcionMouseEntered
