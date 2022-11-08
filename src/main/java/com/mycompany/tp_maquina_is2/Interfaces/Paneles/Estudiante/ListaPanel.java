@@ -27,8 +27,8 @@ import javax.swing.table.JTableHeader;
  */
 public class ListaPanel extends javax.swing.JPanel {
 
-    private int nroRegistro;
-    private String codPlanEstudios;
+    private int nroRegistro=3010820;
+    private String codPlanEstudios="32/12";
 
     /**
      * Creates new form ListaPanel
@@ -315,7 +315,7 @@ public class ListaPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_InscripcionMouseExited
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton1ActionPerformed
+    
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

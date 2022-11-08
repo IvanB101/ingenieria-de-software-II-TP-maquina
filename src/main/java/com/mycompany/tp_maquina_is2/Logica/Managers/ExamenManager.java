@@ -36,6 +36,7 @@ public abstract class ExamenManager {
             throw new ManagementException(e.getMessage());
         }
     }
+
     public static ArrayList<Examen> examenesEstudianteConExp(int nroRegistro) throws ManagementException {
         try {
             return examenDAOImp.getExamenesEstudianteConExp(nroRegistro);
@@ -49,7 +50,7 @@ public abstract class ExamenManager {
             try {
                 examenDAOImp.create(examen);
             } catch (SQLException e) {
-                if(e.getMessage().contains("llave duplicada")) {
+                if (e.getMessage().contains("llave duplicada")) {
                     try {
                         examenDAOImp.update(examen.getCodigo(), examen);
                     } catch (SQLException e2) {
@@ -70,30 +71,33 @@ public abstract class ExamenManager {
         }
     }
 
-    
     //debería controlar el plan de estudios? creo que no pq c1 es la misma para tods
-    public static ArrayList<Experiencia> getExperiencias(String codMateria) throws ManagementException{
-       try {
+    public static ArrayList<Experiencia> getExperiencias(String codMateria) throws ManagementException {
+        try {
             return experienciaDAOImp.getExperienciasDAO(codMateria);
         } catch (Exception e) {
             throw new ManagementException(e.getMessage());
         }
-    
+
     }
-    
-    
-    public static ArrayList<Experiencia> getExperienciasAprobados(String codMateria) throws ManagementException{
+
+    public static ArrayList<Experiencia> getExperienciasAprobados(String codMateria) throws ManagementException {
         try {
             return experienciaDAOImp.getExperienciasAprobadosDAO(codMateria);
+        } catch (Exception e) {
+            throw new ManagementException(e.getMessage());
+        }
+    }
 
-    public static void ModificarExperiencia(String codigo,Experiencia experiencia) throws ManagementException {
+    public static void ModificarExperiencia(String codigo, Experiencia experiencia) throws ManagementException {
         try {
             experienciaDAOImp.update(codigo, experiencia);
         } catch (Exception e) {
             throw new ManagementException(e.getMessage());
         }
     }
-     public static void EliminarExperiencia(String codigo) throws ManagementException {
+
+    public static void EliminarExperiencia(String codigo) throws ManagementException {
         try {
             experienciaDAOImp.delete(codigo);
 
