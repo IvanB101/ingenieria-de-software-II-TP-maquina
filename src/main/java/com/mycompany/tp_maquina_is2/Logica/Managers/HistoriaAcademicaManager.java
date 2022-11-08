@@ -14,6 +14,8 @@ import com.mycompany.tp_maquina_is2.Logica.Transferencia.Experiencia;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.HistoriaAcademica;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.Materia;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -102,12 +104,13 @@ public abstract class HistoriaAcademicaManager {
     public static HashMap<Materia, Object> listaExamenes(int nroRegistro, String codPlanEstudios, String criterio, int dias) throws ManagementException {
         double dificultadPromedio;
         int aprobados = 0;
+        long semanas = 0;
         HistoriaAcademica historia = buscar(nroRegistro, codPlanEstudios);
         HashMap<Materia, Object> ranking = new HashMap<>();
         ArrayList<String> codCorrelativas = new ArrayList();
-        for (Estado estado : historia.getEstados().values()) {
+        for (Estado estado : historia.getEstados().values()) { 
             String codMateria = estado.getCodMateria();
-            if (estado.getCondicion().equals(Condicion.regular)) {
+            if (estado.getCondicion().equals(Condicion.regular)) { 
                 //correlativas de una materia regular
                 codCorrelativas = PlanEstudiosManager.getCodCorrelativas(codMateria, codPlanEstudios);
                 if (cumpleRequisitos(codCorrelativas, historia)) {
@@ -125,22 +128,25 @@ public abstract class HistoriaAcademicaManager {
                             ranking.put(PlanEstudiosManager.buscarMateria(codMateria, codPlanEstudios), dificultadPromedio);
                         }
                     }//fin dificultad  
-                    if(criterio.equals("Tiempo")){
-                    if ((ExamenManager.getExperienciasAprobados(codMateria).size()) == 0) {//si no hay experiencias de aprobados
-                        ranking.put(PlanEstudiosManager.buscarMateria(codMateria, codPlanEstudios), 0);
-                    } else {
-                        aprobados = cantidadAprobadosUnaMateria(ExamenManager.getExperienciasAprobados(codMateria), dias);
-                        ranking.put(PlanEstudiosManager.buscarMateria(codMateria, codPlanEstudios), aprobados);
-                    }
+                    if (criterio.equals("Tiempo")) {
+                        if ((ExamenManager.getExperienciasAprobados(codMateria).size()) == 0) {//si no hay experiencias de aprobados
+                            ranking.put(PlanEstudiosManager.buscarMateria(codMateria, codPlanEstudios), 0);
+                        } else {
+                            aprobados = cantidadAprobadosUnaMateria(ExamenManager.getExperienciasAprobados(codMateria), dias);
+                            ranking.put(PlanEstudiosManager.buscarMateria(codMateria, codPlanEstudios), aprobados);
+                        }
                     }//fin tiempo
+                    //gracias a la linea 113 solo veo los estados de las regulares por lo que veo la fecha de la regularidad.
+                    if (criterio.equals("Vencimiento de regularidad")) {
+                        semanas = semanasVencimiento(estado.getFecha());
+                        ranking.put(PlanEstudiosManager.buscarMateria(codMateria, codPlanEstudios), semanas);
+                    }//fin vencimiento
                 }
             }
-        }
+        }//finfor
 
         return ranking;
     }
-
-   
 
     public static boolean cumpleRequisitos(ArrayList<String> codCorrelativas, HistoriaAcademica historia) {
         for (String correlativa : codCorrelativas) {
@@ -151,6 +157,19 @@ public abstract class HistoriaAcademicaManager {
 
         return true;
     }
+
+    public static long semanasVencimiento(LocalDate fecha) {
+        LocalDate limite = LocalDate.of(fecha.plusMonths(32).getYear(),fecha.plusMonths(32).getMonthValue(),fecha.plusMonths(32).getDayOfMonth());
+        fecha.plusMonths(32).getYear();
+        return ChronoUnit.WEEKS.between(java.time.LocalDate.now(),limite);
+        /*Datos: 
+        LocalDate no se puede modificar
+        el plus solo sirve con año o con mes pero no ambos si no el mes da toda la vuelta
+        sin sumar años
+        Como no se modifica el plus lo modifica para mostrar pero no de verdad por eso esta instanciado asi
+        
+        */
+    } 
 
     public static double promedioDificultad(ArrayList<Experiencia> experiencias) {
         int cant = 0;

@@ -1,5 +1,6 @@
 
 import com.mycompany.tp_maquina_is2.Datos.Conexion;
+import com.mycompany.tp_maquina_is2.Logica.Excepciones.ManagementException;
 import com.mycompany.tp_maquina_is2.Logica.Managers.EstudianteManager;
 import com.mycompany.tp_maquina_is2.Logica.Managers.ExamenManager;
 import com.mycompany.tp_maquina_is2.Logica.Managers.HistoriaAcademicaManager;
@@ -18,7 +19,7 @@ import java.sql.SQLException;
  */
 public class Inicializacion {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ManagementException {
 
         try {
             Conexion conn = Conexion.getInstance();
