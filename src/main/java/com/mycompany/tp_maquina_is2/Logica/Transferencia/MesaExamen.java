@@ -25,6 +25,12 @@ public class MesaExamen {
         this.codMateria = codMateria;
         this.codPlanEstudios = codPlanEstudios;
     }
+    public MesaExamen(int turno, int anio,String codMateria, String codPlanEstudios) {
+        this.turno = turno;
+        this.anio = anio;
+        this.codMateria = codMateria;
+        this.codPlanEstudios = codPlanEstudios;
+    }
 
     public String getCodigo() {
         return codPlanEstudios + "-" + codMateria + "-" + anio + "-" + turno;

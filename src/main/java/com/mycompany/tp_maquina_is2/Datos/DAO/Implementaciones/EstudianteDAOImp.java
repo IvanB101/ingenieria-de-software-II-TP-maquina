@@ -7,10 +7,12 @@ package com.mycompany.tp_maquina_is2.Datos.DAO.Implementaciones;
 import com.mycompany.tp_maquina_is2.Datos.Conexion;
 import com.mycompany.tp_maquina_is2.Datos.DAO.Interfaces.EstudianteDAOInter;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.Estudiante;
+import com.mycompany.tp_maquina_is2.Logica.Transferencia.MesaExamen;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -99,5 +101,6 @@ public class EstudianteDAOImp implements EstudianteDAOInter {
 
         ps.executeUpdate();
     }
+    
 
 }

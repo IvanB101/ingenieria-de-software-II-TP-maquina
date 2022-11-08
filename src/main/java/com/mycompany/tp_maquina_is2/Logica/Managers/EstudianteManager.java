@@ -9,7 +9,9 @@ import com.mycompany.tp_maquina_is2.Datos.DAO.Implementaciones.EstudianteDAOImp;
 import com.mycompany.tp_maquina_is2.Datos.DAO.Implementaciones.MesaExamenDAOImp;
 import com.mycompany.tp_maquina_is2.Logica.Excepciones.ManagementException;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.Estudiante;
+import com.mycompany.tp_maquina_is2.Logica.Transferencia.MesaExamen;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -85,6 +87,25 @@ public abstract class EstudianteManager {
              throw new ManagementException(e.getMessage());
          }
     }
+       public static ArrayList<MesaExamen> obtenerMesasEstudiante(int nroRegistro) throws ManagementException {
+        ArrayList<MesaExamen> mesas =new ArrayList();
+           try {
+             mesas=mesaExamenDAOImp.obtenerMesasInscriptas(nroRegistro);
+         } catch (SQLException e) {
+             throw new ManagementException(e.getMessage());
+         }
+           return mesas;
+    }
+       public static ArrayList<Estudiante> ObtenerInscriptosMesa(String codigo) throws ManagementException {
+        ArrayList<Estudiante> estudiantes=new ArrayList();
+           try {
+             estudiantes = mesaExamenDAOImp.obtenerEstudiantesMesa(codigo);
+         } catch (SQLException e) {
+             throw new ManagementException(e.getMessage());
+         }
+           return estudiantes;
+    }
+       
     
     
 }
