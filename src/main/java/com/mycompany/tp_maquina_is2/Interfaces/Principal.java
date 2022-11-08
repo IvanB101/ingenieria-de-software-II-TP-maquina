@@ -12,6 +12,7 @@ import com.mycompany.tp_maquina_is2.Logica.Excepciones.ManagementException;
 import com.mycompany.tp_maquina_is2.Logica.Managers.EstudianteManager;
 import com.mycompany.tp_maquina_is2.Logica.Managers.ExamenManager;
 import com.mycompany.tp_maquina_is2.Logica.Managers.HistoriaAcademicaManager;
+import com.mycompany.tp_maquina_is2.Logica.Managers.MesaManager;
 import com.mycompany.tp_maquina_is2.Logica.Managers.PlanEstudiosManager;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.Estudiante;
 import com.mycompany.tp_maquina_is2.Logica.Util.ArchivosManager;
@@ -45,6 +46,7 @@ public class Principal extends javax.swing.JFrame {
             EstudianteManager.init(conn);
             HistoriaAcademicaManager.init(conn);
             PlanEstudiosManager.init(conn);
+            MesaManager.init(conn);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Ha habido un problema conectando a la Base de Datos");
         }

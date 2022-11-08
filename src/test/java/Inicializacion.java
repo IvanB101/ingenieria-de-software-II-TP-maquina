@@ -35,6 +35,7 @@ public class Inicializacion {
 
             // Carga de datos de prueba
             EstudianteManager.agregar(new Estudiante(3010820, "Gino", "Paoletti", 44075067));
+            EstudianteManager.agregar(new Estudiante(3026220, "Juan", "Sanchez", 44330220));
         } catch (IOException | SQLException e) {
             e.printStackTrace();
         }
