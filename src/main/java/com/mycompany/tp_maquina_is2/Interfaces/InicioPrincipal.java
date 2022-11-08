@@ -7,6 +7,7 @@ package com.mycompany.tp_maquina_is2.Interfaces;
 
 import com.mycompany.tp_maquina_is2.Interfaces.Paneles.Estudiante.InicioEstudiante;
 import com.mycompany.tp_maquina_is2.Interfaces.Paneles.NoDocente.InicioNoDocente;
+import com.mycompany.tp_maquina_is2.Logica.Transferencia.Estudiante;
 import javax.swing.JPanel;
 
 /**
@@ -15,8 +16,13 @@ import javax.swing.JPanel;
  */
 public class InicioPrincipal extends javax.swing.JPanel {
 
+    private Estudiante user;
+    private String codPlan;
     /** Creates new form Inicio */
-    public InicioPrincipal() {
+    public InicioPrincipal(Estudiante user, String codPlan) {
+        this.user = user;
+        this.codPlan = codPlan;
+        
         initComponents();
     }
     
@@ -142,7 +148,7 @@ public class InicioPrincipal extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void estudianteBPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_estudianteBPMouseClicked
-        changePane(new InicioEstudiante());
+        changePane(new InicioEstudiante(user, codPlan));
     }//GEN-LAST:event_estudianteBPMouseClicked
 
     private void estudianteBPMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_estudianteBPMouseEntered
