@@ -1,7 +1,7 @@
-prueba1
+entregafinalv1
 jdbc:postgresql://localhost:5432/
 postgres
-admin
+gino
 
 Los anteriores son
 

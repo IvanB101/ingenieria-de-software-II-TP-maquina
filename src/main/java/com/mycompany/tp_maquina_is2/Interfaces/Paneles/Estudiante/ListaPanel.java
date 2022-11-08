@@ -110,8 +110,25 @@ public class ListaPanel extends javax.swing.JPanel {
                     modelo.addRow(new Object[]{key.getCodigo(), key.getNombre(), materias.get(key)});
                 }
                 //control 
-            }//fin if tiempo
-        }//control
+            }
+        }
+            
+            if (criterio.equals("Vencimiento de regularidad")){
+               TablaMaterias.getTableHeader().getColumnModel().getColumn(2).setHeaderValue("VENCE EN (semanas)");
+               TablaMaterias.getTableHeader().repaint();
+               for (Materia materia : keys2) {
+                    keys.add(materia);
+                }
+                keys.sort((c1, c2) -> {
+                    Long valuec1 = (Long) materias.get(c1);
+                    return valuec1.compareTo((Long) materias.get(c2));
+                });
+                for (Materia key : keys) {
+                    modelo.addRow(new Object[]{key.getCodigo(), key.getNombre(), materias.get(key)});
+                }
+            
+            
+            }
         } catch (ManagementException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
 
