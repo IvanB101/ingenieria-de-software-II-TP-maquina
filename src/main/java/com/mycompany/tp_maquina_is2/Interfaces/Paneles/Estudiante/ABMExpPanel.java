@@ -395,12 +395,13 @@ public class ABMExpPanel extends javax.swing.JPanel {
             int dificultad = SliderDif.getValue();
             int dedicacion = SliderDedi.getValue();
             String codExamen = (String) TablaExamenes.getValueAt(TablaExamenes.getSelectedRow(), 0);
+            Experiencia experiencia=new Experiencia(dificultad, diasEstudio, dedicacion, codExamen);
             if(caso==1){
-                ExamenManager.agregarExperiencia(new Experiencia(dificultad, diasEstudio, dedicacion, codExamen));
+                ExamenManager.agregarExperiencia(experiencia);
                 JOptionPane.showMessageDialog(null, "Experiencia cargada exitosamente!.");
                 LlenarTablaExamenesSinExp();
             }else{
-                ExamenManager.ModificarExperiencia(codExamen,new Experiencia(dificultad, diasEstudio, dedicacion, codExamen));
+                ExamenManager.ModificarExperiencia(codExamen,experiencia);
                 JOptionPane.showMessageDialog(null, "Experiencia modificada exitosamente!.");
                 LlenarTablaExamenesConExp();
             }
