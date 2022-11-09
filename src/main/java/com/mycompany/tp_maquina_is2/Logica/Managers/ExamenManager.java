@@ -66,7 +66,7 @@ public abstract class ExamenManager {
     public static void agregarExperiencia(Experiencia experiencia) throws ManagementException {
         try {
             experienciaDAOImp.create(experiencia);
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new ManagementException(e.getMessage());
         }
     }
@@ -75,7 +75,7 @@ public abstract class ExamenManager {
     public static ArrayList<Experiencia> getExperiencias(String codMateria, String codPlan) throws ManagementException {
         try {
             return experienciaDAOImp.getExperienciasDAO(codMateria, codPlan);
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new ManagementException(e.getMessage());
         }
 
@@ -83,8 +83,8 @@ public abstract class ExamenManager {
 
     public static ArrayList<Experiencia> getExperienciasAprobados(String codMateria, String codPlan) throws ManagementException {
         try {
-            return experienciaDAOImp.getExperienciasAprobadosDAO(codMateria,codPlan);
-        } catch (Exception e) {
+            return experienciaDAOImp.getExperienciasAprobadosDAO(codMateria, codPlan);
+        } catch (SQLException e) {
             throw new ManagementException(e.getMessage());
         }
     }
@@ -92,7 +92,7 @@ public abstract class ExamenManager {
     public static void ModificarExperiencia(String codigo, Experiencia experiencia) throws ManagementException {
         try {
             experienciaDAOImp.update(codigo, experiencia);
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new ManagementException(e.getMessage());
         }
     }
@@ -101,14 +101,14 @@ public abstract class ExamenManager {
         try {
             experienciaDAOImp.delete(codigo);
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new ManagementException(e.getMessage());
         }
     }
-    
+
     public static double promedioDificultad(String codMateria, String codPlan) throws ManagementException {
         ArrayList<Experiencia> experiencias = getExperiencias(codMateria, codPlan);
-        
+
         int cant = 0;
         for (Experiencia exp : experiencias) {
             cant += exp.getDificultad();
@@ -119,15 +119,15 @@ public abstract class ExamenManager {
     }
 
     public static int cantidadAprobadosUnaMateria(String codMateria, int dias, String codPlan) throws ManagementException {
-        ArrayList<Experiencia> experiencias = getExperiencias(codMateria,codPlan);
-        
+        ArrayList<Experiencia> experiencias = getExperiencias(codMateria, codPlan);
+
         int cant = 0;
         for (Experiencia exp : experiencias) {
             if (exp.getDias() <= dias) {
                 cant++;
             }
         }
-        
+
         return cant;
     }
 }

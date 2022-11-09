@@ -6,21 +6,14 @@ package com.mycompany.tp_maquina_is2.Interfaces.Paneles.Estudiante;
 
 import com.mycompany.tp_maquina_is2.Logica.Excepciones.ManagementException;
 import com.mycompany.tp_maquina_is2.Logica.Managers.HistoriaAcademicaManager;
-import com.mycompany.tp_maquina_is2.Logica.Transferencia.Materia;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
-
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Set;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
 
 /**
  *
@@ -46,10 +39,10 @@ public class ListaPanel extends javax.swing.JPanel {
         //doy aceptar
         ActionEvent evt = null;
         jButton1ActionPerformed(evt);
-        
+
         textfieldias.setVisible(false);
         labeldias.setVisible(false);
-        
+
         Inscripcion.setVisible(false);
         Inscripcion1.setVisible(false);
         mesa.setVisible(false);
@@ -60,89 +53,44 @@ public class ListaPanel extends javax.swing.JPanel {
         DefaultTableModel modelo = (DefaultTableModel) TablaMaterias.getModel();
         modelo.setRowCount(0);
         try {
-            HashMap<Materia, Object> materias = HistoriaAcademicaManager.listaExamenes(nroRegistro, codPlanEstudios, criterio, dias);
-            Set<Materia> keys2 = materias.keySet();
-            ArrayList<Materia> keys = new ArrayList<>();
-            if (criterio.equals("Correlativas")) {
-               TablaMaterias.getTableHeader().getColumnModel().getColumn(2).setHeaderValue("CORRELATIVAS");
-               TablaMaterias.getTableHeader().repaint();
-               for (Materia materia : keys2) {
-                    keys.add(materia);
-                }
-                keys.sort((c1, c2) -> {
-                    Integer valuec1 = (Integer) materias.get(c2);
-                    return valuec1.compareTo((Integer) materias.get(c1));
-                });
-                for (Materia key : keys) {
-                    modelo.addRow(new Object[]{key.getCodigo(), key.getNombre(), materias.get(key)});
-                }
+            switch (criterio) {
+                case "Correlativas":
+                    TablaMaterias.getTableHeader().getColumnModel().getColumn(2).setHeaderValue("CORRELATIVAS");
+                    break;
+                case "Dificultad":
+                    TablaMaterias.getTableHeader().getColumnModel().getColumn(2).setHeaderValue("DIFICULTAD PROMEDIO");
+                    break;
+                case "Tiempo":
+                    if (dias != 0) {
+                        try {
+                            dias = Integer.parseInt(textfieldias.getText().trim());
+                        } catch (HeadlessException | NumberFormatException e) {
+                            JOptionPane.showMessageDialog(null, e.getMessage());
+                        }
+                        
+                        TablaMaterias.getTableHeader().getColumnModel().getColumn(2).setHeaderValue("APROBARON EN " + dias + " DIAS O MENOS");
+                    }
+                    break;
 
-            }//fin if correlativas
-            if (criterio.equals("Dificultad")) { 
-                TablaMaterias.getTableHeader().getColumnModel().getColumn(2).setHeaderValue("DIFICULTAD PROMEDIO");
-                TablaMaterias.getTableHeader().repaint();
-                for (Materia materia : keys2) {
-                    keys.add(materia);
-                }
-                keys.sort((c1, c2) -> {
-                    Double valuec1D = (Double) materias.get(c2);
-                    return valuec1D.compareTo((Double) materias.get(c1));
-                });
-                
-                for (Materia key : keys) {
-                    modelo.addRow(new Object[]{key.getCodigo(), key.getNombre(), materias.get(key)});
-                }
-
-            }//fin if dificultad
-            if (criterio.equals("Tiempo")) {
-               if(dias != 0){
-                try {
-                    dias = Integer.parseInt(textfieldias.getText().trim());
-                } catch (HeadlessException | NumberFormatException e) {
-                    JOptionPane.showMessageDialog(null, e.getMessage());
-                }
-                TablaMaterias.getTableHeader().getColumnModel().getColumn(2).setHeaderValue("APROBARON EN "+dias+" DIAS O MENOS");
-                TablaMaterias.getTableHeader().repaint();
-                for (Materia materia : keys2) {
-                    keys.add(materia);
-                }
-                keys.sort((c1, c2) -> {
-                    Integer valuec1 = (Integer) materias.get(c2);
-                    return valuec1.compareTo((Integer) materias.get(c1));
-                });
-                for (Materia key : keys) {
-                    modelo.addRow(new Object[]{key.getCodigo(), key.getNombre(), materias.get(key)});
-                }
-                //control 
+                case "Vencimiento":
+                    TablaMaterias.getTableHeader().getColumnModel().getColumn(2).setHeaderValue("APROBARON EN " + dias + " DIAS O MENOS");
             }
-        }
-            
-            if (criterio.equals("Vencimiento")){
-               TablaMaterias.getTableHeader().getColumnModel().getColumn(2).setHeaderValue("VENCE EN (semanas)");
-               TablaMaterias.getTableHeader().repaint();
-               for (Materia materia : keys2) {
-                    keys.add(materia);
-                }
-                keys.sort((c1, c2) -> {
-                    Long valuec1 = (Long) materias.get(c1);
-                    return valuec1.compareTo((Long) materias.get(c2));
-                });
-                for (Materia key : keys) {
-                    modelo.addRow(new Object[]{key.getCodigo(), key.getNombre(), materias.get(key)});
-                }
-            
-            
+            TablaMaterias.getTableHeader().repaint();
+
+            ArrayList<Object[]> filasTabla = HistoriaAcademicaManager.listaExamenes(nroRegistro, codPlanEstudios, criterio, dias);
+
+            for (Object[] objects : filasTabla) {
+                modelo.addRow(objects);
             }
         } catch (ManagementException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
-
         }
-        
-
     }
 
     /**
-     * This method is called from within the constructor to initialize the form. WARNING: Do NOT modify this code. The content of this method is always regenerated by the Form Editor.
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
@@ -343,22 +291,22 @@ public class ListaPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-     private void changePane(JPanel jPanel) {
+    private void changePane(JPanel jPanel) {
         PanelCambiable.setLayout(new java.awt.CardLayout());
         PanelCambiable.removeAll();
         PanelCambiable.add(jPanel);
         PanelCambiable.revalidate();
         PanelCambiable.repaint();
     }
-    
+
     private void ComboBoxCriterioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBoxCriterioActionPerformed
-         if (ComboBoxCriterio.getSelectedItem().toString().equals("Tiempo")) {
+        if (ComboBoxCriterio.getSelectedItem().toString().equals("Tiempo")) {
             labeldias.setVisible(true);
             textfieldias.setVisible(true);
-        }else{
-           labeldias.setVisible(false);
-            textfieldias.setVisible(false);  
-         }
+        } else {
+            labeldias.setVisible(false);
+            textfieldias.setVisible(false);
+        }
 
     }//GEN-LAST:event_ComboBoxCriterioActionPerformed
 
@@ -368,9 +316,9 @@ public class ListaPanel extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         int dias = 0;
-        if(ComboBoxCriterio.getSelectedItem().toString().equals("Tiempo")){
-        try {
-            dias = Integer.parseInt(textfieldias.getText().trim());
+        if (ComboBoxCriterio.getSelectedItem().toString().equals("Tiempo")) {
+            try {
+                dias = Integer.parseInt(textfieldias.getText().trim());
             } catch (HeadlessException | NumberFormatException e) {
                 JOptionPane.showMessageDialog(null, "Debes ingresar la cantidad de días que tenés para estudiar");
             }
@@ -381,11 +329,11 @@ public class ListaPanel extends javax.swing.JPanel {
         Inscripcion.setVisible(true);
         Inscripcion1.setVisible(true);
         mesa.setVisible(true);
-        
+
     }//GEN-LAST:event_TablaMateriasMouseClicked
 
     private void InscripcionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_InscripcionMouseClicked
-        changePane(new InscripcionPanel(nroRegistro,codPlanEstudios,(String)TablaMaterias.getValueAt(TablaMaterias.getSelectedRow(),0),false));
+        changePane(new InscripcionPanel(nroRegistro, codPlanEstudios, (String) TablaMaterias.getValueAt(TablaMaterias.getSelectedRow(), 0), false));
     }//GEN-LAST:event_InscripcionMouseClicked
 
     private void InscripcionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_InscripcionMouseEntered
@@ -397,7 +345,7 @@ public class ListaPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_InscripcionMouseExited
 
     private void Inscripcion1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Inscripcion1MouseClicked
-        changePane(new InscripcionPanel(nroRegistro,codPlanEstudios,(String)TablaMaterias.getValueAt(TablaMaterias.getSelectedRow(),0),true));
+        changePane(new InscripcionPanel(nroRegistro, codPlanEstudios, (String) TablaMaterias.getValueAt(TablaMaterias.getSelectedRow(), 0), true));
     }//GEN-LAST:event_Inscripcion1MouseClicked
 
     private void Inscripcion1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Inscripcion1MouseEntered
@@ -407,8 +355,6 @@ public class ListaPanel extends javax.swing.JPanel {
     private void Inscripcion1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Inscripcion1MouseExited
         // TODO add your handling code here:
     }//GEN-LAST:event_Inscripcion1MouseExited
-
-    
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

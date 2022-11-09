@@ -20,7 +20,6 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.FormatFlagsConversionMismatchException;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import org.apache.poi.hssf.usermodel.HSSFCell;
@@ -82,14 +81,17 @@ public class ArchivosManager {
 
                 ArrayList<String> correlativas = new ArrayList<>();
 
-                int i = 0;
-                while (cellIterator.hasNext() && !cell.toString().equals("")) {
+                // Carga de los datos de una fila
+                for(int i = 0; i < 6; i++) {
                     cell = (HSSFCell) cellIterator.next();
                     datos[i] = cell.toString();
-
-                    i++;
+                }
+                
+                if(datos[0].equals("")) {
+                    break;
                 }
 
+                // Carga de las correlativas
                 if (!datos[5].equals("No tiene")) {
                     String[] codCorrelativas = datos[5].split("-");
 
@@ -102,6 +104,7 @@ public class ArchivosManager {
                     }
                 }
 
+                // Arreglo error de parseo en algunos de los codigos de las materias
                 String codMateria = datos[1];
                 if (codMateria.contains(".")) {
                     codMateria = (String) codMateria.subSequence(0, codMateria.indexOf("."));
