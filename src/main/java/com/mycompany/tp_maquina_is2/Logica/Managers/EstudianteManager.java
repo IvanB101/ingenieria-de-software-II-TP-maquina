@@ -20,11 +20,10 @@ import javax.swing.JOptionPane;
  */
 public abstract class EstudianteManager {
     private static EstudianteDAOImp estudianteDAOImp;
-    private static MesaExamenDAOImp mesaExamenDAOImp;
+    
     
     public static void init(Conexion conexion) {
         estudianteDAOImp = new EstudianteDAOImp(conexion);
-        mesaExamenDAOImp = new MesaExamenDAOImp(conexion);
     }
     
     public static void agregar(Estudiante estudiante) throws ManagementException {
@@ -73,38 +72,9 @@ public abstract class EstudianteManager {
          }
     }
     
-    public static void añadirInscripcion(String codigo,int nroRegistro) throws ManagementException {
-        try {
-             mesaExamenDAOImp.createInscripcion(codigo,nroRegistro);
-         } catch (SQLException e) {
-             throw new ManagementException(e.getMessage());
-         }
-    }
-       public static void deleteInscripcion(String codigo,int nroRegistro) throws ManagementException {
-        try {
-             mesaExamenDAOImp.deleteInscripcion(codigo, nroRegistro);
-         } catch (SQLException e) {
-             throw new ManagementException(e.getMessage());
-         }
-    }
-       public static ArrayList<MesaExamen> obtenerMesasEstudiante(int nroRegistro) throws ManagementException {
-        ArrayList<MesaExamen> mesas =new ArrayList();
-           try {
-             mesas=mesaExamenDAOImp.obtenerMesasInscriptas(nroRegistro);
-         } catch (SQLException e) {
-             throw new ManagementException(e.getMessage());
-         }
-           return mesas;
-    }
-       public static ArrayList<Estudiante> ObtenerInscriptosMesa(String codigo) throws ManagementException {
-        ArrayList<Estudiante> estudiantes=new ArrayList();
-           try {
-             estudiantes = mesaExamenDAOImp.obtenerEstudiantesMesa(codigo);
-         } catch (SQLException e) {
-             throw new ManagementException(e.getMessage());
-         }
-           return estudiantes;
-    }
+        
+    
+    
        
     
     

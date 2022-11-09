@@ -24,7 +24,9 @@ import javax.swing.JPanel;
  */
 public class InicioEstudiante extends javax.swing.JPanel {
 
-    private Estudiante user = new Estudiante(3010820, "Gino", "Paoletti", 44075067);
+    //private Estudiante user = new Estudiante(3010820, "Gino", "Paoletti", 44075067);
+    private Estudiante user = new Estudiante(3026220, "Juan", "Sanchez", 44330220);
+    private String codPlan = "";
 
     /**
      * Creates new form Inicio
@@ -262,7 +264,7 @@ public class InicioEstudiante extends javax.swing.JPanel {
         if (returnVal == Archivo.APPROVE_OPTION) {
             File file = Archivo.getSelectedFile();
             try {
-                ArchivosManager.cargarHistoriaAcademica(user.getNroRegistro(), "32/12", file);
+                ArchivosManager.cargarHistoriaAcademica(user.getNroRegistro(),this.codPlan, file);
 
                 JOptionPane.showMessageDialog(null, "Historia cargada correctamente");
             } catch (ManagementException e) {
@@ -289,7 +291,7 @@ public class InicioEstudiante extends javax.swing.JPanel {
     }//GEN-LAST:event_insertButtonPMouseExited
 
     private void deleteButtonPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteButtonPMouseClicked
-        changePane(new ListaPanel(user.getNroRegistro(), "32/12"));
+        changePane(new ListaPanel(user.getNroRegistro(), this.codPlan));
     }//GEN-LAST:event_deleteButtonPMouseClicked
 
     private void deleteButtonPMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteButtonPMouseEntered

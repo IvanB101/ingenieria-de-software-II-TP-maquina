@@ -5,7 +5,7 @@
 package com.mycompany.tp_maquina_is2.Interfaces.Paneles.Estudiante;
 
 import com.mycompany.tp_maquina_is2.Logica.Excepciones.ManagementException;
-import com.mycompany.tp_maquina_is2.Logica.Managers.EstudianteManager;
+import com.mycompany.tp_maquina_is2.Logica.Managers.MesaManager;
 import com.mycompany.tp_maquina_is2.Logica.Managers.ExamenManager;
 import com.mycompany.tp_maquina_is2.Logica.Managers.PlanEstudiosManager;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.Estudiante;
@@ -34,7 +34,7 @@ public class InscripcionPanel extends javax.swing.JPanel {
     /**
      * Creates new form ListaPanel
      */
-    public InscripcionPanel(int nroRegistro, String codPlanEstudios,String codMateria) {
+    public InscripcionPanel(int nroRegistro, String codPlanEstudios,String codMateria,boolean ver) {
         this.nroRegistro = nroRegistro;
         this.codPlanEstudios = codPlanEstudios;
         this.codMateria= codMateria;
@@ -43,8 +43,14 @@ public class InscripcionPanel extends javax.swing.JPanel {
         TablaMesasInscriptas.getTableHeader().setOpaque(true);
         TablaMesasInscriptas.getTableHeader().setBackground(new Color(0, 153, 153));
         jScrollPane1.getViewport().setBackground(new Color(255, 255, 255)); //tabla color blanco
-        TablaMesasInscriptas.getTableHeader().setReorderingAllowed(false);
-        InscribirMesa();
+        TablaInscriptos.getTableHeader().setReorderingAllowed(false);
+        TablaInscriptos.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
+        TablaInscriptos.getTableHeader().setOpaque(true);
+        TablaInscriptos.getTableHeader().setBackground(new Color(0, 153, 153));
+        jScrollPane2.getViewport().setBackground(new Color(255, 255, 255)); //tabla color blanco
+        TablaInscriptos.getTableHeader().setReorderingAllowed(false);
+        if(!ver){
+         InscribirMesa();}
         LlenarTablas();
     }
 
@@ -61,10 +67,12 @@ public class InscripcionPanel extends javax.swing.JPanel {
         PanelCambiable = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TablaMesasInscriptas = new javax.swing.JTable();
-        BorrarInscripcion = new javax.swing.JPanel();
-        estudianteBL = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         TablaInscriptos = new javax.swing.JTable();
+        jLabelMesasInscriptos = new javax.swing.JLabel();
+        jLabelMesasInscriptos1 = new javax.swing.JLabel();
+        jLabelExamenInscripto = new javax.swing.JLabel();
+        nombreMateria = new javax.swing.JLabel();
 
         PanelCambiable.setBackground(new java.awt.Color(255, 255, 255));
         PanelCambiable.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -111,45 +119,6 @@ public class InscripcionPanel extends javax.swing.JPanel {
 
         PanelCambiable.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 80, 330, 330));
 
-        BorrarInscripcion.setBackground(new java.awt.Color(118, 35, 47));
-        BorrarInscripcion.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        BorrarInscripcion.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        BorrarInscripcion.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BorrarInscripcionMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                BorrarInscripcionMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                BorrarInscripcionMouseExited(evt);
-            }
-        });
-
-        estudianteBL.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        estudianteBL.setForeground(new java.awt.Color(255, 255, 255));
-        estudianteBL.setText("Borrar Inscripcion");
-        estudianteBL.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-
-        javax.swing.GroupLayout BorrarInscripcionLayout = new javax.swing.GroupLayout(BorrarInscripcion);
-        BorrarInscripcion.setLayout(BorrarInscripcionLayout);
-        BorrarInscripcionLayout.setHorizontalGroup(
-            BorrarInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(BorrarInscripcionLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(estudianteBL)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        BorrarInscripcionLayout.setVerticalGroup(
-            BorrarInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(BorrarInscripcionLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(estudianteBL)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        PanelCambiable.add(BorrarInscripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 430, -1, -1));
-
         TablaInscriptos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -190,6 +159,21 @@ public class InscripcionPanel extends javax.swing.JPanel {
 
         PanelCambiable.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 330, 330));
 
+        jLabelMesasInscriptos.setFont(new java.awt.Font("Segoe UI Semibold", 1, 12)); // NOI18N
+        jLabelMesasInscriptos.setText("Si selecciona uno se eliminara la inscripcion");
+        PanelCambiable.add(jLabelMesasInscriptos, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 50, 330, -1));
+
+        jLabelMesasInscriptos1.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
+        jLabelMesasInscriptos1.setText("Examenes a los cuales esta inscripto:");
+        PanelCambiable.add(jLabelMesasInscriptos1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 20, 310, -1));
+
+        jLabelExamenInscripto.setFont(new java.awt.Font("Segoe UI Semibold", 1, 16)); // NOI18N
+        jLabelExamenInscripto.setText("Estudiantes que rendiran el examen de: ");
+        PanelCambiable.add(jLabelExamenInscripto, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
+
+        nombreMateria.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
+        PanelCambiable.add(nombreMateria, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 140, 20));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -207,51 +191,52 @@ public class InscripcionPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void TablaMesasInscriptasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaMesasInscriptasMouseClicked
-
-    }//GEN-LAST:event_TablaMesasInscriptasMouseClicked
-
-    private void BorrarInscripcionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BorrarInscripcionMouseClicked
         Materia codMateriaaux=null;
         try {
             codMateriaaux = PlanEstudiosManager.buscarMateria(String.valueOf(TablaMesasInscriptas.getValueAt(TablaMesasInscriptas.getSelectedRow(),3)), codPlanEstudios);
         } catch (ManagementException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
-        String codigo=codPlanEstudios+"-"+codMateriaaux.getCodigo()+"-"+String.valueOf(LocalDate.now().getYear())+"-"+String.valueOf(LocalDate.now().getMonthValue());
+        String codigo=codPlanEstudios+"-"+codMateriaaux.getCodigo()+"-"+String.valueOf(LocalDate.now().getYear())+"-"+"12";
         try {
-            EstudianteManager.deleteInscripcion(codigo, nroRegistro);
+            MesaManager.deleteInscripcion(codigo, nroRegistro);
         } catch (ManagementException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
+        JOptionPane.showMessageDialog(null, "Inscripcion eliminada correctamente!");
         LlenarTablas();
-    }//GEN-LAST:event_BorrarInscripcionMouseClicked
-
-    private void BorrarInscripcionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BorrarInscripcionMouseEntered
-
-    }//GEN-LAST:event_BorrarInscripcionMouseEntered
-
-    private void BorrarInscripcionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BorrarInscripcionMouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BorrarInscripcionMouseExited
+    }//GEN-LAST:event_TablaMesasInscriptasMouseClicked
 
     private void TablaInscriptosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaInscriptosMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_TablaInscriptosMouseClicked
 
-    public void InscribirMesa(){
-        String codigo=codPlanEstudios+"-"+codMateria+"-"+String.valueOf(LocalDate.now().getYear())+"-"+String.valueOf(LocalDate.now().getMonthValue());
+    public void InscribirMesa(){ 
+        // TODO SELECCIONAR TURNO Y ANIO MESA
+        String codigo=codPlanEstudios+"-"+codMateria+"-"+String.valueOf(LocalDate.now().getYear())+"-"+"12";
+        try{
+            MesaManager.agregarMesa(new MesaExamen(12,2022,codMateria,codPlanEstudios));
+        } catch (ManagementException ex){
+            
+        }
         try {
-            EstudianteManager.añadirInscripcion(codigo,nroRegistro);
+            MesaManager.añadirInscripcion(codigo,nroRegistro);
         } catch (ManagementException ex) {
-            JOptionPane.showMessageDialog(null, "Ya estas inscripto a la mesa!");
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
     }
     
     public void LlenarTablas(){
-        Materia codMateriaaux=null;
-        String codigo=codPlanEstudios+"-"+codMateria+"-"+String.valueOf(LocalDate.now().getYear())+"-"+String.valueOf(LocalDate.now().getMonthValue());
+        Materia materiaaux=null;
         try {
-            ArrayList<Estudiante> estudiantes = EstudianteManager.ObtenerInscriptosMesa(codigo);
+            materiaaux = PlanEstudiosManager.buscarMateria(codMateria, codPlanEstudios);
+            nombreMateria.setText(materiaaux.getNombre());
+        } catch (ManagementException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+        String codigo=codPlanEstudios+"-"+codMateria+"-"+String.valueOf(LocalDate.now().getYear())+"-"+"12";
+        try {
+            ArrayList<Estudiante> estudiantes = MesaManager.ObtenerInscriptosMesa(codigo);
             DefaultTableModel modelo = new DefaultTableModel(){
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -268,7 +253,7 @@ public class InscripcionPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
         try {
-            ArrayList<MesaExamen> mesas = EstudianteManager.obtenerMesasEstudiante(nroRegistro);
+            ArrayList<MesaExamen> mesas = MesaManager.obtenerMesasEstudiante(nroRegistro);
             DefaultTableModel modelo = new DefaultTableModel(){
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -281,10 +266,10 @@ public class InscripcionPanel extends javax.swing.JPanel {
             modelo.addColumn("COD MATERIA"); 
             for (MesaExamen mesa : mesas) {
                 try {
-                    codMateriaaux = PlanEstudiosManager.buscarMateria(mesa.getCodMateria(), mesa.getCodPlanEstudios());
+                    materiaaux = PlanEstudiosManager.buscarMateria(mesa.getCodMateria(), mesa.getCodPlanEstudios());
                     } catch (ManagementException ex) {
                         JOptionPane.showMessageDialog(null, ex.getMessage());}
-                modelo.addRow(new Object[]{mesa.getTurno(),mesa.getAnio(),codMateriaaux.getNombre(),mesa.getCodMateria()});
+                modelo.addRow(new Object[]{mesa.getTurno(),mesa.getAnio(),materiaaux.getNombre(),mesa.getCodMateria()});
             }
             TablaMesasInscriptas.setModel(modelo);
         } catch (ManagementException e) {
@@ -296,12 +281,14 @@ public class InscripcionPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel BorrarInscripcion;
     private javax.swing.JPanel PanelCambiable;
     private javax.swing.JTable TablaInscriptos;
     private javax.swing.JTable TablaMesasInscriptas;
-    private javax.swing.JLabel estudianteBL;
+    private javax.swing.JLabel jLabelExamenInscripto;
+    private javax.swing.JLabel jLabelMesasInscriptos;
+    private javax.swing.JLabel jLabelMesasInscriptos1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel nombreMateria;
     // End of variables declaration//GEN-END:variables
 }
