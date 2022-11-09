@@ -17,14 +17,12 @@ public class HistoriaAcademica {
     private String codPlanDeEstudios;
     private HashMap<String, Estado> estados;
     private ArrayList<String> codExamenes;
-    private ArrayList<String> codMateriasExamenes;
 
     public HistoriaAcademica(int nroRegEstudiante, String codPlanDeEstudios, HashMap<String, Estado> estados, ArrayList<String> codExamenes, ArrayList<String> codMateriasExamenes) {
         this.nroRegEstudiante = nroRegEstudiante;
         this.codPlanDeEstudios = codPlanDeEstudios;
         this.estados = estados;
         this.codExamenes = codExamenes;
-        this.codMateriasExamenes = codMateriasExamenes;
     }
 
     public HistoriaAcademica(int nroRegEstudiante, String codPlanDeEstudios) {
@@ -32,7 +30,6 @@ public class HistoriaAcademica {
         this.codPlanDeEstudios = codPlanDeEstudios;
         this.estados = new HashMap<>();
         this.codExamenes = new ArrayList<>();
-        this.codMateriasExamenes = new ArrayList<>();
     }
 
     public String getCodigo() {
@@ -68,14 +65,6 @@ public class HistoriaAcademica {
 
     public void setCodExamenes(ArrayList<String> codExamenes) {
         this.codExamenes = codExamenes;
-    }
-
-    public ArrayList<String> getCodMateriasExamenes() {
-        return codMateriasExamenes;
-    }
-
-    public void setCodMateriasExamenes(ArrayList<String> codMateriasExamenes) {
-        this.codMateriasExamenes = codMateriasExamenes;
     }
 
     @Override
