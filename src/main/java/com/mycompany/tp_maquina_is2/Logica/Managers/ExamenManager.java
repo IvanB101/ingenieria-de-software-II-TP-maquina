@@ -71,19 +71,19 @@ public abstract class ExamenManager {
         }
     }
 
-    //debería controlar el plan de estudios? creo que no pq c1 es la misma para tods
-    public static ArrayList<Experiencia> getExperiencias(String codMateria) throws ManagementException {
+    //debería controlar el plan de estudios? creo que no pq c1 es la misma
+    public static ArrayList<Experiencia> getExperiencias(String codMateria, String codPlan) throws ManagementException {
         try {
-            return experienciaDAOImp.getExperienciasDAO(codMateria);
+            return experienciaDAOImp.getExperienciasDAO(codMateria, codPlan);
         } catch (Exception e) {
             throw new ManagementException(e.getMessage());
         }
 
     }
 
-    public static ArrayList<Experiencia> getExperienciasAprobados(String codMateria) throws ManagementException {
+    public static ArrayList<Experiencia> getExperienciasAprobados(String codMateria, String codPlan) throws ManagementException {
         try {
-            return experienciaDAOImp.getExperienciasAprobadosDAO(codMateria);
+            return experienciaDAOImp.getExperienciasAprobadosDAO(codMateria,codPlan);
         } catch (Exception e) {
             throw new ManagementException(e.getMessage());
         }
@@ -106,8 +106,8 @@ public abstract class ExamenManager {
         }
     }
     
-    public static double promedioDificultad(String codMateria) throws ManagementException {
-        ArrayList<Experiencia> experiencias = getExperiencias(codMateria);
+    public static double promedioDificultad(String codMateria, String codPlan) throws ManagementException {
+        ArrayList<Experiencia> experiencias = getExperiencias(codMateria, codPlan);
         
         int cant = 0;
         for (Experiencia exp : experiencias) {
@@ -118,8 +118,8 @@ public abstract class ExamenManager {
 
     }
 
-    public static int cantidadAprobadosUnaMateria(String codMateria, int dias) throws ManagementException {
-        ArrayList<Experiencia> experiencias = getExperiencias(codMateria);
+    public static int cantidadAprobadosUnaMateria(String codMateria, int dias, String codPlan) throws ManagementException {
+        ArrayList<Experiencia> experiencias = getExperiencias(codMateria,codPlan);
         
         int cant = 0;
         for (Experiencia exp : experiencias) {

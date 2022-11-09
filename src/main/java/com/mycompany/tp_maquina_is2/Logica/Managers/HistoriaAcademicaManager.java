@@ -117,22 +117,22 @@ public abstract class HistoriaAcademicaManager {
                     }//fin correlativas
                     if (criterio.equals("Dificultad")) {
                         //saco la dificultad promedio de una materia, entrada: todas las exp de una materia
-                        if ((ExamenManager.getExperiencias(codMateria).size()) == 0) { //si la materia no tiene experiencias
+                        if ((ExamenManager.getExperiencias(codMateria, codPlanEstudios).size()) == 0) { //si la materia no tiene experiencias
                             ranking.put(PlanEstudiosManager.buscarMateria(codMateria, codPlanEstudios), 0.0); //0.0 PQ ES DOUBLE!!!!!!
                         } else {
-                            ranking.put(PlanEstudiosManager.buscarMateria(codMateria, codPlanEstudios), ExamenManager.promedioDificultad(codMateria));
+                            ranking.put(PlanEstudiosManager.buscarMateria(codMateria, codPlanEstudios), ExamenManager.promedioDificultad(codMateria,codPlanEstudios));
                         }
                     }//fin dificultad  
                     if (criterio.equals("Tiempo")) {
-                        if ((ExamenManager.getExperienciasAprobados(codMateria).size()) == 0) {//si no hay experiencias de aprobados
+                        if ((ExamenManager.getExperienciasAprobados(codMateria,codPlanEstudios).size()) == 0) {//si no hay experiencias de aprobados
                             ranking.put(PlanEstudiosManager.buscarMateria(codMateria, codPlanEstudios), 0);
                         } else {
-                            ranking.put(PlanEstudiosManager.buscarMateria(codMateria, codPlanEstudios), ExamenManager.cantidadAprobadosUnaMateria(codMateria, dias));
+                            ranking.put(PlanEstudiosManager.buscarMateria(codMateria, codPlanEstudios), ExamenManager.cantidadAprobadosUnaMateria(codMateria, dias,codPlanEstudios));
                         }
                     }//fin tiempo
                     //gracias a la linea 113 solo veo los estados de las regulares por lo que veo la fecha de la regularidad.
                     if (criterio.equals("Vencimiento")) {
-                        ranking.put(PlanEstudiosManager.buscarMateria(codMateria, codPlanEstudios), semanasVencimiento(estado.getFecha()));
+                        ranking.put(PlanEstudiosManager.buscarMateria(codMateria, codPlanEstudios),semanasVencimiento(estado.getFecha()));
                     }//fin vencimiento
                 }
             }
