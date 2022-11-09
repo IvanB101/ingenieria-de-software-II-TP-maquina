@@ -31,6 +31,8 @@ public class HistoriaAcademica {
         this.nroRegEstudiante = nroRegEstudiante;
         this.codPlanDeEstudios = codPlanDeEstudios;
         this.estados = new HashMap<>();
+        this.codExamenes = new ArrayList<>();
+        this.codMateriasExamenes = new ArrayList<>();
     }
 
     public String getCodigo() {

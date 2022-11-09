@@ -140,10 +140,8 @@ public class ArchivosManager {
             // Iterador sobre las filas de la hoja
             Iterator rowIterator = sheet0.rowIterator();
 
-            HashMap<String, Estado> estados = new HashMap<>();
-            ArrayList<String> codMateriasExamenes = new ArrayList<>();
             LinkedList<Examen> examenes = new LinkedList<>();
-            ArrayList<String> codExamenes = new ArrayList<>();
+            HistoriaAcademica historia = new HistoriaAcademica(nroRegistro, codPlanEstudios);
 
             if (!avanzarIteradorFilasHasta(rowIterator, "Actividad")) {
                 throw new ManagementException("Historia Academica invalida");
@@ -189,8 +187,8 @@ public class ArchivosManager {
                             nroRegistro + "-" + codPlanEstudios);
 
                     examenes.add(examen);
-                    codExamenes.add(examen.getCodigo());
-                    codMateriasExamenes.add(examen.getCodMateria());
+                    historia.getCodExamenes().add(examen.getCodigo());
+                    historia.getCodMateriasExamenes().add(examen.getCodMateria());
                 }
 
                 row = (HSSFRow) rowIterator.next();
@@ -214,7 +212,7 @@ public class ArchivosManager {
                 LocalDate fecha = LocalDate.of(Integer.parseInt(temp[2]), Integer.parseInt(temp[1]), Integer.parseInt(temp[0]));
                 // Si cambia la materia de la fila del excel se carga el estado y se pasa a cargar el siguiente
                 if (!codigoMateria(datos[0]).equals(estado.getCodMateria())) {
-                    estados.put(estado.getCodMateria(), estado);
+                    historia.getEstados().put(estado.getCodMateria(), estado);
 
                     estado = new Estado(
                             codigoMateria(datos[0]),
@@ -237,7 +235,7 @@ public class ArchivosManager {
             }
 
             //Carga de los datos de la ultima fila del excel
-            estados.put(estado.getCodMateria(), estado);
+            historia.getEstados().put(estado.getCodMateria(), estado);
 
             if (datos[2].equals("Examen")) {
                 temp = datos[1].split("/");
@@ -249,8 +247,7 @@ public class ArchivosManager {
                         nroRegistro + "-" + codPlanEstudios));
             }
             // Carga de los datos sacados del excel
-            HistoriaAcademicaManager.cargar(new HistoriaAcademica(nroRegistro, codPlanEstudios, estados,
-                    codExamenes, codMateriasExamenes));
+            HistoriaAcademicaManager.cargar(historia);
             ExamenManager.cargar(examenes);
         } catch (IOException e) {
             throw new ManagementException("Error en la lectura del archivo .xlsx");
