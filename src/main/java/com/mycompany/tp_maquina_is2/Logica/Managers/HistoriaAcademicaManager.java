@@ -177,6 +177,7 @@ public abstract class HistoriaAcademicaManager {
             }
         }//finfor
 
+
         // Pasaje del hashmap a una lista para poder ordenarla
         Set<Materia> keys2 = ranking.keySet();
         ArrayList<Materia> keys = new ArrayList<>();
@@ -184,6 +185,7 @@ public abstract class HistoriaAcademicaManager {
         for (Materia materia : keys2) {
             keys.add(materia);
         }
+
 
         // Se ordena la lista en funcion del criterio
         switch (criterio) {
