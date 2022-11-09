@@ -81,10 +81,6 @@ public class MesaExamenDAOImp implements MesaExamenDAOInter {
         return new MesaExamen(turno, anio, nroInscriptos, codMateria, codPlanEstudios);
     }
 
-    @Override
-    public void update(String codigo, MesaExamen mesaExamen) throws SQLException {
-        //TODO
-    }
 
     @Override
     public void delete(String codigo) throws SQLException {

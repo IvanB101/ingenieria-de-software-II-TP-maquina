@@ -73,7 +73,7 @@ public class ListaPanel extends javax.swing.JPanel {
                     break;
 
                 case "Vencimiento":
-                    TablaMaterias.getTableHeader().getColumnModel().getColumn(2).setHeaderValue("APROBARON EN " + dias + " DIAS O MENOS");
+                    TablaMaterias.getTableHeader().getColumnModel().getColumn(2).setHeaderValue("SE VENCE EN: (SEMANAS)");
             }
             TablaMaterias.getTableHeader().repaint();
 

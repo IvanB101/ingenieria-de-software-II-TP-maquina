@@ -17,7 +17,5 @@ public interface MesaExamenDAOInter {
 
     public MesaExamen read(String codigo) throws SQLException;
 
-    public void update(String codigo, MesaExamen nueva) throws SQLException;
-
     public void delete(String codigo) throws SQLException;
 }

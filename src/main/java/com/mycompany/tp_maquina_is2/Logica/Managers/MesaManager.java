@@ -109,7 +109,7 @@ public abstract class MesaManager {
      * @return los estudiantes que estan inscriptos a la mesa de examen
      * @throws ManagementException
      */
-    public static ArrayList<Estudiante> ObtenerInscriptosMesa(String codigo) throws ManagementException {
+    public static ArrayList<Estudiante> obtenerInscriptosMesa(String codigo) throws ManagementException {
         ArrayList<Estudiante> estudiantes = new ArrayList();
         try {
             estudiantes = mesaExamenDAOImp.obtenerEstudiantesMesa(codigo);
