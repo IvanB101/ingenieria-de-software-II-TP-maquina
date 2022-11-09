@@ -93,7 +93,7 @@ public class ABMPlanEstudios extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        contenedor.add(modificarBP, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 160, -1, -1));
+        contenedor.add(modificarBP, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 160, 90, -1));
 
         cargarBP.setBackground(new java.awt.Color(118, 35, 47));
         cargarBP.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -132,7 +132,7 @@ public class ABMPlanEstudios extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        contenedor.add(cargarBP, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, 70, -1));
+        contenedor.add(cargarBP, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, 90, -1));
 
         eliminarBP.setBackground(new java.awt.Color(118, 35, 47));
         eliminarBP.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -161,7 +161,7 @@ public class ABMPlanEstudios extends javax.swing.JPanel {
             .addGroup(eliminarBPLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(eliminarBL)
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         eliminarBPLayout.setVerticalGroup(
             eliminarBPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,7 +171,7 @@ public class ABMPlanEstudios extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        contenedor.add(eliminarBP, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 260, 80, -1));
+        contenedor.add(eliminarBP, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 260, -1, -1));
 
         add(contenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, 560));
     }// </editor-fold>//GEN-END:initComponents

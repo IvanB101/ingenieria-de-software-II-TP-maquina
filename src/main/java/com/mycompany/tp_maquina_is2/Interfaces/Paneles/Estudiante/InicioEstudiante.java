@@ -24,7 +24,6 @@ import javax.swing.JPanel;
  */
 public class InicioEstudiante extends javax.swing.JPanel {
 
-    //private Estudiante user = new Estudiante(3010820, "Gino", "Paoletti", 44075067);
     private Estudiante user;
     private String codPlan;
 
@@ -294,7 +293,7 @@ public class InicioEstudiante extends javax.swing.JPanel {
     }//GEN-LAST:event_insertButtonPMouseExited
 
     private void deleteButtonPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteButtonPMouseClicked
-        changePane(new ListaPanel(user.getNroRegistro(), this.codPlan));
+        changePane(new ListaPanel(user.getNroRegistro(), codPlan));
     }//GEN-LAST:event_deleteButtonPMouseClicked
 
     private void deleteButtonPMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteButtonPMouseEntered

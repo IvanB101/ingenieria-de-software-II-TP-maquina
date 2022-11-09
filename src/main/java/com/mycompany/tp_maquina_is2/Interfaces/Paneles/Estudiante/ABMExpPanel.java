@@ -37,7 +37,8 @@ public class ABMExpPanel extends javax.swing.JPanel {
         TablaExamenes.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.getViewport().setBackground(new Color(255, 255, 255)); //tabla color blanc
         this.PanelDatosExp.setVisible(false);
-        this.BotConfirmarBorrar.setVisible(false);
+        BorrarL.setVisible(false);
+        LlenarTablaExamenesSinExp();
     }
 
     /**
@@ -54,13 +55,13 @@ public class ABMExpPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         TablaExamenes = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        BotConfirmarBorrar = new javax.swing.JButton();
         AgregarButton = new javax.swing.JPanel();
         estudianteBL = new javax.swing.JLabel();
         EliminarButton = new javax.swing.JPanel();
         estudianteBL1 = new javax.swing.JLabel();
         ModificarButton = new javax.swing.JPanel();
         estudianteBL2 = new javax.swing.JLabel();
+        BorrarL = new javax.swing.JLabel();
         PanelDatosExp = new javax.swing.JPanel();
         SliderDif = new javax.swing.JSlider();
         SliderDedi = new javax.swing.JSlider();
@@ -98,15 +99,6 @@ public class ABMExpPanel extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setText("Lista de Examenes");
-
-        BotConfirmarBorrar.setBackground(new java.awt.Color(255, 0, 0));
-        BotConfirmarBorrar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        BotConfirmarBorrar.setText("Borrar Experiencia");
-        BotConfirmarBorrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BotConfirmarBorrarActionPerformed(evt);
-            }
-        });
 
         AgregarButton.setBackground(new java.awt.Color(118, 35, 47));
         AgregarButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -172,7 +164,7 @@ public class ABMExpPanel extends javax.swing.JPanel {
             .addGroup(EliminarButtonLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(estudianteBL1)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         EliminarButtonLayout.setVerticalGroup(
             EliminarButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -219,6 +211,9 @@ public class ABMExpPanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        BorrarL.setFont(new java.awt.Font("Segoe UI Semibold", 1, 16)); // NOI18N
+        BorrarL.setText("Si selecciona una fila, borrara esa experiencia de examen");
+
         javax.swing.GroupLayout panelExamRendidosLayout = new javax.swing.GroupLayout(panelExamRendidos);
         panelExamRendidos.setLayout(panelExamRendidosLayout);
         panelExamRendidosLayout.setHorizontalGroup(
@@ -238,12 +233,11 @@ public class ABMExpPanel extends javax.swing.JPanel {
                                 .addComponent(EliminarButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(ModificarButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(13, 13, 13)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelExamRendidosLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(BotConfirmarBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(56, 56, 56))
+                                .addGap(13, 13, 13))))
+                    .addGroup(panelExamRendidosLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(BorrarL)))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
         panelExamRendidosLayout.setVerticalGroup(
             panelExamRendidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -258,8 +252,8 @@ public class ABMExpPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(BotConfirmarBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(BorrarL)
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         PanelDatosExp.setBackground(new java.awt.Color(255, 255, 255));
@@ -362,7 +356,7 @@ public class ABMExpPanel extends javax.swing.JPanel {
                     .addComponent(SliderDedi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(DatosDed, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addComponent(ConfirmarDatosExp, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(136, 136, 136))
         );
@@ -396,9 +390,8 @@ public class ABMExpPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ConfirmarDatosExpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarDatosExpActionPerformed
-        int diasEstudio = 0;
         try {
-            diasEstudio = Integer.parseInt(DiasDeEstudio.getText().trim());
+            int diasEstudio = Integer.parseInt(DiasDeEstudio.getText().trim());
             int dificultad = SliderDif.getValue();
             int dedicacion = SliderDedi.getValue();
             String codExamen = (String) TablaExamenes.getValueAt(TablaExamenes.getSelectedRow(), 0);
@@ -435,11 +428,7 @@ public class ABMExpPanel extends javax.swing.JPanel {
     private void TablaExamenesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaExamenesMouseClicked
         if(caso==1 || caso==3){
             PanelDatosExp.setVisible(true);
-        }else
-            BotConfirmarBorrar.setVisible(true);
-    }//GEN-LAST:event_TablaExamenesMouseClicked
-
-    private void BotConfirmarBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotConfirmarBorrarActionPerformed
+        }else{
         String codExamen = (String) TablaExamenes.getValueAt(TablaExamenes.getSelectedRow(), 0);
         try{
         ExamenManager.EliminarExperiencia(codExamen);
@@ -448,12 +437,12 @@ public class ABMExpPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
         LlenarTablaExamenesConExp();
-        
-    }//GEN-LAST:event_BotConfirmarBorrarActionPerformed
+        }
+    }//GEN-LAST:event_TablaExamenesMouseClicked
 
     private void AgregarButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AgregarButtonMouseClicked
-        BotConfirmarBorrar.setVisible(false);
         LlenarTablaExamenesSinExp();
+        BorrarL.setVisible(false);
         caso=1;
     }//GEN-LAST:event_AgregarButtonMouseClicked
 
@@ -467,6 +456,7 @@ public class ABMExpPanel extends javax.swing.JPanel {
 
     private void EliminarButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EliminarButtonMouseClicked
         PanelDatosExp.setVisible(false);
+        BorrarL.setVisible(true);
         LlenarTablaExamenesConExp();
         caso=2;
     }//GEN-LAST:event_EliminarButtonMouseClicked
@@ -480,8 +470,8 @@ public class ABMExpPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_EliminarButtonMouseExited
 
     private void ModificarButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ModificarButtonMouseClicked
-        BotConfirmarBorrar.setVisible(false);
         LlenarTablaExamenesConExp();
+        BorrarL.setVisible(false);
         caso=3;
     }//GEN-LAST:event_ModificarButtonMouseClicked
 
@@ -549,7 +539,7 @@ public class ABMExpPanel extends javax.swing.JPanel {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel AgregarButton;
-    private javax.swing.JButton BotConfirmarBorrar;
+    private javax.swing.JLabel BorrarL;
     private javax.swing.JButton ConfirmarDatosExp;
     private javax.swing.JPanel Contenedor;
     private javax.swing.JLabel Datos;
