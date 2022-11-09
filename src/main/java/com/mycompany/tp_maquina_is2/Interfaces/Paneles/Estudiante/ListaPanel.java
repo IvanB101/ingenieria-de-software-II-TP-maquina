@@ -117,7 +117,7 @@ public class ListaPanel extends javax.swing.JPanel {
             }
         }
             
-            if (criterio.equals("Vencimiento de regularidad")){
+            if (criterio.equals("Vencimiento")){
                TablaMaterias.getTableHeader().getColumnModel().getColumn(2).setHeaderValue("VENCE EN (semanas)");
                TablaMaterias.getTableHeader().repaint();
                for (Materia materia : keys2) {
