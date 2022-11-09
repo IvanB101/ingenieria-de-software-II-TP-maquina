@@ -124,11 +124,12 @@ public class ExperienciaDAOImp implements ExperienciaDAOInter {
         ps.executeUpdate();
     }
 
-    public ArrayList<Experiencia> getExperienciasDAO(String codMateria) throws SQLException {
+    public ArrayList<Experiencia> getExperienciasDAO(String codMateria, String codPlan) throws SQLException {
         ArrayList<Experiencia> experiencias = new ArrayList();
         Connection con = conexion.getConnection();
-        PreparedStatement ps = con.prepareStatement("SELECT * FROM Experiencia WHERE Examen_Materia_codigo=?");
+        PreparedStatement ps = con.prepareStatement("SELECT * FROM Experiencia WHERE Examen_Materia_codigo=? and Examen_PlanEstudios_codigo=?");
         ps.setString(1, codMateria);
+        ps.setString(2, codPlan);
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
             experiencias.add(new Experiencia(
@@ -143,13 +144,14 @@ public class ExperienciaDAOImp implements ExperienciaDAOInter {
         return experiencias;
     }
     
-    public ArrayList<Experiencia> getExperienciasAprobadosDAO(String codMateria)throws SQLException{
+    public ArrayList<Experiencia> getExperienciasAprobadosDAO(String codMateria, String codPlan)throws SQLException{
         ArrayList<Experiencia> experiencias = new ArrayList();
         Connection con = conexion.getConnection();
         PreparedStatement ps = con.prepareStatement("SELECT dificultad, dedicacion, dias,Examen_HistoriaAcademica_Estudiante_nroRegistro, Examen_PlanEstudios_codigo,Examen_Materia_codigo, Examen_fecha "
                 + "FROM experiencia,examen "
-                + "WHERE experiencia.examen_fecha = examen.fecha and nota>=4 and examen_materia_codigo=?");
+                + "WHERE experiencia.examen_fecha = examen.fecha and nota>=4 and examen_materia_codigo=? and Examen_PlanEstudios_codigo=?");
         ps.setString(1, codMateria);
+        ps.setString(2, codPlan);
         ResultSet rs = ps.executeQuery();
         while(rs.next()){
             experiencias.add(new Experiencia(
