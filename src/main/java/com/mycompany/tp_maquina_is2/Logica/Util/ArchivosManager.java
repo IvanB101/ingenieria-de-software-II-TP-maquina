@@ -191,7 +191,6 @@ public class ArchivosManager {
 
                     examenes.add(examen);
                     historia.getCodExamenes().add(examen.getCodigo());
-                    historia.getCodMateriasExamenes().add(examen.getCodMateria());
                 }
 
                 row = (HSSFRow) rowIterator.next();

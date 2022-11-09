@@ -133,7 +133,8 @@ public abstract class HistoriaAcademicaManager {
      * @param codPlanEstudios codigo del plan de estudios de la carrera
      * @param criterio de prioridad para ordenar a las materias
      * @param dias con los que se cuenta para preparar la materia
-     * @return lista de arreglos de objetos para llenar la tabla de materias ordenadas segun el criterio
+     * @return lista de arreglos de objetos para llenar la tabla de materias
+     * ordenadas segun el criterio
      * @throws ManagementException
      */
     public static ArrayList<Object[]> listaExamenes(int nroRegistro, String codPlanEstudios, String criterio, int dias) throws ManagementException {
@@ -176,6 +177,8 @@ public abstract class HistoriaAcademicaManager {
             }
         }//finfor
 
+
+        // Pasaje del hashmap a una lista para poder ordenarla
         Set<Materia> keys2 = ranking.keySet();
         ArrayList<Materia> keys = new ArrayList<>();
 
@@ -183,6 +186,8 @@ public abstract class HistoriaAcademicaManager {
             keys.add(materia);
         }
 
+
+        // Se ordena la lista en funcion del criterio
         switch (criterio) {
             case "Correlativas":
                 keys.sort((c1, c2) -> {
@@ -211,6 +216,7 @@ public abstract class HistoriaAcademicaManager {
 
         ArrayList<Object[]> filasTabla = new ArrayList<>();
 
+        // Pasaje al formato necesario para llenar la tabla
         for (Materia key : keys) {
             filasTabla.add(new Object[]{key.getCodigo(), key.getNombre(), ranking.get(key)});
         }

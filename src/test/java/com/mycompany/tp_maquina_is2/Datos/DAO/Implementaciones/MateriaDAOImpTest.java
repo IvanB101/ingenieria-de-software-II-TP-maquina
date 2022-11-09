@@ -120,7 +120,7 @@ public class MateriaDAOImpTest {
         try {
             System.out.println("materiasFromPlanEstudios");
             
-            materiaDAOImp.materiasFromPlanEstudios(codPlanEstudios);
+            materiaDAOImp.materiasDePlan(codPlanEstudios);
         } catch (SQLException e) {
             System.out.println("Error: " + e.getMessage());
             failTest();

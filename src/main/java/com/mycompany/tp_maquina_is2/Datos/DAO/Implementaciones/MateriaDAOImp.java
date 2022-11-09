@@ -123,7 +123,7 @@ public class MateriaDAOImp implements MateriaDAOInter {
         ps.executeUpdate();
     }
 
-    public HashMap<String, Materia> materiasFromPlanEstudios(String codPlanEstudios) throws SQLException {
+    public HashMap<String, Materia> materiasDePlan(String codPlanEstudios) throws SQLException {
         HashMap<String, Materia> materias = new HashMap<>();
 
         Connection con = conexion.getConnection();

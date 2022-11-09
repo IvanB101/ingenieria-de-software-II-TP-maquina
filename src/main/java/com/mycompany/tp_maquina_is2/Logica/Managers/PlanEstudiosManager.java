@@ -64,7 +64,7 @@ public abstract class PlanEstudiosManager {
             if (planEstudios == null || !planEstudios.getCodigo().equals(codigo)) {
                 planEstudios = planEstudiosDAOImp.read(codigo);
 
-                planEstudios.setMaterias(materiaDAOImp.materiasFromPlanEstudios(codigo));
+                planEstudios.setMaterias(materiaDAOImp.materiasDePlan(codigo));
             }
 
             return planEstudios;
