@@ -105,4 +105,29 @@ public abstract class ExamenManager {
             throw new ManagementException(e.getMessage());
         }
     }
+    
+    public static double promedioDificultad(String codMateria) throws ManagementException {
+        ArrayList<Experiencia> experiencias = getExperiencias(codMateria);
+        
+        int cant = 0;
+        for (Experiencia exp : experiencias) {
+            cant += exp.getDificultad();
+        }
+
+        return cant / experiencias.size();
+
+    }
+
+    public static int cantidadAprobadosUnaMateria(String codMateria, int dias) throws ManagementException {
+        ArrayList<Experiencia> experiencias = getExperiencias(codMateria);
+        
+        int cant = 0;
+        for (Experiencia exp : experiencias) {
+            if (exp.getDias() <= dias) {
+                cant++;
+            }
+        }
+        
+        return cant;
+    }
 }

@@ -29,6 +29,7 @@ import javax.swing.JPanel;
 public class Principal extends javax.swing.JFrame {
 
     private Estudiante user = new Estudiante(3010820, "Gino", "Paoletti", 44075067);
+    private String codPlan = "32/12";
     private int xMouse, yMouse;
 
     /**
@@ -51,7 +52,7 @@ public class Principal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Ha habido un problema conectando a la Base de Datos");
         }
         
-        changePane(new com.mycompany.tp_maquina_is2.Interfaces.InicioPrincipal());
+        changePane(new com.mycompany.tp_maquina_is2.Interfaces.InicioPrincipal(user, codPlan));
     }
 
     /**

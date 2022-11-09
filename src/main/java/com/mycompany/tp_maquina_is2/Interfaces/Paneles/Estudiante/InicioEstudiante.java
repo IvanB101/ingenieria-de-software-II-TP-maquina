@@ -25,13 +25,16 @@ import javax.swing.JPanel;
 public class InicioEstudiante extends javax.swing.JPanel {
 
     //private Estudiante user = new Estudiante(3010820, "Gino", "Paoletti", 44075067);
-    private Estudiante user = new Estudiante(3026220, "Juan", "Sanchez", 44330220);
-    private String codPlan = "";
+    private Estudiante user;
+    private String codPlan;
 
     /**
      * Creates new form Inicio
      */
-    public InicioEstudiante() {
+    public InicioEstudiante(Estudiante user, String codPlan) {
+        this.user = user;
+        this.codPlan = codPlan;
+        
         initComponents();
 
         try {

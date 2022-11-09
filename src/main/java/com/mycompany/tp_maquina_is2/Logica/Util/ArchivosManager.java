@@ -83,7 +83,7 @@ public class ArchivosManager {
                 ArrayList<String> correlativas = new ArrayList<>();
 
                 int i = 0;
-                while (cellIterator.hasNext()) {
+                while (cellIterator.hasNext() && !cell.toString().equals("")) {
                     cell = (HSSFCell) cellIterator.next();
                     datos[i] = cell.toString();
 

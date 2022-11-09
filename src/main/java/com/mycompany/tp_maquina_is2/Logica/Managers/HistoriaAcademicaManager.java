@@ -10,7 +10,6 @@ import com.mycompany.tp_maquina_is2.Datos.DAO.Implementaciones.HistoriaAcademica
 import com.mycompany.tp_maquina_is2.Logica.Excepciones.ManagementException;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.Estado;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.Estado.Condicion;
-import com.mycompany.tp_maquina_is2.Logica.Transferencia.Experiencia;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.HistoriaAcademica;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.Materia;
 import java.sql.SQLException;
@@ -102,12 +101,9 @@ public abstract class HistoriaAcademicaManager {
     }
 
     public static HashMap<Materia, Object> listaExamenes(int nroRegistro, String codPlanEstudios, String criterio, int dias) throws ManagementException {
-        double dificultadPromedio;
-        int aprobados = 0;
-        long semanas = 0;
         HistoriaAcademica historia = buscar(nroRegistro, codPlanEstudios);
         HashMap<Materia, Object> ranking = new HashMap<>();
-        ArrayList<String> codCorrelativas = new ArrayList();
+        ArrayList<String> codCorrelativas;
         for (Estado estado : historia.getEstados().values()) { 
             String codMateria = estado.getCodMateria();
             if (estado.getCondicion().equals(Condicion.regular)) { 
@@ -124,22 +120,19 @@ public abstract class HistoriaAcademicaManager {
                         if ((ExamenManager.getExperiencias(codMateria).size()) == 0) { //si la materia no tiene experiencias
                             ranking.put(PlanEstudiosManager.buscarMateria(codMateria, codPlanEstudios), 0.0); //0.0 PQ ES DOUBLE!!!!!!
                         } else {
-                            dificultadPromedio = promedioDificultad(ExamenManager.getExperiencias(codMateria));
-                            ranking.put(PlanEstudiosManager.buscarMateria(codMateria, codPlanEstudios), dificultadPromedio);
+                            ranking.put(PlanEstudiosManager.buscarMateria(codMateria, codPlanEstudios), ExamenManager.promedioDificultad(codMateria));
                         }
                     }//fin dificultad  
                     if (criterio.equals("Tiempo")) {
                         if ((ExamenManager.getExperienciasAprobados(codMateria).size()) == 0) {//si no hay experiencias de aprobados
                             ranking.put(PlanEstudiosManager.buscarMateria(codMateria, codPlanEstudios), 0);
                         } else {
-                            aprobados = cantidadAprobadosUnaMateria(ExamenManager.getExperienciasAprobados(codMateria), dias);
-                            ranking.put(PlanEstudiosManager.buscarMateria(codMateria, codPlanEstudios), aprobados);
+                            ranking.put(PlanEstudiosManager.buscarMateria(codMateria, codPlanEstudios), ExamenManager.cantidadAprobadosUnaMateria(codMateria, dias));
                         }
                     }//fin tiempo
                     //gracias a la linea 113 solo veo los estados de las regulares por lo que veo la fecha de la regularidad.
                     if (criterio.equals("Vencimiento de regularidad")) {
-                        semanas = semanasVencimiento(estado.getFecha());
-                        ranking.put(PlanEstudiosManager.buscarMateria(codMateria, codPlanEstudios), semanas);
+                        ranking.put(PlanEstudiosManager.buscarMateria(codMateria, codPlanEstudios), semanasVencimiento(estado.getFecha()));
                     }//fin vencimiento
                 }
             }
@@ -169,27 +162,6 @@ public abstract class HistoriaAcademicaManager {
         Como no se modifica el plus lo modifica para mostrar pero no de verdad por eso esta instanciado asi
         
         */
-    } 
-
-    public static double promedioDificultad(ArrayList<Experiencia> experiencias) {
-        int cant = 0;
-        for (Experiencia exp : experiencias) {
-            cant += exp.getDificultad();
-        }
-
-        return cant / experiencias.size();
-
-    }
-
-    public static int cantidadAprobadosUnaMateria(ArrayList<Experiencia> experiencias, int dias) {
-        int cant = 0;
-        for (Experiencia exp : experiencias) {
-            if (exp.getDias() <= dias) {
-                cant++;
-            }
-        }
-        return cant;
-
     }
 
     public static HistoriaAcademica buscar(int nroRegistro, String codPlanEstudios) throws ManagementException {
