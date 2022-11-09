@@ -131,7 +131,7 @@ public abstract class HistoriaAcademicaManager {
                         }
                     }//fin tiempo
                     //gracias a la linea 113 solo veo los estados de las regulares por lo que veo la fecha de la regularidad.
-                    if (criterio.equals("Vencimiento de regularidad")) {
+                    if (criterio.equals("Vencimiento")) {
                         ranking.put(PlanEstudiosManager.buscarMateria(codMateria, codPlanEstudios), semanasVencimiento(estado.getFecha()));
                     }//fin vencimiento
                 }

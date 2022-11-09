@@ -90,7 +90,7 @@ public class ArchivosManager {
                     i++;
                 }
 
-                if (!datos[5].equals("No tiene") && !datos[5].equals("")) {
+                if (!datos[5].equals("No tiene")) {
                     String[] codCorrelativas = datos[5].split("-");
 
                     for (String codCorrelativa : codCorrelativas) {
