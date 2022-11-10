@@ -64,7 +64,7 @@ public class MesaExamenDAOImpTest {
             turno = 3;
 
             mesaExamenDAOImp = new MesaExamenDAOImp(Conexion.getInstance());
-            mesaExamen = new MesaExamen(turno, anio, new ArrayList<>(), codMateria, codPlanEstudios);
+            mesaExamen = new MesaExamen(turno, anio, new ArrayList(),codMateria, codPlanEstudios);
         } catch (IOException | SQLException e) {
             System.out.println("Error: " + e.getMessage());
             failTest();

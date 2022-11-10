@@ -6,18 +6,14 @@ package com.mycompany.tp_maquina_is2.Interfaces.Paneles.Estudiante;
 
 import com.mycompany.tp_maquina_is2.Logica.Excepciones.ManagementException;
 import com.mycompany.tp_maquina_is2.Logica.Managers.MesaManager;
-import com.mycompany.tp_maquina_is2.Logica.Managers.ExamenManager;
 import com.mycompany.tp_maquina_is2.Logica.Managers.PlanEstudiosManager;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.Estudiante;
-import com.mycompany.tp_maquina_is2.Logica.Transferencia.Examen;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.Materia;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.MesaExamen;
 import java.awt.Color;
 import java.awt.Font;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -216,9 +212,7 @@ public class InscripcionPanel extends javax.swing.JPanel {
         String codigo=codPlanEstudios+"-"+codMateria+"-"+String.valueOf(LocalDate.now().getYear())+"-"+"12";
         try{
             MesaManager.agregarMesa(new MesaExamen(12,2022,codMateria,codPlanEstudios));
-        } catch (ManagementException ex){
-            
-        }
+        } catch (ManagementException ex){}
         try {
             MesaManager.añadirInscripcion(codigo,nroRegistro);
         } catch (ManagementException ex) {
@@ -236,7 +230,7 @@ public class InscripcionPanel extends javax.swing.JPanel {
         }
         String codigo=codPlanEstudios+"-"+codMateria+"-"+String.valueOf(LocalDate.now().getYear())+"-"+"12";
         try {
-            ArrayList<Estudiante> estudiantes = MesaManager.ObtenerInscriptosMesa(codigo);
+            ArrayList<Estudiante> estudiantes = MesaManager.obtenerInscriptosMesa(codigo);
             DefaultTableModel modelo = new DefaultTableModel(){
             @Override
             public boolean isCellEditable(int row, int column) {
