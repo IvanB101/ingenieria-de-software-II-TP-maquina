@@ -11,7 +11,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.LinkedList;
 
 /**
@@ -49,7 +48,7 @@ public class PlanEstudiosDAOImp implements PlanEstudiosDAOInter {
 
         rs.next();
 
-        return new PlanEstudios(rs.getString("codigo"), rs.getString("propuesta"));
+        return new PlanEstudios(codigo, rs.getString("propuesta"));
     }
 
     @Override
