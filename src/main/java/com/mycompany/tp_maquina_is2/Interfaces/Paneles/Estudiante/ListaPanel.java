@@ -73,7 +73,7 @@ public class ListaPanel extends javax.swing.JPanel {
                     break;
 
                 case "Vencimiento":
-                    TablaMaterias.getTableHeader().getColumnModel().getColumn(2).setHeaderValue("APROBARON EN " + dias + " DIAS O MENOS");
+                    TablaMaterias.getTableHeader().getColumnModel().getColumn(2).setHeaderValue("SE VENCE EN: (SEMANAS)");
             }
             TablaMaterias.getTableHeader().repaint();
 
@@ -211,7 +211,7 @@ public class ListaPanel extends javax.swing.JPanel {
         estudianteBL.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         estudianteBL.setForeground(new java.awt.Color(255, 255, 255));
         estudianteBL.setText("Inscribirse a examen");
-        estudianteBL.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        estudianteBL.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout InscripcionLayout = new javax.swing.GroupLayout(Inscripcion);
         Inscripcion.setLayout(InscripcionLayout);
@@ -250,7 +250,7 @@ public class ListaPanel extends javax.swing.JPanel {
         estudianteBL1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         estudianteBL1.setForeground(new java.awt.Color(255, 255, 255));
         estudianteBL1.setText("Ver Lista Inscriptos");
-        estudianteBL1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        estudianteBL1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout Inscripcion1Layout = new javax.swing.GroupLayout(Inscripcion1);
         Inscripcion1.setLayout(Inscripcion1Layout);

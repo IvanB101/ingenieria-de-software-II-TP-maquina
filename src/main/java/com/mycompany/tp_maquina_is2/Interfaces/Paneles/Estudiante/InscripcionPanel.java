@@ -6,18 +6,14 @@ package com.mycompany.tp_maquina_is2.Interfaces.Paneles.Estudiante;
 
 import com.mycompany.tp_maquina_is2.Logica.Excepciones.ManagementException;
 import com.mycompany.tp_maquina_is2.Logica.Managers.MesaManager;
-import com.mycompany.tp_maquina_is2.Logica.Managers.ExamenManager;
 import com.mycompany.tp_maquina_is2.Logica.Managers.PlanEstudiosManager;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.Estudiante;
-import com.mycompany.tp_maquina_is2.Logica.Transferencia.Examen;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.Materia;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.MesaExamen;
 import java.awt.Color;
 import java.awt.Font;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -50,7 +46,7 @@ public class InscripcionPanel extends javax.swing.JPanel {
         jScrollPane2.getViewport().setBackground(new Color(255, 255, 255)); //tabla color blanco
         TablaInscriptos.getTableHeader().setReorderingAllowed(false);
         if(!ver){
-         InscribirMesa();}
+         AltaInscripcion();}
         LlenarTablas();
     }
 
@@ -191,34 +187,33 @@ public class InscripcionPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void TablaMesasInscriptasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaMesasInscriptasMouseClicked
-        Materia codMateriaaux=null;
+        switch (JOptionPane.showConfirmDialog(this, "Esta seguro de que desea borrar la inscripcion a la mesa (materia: "
+                + TablaMesasInscriptas.getValueAt(TablaMesasInscriptas.getSelectedRow(), 2)+")")){
+            case JOptionPane.OK_OPTION:
         try {
-            codMateriaaux = PlanEstudiosManager.buscarMateria(String.valueOf(TablaMesasInscriptas.getValueAt(TablaMesasInscriptas.getSelectedRow(),3)), codPlanEstudios);
+            MesaManager.deleteInscripcion(codPlanEstudios,String.valueOf(TablaMesasInscriptas.getValueAt(TablaMesasInscriptas.getSelectedRow(),3)), nroRegistro);
+            JOptionPane.showMessageDialog(null, "Inscripcion eliminada correctamente!");
+            DefaultTableModel modelo = (DefaultTableModel)TablaMesasInscriptas.getModel();
+            modelo.removeRow(TablaMesasInscriptas.getSelectedRow());
+            TablaMesasInscriptas.setModel(modelo);
         } catch (ManagementException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
-        String codigo=codPlanEstudios+"-"+codMateriaaux.getCodigo()+"-"+String.valueOf(LocalDate.now().getYear())+"-"+"12";
-        try {
-            MesaManager.deleteInscripcion(codigo, nroRegistro);
-        } catch (ManagementException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage());
+        break;
         }
-        JOptionPane.showMessageDialog(null, "Inscripcion eliminada correctamente!");
-        LlenarTablas();
+
     }//GEN-LAST:event_TablaMesasInscriptasMouseClicked
 
     private void TablaInscriptosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaInscriptosMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_TablaInscriptosMouseClicked
 
-    public void InscribirMesa(){ 
+    public void AltaInscripcion(){ 
         // TODO SELECCIONAR TURNO Y ANIO MESA
         String codigo=codPlanEstudios+"-"+codMateria+"-"+String.valueOf(LocalDate.now().getYear())+"-"+"12";
         try{
             MesaManager.agregarMesa(new MesaExamen(12,2022,codMateria,codPlanEstudios));
-        } catch (ManagementException ex){
-            
-        }
+        } catch (ManagementException ex){}
         try {
             MesaManager.añadirInscripcion(codigo,nroRegistro);
         } catch (ManagementException ex) {
@@ -236,7 +231,7 @@ public class InscripcionPanel extends javax.swing.JPanel {
         }
         String codigo=codPlanEstudios+"-"+codMateria+"-"+String.valueOf(LocalDate.now().getYear())+"-"+"12";
         try {
-            ArrayList<Estudiante> estudiantes = MesaManager.ObtenerInscriptosMesa(codigo);
+            ArrayList<Estudiante> estudiantes = MesaManager.obtenerInscriptosMesa(codigo);
             DefaultTableModel modelo = new DefaultTableModel(){
             @Override
             public boolean isCellEditable(int row, int column) {

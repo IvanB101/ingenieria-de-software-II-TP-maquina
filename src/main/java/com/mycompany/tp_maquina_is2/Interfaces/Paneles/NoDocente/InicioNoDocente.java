@@ -74,7 +74,7 @@ public class InicioNoDocente extends javax.swing.JPanel {
         MenuTop.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         planEstudiosBP.setBackground(new java.awt.Color(118, 35, 47));
-        planEstudiosBP.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        planEstudiosBP.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         planEstudiosBP.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         planEstudiosBP.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -91,7 +91,7 @@ public class InicioNoDocente extends javax.swing.JPanel {
         planEstudiosBL.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         planEstudiosBL.setForeground(new java.awt.Color(255, 255, 255));
         planEstudiosBL.setText("Planes de Estudios");
-        planEstudiosBL.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        planEstudiosBL.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout planEstudiosBPLayout = new javax.swing.GroupLayout(planEstudiosBP);
         planEstudiosBP.setLayout(planEstudiosBPLayout);
@@ -113,7 +113,7 @@ public class InicioNoDocente extends javax.swing.JPanel {
         MenuTop.add(planEstudiosBP, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, 170, -1));
 
         estadisticasBP.setBackground(new java.awt.Color(118, 35, 47));
-        estadisticasBP.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        estadisticasBP.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         estadisticasBP.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         estadisticasBP.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -130,7 +130,7 @@ public class InicioNoDocente extends javax.swing.JPanel {
         estadisticasBL.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         estadisticasBL.setForeground(new java.awt.Color(255, 255, 255));
         estadisticasBL.setText("Estadisticas");
-        estadisticasBL.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        estadisticasBL.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout estadisticasBPLayout = new javax.swing.GroupLayout(estadisticasBP);
         estadisticasBP.setLayout(estadisticasBPLayout);
@@ -139,7 +139,7 @@ public class InicioNoDocente extends javax.swing.JPanel {
             .addGroup(estadisticasBPLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(estadisticasBL)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         estadisticasBPLayout.setVerticalGroup(
             estadisticasBPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

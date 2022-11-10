@@ -64,7 +64,7 @@ public class MesaExamenDAOImp implements MesaExamenDAOInter {
         rs.next();
         rs.getInt("turno");
 
-        ps = con.prepareStatement("SELECT FROM Inscripcion "
+        ps = con.prepareStatement("SELECT * FROM Inscripcion "
                 + "WHERE MesaExamen_turno=? AND MesaExamen_anio=? AND MesaExamen_Materia_codigo=? "
                 + "AND MesaExamen_Materia_PlanEstudios_codigo=?");
         ps.setInt(1, turno);
@@ -81,10 +81,6 @@ public class MesaExamenDAOImp implements MesaExamenDAOInter {
         return new MesaExamen(turno, anio, nroInscriptos, codMateria, codPlanEstudios);
     }
 
-    @Override
-    public void update(String codigo, MesaExamen mesaExamen) throws SQLException {
-        //TODO
-    }
 
     @Override
     public void delete(String codigo) throws SQLException {
