@@ -4,6 +4,7 @@
  */
 package com.mycompany.tp_maquina_is2.Logica.Util;
 
+import com.mycompany.tp_maquina_is2.Logica.Util.Facade.ExcelFacade;
 import com.mycompany.tp_maquina_is2.Logica.Excepciones.ManagementException;
 import com.mycompany.tp_maquina_is2.Logica.Managers.ExamenManager;
 import com.mycompany.tp_maquina_is2.Logica.Managers.HistoriaAcademicaManager;
@@ -35,7 +36,7 @@ public class ArchivosManager {
      */
     public static void cargarPlanEstudios(File file) throws ManagementException {
         try {
-            ExcelFacade excel = new ExcelFacade(file);
+            ExcelFacade excel = ExcelFacade.leerDocumento(file);
 
             excel.avanzarHasta("Carrera", 0);
 
@@ -105,7 +106,7 @@ public class ArchivosManager {
      */
     public static void cargarHistoriaAcademica(int nroRegistro, String codPlanEstudios, File file) throws ManagementException {
         try {
-            ExcelFacade excel = new ExcelFacade(file);
+            ExcelFacade excel = ExcelFacade.leerDocumento(file);
 
             LinkedList<Examen> examenes = new LinkedList<>();
             HistoriaAcademica historia = new HistoriaAcademica(nroRegistro, codPlanEstudios);

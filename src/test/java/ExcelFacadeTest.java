@@ -1,5 +1,5 @@
 
-import com.mycompany.tp_maquina_is2.Logica.Util.ExcelFacade;
+import com.mycompany.tp_maquina_is2.Logica.Util.Facade.ExcelFacade;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
@@ -19,7 +19,7 @@ public class ExcelFacadeTest {
         try {
             File file = new File("D:\\Documentos\\GitHub\\TP_Maquina_IS2\\datos_prueba\\historia-gino.xls");
 
-            ExcelFacade excel = new ExcelFacade(file);
+            ExcelFacade excel = ExcelFacade.leerDocumento(file);
             
             excel.avanzarHasta("Actividad", 0);
             
