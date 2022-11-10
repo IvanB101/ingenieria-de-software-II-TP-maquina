@@ -32,6 +32,7 @@ public class Principal extends javax.swing.JFrame {
     public Principal() {
         initComponents();
         this.setLocationRelativeTo(null);
+         this.setResizable(false);
 
         try {
             Conexion conn = Conexion.getInstance();
@@ -60,11 +61,6 @@ public class Principal extends javax.swing.JFrame {
 
         Archivo = new javax.swing.JFileChooser();
         Contenedor = new javax.swing.JPanel();
-        MenuTop = new javax.swing.JPanel();
-        titulo = new javax.swing.JLabel();
-        closeButtonP = new javax.swing.JPanel();
-        closeButtonL = new javax.swing.JLabel();
-        estudianteBP1 = new javax.swing.JPanel();
         Cambiable = new javax.swing.JPanel();
 
         Archivo.setCurrentDirectory(new java.io.File("C:\\Users\\juan_\\Desktop"));
@@ -76,108 +72,15 @@ public class Principal extends javax.swing.JFrame {
         });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Contenedor.setBackground(new java.awt.Color(255, 255, 255));
         Contenedor.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        MenuTop.setBackground(new java.awt.Color(118, 35, 47));
-        MenuTop.setToolTipText("");
-        MenuTop.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                MenuTopMouseDragged(evt);
-            }
-        });
-        MenuTop.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                MenuTopMousePressed(evt);
-            }
-        });
-        MenuTop.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        titulo.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        titulo.setForeground(new java.awt.Color(255, 255, 255));
-        titulo.setText("Sistema de asistencia universitaria");
-        titulo.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tituloMouseClicked(evt);
-            }
-        });
-        MenuTop.add(titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 20, 410, -1));
-
-        closeButtonP.setBackground(new java.awt.Color(118, 35, 47));
-        closeButtonP.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        closeButtonP.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                closeButtonPMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                closeButtonPMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                closeButtonPMouseExited(evt);
-            }
-        });
-
-        closeButtonL.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
-        closeButtonL.setForeground(new java.awt.Color(255, 255, 255));
-        closeButtonL.setText(" x");
-        closeButtonL.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-
-        javax.swing.GroupLayout closeButtonPLayout = new javax.swing.GroupLayout(closeButtonP);
-        closeButtonP.setLayout(closeButtonPLayout);
-        closeButtonPLayout.setHorizontalGroup(
-            closeButtonPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(closeButtonPLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(closeButtonL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        closeButtonPLayout.setVerticalGroup(
-            closeButtonPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(closeButtonPLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(closeButtonL, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        MenuTop.add(closeButtonP, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 0, 50, 50));
-
-        estudianteBP1.setBackground(new java.awt.Color(118, 35, 47));
-        estudianteBP1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        estudianteBP1.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        estudianteBP1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                estudianteBP1MouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                estudianteBP1MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                estudianteBP1MouseExited(evt);
-            }
-        });
-
-        javax.swing.GroupLayout estudianteBP1Layout = new javax.swing.GroupLayout(estudianteBP1);
-        estudianteBP1.setLayout(estudianteBP1Layout);
-        estudianteBP1Layout.setHorizontalGroup(
-            estudianteBP1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 40, Short.MAX_VALUE)
-        );
-        estudianteBP1Layout.setVerticalGroup(
-            estudianteBP1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 50, Short.MAX_VALUE)
-        );
-
-        MenuTop.add(estudianteBP1, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 20, 40, -1));
-
-        Contenedor.add(MenuTop, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, 67));
-
         Cambiable.setBackground(new java.awt.Color(255, 255, 255));
         Cambiable.setPreferredSize(new java.awt.Dimension(950, 500));
         Cambiable.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        Contenedor.add(Cambiable, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 920, 580));
+        Contenedor.add(Cambiable, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 670));
 
         getContentPane().add(Contenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
@@ -192,47 +95,9 @@ public class Principal extends javax.swing.JFrame {
         Cambiable.repaint();
     }
 
-    private void closeButtonPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeButtonPMouseClicked
-        System.exit(0);
-    }//GEN-LAST:event_closeButtonPMouseClicked
-
-    private void closeButtonPMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeButtonPMouseEntered
-        closeButtonP.setBackground(Color.red);
-    }//GEN-LAST:event_closeButtonPMouseEntered
-
-    private void closeButtonPMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeButtonPMouseExited
-        closeButtonP.setBackground(new Color(118, 35, 47));
-    }//GEN-LAST:event_closeButtonPMouseExited
-
-    private void MenuTopMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuTopMouseDragged
-        int x = evt.getXOnScreen(), y = evt.getYOnScreen();
-        this.setLocation(x - xMouse, y - yMouse);
-    }//GEN-LAST:event_MenuTopMouseDragged
-
-    private void MenuTopMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuTopMousePressed
-        xMouse = evt.getX();
-        yMouse = evt.getY();
-    }//GEN-LAST:event_MenuTopMousePressed
-
     private void ArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ArchivoActionPerformed
 
     }//GEN-LAST:event_ArchivoActionPerformed
-
-    private void estudianteBP1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_estudianteBP1MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_estudianteBP1MouseClicked
-
-    private void estudianteBP1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_estudianteBP1MouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_estudianteBP1MouseEntered
-
-    private void estudianteBP1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_estudianteBP1MouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_estudianteBP1MouseExited
-
-    private void tituloMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tituloMouseClicked
-        changePane(new InicioPrincipal(user, codPlan));
-    }//GEN-LAST:event_tituloMouseClicked
 
     /**
      * @param args the command line arguments
@@ -249,10 +114,5 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JFileChooser Archivo;
     private javax.swing.JPanel Cambiable;
     private javax.swing.JPanel Contenedor;
-    private javax.swing.JPanel MenuTop;
-    private javax.swing.JLabel closeButtonL;
-    private javax.swing.JPanel closeButtonP;
-    private javax.swing.JPanel estudianteBP1;
-    private javax.swing.JLabel titulo;
     // End of variables declaration//GEN-END:variables
 }

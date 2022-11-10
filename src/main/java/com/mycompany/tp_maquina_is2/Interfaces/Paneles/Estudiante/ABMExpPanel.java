@@ -56,13 +56,10 @@ public class ABMExpPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         TablaExamenes = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        AgregarButton = new javax.swing.JPanel();
-        estudianteBL = new javax.swing.JLabel();
-        EliminarButton = new javax.swing.JPanel();
-        estudianteBL1 = new javax.swing.JLabel();
-        ModificarButton = new javax.swing.JPanel();
-        estudianteBL2 = new javax.swing.JLabel();
         BorrarL = new javax.swing.JLabel();
+        agregarexpLabel = new javax.swing.JLabel();
+        eliminarExpLabel = new javax.swing.JLabel();
+        modificarExpLabel = new javax.swing.JLabel();
         PanelDatosExp = new javax.swing.JPanel();
         SliderDif = new javax.swing.JSlider();
         SliderDedi = new javax.swing.JSlider();
@@ -78,6 +75,7 @@ public class ABMExpPanel extends javax.swing.JPanel {
         Contenedor.setPreferredSize(new java.awt.Dimension(920, 500));
 
         panelExamRendidos.setBackground(new java.awt.Color(255, 255, 255));
+        panelExamRendidos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         TablaExamenes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -98,166 +96,55 @@ public class ABMExpPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(TablaExamenes);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        panelExamRendidos.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 123, 390, 319));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(51, 51, 51));
         jLabel1.setText("Lista de Examenes");
-
-        AgregarButton.setBackground(new java.awt.Color(118, 35, 47));
-        AgregarButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        AgregarButton.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        AgregarButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                AgregarButtonMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                AgregarButtonMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                AgregarButtonMouseExited(evt);
-            }
-        });
-
-        estudianteBL.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        estudianteBL.setForeground(new java.awt.Color(255, 255, 255));
-        estudianteBL.setText("Agregar");
-        estudianteBL.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
-        javax.swing.GroupLayout AgregarButtonLayout = new javax.swing.GroupLayout(AgregarButton);
-        AgregarButton.setLayout(AgregarButtonLayout);
-        AgregarButtonLayout.setHorizontalGroup(
-            AgregarButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(AgregarButtonLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(estudianteBL)
-                .addContainerGap(23, Short.MAX_VALUE))
-        );
-        AgregarButtonLayout.setVerticalGroup(
-            AgregarButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(AgregarButtonLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(estudianteBL)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        EliminarButton.setBackground(new java.awt.Color(118, 35, 47));
-        EliminarButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        EliminarButton.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        EliminarButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                EliminarButtonMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                EliminarButtonMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                EliminarButtonMouseExited(evt);
-            }
-        });
-
-        estudianteBL1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        estudianteBL1.setForeground(new java.awt.Color(255, 255, 255));
-        estudianteBL1.setText("Eliminar");
-        estudianteBL1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
-        javax.swing.GroupLayout EliminarButtonLayout = new javax.swing.GroupLayout(EliminarButton);
-        EliminarButton.setLayout(EliminarButtonLayout);
-        EliminarButtonLayout.setHorizontalGroup(
-            EliminarButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(EliminarButtonLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(estudianteBL1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        EliminarButtonLayout.setVerticalGroup(
-            EliminarButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(EliminarButtonLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(estudianteBL1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        ModificarButton.setBackground(new java.awt.Color(118, 35, 47));
-        ModificarButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        ModificarButton.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        ModificarButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                ModificarButtonMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                ModificarButtonMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                ModificarButtonMouseExited(evt);
-            }
-        });
-
-        estudianteBL2.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        estudianteBL2.setForeground(new java.awt.Color(255, 255, 255));
-        estudianteBL2.setText("Modificar");
-        estudianteBL2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
-        javax.swing.GroupLayout ModificarButtonLayout = new javax.swing.GroupLayout(ModificarButton);
-        ModificarButton.setLayout(ModificarButtonLayout);
-        ModificarButtonLayout.setHorizontalGroup(
-            ModificarButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ModificarButtonLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(estudianteBL2)
-                .addContainerGap(29, Short.MAX_VALUE))
-        );
-        ModificarButtonLayout.setVerticalGroup(
-            ModificarButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ModificarButtonLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(estudianteBL2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        panelExamRendidos.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, -1, -1));
 
         BorrarL.setFont(new java.awt.Font("Segoe UI Semibold", 1, 16)); // NOI18N
         BorrarL.setText("Si selecciona una fila, borrara esa experiencia de examen");
+        panelExamRendidos.add(BorrarL, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 460, -1, -1));
 
-        javax.swing.GroupLayout panelExamRendidosLayout = new javax.swing.GroupLayout(panelExamRendidos);
-        panelExamRendidos.setLayout(panelExamRendidosLayout);
-        panelExamRendidosLayout.setHorizontalGroup(
-            panelExamRendidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelExamRendidosLayout.createSequentialGroup()
-                .addGroup(panelExamRendidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelExamRendidosLayout.createSequentialGroup()
-                        .addGap(118, 118, 118)
-                        .addComponent(jLabel1))
-                    .addGroup(panelExamRendidosLayout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addGroup(panelExamRendidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(panelExamRendidosLayout.createSequentialGroup()
-                                .addComponent(AgregarButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(45, 45, 45)
-                                .addComponent(EliminarButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(ModificarButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(13, 13, 13))))
-                    .addGroup(panelExamRendidosLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(BorrarL)))
-                .addContainerGap(27, Short.MAX_VALUE))
-        );
-        panelExamRendidosLayout.setVerticalGroup(
-            panelExamRendidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelExamRendidosLayout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addGroup(panelExamRendidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(AgregarButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ModificarButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(EliminarButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(24, 24, 24)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(BorrarL)
-                .addContainerGap(22, Short.MAX_VALUE))
-        );
+        agregarexpLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        agregarexpLabel.setForeground(new java.awt.Color(51, 51, 51));
+        agregarexpLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_add_40px.png"))); // NOI18N
+        agregarexpLabel.setText("Agregar");
+        agregarexpLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        agregarexpLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                agregarexpLabelMouseClicked(evt);
+            }
+        });
+        panelExamRendidos.add(agregarexpLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 120, -1));
+
+        eliminarExpLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        eliminarExpLabel.setForeground(new java.awt.Color(51, 51, 51));
+        eliminarExpLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_Xbox_X_40px.png"))); // NOI18N
+        eliminarExpLabel.setText("Eliminar");
+        eliminarExpLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        eliminarExpLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                eliminarExpLabelMouseClicked(evt);
+            }
+        });
+        panelExamRendidos.add(eliminarExpLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, -1, -1));
+
+        modificarExpLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        modificarExpLabel.setForeground(new java.awt.Color(51, 51, 51));
+        modificarExpLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_Available_Updates_40px.png"))); // NOI18N
+        modificarExpLabel.setText("Modificar");
+        modificarExpLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        modificarExpLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                modificarExpLabelMouseClicked(evt);
+            }
+        });
+        panelExamRendidos.add(modificarExpLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 30, 120, -1));
 
         PanelDatosExp.setBackground(new java.awt.Color(255, 255, 255));
+        PanelDatosExp.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         SliderDif.setMaximum(10);
         SliderDif.setValue(5);
@@ -267,6 +154,7 @@ public class ABMExpPanel extends javax.swing.JPanel {
                 SliderDifStateChanged(evt);
             }
         });
+        PanelDatosExp.add(SliderDif, new org.netbeans.lib.awtextra.AbsoluteConstraints(165, 129, -1, 28));
 
         SliderDedi.setMaximum(10);
         SliderDedi.setValue(5);
@@ -276,18 +164,23 @@ public class ABMExpPanel extends javax.swing.JPanel {
                 SliderDediStateChanged(evt);
             }
         });
+        PanelDatosExp.add(SliderDedi, new org.netbeans.lib.awtextra.AbsoluteConstraints(165, 262, -1, -1));
 
         DificultadL.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         DificultadL.setText("Dificultad:");
+        PanelDatosExp.add(DificultadL, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 137, -1, -1));
 
         DificultadL1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         DificultadL1.setText("Días de Estudio:");
+        PanelDatosExp.add(DificultadL1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 201, -1, -1));
 
         DificultadL2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         DificultadL2.setText("Dedicación:");
+        PanelDatosExp.add(DificultadL2, new org.netbeans.lib.awtextra.AbsoluteConstraints(87, 260, -1, -1));
 
         ConfirmarDatosExp.setBackground(new java.awt.Color(102, 255, 102));
         ConfirmarDatosExp.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        ConfirmarDatosExp.setForeground(new java.awt.Color(51, 51, 51));
         ConfirmarDatosExp.setText("Confirmar Experiencia");
         ConfirmarDatosExp.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         ConfirmarDatosExp.addActionListener(new java.awt.event.ActionListener() {
@@ -295,82 +188,31 @@ public class ABMExpPanel extends javax.swing.JPanel {
                 ConfirmarDatosExpActionPerformed(evt);
             }
         });
+        PanelDatosExp.add(ConfirmarDatosExp, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 310, 200, 32));
 
         Datos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         Datos.setPreferredSize(new java.awt.Dimension(20, 10));
+        PanelDatosExp.add(Datos, new org.netbeans.lib.awtextra.AbsoluteConstraints(257, 163, -1, 26));
 
         DatosDed.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         DatosDed.setPreferredSize(new java.awt.Dimension(20, 15));
+        PanelDatosExp.add(DatosDed, new org.netbeans.lib.awtextra.AbsoluteConstraints(256, 288, -1, 26));
 
         DiasDeEstudio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 DiasDeEstudioActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout PanelDatosExpLayout = new javax.swing.GroupLayout(PanelDatosExp);
-        PanelDatosExp.setLayout(PanelDatosExpLayout);
-        PanelDatosExpLayout.setHorizontalGroup(
-            PanelDatosExpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanelDatosExpLayout.createSequentialGroup()
-                .addContainerGap(60, Short.MAX_VALUE)
-                .addGroup(PanelDatosExpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelDatosExpLayout.createSequentialGroup()
-                        .addGroup(PanelDatosExpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(DificultadL, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(DificultadL1, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(DificultadL2, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGroup(PanelDatosExpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(PanelDatosExpLayout.createSequentialGroup()
-                                .addGap(15, 15, 15)
-                                .addComponent(DiasDeEstudio, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(PanelDatosExpLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(PanelDatosExpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(SliderDedi, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(SliderDif, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(ConfirmarDatosExp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addGap(115, 115, 115))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelDatosExpLayout.createSequentialGroup()
-                        .addComponent(DatosDed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(204, 204, 204))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelDatosExpLayout.createSequentialGroup()
-                        .addComponent(Datos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(203, 203, 203))))
-        );
-        PanelDatosExpLayout.setVerticalGroup(
-            PanelDatosExpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanelDatosExpLayout.createSequentialGroup()
-                .addGap(129, 129, 129)
-                .addGroup(PanelDatosExpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(DificultadL)
-                    .addComponent(SliderDif, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Datos, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(PanelDatosExpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(DiasDeEstudio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(DificultadL1))
-                .addGap(37, 37, 37)
-                .addGroup(PanelDatosExpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(DificultadL2)
-                    .addComponent(SliderDedi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(DatosDed, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                .addComponent(ConfirmarDatosExp, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(136, 136, 136))
-        );
+        PanelDatosExp.add(DiasDeEstudio, new org.netbeans.lib.awtextra.AbsoluteConstraints(174, 201, 180, -1));
 
         javax.swing.GroupLayout ContenedorLayout = new javax.swing.GroupLayout(Contenedor);
         Contenedor.setLayout(ContenedorLayout);
         ContenedorLayout.setHorizontalGroup(
             ContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ContenedorLayout.createSequentialGroup()
-                .addComponent(panelExamRendidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panelExamRendidos, javax.swing.GroupLayout.PREFERRED_SIZE, 503, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(PanelDatosExp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(PanelDatosExp, javax.swing.GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE))
         );
         ContenedorLayout.setVerticalGroup(
             ContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -382,7 +224,7 @@ public class ABMExpPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Contenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 983, Short.MAX_VALUE)
+            .addComponent(Contenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 1013, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -457,48 +299,24 @@ public class ABMExpPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_TablaExamenesMouseClicked
 
-    private void AgregarButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AgregarButtonMouseClicked
-        LlenarTablaExamenesSinExp();
+    private void modificarExpLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_modificarExpLabelMouseClicked
+        LlenarTablaExamenesConExp();
         BorrarL.setVisible(false);
-        caso=1;
-    }//GEN-LAST:event_AgregarButtonMouseClicked
+        caso=3;
+    }//GEN-LAST:event_modificarExpLabelMouseClicked
 
-    private void AgregarButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AgregarButtonMouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_AgregarButtonMouseEntered
-
-    private void AgregarButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AgregarButtonMouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_AgregarButtonMouseExited
-
-    private void EliminarButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EliminarButtonMouseClicked
+    private void eliminarExpLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eliminarExpLabelMouseClicked
         PanelDatosExp.setVisible(false);
         BorrarL.setVisible(true);
         LlenarTablaExamenesConExp();
         caso=2;
-    }//GEN-LAST:event_EliminarButtonMouseClicked
+    }//GEN-LAST:event_eliminarExpLabelMouseClicked
 
-    private void EliminarButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EliminarButtonMouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_EliminarButtonMouseEntered
-
-    private void EliminarButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EliminarButtonMouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_EliminarButtonMouseExited
-
-    private void ModificarButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ModificarButtonMouseClicked
-        LlenarTablaExamenesConExp();
+    private void agregarexpLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agregarexpLabelMouseClicked
+        LlenarTablaExamenesSinExp();
         BorrarL.setVisible(false);
-        caso=3;
-    }//GEN-LAST:event_ModificarButtonMouseClicked
-
-    private void ModificarButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ModificarButtonMouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ModificarButtonMouseEntered
-
-    private void ModificarButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ModificarButtonMouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ModificarButtonMouseExited
+        caso=1;
+    }//GEN-LAST:event_agregarexpLabelMouseClicked
 
     public void LlenarTablaExamenesSinExp() {
         try {
@@ -555,7 +373,6 @@ public class ABMExpPanel extends javax.swing.JPanel {
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel AgregarButton;
     private javax.swing.JLabel BorrarL;
     private javax.swing.JButton ConfirmarDatosExp;
     private javax.swing.JPanel Contenedor;
@@ -565,17 +382,15 @@ public class ABMExpPanel extends javax.swing.JPanel {
     private javax.swing.JLabel DificultadL;
     private javax.swing.JLabel DificultadL1;
     private javax.swing.JLabel DificultadL2;
-    private javax.swing.JPanel EliminarButton;
-    private javax.swing.JPanel ModificarButton;
     private javax.swing.JPanel PanelDatosExp;
     private javax.swing.JSlider SliderDedi;
     private javax.swing.JSlider SliderDif;
     private javax.swing.JTable TablaExamenes;
-    private javax.swing.JLabel estudianteBL;
-    private javax.swing.JLabel estudianteBL1;
-    private javax.swing.JLabel estudianteBL2;
+    private javax.swing.JLabel agregarexpLabel;
+    private javax.swing.JLabel eliminarExpLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel modificarExpLabel;
     private javax.swing.JPanel panelExamRendidos;
     // End of variables declaration//GEN-END:variables
 }
