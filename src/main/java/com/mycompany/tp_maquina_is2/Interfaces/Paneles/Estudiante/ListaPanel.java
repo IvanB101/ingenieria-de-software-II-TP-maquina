@@ -304,7 +304,7 @@ public class ListaPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_inscribirseExamenLabelMouseClicked
 
     private void verEstadisticasLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_verEstadisticasLabelMouseClicked
-        changePane(new EstadisticasEstudiante((String)TablaMaterias.getValueAt(TablaMaterias.getSelectedRow(),0),codPlanEstudios));
+        changePane(new EstadisticasEstudiante("283",codPlanEstudios));
     }//GEN-LAST:event_verEstadisticasLabelMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
