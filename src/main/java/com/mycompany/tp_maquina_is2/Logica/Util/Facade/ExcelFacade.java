@@ -13,9 +13,6 @@ import org.apache.poi.poifs.filesystem.OfficeXmlFileException;
  * @author ivanb
  */
 public abstract class ExcelFacade {
-
-    public ExcelFacade() {
-    }
     
     public static ExcelFacade leerDocumento(File file) throws IOException {
         try {            

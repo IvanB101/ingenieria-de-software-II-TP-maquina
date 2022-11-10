@@ -26,7 +26,7 @@ import java.util.NoSuchElementException;
  *
  * @author ivanb
  */
-public class ArchivosManager {
+public abstract class ArchivosManager {
 
     /**
      *
