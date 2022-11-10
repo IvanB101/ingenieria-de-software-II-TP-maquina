@@ -54,6 +54,12 @@ public class Experiencia {
         this.codExamen = codExamen;
     }
     
+    public String getCodMateria() {
+        String[]temp = codExamen.split("-");
+        
+        return temp[2];
+    }
+    
     @Override
     public String toString(){
         return "Dificultad:"+dificultad+ " | Dias: " + dias + " | Dedicacion: " + dedicacion +" | Cod examen: "+codExamen; 

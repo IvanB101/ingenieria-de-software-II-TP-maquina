@@ -162,5 +162,26 @@ public class ExamenDAOImp implements ExamenDAOInter {
         
         return examenes;
     }
+    
+    public ArrayList<Examen> getExamenesPlan(String codigo) throws SQLException {
+        ArrayList<Examen> examenes = new ArrayList();
+        Connection con = conexion.getConnection();
+
+        PreparedStatement ps = con.prepareStatement("SELECT * "
+                + "FROM Examen "
+                + "WHERE PlanEstudios_codigo=?");
+        ps.setString(1, codigo);
+
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            examenes.add(new Examen(LocalDate.parse(rs.getDate("fecha").toString()),
+                    rs.getFloat("nota"),
+                    rs.getString("Materia_codigo"),
+                    rs.getInt("HistoriaAcademica_Estudiante_nroRegistro") + "-" + rs.getString("PlanEstudios_codigo")));
+        }
+
+        return examenes;
+    }
 
 }

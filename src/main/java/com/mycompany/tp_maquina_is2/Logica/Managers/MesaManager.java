@@ -83,14 +83,17 @@ public abstract class MesaManager {
      * @param nroRegistro del estudiante que desea eliminar la inscripcion
      * @throws ManagementException
      */
-    public static void deleteInscripcion(String codPlanEstudios,String codMateria, int nroRegistro) throws ManagementException {
-        Materia codMateriaaux=null;
+    public static void deleteInscripcion(String codPlanEstudios, String codMateria, int nroRegistro) throws ManagementException {
+        Materia codMateriaaux = null;
+        
         try {
             codMateriaaux = PlanEstudiosManager.buscarMateria(codMateria, codPlanEstudios);
         } catch (ManagementException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
-        String codigo=codPlanEstudios+"-"+codMateriaaux.getCodigo()+"-"+String.valueOf(LocalDate.now().getYear())+"-"+"12";
+        
+        String codigo = codPlanEstudios + "-" + codMateriaaux.getCodigo() + "-" + String.valueOf(LocalDate.now().getYear()) + "-" + "12";
+        
         try {
             mesaExamenDAOImp.deleteInscripcion(codigo, nroRegistro);
         } catch (SQLException e) {
