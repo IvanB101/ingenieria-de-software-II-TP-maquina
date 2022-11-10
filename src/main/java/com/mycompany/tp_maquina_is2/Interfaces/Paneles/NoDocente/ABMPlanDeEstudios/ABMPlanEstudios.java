@@ -177,7 +177,7 @@ public class ABMPlanEstudios extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void modificarBPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_modificarBPMouseClicked
-        changePane(new SeleccionarPlan());
+        changePane(new SeleccionarPlan("modificar"));
     }//GEN-LAST:event_modificarBPMouseClicked
 
     private void modificarBPMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_modificarBPMouseEntered

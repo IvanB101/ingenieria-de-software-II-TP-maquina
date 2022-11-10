@@ -166,6 +166,34 @@ public class ExperienciaDAOImp implements ExperienciaDAOInter {
         return experiencias;
     }
 
+    public ArrayList<Experiencia> getExperienciasAprobadosPlan(String codPlan) throws SQLException {
+        ArrayList<Experiencia> experiencias = new ArrayList();
+        Connection con = conexion.getConnection();
+        
+        PreparedStatement ps = con.prepareStatement("SELECT dificultad, dedicacion, dias,"
+                + "Examen_HistoriaAcademica_Estudiante_nroRegistro, Examen_PlanEstudios_codigo,"
+                + "Examen_Materia_codigo, Examen_fecha "
+                + "FROM experiencia,examen "
+                + "WHERE experiencia.examen_fecha = examen.fecha and nota>=4"
+                + "and Examen_PlanEstudios_codigo=?");
+        ps.setString(1, codPlan);
+        
+        ResultSet rs = ps.executeQuery();
+        
+        while (rs.next()) {
+            experiencias.add(new Experiencia(
+                    rs.getInt("dificultad"),
+                    rs.getInt("dias"),
+                    rs.getInt("dedicacion"),
+                    "" + rs.getInt("Examen_HistoriaAcademica_Estudiante_nroRegistro")
+                    + "-" + rs.getString("Examen_PlanEstudios_codigo")
+                    + "-" + rs.getString("Examen_Materia_codigo")
+                    + "-" + rs.getDate("Examen_fecha")));
+        }
+        
+        return experiencias;
+    }
+
     public ArrayList<Experiencia> getExperienciasPlan(String codigo) throws SQLException {
         ArrayList<Experiencia> experiencias = new ArrayList();
         Connection con = conexion.getConnection();
