@@ -4,6 +4,7 @@
  */
 package com.mycompany.tp_maquina_is2.Logica.Util;
 
+import com.mycompany.tp_maquina_is2.Logica.Util.Facade.ExcelFacade;
 import com.mycompany.tp_maquina_is2.Logica.Excepciones.ManagementException;
 import com.mycompany.tp_maquina_is2.Logica.Managers.ExamenManager;
 import com.mycompany.tp_maquina_is2.Logica.Managers.HistoriaAcademicaManager;
@@ -15,17 +16,11 @@ import com.mycompany.tp_maquina_is2.Logica.Transferencia.HistoriaAcademica;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.Materia;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.PlanEstudios;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.FormatFlagsConversionMismatchException;
-import java.util.Iterator;
 import java.util.LinkedList;
-import org.apache.poi.hssf.usermodel.HSSFCell;
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
+import java.util.NoSuchElementException;
 
 /**
  *
@@ -41,55 +36,41 @@ public class ArchivosManager {
      */
     public static void cargarPlanEstudios(File file) throws ManagementException {
         try {
-            FileInputStream fileInputStream = new FileInputStream(file);
-            // Estructura central dentro del libro de ArchivosManager
-            HSSFWorkbook book = new HSSFWorkbook(fileInputStream);
-            // Obtencion de la primera hoja del libro
-            HSSFSheet sheet0 = book.getSheetAt(0);
-            // Iterador sobre las filas de la hoja
-            Iterator rowIterator = sheet0.rowIterator();
+            ExcelFacade excel = ExcelFacade.leerDocumento(file);
 
-            if (!avanzarIteradorFilasHasta(rowIterator, "Carrera")) {
-                throw new ManagementException("Plan de Estudios invalido");
-            }
+            excel.avanzarHasta("Carrera", 0);
 
-            HSSFRow row = (HSSFRow) rowIterator.next();
-            // Iterador sobre las celdas de las filas
-            Iterator cellIterator = row.cellIterator();
+            String[] datos = excel.leerFila(2);
 
-            // Carga de la propuesta del plan de estudios
-            HSSFCell cell = (HSSFCell) cellIterator.next();
-            String propuesta = cell.toString();
-
-            // Carga del codigo del plan de estudios
-            cell = (HSSFCell) cellIterator.next();
-            String codigo = cell.toString();
+            // Carga datos de plan de estudios
+            PlanEstudios plan = new PlanEstudios(datos[1], datos[0]);
 
             /* Se mantiene una LinkedList para mantener el orden y evitar conflictos con las correlativas 
             en la posterior carga en la base de datos */
-            LinkedList<Materia> materiasLista = new LinkedList<>();
+            LinkedList<Materia> materias = new LinkedList<>();
+            
+            excel.avanzarHasta("Nombre", 0);
 
-            if (!avanzarIteradorFilasHasta(rowIterator, "Nombre")) {
-                throw new ManagementException("Plan de Estudios invalido");
-            }
-
-            String[] datos = new String[7];
             // Carga de la materias
-            while (rowIterator.hasNext()) {
-                row = (HSSFRow) rowIterator.next();
-                cellIterator = row.cellIterator();
+            while (excel.hasNext()) {
+                datos = excel.leerFila(6);
 
-                ArrayList<String> correlativas = new ArrayList<>();
-
-                // Carga de los datos de una fila
-                for(int i = 0; i < 6; i++) {
-                    cell = (HSSFCell) cellIterator.next();
-                    datos[i] = cell.toString();
-                }
-                
-                if(datos[0].equals("")) {
+                if (datos[0].equals("")) {
                     break;
                 }
+
+                // Arreglo error de parseo en algunos de los codigos de las materias
+                String codMateria = datos[1];
+                if (codMateria.contains(".")) {
+                    codMateria = (String) codMateria.subSequence(0, codMateria.indexOf("."));
+                }
+
+                Materia materia = new Materia(
+                        codMateria,
+                        datos[0],
+                        plan.getCodigo(),
+                        new ArrayList(),
+                        new ArrayList());
 
                 // Carga de las correlativas
                 if (!datos[5].equals("No tiene")) {
@@ -100,25 +81,14 @@ public class ArchivosManager {
                             codCorrelativa = (String) codCorrelativa.subSequence(0, codCorrelativa.indexOf("."));
                         }
 
-                        correlativas.add(codCorrelativa);
+                        materia.getCorrelativas().add(codCorrelativa);
                     }
                 }
 
-                // Arreglo error de parseo en algunos de los codigos de las materias
-                String codMateria = datos[1];
-                if (codMateria.contains(".")) {
-                    codMateria = (String) codMateria.subSequence(0, codMateria.indexOf("."));
-                }
-
-                materiasLista.add(new Materia(
-                        codMateria,
-                        datos[0],
-                        codigo,
-                        correlativas,
-                        new ArrayList<>()));
+                materias.add(materia);
             }
 
-            PlanEstudiosManager.agregar(new PlanEstudios(codigo, propuesta), materiasLista);
+            PlanEstudiosManager.agregar(plan, materias);
         } catch (IOException e) {
             throw new ManagementException("Error en la lectura del archivo .xlsx");
         }
@@ -131,38 +101,19 @@ public class ArchivosManager {
      * pertenece la historia
      * @param file es el archivo con la historia a leer
      * @param codPlanEstudios es el codigo del plan de estudios de la carrera
-     * @throws FormatFlagsConversionMismatchException
+     * @throws
+     * com.mycompany.tp_maquina_is2.Logica.Excepciones.ManagementException
      */
     public static void cargarHistoriaAcademica(int nroRegistro, String codPlanEstudios, File file) throws ManagementException {
         try {
-            FileInputStream fileInputStream = new FileInputStream(file);
-            // Estructura central dentro del libro de ArchivosManager
-            HSSFWorkbook book = new HSSFWorkbook(fileInputStream);
-            // Obtencion de la primera hoja del libro
-            HSSFSheet sheet0 = book.getSheetAt(0);
-            // Iterador sobre las filas de la hoja
-            Iterator rowIterator = sheet0.rowIterator();
+            ExcelFacade excel = ExcelFacade.leerDocumento(file);
 
             LinkedList<Examen> examenes = new LinkedList<>();
             HistoriaAcademica historia = new HistoriaAcademica(nroRegistro, codPlanEstudios);
 
-            if (!avanzarIteradorFilasHasta(rowIterator, "Actividad")) {
-                throw new ManagementException("Historia Academica invalida");
-            }
+            excel.avanzarHasta("Actividad", 0);
 
-            // Carga de la primera fila de la historia
-            HSSFRow row = (HSSFRow) rowIterator.next();
-            Iterator cellIterator = row.cellIterator();
-            HSSFCell cell;
-
-            String[] datos = new String[7];
-            int i = 0;
-
-            while (cellIterator.hasNext()) {
-                cell = (HSSFCell) cellIterator.next();
-                datos[i] = cell.toString();
-                i++;
-            }
+            String[] datos = excel.leerFila(5);
 
             // Comprobacion de que la materia este en el plan de estudios
             String codMateria = codigoMateria(datos[0]);
@@ -178,8 +129,7 @@ public class ArchivosManager {
                     LocalDate.of(Integer.parseInt(temp[2]), Integer.parseInt(temp[1]), Integer.parseInt(temp[0])));
 
             // Carga de los estados
-            while (rowIterator.hasNext()) {
-
+            while (excel.hasNext()) {
                 if (datos[2].equals("Examen")) {
                     temp = datos[1].split("/");
 
@@ -193,15 +143,10 @@ public class ArchivosManager {
                     historia.getCodExamenes().add(examen.getCodigo());
                 }
 
-                row = (HSSFRow) rowIterator.next();
-                cellIterator = row.cellIterator();
-
-                // Carga de los datos de la fila del excel
-                i = 0;
-                while (cellIterator.hasNext()) {
-                    cell = (HSSFCell) cellIterator.next();
-                    datos[i] = cell.toString();
-                    i++;
+                datos = excel.leerFila(5);
+                
+                if(datos[0].equals("")) {
+                    break;
                 }
 
                 // Comprobacion de que la materia este en el plan de estudios
@@ -226,7 +171,7 @@ public class ArchivosManager {
                     no cambia el resultado final del estudiante en la materia */
                     if (!estado.getCondicion().equals(Condicion.aprobado)) {
                         Condicion condicion = formatCondicion(datos[2], datos[4]);
-                        
+
                         if (!combinarCondicion(estado.getCondicion(), condicion).equals(estado.getCondicion())) {
                             estado.setCondicion(condicion);
                             // En caso de actualizar la condicion, también se actualiza la fecha del estado
@@ -255,6 +200,11 @@ public class ArchivosManager {
             throw new ManagementException("Error en la lectura del archivo .xlsx");
         } catch (ManagementException e) {
             throw e;
+        } catch (NoSuchElementException e) {
+            throw new ManagementException("Historia academica inválida");
+        } catch (Exception e) {
+            System.out.println(e);
+            throw new ManagementException("Ha ocurrido un error");
         }
     }
 
@@ -272,31 +222,6 @@ public class ArchivosManager {
         }
 
         return (String) contenidoCelda.subSequence(start, finish);
-    }
-
-    /**
-     * Avanza el iterador de fila del documento excel hasta la fila posterior a
-     * la ocurrencia
-     *
-     * @param rowIterator iterador de las filas del documento a avanzar
-     * @param ocurrencia contenido de la primera celda de la fila anterior a la
-     * que se desea avanzar
-     * @return true si la ocurrencia fue encontrada, false en otro caso
-     */
-    private static boolean avanzarIteradorFilasHasta(Iterator rowIterator, String ocurrencia) {
-        while (rowIterator.hasNext()) {
-            HSSFRow row = (HSSFRow) rowIterator.next();
-
-            Iterator cellIterator = row.cellIterator();
-            // Iterador sobre las celdas de las filas
-            HSSFCell cell = (HSSFCell) cellIterator.next();
-
-            if (cell.toString().equals(ocurrencia)) {
-                return true;
-            }
-        }
-
-        return false;
     }
 
     /**

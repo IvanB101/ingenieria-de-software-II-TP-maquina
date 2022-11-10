@@ -48,7 +48,7 @@ public abstract class PlanEstudiosManager {
 
         if (planEstudios.getMaterias().get(codMateria) == null) {
             throw new ManagementException("Materia con codigo " + codMateria + " no esta en el plan de estudios"
-                    + " con codigo " + codPlanEstudios + ", o el plan de estudios no se encuentra cargado");
+                    + " con codigo " + codPlanEstudios + "\n, o el plan de estudios no se encuentra cargado");
         }
     }
 

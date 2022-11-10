@@ -145,38 +145,37 @@ public abstract class HistoriaAcademicaManager {
         for (Estado estado : historia.getEstados().values()) {
 
             String codMateria = estado.getCodMateria();
+            Materia materia = PlanEstudiosManager.buscarMateria(codMateria, codPlanEstudios);
 
             if (estado.getCondicion().equals(Condicion.regular)) {
                 //correlativas de una materia regular
-                if (cumpleRequisitos(PlanEstudiosManager.getCodCorrelativas(codMateria, codPlanEstudios), historia)) {
+                if (cumpleRequisitos(materia.getCorrelativas(), historia)) {
                     switch (criterio) {
                         case "Correlativas":
                             //busco en cuantas materias es correlativa
-                            ranking.put(PlanEstudiosManager.buscarMateria(codMateria, codPlanEstudios),
-                                    PlanEstudiosManager.getCantidadDependientes(codMateria, codPlanEstudios));
+                            ranking.put(materia, PlanEstudiosManager.getCantidadDependientes(codMateria, codPlanEstudios));
                             break;
                         case "Dificultad":
                             //saco la dificultad promedio de una materia, entrada: todas las exp de una materia
                             if ((ExamenManager.getExperiencias(codMateria, codPlanEstudios).size()) == 0) { //si la materia no tiene experiencias
-                                ranking.put(PlanEstudiosManager.buscarMateria(codMateria, codPlanEstudios), 0.0);
+                                ranking.put(materia, 0.0);
                             } else {
-                                ranking.put(PlanEstudiosManager.buscarMateria(codMateria, codPlanEstudios), ExamenManager.promedioDificultad(codMateria, codPlanEstudios));
+                                ranking.put(materia, ExamenManager.promedioDificultad(codMateria, codPlanEstudios));
                             }
                             break;
                         case "Tiempo":
                             if ((ExamenManager.getExperienciasAprobados(codMateria, codPlanEstudios).size()) == 0) {//si no hay experiencias de aprobados
-                                ranking.put(PlanEstudiosManager.buscarMateria(codMateria, codPlanEstudios), 0);
+                                ranking.put(materia, 0);
                             } else {
-                                ranking.put(PlanEstudiosManager.buscarMateria(codMateria, codPlanEstudios), ExamenManager.cantidadAprobadosUnaMateria(codMateria, dias, codPlanEstudios));
+                                ranking.put(materia, ExamenManager.cantidadAprobadosUnaMateria(codMateria, dias, codPlanEstudios));
                             }
                             break;
                         case "Vencimiento":
-                            ranking.put(PlanEstudiosManager.buscarMateria(codMateria, codPlanEstudios), semanasVencimiento(estado.getFecha()));
+                            ranking.put(materia, semanasVencimiento(estado.getFecha()));
                     }
                 }
             }
         }//finfor
-
 
         // Pasaje del hashmap a una lista para poder ordenarla
         Set<Materia> keys2 = ranking.keySet();
@@ -185,7 +184,6 @@ public abstract class HistoriaAcademicaManager {
         for (Materia materia : keys2) {
             keys.add(materia);
         }
-
 
         // Se ordena la lista en funcion del criterio
         switch (criterio) {
@@ -248,9 +246,10 @@ public abstract class HistoriaAcademicaManager {
      * regularidad
      */
     public static long semanasVencimiento(LocalDate fecha) {
-        LocalDate limite = LocalDate.of(fecha.plusMonths(32).getYear(), fecha.plusMonths(32).getMonthValue(), fecha.plusMonths(32).getDayOfMonth());
-        fecha.plusMonths(32).getYear();
-        return ChronoUnit.WEEKS.between(java.time.LocalDate.now(), limite);
+        return ChronoUnit.WEEKS.between(java.time.LocalDate.now(),
+                LocalDate.of(fecha.plusMonths(32).getYear(),
+                        fecha.plusMonths(32).getMonthValue(),
+                        fecha.plusMonths(32).getDayOfMonth()));
         /*Datos: 
         LocalDate no se puede actualizar
         el plus solo sirve con año o con mes pero no ambos si no el mes da toda la vuelta

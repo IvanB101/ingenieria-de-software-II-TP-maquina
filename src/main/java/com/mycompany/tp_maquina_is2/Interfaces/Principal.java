@@ -5,19 +5,13 @@
 package com.mycompany.tp_maquina_is2.Interfaces;
 
 import com.mycompany.tp_maquina_is2.Datos.Conexion;
-import com.mycompany.tp_maquina_is2.Interfaces.Paneles.Estudiante.ABMExpPanel;
-import com.mycompany.tp_maquina_is2.Interfaces.Paneles.Estudiante.InicioEstudiante;
-import com.mycompany.tp_maquina_is2.Interfaces.Paneles.Estudiante.ListaPanel;
-import com.mycompany.tp_maquina_is2.Logica.Excepciones.ManagementException;
 import com.mycompany.tp_maquina_is2.Logica.Managers.EstudianteManager;
 import com.mycompany.tp_maquina_is2.Logica.Managers.ExamenManager;
 import com.mycompany.tp_maquina_is2.Logica.Managers.HistoriaAcademicaManager;
 import com.mycompany.tp_maquina_is2.Logica.Managers.MesaManager;
 import com.mycompany.tp_maquina_is2.Logica.Managers.PlanEstudiosManager;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.Estudiante;
-import com.mycompany.tp_maquina_is2.Logica.Util.ArchivosManager;
 import java.awt.Color;
-import java.io.File;
 import java.io.IOException;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
