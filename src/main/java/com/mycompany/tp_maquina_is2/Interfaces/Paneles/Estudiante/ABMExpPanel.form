@@ -109,7 +109,7 @@
                       <Component id="jScrollPane1" min="-2" pref="319" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="BorrarL" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="22" max="32767" attributes="0"/>
+                      <EmptySpace pref="34" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -131,7 +131,7 @@
                       <TableColumnModel selectionModel="0"/>
                     </Property>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                      <Color id="Cursor Por defecto"/>
+                      <Color id="Default Cursor"/>
                     </Property>
                     <Property name="focusable" type="boolean" value="false"/>
                     <Property name="rowHeight" type="int" value="25"/>
@@ -162,7 +162,7 @@
                   <Color blue="2f" green="23" red="76" type="rgb"/>
                 </Property>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                  <Color id="Cursor de Mano"/>
+                  <Color id="Default Cursor"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Dialog" size="12" style="1"/>
@@ -205,7 +205,7 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Agregar"/>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                      <Color id="Cursor de Mano"/>
+                      <Color id="Default Cursor"/>
                     </Property>
                   </Properties>
                 </Component>
@@ -217,7 +217,7 @@
                   <Color blue="2f" green="23" red="76" type="rgb"/>
                 </Property>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                  <Color id="Cursor de Mano"/>
+                  <Color id="Default Cursor"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Dialog" size="12" style="1"/>
@@ -260,7 +260,7 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Eliminar"/>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                      <Color id="Cursor de Mano"/>
+                      <Color id="Default Cursor"/>
                     </Property>
                   </Properties>
                 </Component>
@@ -272,7 +272,7 @@
                   <Color blue="2f" green="23" red="76" type="rgb"/>
                 </Property>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                  <Color id="Cursor de Mano"/>
+                  <Color id="Default Cursor"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Dialog" size="12" style="1"/>
@@ -315,7 +315,7 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Modificar"/>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                      <Color id="Cursor de Mano"/>
+                      <Color id="Default Cursor"/>
                     </Property>
                   </Properties>
                 </Component>
@@ -345,24 +345,17 @@
                       <EmptySpace pref="60" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="DificultadL" alignment="1" min="-2" max="-2" attributes="0"/>
                                   <Component id="DificultadL1" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="DificultadL2" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="DificultadL2" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                                      <Component id="DiasDeEstudio" min="-2" pref="180" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="SliderDedi" alignment="1" max="32767" attributes="0"/>
-                                          <Component id="SliderDif" alignment="1" max="32767" attributes="0"/>
-                                          <Component id="ConfirmarDatosExp" alignment="0" max="32767" attributes="0"/>
-                                      </Group>
-                                  </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="SliderDedi" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="SliderDif" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="ConfirmarDatosExp" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="DiasDeEstudio" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="115" max="-2" attributes="0"/>
                           </Group>
@@ -384,23 +377,29 @@
                       <EmptySpace min="-2" pref="129" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="DificultadL" min="-2" max="-2" attributes="0"/>
-                          <Component id="SliderDif" min="-2" pref="28" max="-2" attributes="0"/>
+                          <Component id="SliderDif" min="-2" pref="22" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="Datos" min="-2" pref="26" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="DiasDeEstudio" min="-2" max="-2" attributes="0"/>
-                          <Component id="DificultadL1" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="DificultadL2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="SliderDedi" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="DificultadL1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="DiasDeEstudio" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+                              <Component id="SliderDedi" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                              <Component id="DificultadL2" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="DatosDed" min="-2" pref="26" max="-2" attributes="0"/>
-                      <EmptySpace pref="26" max="32767" attributes="0"/>
+                      <EmptySpace pref="27" max="32767" attributes="0"/>
                       <Component id="ConfirmarDatosExp" min="-2" pref="32" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="136" max="-2" attributes="0"/>
                   </Group>
@@ -413,7 +412,7 @@
                 <Property name="maximum" type="int" value="10"/>
                 <Property name="value" type="int" value="5"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                  <Color id="Cursor Por defecto"/>
+                  <Color id="Default Cursor"/>
                 </Property>
               </Properties>
               <Events>
@@ -425,7 +424,7 @@
                 <Property name="maximum" type="int" value="10"/>
                 <Property name="value" type="int" value="5"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                  <Color id="Cursor Por defecto"/>
+                  <Color id="Default Cursor"/>
                 </Property>
               </Properties>
               <Events>
@@ -453,7 +452,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Dedicaci&#xf3;n:"/>
+                <Property name="text" type="java.lang.String" value="Dedicaci&#xf3;n de estudio:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="ConfirmarDatosExp">
@@ -466,7 +465,7 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Confirmar Experiencia"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                  <Color id="Cursor Por defecto"/>
+                  <Color id="Default Cursor"/>
                 </Property>
               </Properties>
               <Events>

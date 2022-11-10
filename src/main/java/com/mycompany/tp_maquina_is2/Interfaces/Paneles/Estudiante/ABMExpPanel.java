@@ -24,12 +24,14 @@ public class ABMExpPanel extends javax.swing.JPanel {
 
     private int nroRegistro;
     private int caso;
+    private String codPlan;
 
     /**
      * Creates new form AgregarExpPanel
      */
-    public ABMExpPanel(int nroRegistro) {
+    public ABMExpPanel(int nroRegistro,String codPlan) {
         this.nroRegistro = nroRegistro;
+        this.codPlan=codPlan;
         initComponents();
         TablaExamenes.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
         TablaExamenes.getTableHeader().setOpaque(true);
@@ -102,7 +104,7 @@ public class ABMExpPanel extends javax.swing.JPanel {
         jLabel1.setText("Lista de Examenes");
 
         AgregarButton.setBackground(new java.awt.Color(118, 35, 47));
-        AgregarButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        AgregarButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         AgregarButton.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         AgregarButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -119,7 +121,7 @@ public class ABMExpPanel extends javax.swing.JPanel {
         estudianteBL.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         estudianteBL.setForeground(new java.awt.Color(255, 255, 255));
         estudianteBL.setText("Agregar");
-        estudianteBL.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        estudianteBL.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         javax.swing.GroupLayout AgregarButtonLayout = new javax.swing.GroupLayout(AgregarButton);
         AgregarButton.setLayout(AgregarButtonLayout);
@@ -139,7 +141,7 @@ public class ABMExpPanel extends javax.swing.JPanel {
         );
 
         EliminarButton.setBackground(new java.awt.Color(118, 35, 47));
-        EliminarButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        EliminarButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         EliminarButton.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         EliminarButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -156,7 +158,7 @@ public class ABMExpPanel extends javax.swing.JPanel {
         estudianteBL1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         estudianteBL1.setForeground(new java.awt.Color(255, 255, 255));
         estudianteBL1.setText("Eliminar");
-        estudianteBL1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        estudianteBL1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         javax.swing.GroupLayout EliminarButtonLayout = new javax.swing.GroupLayout(EliminarButton);
         EliminarButton.setLayout(EliminarButtonLayout);
@@ -176,7 +178,7 @@ public class ABMExpPanel extends javax.swing.JPanel {
         );
 
         ModificarButton.setBackground(new java.awt.Color(118, 35, 47));
-        ModificarButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        ModificarButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         ModificarButton.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         ModificarButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -193,7 +195,7 @@ public class ABMExpPanel extends javax.swing.JPanel {
         estudianteBL2.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         estudianteBL2.setForeground(new java.awt.Color(255, 255, 255));
         estudianteBL2.setText("Modificar");
-        estudianteBL2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        estudianteBL2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         javax.swing.GroupLayout ModificarButtonLayout = new javax.swing.GroupLayout(ModificarButton);
         ModificarButton.setLayout(ModificarButtonLayout);
@@ -254,7 +256,7 @@ public class ABMExpPanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(BorrarL)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         PanelDatosExp.setBackground(new java.awt.Color(255, 255, 255));
@@ -284,7 +286,7 @@ public class ABMExpPanel extends javax.swing.JPanel {
         DificultadL1.setText("Días de Estudio:");
 
         DificultadL2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        DificultadL2.setText("Dedicación:");
+        DificultadL2.setText("Dedicación de estudio:");
 
         ConfirmarDatosExp.setBackground(new java.awt.Color(102, 255, 102));
         ConfirmarDatosExp.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -316,20 +318,16 @@ public class ABMExpPanel extends javax.swing.JPanel {
                 .addContainerGap(60, Short.MAX_VALUE)
                 .addGroup(PanelDatosExpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelDatosExpLayout.createSequentialGroup()
-                        .addGroup(PanelDatosExpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(PanelDatosExpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(DificultadL, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(DificultadL1, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(DificultadL2, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGroup(PanelDatosExpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(PanelDatosExpLayout.createSequentialGroup()
-                                .addGap(15, 15, 15)
-                                .addComponent(DiasDeEstudio, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(PanelDatosExpLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(PanelDatosExpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(SliderDedi, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(SliderDif, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(ConfirmarDatosExp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(DificultadL2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(PanelDatosExpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(SliderDedi, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(SliderDif, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(ConfirmarDatosExp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(DiasDeEstudio))
                         .addGap(115, 115, 115))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelDatosExpLayout.createSequentialGroup()
                         .addComponent(DatosDed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -344,20 +342,24 @@ public class ABMExpPanel extends javax.swing.JPanel {
                 .addGap(129, 129, 129)
                 .addGroup(PanelDatosExpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(DificultadL)
-                    .addComponent(SliderDif, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(SliderDif, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Datos, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(PanelDatosExpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(DiasDeEstudio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(DificultadL1))
-                .addGap(37, 37, 37)
                 .addGroup(PanelDatosExpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(DificultadL2)
-                    .addComponent(SliderDedi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(DificultadL1)
+                    .addComponent(DiasDeEstudio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(1, 1, 1)
+                .addGroup(PanelDatosExpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelDatosExpLayout.createSequentialGroup()
+                        .addGap(53, 53, 53)
+                        .addComponent(SliderDedi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(PanelDatosExpLayout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addComponent(DificultadL2)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(DatosDed, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addComponent(ConfirmarDatosExp, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(136, 136, 136))
         );
@@ -502,7 +504,7 @@ public class ABMExpPanel extends javax.swing.JPanel {
 
     public void LlenarTablaExamenesSinExp() {
         try {
-            ArrayList<Examen> examenes = ExamenManager.examenesEstudianteSinExp(nroRegistro);
+            ArrayList<Examen> examenes = ExamenManager.examenesEstudianteSinExp(nroRegistro,codPlan);
             DefaultTableModel modelo = new DefaultTableModel(){
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -527,7 +529,7 @@ public class ABMExpPanel extends javax.swing.JPanel {
 
         public void LlenarTablaExamenesConExp() {
         try {
-            ArrayList<Examen> examenes = ExamenManager.examenesEstudianteConExp(nroRegistro);
+            ArrayList<Examen> examenes = ExamenManager.examenesEstudianteConExp(nroRegistro,codPlan);
             DefaultTableModel modelo = new DefaultTableModel(){
             @Override
             public boolean isCellEditable(int row, int column) {

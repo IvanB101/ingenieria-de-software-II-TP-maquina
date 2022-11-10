@@ -29,17 +29,17 @@ public abstract class ExamenManager {
         experienciaDAOImp = new ExperienciaDAOImp(conexion);
     }
 
-    public static ArrayList<Examen> examenesEstudianteSinExp(int nroRegistro) throws ManagementException {
+    public static ArrayList<Examen> examenesEstudianteSinExp(int nroRegistro,String codPlan) throws ManagementException {
         try {
-            return examenDAOImp.getExamenesEstudianteSinExp(nroRegistro);
+            return examenDAOImp.getExamenesEstudianteSinExp(nroRegistro,codPlan);
         } catch (SQLException e) {
             throw new ManagementException(e.getMessage());
         }
     }
 
-    public static ArrayList<Examen> examenesEstudianteConExp(int nroRegistro) throws ManagementException {
+    public static ArrayList<Examen> examenesEstudianteConExp(int nroRegistro,String codPlan) throws ManagementException {
         try {
-            return examenDAOImp.getExamenesEstudianteConExp(nroRegistro);
+            return examenDAOImp.getExamenesEstudianteConExp(nroRegistro,codPlan);
         } catch (SQLException e) {
             throw new ManagementException(e.getMessage());
         }
@@ -129,5 +129,25 @@ public abstract class ExamenManager {
         }
 
         return cant;
+    }
+    
+    public static ArrayList<Double> promediosEstadisticas(String codMateria,String codPlan) throws ManagementException {
+        int i=0;
+        ArrayList<Double> promedios =new ArrayList();
+        ArrayList<Experiencia> exps = getExperienciasAprobados(codMateria,codPlan);
+        double dias = 0,dificultad =0,dedicacion=0;
+        for (i=0;i<exps.size();i++){
+            dias+=exps.get(i).getDias();
+            dificultad+=exps.get(i).getDificultad();
+            dedicacion+=exps.get(i).getDedicacion();
+        }
+        dias=dias/i;
+        dificultad=dificultad/i;
+        dedicacion=dedicacion/i;
+        promedios.add(dificultad);
+        promedios.add(dias);
+        promedios.add(dedicacion);
+        
+        return promedios;
     }
 }
