@@ -110,6 +110,7 @@ public class ListaPanel extends javax.swing.JPanel {
         mesa = new javax.swing.JLabel();
         verListaInscriptosLabel = new javax.swing.JLabel();
         inscribirseExamenLabel = new javax.swing.JLabel();
+        verEstadisticasLabel = new javax.swing.JLabel();
 
         PanelCambiable.setBackground(new java.awt.Color(255, 255, 255));
         PanelCambiable.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -228,7 +229,17 @@ public class ListaPanel extends javax.swing.JPanel {
             }
         });
         PanelCambiable.add(inscribirseExamenLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 350, -1, -1));
-
+        verEstadisticasLabel.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
+        verEstadisticasLabel.setForeground(new java.awt.Color(51, 51, 51));
+        verEstadisticasLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_view_40px.png"))); // NOI18N
+        verEstadisticasLabel.setText("Ver Estadisticas de Examen");
+        verEstadisticasLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        verEstadisticasLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                verEstadisticasLabelMouseClicked(evt);
+            }
+        });
+        PanelCambiable.add(verEstadisticasLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 490, -1, -1));
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -292,6 +303,9 @@ public class ListaPanel extends javax.swing.JPanel {
         changePane(new InscripcionPanel(nroRegistro, codPlanEstudios, (String) TablaMaterias.getValueAt(TablaMaterias.getSelectedRow(), 0), false));
     }//GEN-LAST:event_inscribirseExamenLabelMouseClicked
 
+    private void verEstadisticasLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_verEstadisticasLabelMouseClicked
+        changePane(new EstadisticasEstudiante((String)TablaMaterias.getValueAt(TablaMaterias.getSelectedRow(),0),codPlanEstudios));
+    }//GEN-LAST:event_verEstadisticasLabelMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> ComboBoxCriterio;
@@ -305,6 +319,7 @@ public class ListaPanel extends javax.swing.JPanel {
     private javax.swing.JLabel labeldias;
     private javax.swing.JLabel mesa;
     private javax.swing.JTextField textfieldias;
+    private javax.swing.JLabel verEstadisticasLabel;
     private javax.swing.JLabel verListaInscriptosLabel;
     // End of variables declaration//GEN-END:variables
 }
