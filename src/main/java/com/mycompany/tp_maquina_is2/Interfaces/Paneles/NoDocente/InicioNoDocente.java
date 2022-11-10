@@ -41,8 +41,8 @@ public class InicioNoDocente extends javax.swing.JPanel {
         contenedor = new javax.swing.JPanel();
         MenuTop = new javax.swing.JPanel();
         planEstudiosBP = new javax.swing.JPanel();
-        estadisticasBP = new javax.swing.JPanel();
         planEstudiosBL = new javax.swing.JLabel();
+        estadisticasBP = new javax.swing.JPanel();
         estadisticasBL = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -81,18 +81,28 @@ public class InicioNoDocente extends javax.swing.JPanel {
             }
         });
 
+        planEstudiosBL.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        planEstudiosBL.setForeground(new java.awt.Color(255, 255, 255));
+        planEstudiosBL.setText("Planes de Estudios");
+        planEstudiosBL.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
         javax.swing.GroupLayout planEstudiosBPLayout = new javax.swing.GroupLayout(planEstudiosBP);
         planEstudiosBP.setLayout(planEstudiosBPLayout);
         planEstudiosBPLayout.setHorizontalGroup(
             planEstudiosBPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 170, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, planEstudiosBPLayout.createSequentialGroup()
+                .addContainerGap(9, Short.MAX_VALUE)
+                .addComponent(planEstudiosBL)
+                .addContainerGap())
         );
         planEstudiosBPLayout.setVerticalGroup(
             planEstudiosBPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 36, Short.MAX_VALUE)
+            .addGroup(planEstudiosBPLayout.createSequentialGroup()
+                .addComponent(planEstudiosBL)
+                .addGap(0, 12, Short.MAX_VALUE))
         );
 
-        MenuTop.add(planEstudiosBP, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, 170, -1));
+        MenuTop.add(planEstudiosBP, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 30, 170, -1));
 
         estadisticasBP.setBackground(new java.awt.Color(118, 35, 47));
         estadisticasBP.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -120,19 +130,13 @@ public class InicioNoDocente extends javax.swing.JPanel {
             .addGap(0, 36, Short.MAX_VALUE)
         );
 
-        MenuTop.add(estadisticasBP, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 10, 120, -1));
-
-        planEstudiosBL.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        planEstudiosBL.setForeground(new java.awt.Color(255, 255, 255));
-        planEstudiosBL.setText("Planes de Estudios");
-        planEstudiosBL.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        MenuTop.add(planEstudiosBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 40, -1, -1));
+        MenuTop.add(estadisticasBP, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 30, 120, -1));
 
         estadisticasBL.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         estadisticasBL.setForeground(new java.awt.Color(255, 255, 255));
         estadisticasBL.setText("Estadisticas");
         estadisticasBL.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        MenuTop.add(estadisticasBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 40, -1, -1));
+        MenuTop.add(estadisticasBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 30, -1, -1));
 
         add(MenuTop, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 84));
     }// </editor-fold>//GEN-END:initComponents

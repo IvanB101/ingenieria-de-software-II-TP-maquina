@@ -88,7 +88,7 @@ public class SeleccionarPlan extends javax.swing.JPanel {
         PrincipalL.setText("Seleccione el Plan de Estudios que desea modificar");
         contenedor.add(PrincipalL, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, -1, 37));
 
-        add(contenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, 560));
+        add(contenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 670));
     }// </editor-fold>//GEN-END:initComponents
 
     private void TablaExamenesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaExamenesMouseClicked

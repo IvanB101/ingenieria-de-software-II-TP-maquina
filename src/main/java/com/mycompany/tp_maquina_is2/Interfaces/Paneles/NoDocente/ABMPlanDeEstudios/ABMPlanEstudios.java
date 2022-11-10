@@ -173,7 +173,7 @@ public class ABMPlanEstudios extends javax.swing.JPanel {
 
         contenedor.add(eliminarBP, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 260, -1, -1));
 
-        add(contenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, 560));
+        add(contenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 670));
     }// </editor-fold>//GEN-END:initComponents
 
     private void modificarBPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_modificarBPMouseClicked
