@@ -103,7 +103,7 @@ public class InicioEstudiante extends javax.swing.JPanel {
         MenuTop.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         insertButtonP.setBackground(new java.awt.Color(118, 35, 47));
-        insertButtonP.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        insertButtonP.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         insertButtonP.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         insertButtonP.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -120,7 +120,7 @@ public class InicioEstudiante extends javax.swing.JPanel {
         insertButtonL.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         insertButtonL.setForeground(new java.awt.Color(255, 255, 255));
         insertButtonL.setText("Cargar historia academica");
-        insertButtonL.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        insertButtonL.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout insertButtonPLayout = new javax.swing.GroupLayout(insertButtonP);
         insertButtonP.setLayout(insertButtonPLayout);
@@ -142,7 +142,7 @@ public class InicioEstudiante extends javax.swing.JPanel {
         MenuTop.add(insertButtonP, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 230, -1));
 
         deleteButtonP.setBackground(new java.awt.Color(118, 35, 47));
-        deleteButtonP.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        deleteButtonP.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         deleteButtonP.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         deleteButtonP.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -159,7 +159,7 @@ public class InicioEstudiante extends javax.swing.JPanel {
         deleteButtonL.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         deleteButtonL.setForeground(new java.awt.Color(255, 255, 255));
         deleteButtonL.setText("Ver Lista Finales");
-        deleteButtonL.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        deleteButtonL.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout deleteButtonPLayout = new javax.swing.GroupLayout(deleteButtonP);
         deleteButtonP.setLayout(deleteButtonPLayout);
@@ -181,7 +181,7 @@ public class InicioEstudiante extends javax.swing.JPanel {
         MenuTop.add(deleteButtonP, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 10, 160, -1));
 
         tablesButtonP.setBackground(new java.awt.Color(118, 35, 47));
-        tablesButtonP.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        tablesButtonP.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         tablesButtonP.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         tablesButtonP.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -198,7 +198,7 @@ public class InicioEstudiante extends javax.swing.JPanel {
         tablesButtonL.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         tablesButtonL.setForeground(new java.awt.Color(255, 255, 255));
         tablesButtonL.setText("Estadisticas");
-        tablesButtonL.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        tablesButtonL.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout tablesButtonPLayout = new javax.swing.GroupLayout(tablesButtonP);
         tablesButtonP.setLayout(tablesButtonPLayout);
@@ -207,7 +207,7 @@ public class InicioEstudiante extends javax.swing.JPanel {
             .addGroup(tablesButtonPLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(tablesButtonL)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         tablesButtonPLayout.setVerticalGroup(
             tablesButtonPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -220,7 +220,7 @@ public class InicioEstudiante extends javax.swing.JPanel {
         MenuTop.add(tablesButtonP, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 10, 120, -1));
 
         AñadirExp.setBackground(new java.awt.Color(118, 35, 47));
-        AñadirExp.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        AñadirExp.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         AñadirExp.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         AñadirExp.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -237,7 +237,7 @@ public class InicioEstudiante extends javax.swing.JPanel {
         queryButtonL.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         queryButtonL.setForeground(new java.awt.Color(255, 255, 255));
         queryButtonL.setText("Añadir Experiencia examen");
-        queryButtonL.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        queryButtonL.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout AñadirExpLayout = new javax.swing.GroupLayout(AñadirExp);
         AñadirExp.setLayout(AñadirExpLayout);

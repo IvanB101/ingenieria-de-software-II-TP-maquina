@@ -38,6 +38,7 @@ public class ABMExpPanel extends javax.swing.JPanel {
         jScrollPane1.getViewport().setBackground(new Color(255, 255, 255)); //tabla color blanc
         this.PanelDatosExp.setVisible(false);
         BorrarL.setVisible(false);
+        caso=1;
         LlenarTablaExamenesSinExp();
     }
 
@@ -101,7 +102,7 @@ public class ABMExpPanel extends javax.swing.JPanel {
         jLabel1.setText("Lista de Examenes");
 
         AgregarButton.setBackground(new java.awt.Color(118, 35, 47));
-        AgregarButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        AgregarButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         AgregarButton.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         AgregarButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -118,7 +119,7 @@ public class ABMExpPanel extends javax.swing.JPanel {
         estudianteBL.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         estudianteBL.setForeground(new java.awt.Color(255, 255, 255));
         estudianteBL.setText("Agregar");
-        estudianteBL.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        estudianteBL.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout AgregarButtonLayout = new javax.swing.GroupLayout(AgregarButton);
         AgregarButton.setLayout(AgregarButtonLayout);
@@ -138,7 +139,7 @@ public class ABMExpPanel extends javax.swing.JPanel {
         );
 
         EliminarButton.setBackground(new java.awt.Color(118, 35, 47));
-        EliminarButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        EliminarButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         EliminarButton.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         EliminarButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -155,7 +156,7 @@ public class ABMExpPanel extends javax.swing.JPanel {
         estudianteBL1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         estudianteBL1.setForeground(new java.awt.Color(255, 255, 255));
         estudianteBL1.setText("Eliminar");
-        estudianteBL1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        estudianteBL1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout EliminarButtonLayout = new javax.swing.GroupLayout(EliminarButton);
         EliminarButton.setLayout(EliminarButtonLayout);
@@ -175,7 +176,7 @@ public class ABMExpPanel extends javax.swing.JPanel {
         );
 
         ModificarButton.setBackground(new java.awt.Color(118, 35, 47));
-        ModificarButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        ModificarButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         ModificarButton.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         ModificarButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -192,7 +193,7 @@ public class ABMExpPanel extends javax.swing.JPanel {
         estudianteBL2.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         estudianteBL2.setForeground(new java.awt.Color(255, 255, 255));
         estudianteBL2.setText("Modificar");
-        estudianteBL2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        estudianteBL2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout ModificarButtonLayout = new javax.swing.GroupLayout(ModificarButton);
         ModificarButton.setLayout(ModificarButtonLayout);

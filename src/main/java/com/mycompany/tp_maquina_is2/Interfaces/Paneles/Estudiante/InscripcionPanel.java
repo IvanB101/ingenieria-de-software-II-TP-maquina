@@ -188,7 +188,7 @@ public class InscripcionPanel extends javax.swing.JPanel {
 
     private void TablaMesasInscriptasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaMesasInscriptasMouseClicked
         switch (JOptionPane.showConfirmDialog(this, "Esta seguro de que desea borrar la inscripcion a la mesa (materia: "
-                + TablaMesasInscriptas.getValueAt(TablaMesasInscriptas.getSelectedRow(), 2))){
+                + TablaMesasInscriptas.getValueAt(TablaMesasInscriptas.getSelectedRow(), 2)+")")){
             case JOptionPane.OK_OPTION:
         try {
             MesaManager.deleteInscripcion(codPlanEstudios,String.valueOf(TablaMesasInscriptas.getValueAt(TablaMesasInscriptas.getSelectedRow(),3)), nroRegistro);

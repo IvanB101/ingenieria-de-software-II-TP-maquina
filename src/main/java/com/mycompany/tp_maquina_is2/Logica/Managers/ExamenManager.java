@@ -119,7 +119,7 @@ public abstract class ExamenManager {
     }
 
     public static int cantidadAprobadosUnaMateria(String codMateria, int dias, String codPlan) throws ManagementException {
-        ArrayList<Experiencia> experiencias = getExperiencias(codMateria, codPlan);
+        ArrayList<Experiencia> experiencias = getExperienciasAprobados(codMateria, codPlan);
 
         int cant = 0;
         for (Experiencia exp : experiencias) {

@@ -54,7 +54,7 @@ public class InicioPrincipal extends javax.swing.JPanel {
         contenedor.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         estudianteBP.setBackground(new java.awt.Color(118, 35, 47));
-        estudianteBP.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        estudianteBP.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         estudianteBP.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         estudianteBP.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -71,7 +71,7 @@ public class InicioPrincipal extends javax.swing.JPanel {
         estudianteBL.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         estudianteBL.setForeground(new java.awt.Color(255, 255, 255));
         estudianteBL.setText("Estudiante");
-        estudianteBL.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        estudianteBL.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout estudianteBPLayout = new javax.swing.GroupLayout(estudianteBP);
         estudianteBP.setLayout(estudianteBPLayout);
@@ -93,7 +93,7 @@ public class InicioPrincipal extends javax.swing.JPanel {
         contenedor.add(estudianteBP, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 50, 120, -1));
 
         noDocenteBP.setBackground(new java.awt.Color(118, 35, 47));
-        noDocenteBP.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        noDocenteBP.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         noDocenteBP.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         noDocenteBP.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -110,7 +110,7 @@ public class InicioPrincipal extends javax.swing.JPanel {
         noDocenteBL.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         noDocenteBL.setForeground(new java.awt.Color(255, 255, 255));
         noDocenteBL.setText("NoDocente");
-        noDocenteBL.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        noDocenteBL.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout noDocenteBPLayout = new javax.swing.GroupLayout(noDocenteBP);
         noDocenteBP.setLayout(noDocenteBPLayout);
