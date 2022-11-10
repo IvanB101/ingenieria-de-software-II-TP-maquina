@@ -35,6 +35,7 @@ public class InicioEstudiante extends javax.swing.JPanel {
         this.codPlan = codPlan;
         
         initComponents();
+        changePane(new PanelFondoInicio());
 
         try {
             Conexion conn = Conexion.getInstance();
@@ -59,36 +60,19 @@ public class InicioEstudiante extends javax.swing.JPanel {
     private void initComponents() {
 
         Archivo = new javax.swing.JFileChooser();
-        Cambiable = new javax.swing.JPanel();
-        PrincipalL = new javax.swing.JLabel();
-        PrincipalL1 = new javax.swing.JLabel();
         MenuTop = new javax.swing.JPanel();
-        insertButtonP = new javax.swing.JPanel();
-        insertButtonL = new javax.swing.JLabel();
-        deleteButtonP = new javax.swing.JPanel();
-        deleteButtonL = new javax.swing.JLabel();
-        tablesButtonP = new javax.swing.JPanel();
-        tablesButtonL = new javax.swing.JLabel();
-        AñadirExp = new javax.swing.JPanel();
-        queryButtonL = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        labelinicio = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        añadirExpLabel = new javax.swing.JLabel();
+        verListaLabel = new javax.swing.JLabel();
+        cargarHistoriaLabel = new javax.swing.JLabel();
+        jLabelnavbarfondo = new javax.swing.JLabel();
+        Cambiable = new javax.swing.JPanel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        Cambiable.setBackground(new java.awt.Color(255, 255, 255));
-        Cambiable.setPreferredSize(new java.awt.Dimension(950, 500));
-        Cambiable.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        PrincipalL.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
-        PrincipalL.setText("Bienvenido al sistema de asistencia universitaria");
-        Cambiable.add(PrincipalL, new org.netbeans.lib.awtextra.AbsoluteConstraints(265, 60, -1, 37));
-
-        PrincipalL1.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
-        PrincipalL1.setText("Seleccione la operacion que desee realizar");
-        Cambiable.add(PrincipalL1, new org.netbeans.lib.awtextra.AbsoluteConstraints(265, 103, 419, 45));
-
-        add(Cambiable, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 62, 920, 560));
-
-        MenuTop.setBackground(new java.awt.Color(118, 35, 47));
+        MenuTop.setBackground(new java.awt.Color(204, 204, 204));
         MenuTop.setToolTipText("");
         MenuTop.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
@@ -102,166 +86,92 @@ public class InicioEstudiante extends javax.swing.JPanel {
         });
         MenuTop.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        insertButtonP.setBackground(new java.awt.Color(118, 35, 47));
-        insertButtonP.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        insertButtonP.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        insertButtonP.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_account_40px.png"))); // NOI18N
+        jLabel2.setText("Cuenta");
+        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        MenuTop.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 20, 120, 50));
+
+        labelinicio.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        labelinicio.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                insertButtonPMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                insertButtonPMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                insertButtonPMouseExited(evt);
+                labelinicioMouseClicked(evt);
             }
         });
+        MenuTop.add(labelinicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, 260, 60));
 
-        insertButtonL.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        insertButtonL.setForeground(new java.awt.Color(255, 255, 255));
-        insertButtonL.setText("Cargar historia academica");
-        insertButtonL.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_automatic_40px.png"))); // NOI18N
+        jLabel1.setText("Configuración");
+        jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        MenuTop.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 20, 120, 50));
 
-        javax.swing.GroupLayout insertButtonPLayout = new javax.swing.GroupLayout(insertButtonP);
-        insertButtonP.setLayout(insertButtonPLayout);
-        insertButtonPLayout.setHorizontalGroup(
-            insertButtonPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(insertButtonPLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(insertButtonL)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        insertButtonPLayout.setVerticalGroup(
-            insertButtonPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(insertButtonPLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(insertButtonL)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        MenuTop.add(insertButtonP, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 230, -1));
-
-        deleteButtonP.setBackground(new java.awt.Color(118, 35, 47));
-        deleteButtonP.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        deleteButtonP.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        deleteButtonP.addMouseListener(new java.awt.event.MouseAdapter() {
+        añadirExpLabel.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        añadirExpLabel.setForeground(new java.awt.Color(51, 51, 51));
+        añadirExpLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_talk_40px.png"))); // NOI18N
+        añadirExpLabel.setText("Experiencia");
+        añadirExpLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        añadirExpLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                deleteButtonPMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                deleteButtonPMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                deleteButtonPMouseExited(evt);
+                añadirExpLabelMouseClicked(evt);
             }
         });
+        MenuTop.add(añadirExpLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 20, 120, 50));
 
-        deleteButtonL.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        deleteButtonL.setForeground(new java.awt.Color(255, 255, 255));
-        deleteButtonL.setText("Ver Lista Finales");
-        deleteButtonL.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
-        javax.swing.GroupLayout deleteButtonPLayout = new javax.swing.GroupLayout(deleteButtonP);
-        deleteButtonP.setLayout(deleteButtonPLayout);
-        deleteButtonPLayout.setHorizontalGroup(
-            deleteButtonPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(deleteButtonPLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(deleteButtonL, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        deleteButtonPLayout.setVerticalGroup(
-            deleteButtonPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(deleteButtonPLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(deleteButtonL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        MenuTop.add(deleteButtonP, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 10, 160, -1));
-
-        tablesButtonP.setBackground(new java.awt.Color(118, 35, 47));
-        tablesButtonP.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        tablesButtonP.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        tablesButtonP.addMouseListener(new java.awt.event.MouseAdapter() {
+        verListaLabel.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        verListaLabel.setForeground(new java.awt.Color(51, 51, 51));
+        verListaLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_shortlist_40px.png"))); // NOI18N
+        verListaLabel.setText("Lista finales");
+        verListaLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        verListaLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tablesButtonPMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                tablesButtonPMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                tablesButtonPMouseExited(evt);
+                verListaLabelMouseClicked(evt);
             }
         });
+        MenuTop.add(verListaLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 20, 120, 50));
 
-        tablesButtonL.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        tablesButtonL.setForeground(new java.awt.Color(255, 255, 255));
-        tablesButtonL.setText("Estadisticas");
-        tablesButtonL.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
-        javax.swing.GroupLayout tablesButtonPLayout = new javax.swing.GroupLayout(tablesButtonP);
-        tablesButtonP.setLayout(tablesButtonPLayout);
-        tablesButtonPLayout.setHorizontalGroup(
-            tablesButtonPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tablesButtonPLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(tablesButtonL)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        tablesButtonPLayout.setVerticalGroup(
-            tablesButtonPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tablesButtonPLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(tablesButtonL)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        MenuTop.add(tablesButtonP, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 10, 120, -1));
-
-        AñadirExp.setBackground(new java.awt.Color(118, 35, 47));
-        AñadirExp.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        AñadirExp.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        AñadirExp.addMouseListener(new java.awt.event.MouseAdapter() {
+        cargarHistoriaLabel.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        cargarHistoriaLabel.setForeground(new java.awt.Color(51, 51, 51));
+        cargarHistoriaLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_xls_import_40px.png"))); // NOI18N
+        cargarHistoriaLabel.setText("Cargar Historia");
+        cargarHistoriaLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cargarHistoriaLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                AñadirExpMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                AñadirExpMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                AñadirExpMouseExited(evt);
+                cargarHistoriaLabelMouseClicked(evt);
             }
         });
+        MenuTop.add(cargarHistoriaLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 20, 120, 50));
 
-        queryButtonL.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        queryButtonL.setForeground(new java.awt.Color(255, 255, 255));
-        queryButtonL.setText("Añadir Experiencia examen");
-        queryButtonL.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabelnavbarfondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/navbar1200x115.jpg"))); // NOI18N
+        MenuTop.add(jLabelnavbarfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 90));
 
-        javax.swing.GroupLayout AñadirExpLayout = new javax.swing.GroupLayout(AñadirExp);
-        AñadirExp.setLayout(AñadirExpLayout);
-        AñadirExpLayout.setHorizontalGroup(
-            AñadirExpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(AñadirExpLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(queryButtonL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(45, 45, 45))
-        );
-        AñadirExpLayout.setVerticalGroup(
-            AñadirExpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(AñadirExpLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(queryButtonL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        add(MenuTop, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 90));
 
-        MenuTop.add(AñadirExp, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 10, 250, -1));
-
-        add(MenuTop, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, 60));
+        Cambiable.setBackground(new java.awt.Color(255, 255, 255));
+        Cambiable.setPreferredSize(new java.awt.Dimension(950, 500));
+        Cambiable.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        add(Cambiable, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 82, 1200, 610));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void insertButtonPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_insertButtonPMouseClicked
+    private void changePane(JPanel jPanel) {
+        Cambiable.setLayout(new java.awt.CardLayout());
+        Cambiable.removeAll();
+        Cambiable.add(jPanel);
+        Cambiable.revalidate();
+        Cambiable.repaint();
+    }
+    
+    private void MenuTopMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuTopMouseDragged
+
+    }//GEN-LAST:event_MenuTopMouseDragged
+
+    private void MenuTopMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuTopMousePressed
+
+    }//GEN-LAST:event_MenuTopMousePressed
+
+    private void cargarHistoriaLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cargarHistoriaLabelMouseClicked
         int returnVal = Archivo.showOpenDialog(this);
         if (returnVal == Archivo.APPROVE_OPTION) {
             File file = Archivo.getSelectedFile();
@@ -274,82 +184,31 @@ public class InicioEstudiante extends javax.swing.JPanel {
             }
         } else {
         }
-    }//GEN-LAST:event_insertButtonPMouseClicked
+    }//GEN-LAST:event_cargarHistoriaLabelMouseClicked
 
-    private void changePane(JPanel jPanel) {
-        Cambiable.setLayout(new java.awt.CardLayout());
-        Cambiable.removeAll();
-        Cambiable.add(jPanel);
-        Cambiable.revalidate();
-        Cambiable.repaint();
-    }
-    
-    private void insertButtonPMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_insertButtonPMouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_insertButtonPMouseEntered
-
-    private void insertButtonPMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_insertButtonPMouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_insertButtonPMouseExited
-
-    private void deleteButtonPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteButtonPMouseClicked
+    private void verListaLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_verListaLabelMouseClicked
         changePane(new ListaPanel(user.getNroRegistro(), codPlan));
-    }//GEN-LAST:event_deleteButtonPMouseClicked
+    }//GEN-LAST:event_verListaLabelMouseClicked
 
-    private void deleteButtonPMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteButtonPMouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_deleteButtonPMouseEntered
+    private void añadirExpLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_añadirExpLabelMouseClicked
+        changePane(new ABMExpPanel(user.getNroRegistro()));
+    }//GEN-LAST:event_añadirExpLabelMouseClicked
 
-    private void deleteButtonPMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteButtonPMouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_deleteButtonPMouseExited
-
-    private void tablesButtonPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablesButtonPMouseClicked
-        JOptionPane.showMessageDialog(null, "En construccion");
-    }//GEN-LAST:event_tablesButtonPMouseClicked
-
-    private void tablesButtonPMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablesButtonPMouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tablesButtonPMouseEntered
-
-    private void tablesButtonPMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablesButtonPMouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tablesButtonPMouseExited
-
-    private void AñadirExpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AñadirExpMouseClicked
-        changePane(new ABMExpPanel(user.getNroRegistro(),codPlan));
-    }//GEN-LAST:event_AñadirExpMouseClicked
-
-    private void AñadirExpMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AñadirExpMouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_AñadirExpMouseEntered
-
-    private void AñadirExpMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AñadirExpMouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_AñadirExpMouseExited
-
-    private void MenuTopMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuTopMouseDragged
-
-    }//GEN-LAST:event_MenuTopMouseDragged
-
-    private void MenuTopMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuTopMousePressed
-
-    }//GEN-LAST:event_MenuTopMousePressed
+    private void labelinicioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelinicioMouseClicked
+        changePane(new PanelFondoInicio());
+    }//GEN-LAST:event_labelinicioMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFileChooser Archivo;
-    private javax.swing.JPanel AñadirExp;
     private javax.swing.JPanel Cambiable;
     private javax.swing.JPanel MenuTop;
-    private javax.swing.JLabel PrincipalL;
-    private javax.swing.JLabel PrincipalL1;
-    private javax.swing.JLabel deleteButtonL;
-    private javax.swing.JPanel deleteButtonP;
-    private javax.swing.JLabel insertButtonL;
-    private javax.swing.JPanel insertButtonP;
-    private javax.swing.JLabel queryButtonL;
-    private javax.swing.JLabel tablesButtonL;
-    private javax.swing.JPanel tablesButtonP;
+    private javax.swing.JLabel añadirExpLabel;
+    private javax.swing.JLabel cargarHistoriaLabel;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabelnavbarfondo;
+    private javax.swing.JLabel labelinicio;
+    private javax.swing.JLabel verListaLabel;
     // End of variables declaration//GEN-END:variables
 }

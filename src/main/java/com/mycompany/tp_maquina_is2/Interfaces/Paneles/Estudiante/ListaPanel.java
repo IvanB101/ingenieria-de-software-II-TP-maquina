@@ -33,7 +33,7 @@ public class ListaPanel extends javax.swing.JPanel {
         initComponents();
         TablaMaterias.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
         TablaMaterias.getTableHeader().setOpaque(true);
-        TablaMaterias.getTableHeader().setBackground(new Color(0, 153, 153));
+        TablaMaterias.getTableHeader().setBackground(new Color(183, 84,94));
         jScrollPane1.getViewport().setBackground(new Color(255, 255, 255)); //tabla color blanco
         TablaMaterias.getTableHeader().setReorderingAllowed(false);
         //doy aceptar
@@ -43,8 +43,8 @@ public class ListaPanel extends javax.swing.JPanel {
         textfieldias.setVisible(false);
         labeldias.setVisible(false);
 
-        Inscripcion.setVisible(false);
-        Inscripcion1.setVisible(false);
+        inscribirseExamenLabel.setVisible(false);
+        verListaInscriptosLabel.setVisible(false);
         mesa.setVisible(false);
         Estadisticas.setVisible(false);
 
@@ -108,17 +108,14 @@ public class ListaPanel extends javax.swing.JPanel {
         textfieldias = new javax.swing.JTextField();
         labeldias = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        Inscripcion = new javax.swing.JPanel();
-        estudianteBL = new javax.swing.JLabel();
-        Inscripcion1 = new javax.swing.JPanel();
-        estudianteBL1 = new javax.swing.JLabel();
         mesa = new javax.swing.JLabel();
-        Estadisticas = new javax.swing.JPanel();
-        estudianteBL2 = new javax.swing.JLabel();
+        verListaInscriptosLabel = new javax.swing.JLabel();
+        inscribirseExamenLabel = new javax.swing.JLabel();
 
         PanelCambiable.setBackground(new java.awt.Color(255, 255, 255));
         PanelCambiable.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        TablaMaterias.setForeground(new java.awt.Color(51, 51, 51));
         TablaMaterias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -146,6 +143,7 @@ public class ListaPanel extends javax.swing.JPanel {
         TablaMaterias.setFocusable(false);
         TablaMaterias.setRowHeight(25);
         TablaMaterias.setSelectionBackground(new java.awt.Color(118, 35, 47));
+        TablaMaterias.setSelectionForeground(new java.awt.Color(255, 255, 255));
         TablaMaterias.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TablaMateriasMouseClicked(evt);
@@ -185,99 +183,52 @@ public class ListaPanel extends javax.swing.JPanel {
         });
         PanelCambiable.add(textfieldias, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 150, 170, -1));
 
+        labeldias.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         labeldias.setForeground(new java.awt.Color(51, 51, 51));
-        labeldias.setText("Dias para estudiar:");
+        labeldias.setText("Días para estudiar:");
         PanelCambiable.add(labeldias, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 130, -1, -1));
 
-        jButton1.setText("Aceptar");
+        jButton1.setBackground(new java.awt.Color(51, 255, 51));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(51, 51, 51));
+        jButton1.setText("ACEPTAR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        PanelCambiable.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 210, 160, 20));
-
-        Inscripcion.setBackground(new java.awt.Color(118, 35, 47));
-        Inscripcion.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        Inscripcion.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        Inscripcion.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                InscripcionMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                InscripcionMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                InscripcionMouseExited(evt);
-            }
-        });
-
-        estudianteBL.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        estudianteBL.setForeground(new java.awt.Color(255, 255, 255));
-        estudianteBL.setText("Inscribirse a examen");
-        estudianteBL.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-
-        javax.swing.GroupLayout InscripcionLayout = new javax.swing.GroupLayout(Inscripcion);
-        Inscripcion.setLayout(InscripcionLayout);
-        InscripcionLayout.setHorizontalGroup(
-            InscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(InscripcionLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(estudianteBL)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        InscripcionLayout.setVerticalGroup(
-            InscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(InscripcionLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(estudianteBL)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        PanelCambiable.add(Inscripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 440, -1, -1));
-
-        Inscripcion1.setBackground(new java.awt.Color(118, 35, 47));
-        Inscripcion1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        Inscripcion1.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        Inscripcion1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Inscripcion1MouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                Inscripcion1MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                Inscripcion1MouseExited(evt);
-            }
-        });
-
-        estudianteBL1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        estudianteBL1.setForeground(new java.awt.Color(255, 255, 255));
-        estudianteBL1.setText("Ver Lista Inscriptos");
-        estudianteBL1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-
-        javax.swing.GroupLayout Inscripcion1Layout = new javax.swing.GroupLayout(Inscripcion1);
-        Inscripcion1.setLayout(Inscripcion1Layout);
-        Inscripcion1Layout.setHorizontalGroup(
-            Inscripcion1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Inscripcion1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(estudianteBL1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        Inscripcion1Layout.setVerticalGroup(
-            Inscripcion1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Inscripcion1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(estudianteBL1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        PanelCambiable.add(Inscripcion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 440, -1, -1));
+        PanelCambiable.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 210, 170, 30));
 
         mesa.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
+        mesa.setForeground(new java.awt.Color(51, 51, 51));
+        mesa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_calendar_40px.png"))); // NOI18N
         mesa.setText("Se corresponden a la mesa siguiente : Diciembre");
-        PanelCambiable.add(mesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 480, 340, -1));
+        mesa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        PanelCambiable.add(mesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 430, 380, -1));
+
+        verListaInscriptosLabel.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
+        verListaInscriptosLabel.setForeground(new java.awt.Color(51, 51, 51));
+        verListaInscriptosLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_view_40px.png"))); // NOI18N
+        verListaInscriptosLabel.setText("Ver Lista Inscriptos");
+        verListaInscriptosLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        verListaInscriptosLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                verListaInscriptosLabelMouseClicked(evt);
+            }
+        });
+        PanelCambiable.add(verListaInscriptosLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 290, -1, -1));
+
+        inscribirseExamenLabel.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
+        inscribirseExamenLabel.setForeground(new java.awt.Color(51, 51, 51));
+        inscribirseExamenLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_inscription_40px.png"))); // NOI18N
+        inscribirseExamenLabel.setText("Inscribirse a examen");
+        inscribirseExamenLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        inscribirseExamenLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                inscribirseExamenLabelMouseClicked(evt);
+            }
+        });
+        PanelCambiable.add(inscribirseExamenLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 350, -1, -1));
 
         Estadisticas.setBackground(new java.awt.Color(118, 35, 47));
         Estadisticas.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -323,14 +274,12 @@ public class ListaPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(PanelCambiable, javax.swing.GroupLayout.DEFAULT_SIZE, 913, Short.MAX_VALUE)
+                .addComponent(PanelCambiable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(PanelCambiable, javax.swing.GroupLayout.DEFAULT_SIZE, 506, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(PanelCambiable, javax.swing.GroupLayout.DEFAULT_SIZE, 670, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -369,36 +318,20 @@ public class ListaPanel extends javax.swing.JPanel {
         this.listaFinales(dias);
     }//GEN-LAST:event_jButton1ActionPerformed
     private void TablaMateriasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaMateriasMouseClicked
-        Inscripcion.setVisible(true);
-        Inscripcion1.setVisible(true);
+        inscribirseExamenLabel.setVisible(true);
+        verListaInscriptosLabel.setVisible(true);
         mesa.setVisible(true);
         Estadisticas.setVisible(true);
 
     }//GEN-LAST:event_TablaMateriasMouseClicked
 
-    private void InscripcionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_InscripcionMouseClicked
-        changePane(new InscripcionPanel(nroRegistro, codPlanEstudios, (String) TablaMaterias.getValueAt(TablaMaterias.getSelectedRow(), 0), false));
-    }//GEN-LAST:event_InscripcionMouseClicked
-
-    private void InscripcionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_InscripcionMouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_InscripcionMouseEntered
-
-    private void InscripcionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_InscripcionMouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_InscripcionMouseExited
-
-    private void Inscripcion1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Inscripcion1MouseClicked
+    private void verListaInscriptosLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_verListaInscriptosLabelMouseClicked
         changePane(new InscripcionPanel(nroRegistro, codPlanEstudios, (String) TablaMaterias.getValueAt(TablaMaterias.getSelectedRow(), 0), true));
-    }//GEN-LAST:event_Inscripcion1MouseClicked
+    }//GEN-LAST:event_verListaInscriptosLabelMouseClicked
 
-    private void Inscripcion1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Inscripcion1MouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Inscripcion1MouseEntered
-
-    private void Inscripcion1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Inscripcion1MouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Inscripcion1MouseExited
+    private void inscribirseExamenLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inscribirseExamenLabelMouseClicked
+        changePane(new InscripcionPanel(nroRegistro, codPlanEstudios, (String) TablaMaterias.getValueAt(TablaMaterias.getSelectedRow(), 0), false));
+    }//GEN-LAST:event_inscribirseExamenLabelMouseClicked
 
     private void EstadisticasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EstadisticasMouseClicked
        changePane(new EstadisticasEstudiante((String) TablaMaterias.getValueAt(TablaMaterias.getSelectedRow(), 0),codPlanEstudios));
@@ -416,14 +349,9 @@ public class ListaPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> ComboBoxCriterio;
-    private javax.swing.JPanel Estadisticas;
-    private javax.swing.JPanel Inscripcion;
-    private javax.swing.JPanel Inscripcion1;
     private javax.swing.JPanel PanelCambiable;
     private javax.swing.JTable TablaMaterias;
-    private javax.swing.JLabel estudianteBL;
-    private javax.swing.JLabel estudianteBL1;
-    private javax.swing.JLabel estudianteBL2;
+    private javax.swing.JLabel inscribirseExamenLabel;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -431,5 +359,6 @@ public class ListaPanel extends javax.swing.JPanel {
     private javax.swing.JLabel labeldias;
     private javax.swing.JLabel mesa;
     private javax.swing.JTextField textfieldias;
+    private javax.swing.JLabel verListaInscriptosLabel;
     // End of variables declaration//GEN-END:variables
 }

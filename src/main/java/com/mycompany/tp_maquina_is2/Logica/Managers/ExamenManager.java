@@ -12,7 +12,9 @@ import com.mycompany.tp_maquina_is2.Logica.Transferencia.Examen;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.Experiencia;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -149,5 +151,137 @@ public abstract class ExamenManager {
         promedios.add(dedicacion);
         
         return promedios;
+   }
+
+    public static HashMap<String, Double> getCodTopRendidas(String codPlan) throws ManagementException {
+        try {
+            HashMap<String, Integer> temp = new HashMap<>();
+            HashMap<String, Double> result = new HashMap<>();
+            int cantidad = 10, total = 0;
+            ArrayList<Examen> examenes = examenDAOImp.getExamenesPlan(codPlan);
+
+            for (Examen examen : examenes) {
+                Integer cant;
+                String codMateria = examen.getCodMateria();
+                if ((cant = temp.get(codMateria)) == null) {
+                    temp.put(codMateria, 1);
+                } else {
+                    temp.put(codMateria, ++cant);
+                }
+            }
+
+            Set<String> keys2 = temp.keySet();
+            ArrayList<String> keys = new ArrayList<>();
+
+            for (String codMateria : keys2) {
+                keys.add(codMateria);
+            }
+
+            keys.sort((c1, c2) -> {
+                Integer valuec1 = temp.get(c2);
+                return valuec1.compareTo(temp.get(c1));
+            });
+
+            if (keys.size() < 10) {
+                cantidad = keys.size();
+            }
+
+            for (int i = 0; i < cantidad; i++) {
+                String codMateria = keys.get(i);
+                double temp2 = temp.get(codMateria);
+
+                result.put(codMateria, temp2);
+                total += temp2;
+            }
+
+            for (String codMateria : result.keySet()) {
+                result.put(codMateria, result.get(codMateria) / ((double) total));
+            }
+
+            return result;
+        } catch (SQLException e) {
+            System.out.println(e);
+            throw new ManagementException("Ha ocurrido un error");
+        }
+    }
+
+    public static HashMap<String, Double> getEstadisticaExpPlan(String codPlan, String estadistica) throws ManagementException {
+        try {
+            HashMap<String, Double> temp = new HashMap<>();
+            HashMap<String, Integer> cantidades = new HashMap<>();
+            HashMap<String, Double> result = new HashMap<>();
+            int cantidad = 10;
+            ArrayList<Experiencia> experiencias = new ArrayList<>();
+
+            switch (estadistica) {
+                case "dificultad":
+                    experiencias = experienciaDAOImp.getExperienciasPlan(codPlan);
+                    break;
+                case "preparacion":
+
+                    break;
+                case "decicacion":
+
+            }
+
+            for (Experiencia experiencia : experiencias) {
+                String codMateria = experiencia.getCodMateria();
+                Double dato = temp.get(codMateria);
+                Double sumar = 0.0;
+
+                switch (estadistica) {
+                    case "dificultad":
+                        sumar = (double) experiencia.getDificultad();
+                        break;
+                    case "preparacion":
+                        sumar = (double) experiencia.getDias();
+                        break;
+                    case "decicacion":
+                        sumar = (double) experiencia.getDedicacion();
+                }
+                if (dato == null) {
+                    temp.put(codMateria, sumar);
+
+                    cantidades.put(codMateria, 1);
+                } else {
+                    temp.put(codMateria, dato + sumar);
+
+                    cantidades.put(codMateria, cantidades.get(codMateria) + 1);
+                }
+            }
+
+            // Pasaje a promedios
+            for (String codMateria : temp.keySet()) {
+                temp.put(codPlan, temp.get(codMateria) / cantidades.get(codMateria));
+            }
+
+            Set<String> keys2 = temp.keySet();
+            ArrayList<String> keys = new ArrayList<>();
+
+            for (String codMateria : keys2) {
+                keys.add(codMateria);
+            }
+
+            keys.sort((c1, c2) -> {
+                Double valuec1 = temp.get(c2);
+                return valuec1.compareTo(temp.get(c1));
+            });
+
+            if (keys.size() < 10) {
+                cantidad = keys.size();
+            }
+
+            for (int i = 0; i < cantidad; i++) {
+                String codMateria = keys.get(i);
+
+                result.put(codMateria, temp.get(codMateria));
+            }
+
+            return result;
+        } catch (SQLException e) {
+            System.out.println(e);
+            throw new ManagementException("Ha ocurrido un error");
+        }
+
     }
 }

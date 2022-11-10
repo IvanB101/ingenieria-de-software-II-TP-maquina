@@ -322,7 +322,7 @@ public class ModificarPlan extends javax.swing.JPanel {
 
         materiaP.add(agregarCorrelativaBP, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 160, 90, -1));
 
-        contenedor.add(materiaP, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 0, 470, 520));
+        contenedor.add(materiaP, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 0, 690, 520));
 
         seleccionMateria.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         seleccionMateria.setForeground(new java.awt.Color(165, 165, 165));
@@ -582,7 +582,7 @@ public class ModificarPlan extends javax.swing.JPanel {
         PrincipalL9.setText("Plan de Estudios");
         contenedor.add(PrincipalL9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 320, 30));
 
-        add(contenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, 520));
+        add(contenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 670));
     }// </editor-fold>//GEN-END:initComponents
 
     private void tablaCorrelativasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaCorrelativasMouseClicked
