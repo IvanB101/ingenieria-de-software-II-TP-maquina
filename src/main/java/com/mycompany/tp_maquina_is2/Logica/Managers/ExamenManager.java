@@ -198,10 +198,8 @@ public abstract class ExamenManager {
                     experiencias = experienciaDAOImp.getExperienciasPlan(codPlan);
                     break;
                 case "preparacion":
-
-                    break;
                 case "decicacion":
-
+                    experiencias = experienciaDAOImp.getExperienciasAprobadosPlan(codPlan);
             }
 
             for (Experiencia experiencia : experiencias) {

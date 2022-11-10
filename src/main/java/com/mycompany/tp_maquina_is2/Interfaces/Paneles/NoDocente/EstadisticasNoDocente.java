@@ -49,15 +49,12 @@ public class EstadisticasNoDocente extends javax.swing.JPanel {
 
             switch (tipo) {
                 case "dificultad":
-                    JOptionPane.showMessageDialog(null, "En construccion");
                     chart = graficaExperiencia("dificultad");
                     break;
                 case "preparacion":
-                    JOptionPane.showMessageDialog(null, "En construccion");
                     chart = graficaExperiencia("preparacion");
                     break;
                 case "dedicacion":
-                    JOptionPane.showMessageDialog(null, "En construccion");
                     chart = graficaExperiencia("dedicacion");
                     break;
                 case "rendidas":
@@ -183,10 +180,11 @@ public class EstadisticasNoDocente extends javax.swing.JPanel {
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         contenedor.setBackground(new java.awt.Color(255, 255, 255));
-        contenedor.setLayout(new java.awt.CardLayout());
-        add(contenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 0, 620, 560));
+        contenedor.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        add(contenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 0, 900, 680));
 
         SeleccionP.setBackground(new java.awt.Color(118, 35, 47));
+        SeleccionP.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         dificultadPromedioP.setBackground(new java.awt.Color(118, 35, 47));
         dificultadPromedioP.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -225,6 +223,8 @@ public class EstadisticasNoDocente extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        SeleccionP.add(dificultadPromedioP, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 180, -1, -1));
+
         preparacionP.setBackground(new java.awt.Color(118, 35, 47));
         preparacionP.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         preparacionP.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
@@ -242,7 +242,7 @@ public class EstadisticasNoDocente extends javax.swing.JPanel {
 
         preparacionL.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         preparacionL.setForeground(new java.awt.Color(255, 255, 255));
-        preparacionL.setText("Tiempo promedio de preparacion");
+        preparacionL.setText("Promedio preparacion aprobados");
         preparacionL.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout preparacionPLayout = new javax.swing.GroupLayout(preparacionP);
@@ -262,6 +262,8 @@ public class EstadisticasNoDocente extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        SeleccionP.add(preparacionP, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 228, -1, -1));
+
         dedicacionP.setBackground(new java.awt.Color(118, 35, 47));
         dedicacionP.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         dedicacionP.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
@@ -279,7 +281,7 @@ public class EstadisticasNoDocente extends javax.swing.JPanel {
 
         dedicacionL.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         dedicacionL.setForeground(new java.awt.Color(255, 255, 255));
-        dedicacionL.setText("Dedicacion promedio");
+        dedicacionL.setText("Dedicacion promedio aprobados");
         dedicacionL.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout dedicacionPLayout = new javax.swing.GroupLayout(dedicacionP);
@@ -298,6 +300,8 @@ public class EstadisticasNoDocente extends javax.swing.JPanel {
                 .addComponent(dedicacionL)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        SeleccionP.add(dedicacionP, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 276, -1, -1));
 
         mesasP.setBackground(new java.awt.Color(118, 35, 47));
         mesasP.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -336,47 +340,17 @@ public class EstadisticasNoDocente extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        SeleccionP.add(mesasP, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 324, -1, -1));
+
         labelSeleccion.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         labelSeleccion.setText("Seleccione una Estadistica");
+        SeleccionP.add(labelSeleccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
 
         labelTop10.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         labelTop10.setText("Top 10");
+        SeleccionP.add(labelTop10, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
 
-        javax.swing.GroupLayout SeleccionPLayout = new javax.swing.GroupLayout(SeleccionP);
-        SeleccionP.setLayout(SeleccionPLayout);
-        SeleccionPLayout.setHorizontalGroup(
-            SeleccionPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(SeleccionPLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addGroup(SeleccionPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelSeleccion)
-                    .addComponent(labelTop10)
-                    .addComponent(mesasP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(SeleccionPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(preparacionP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(dedicacionP, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(dificultadPromedioP, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(9, Short.MAX_VALUE))
-        );
-        SeleccionPLayout.setVerticalGroup(
-            SeleccionPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(SeleccionPLayout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(labelSeleccion)
-                .addGap(68, 68, 68)
-                .addComponent(labelTop10)
-                .addGap(30, 30, 30)
-                .addComponent(dificultadPromedioP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(preparacionP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(dedicacionP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(mesasP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(210, Short.MAX_VALUE))
-        );
-
-        add(SeleccionP, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 300, 570));
+        add(SeleccionP, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 300, 690));
     }// </editor-fold>//GEN-END:initComponents
 
     private void dificultadPromedioPMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_dificultadPromedioPMouseClicked

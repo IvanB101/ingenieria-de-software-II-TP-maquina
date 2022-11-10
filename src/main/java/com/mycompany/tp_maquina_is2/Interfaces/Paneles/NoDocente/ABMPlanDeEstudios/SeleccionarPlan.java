@@ -4,6 +4,7 @@
  */
 package com.mycompany.tp_maquina_is2.Interfaces.Paneles.NoDocente.ABMPlanDeEstudios;
 
+import com.mycompany.tp_maquina_is2.Interfaces.Paneles.NoDocente.EstadisticasNoDocente;
 import com.mycompany.tp_maquina_is2.Logica.Excepciones.ManagementException;
 import com.mycompany.tp_maquina_is2.Logica.Managers.PlanEstudiosManager;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.PlanEstudios;
@@ -18,11 +19,19 @@ import javax.swing.table.DefaultTableModel;
  */
 public class SeleccionarPlan extends javax.swing.JPanel {
 
+    private String operacion;
+
     /**
      * Creates new form ModificarPlan
      */
-    public SeleccionarPlan() {
+    public SeleccionarPlan(String operacion) {
+        this.operacion = operacion;
+
         initComponents();
+
+        if (operacion.equals("estadisticas")) {
+            PrincipalL.setText("Seleccione el plan del que desea ver estadisticas");
+        }
 
         llenarTabla();
     }
@@ -92,7 +101,16 @@ public class SeleccionarPlan extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void TablaExamenesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaExamenesMouseClicked
-        changePane(new ModificarPlan((String) TablaExamenes.getValueAt(TablaExamenes.getSelectedRow(), 0)));
+        String codPlan = (String) TablaExamenes.getValueAt(TablaExamenes.getSelectedRow(), 0);
+
+        switch (operacion) {
+            case "modificar":
+                changePane(new ModificarPlan(codPlan));
+                break;
+            case "estadisticas":
+                changePane(new EstadisticasNoDocente(codPlan));
+        }
+
     }//GEN-LAST:event_TablaExamenesMouseClicked
 
     private void changePane(JPanel jPanel) {
