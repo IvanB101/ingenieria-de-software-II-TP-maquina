@@ -190,7 +190,7 @@ public class InicioNoDocente extends javax.swing.JPanel {
     }//GEN-LAST:event_planEstudiosBPMouseExited
 
     private void estadisticasBPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_estadisticasBPMouseClicked
-        JOptionPane.showMessageDialog(null, "En construccion");
+        changePane(new EstadisticasNoDocente());
     }//GEN-LAST:event_estadisticasBPMouseClicked
 
     private void estadisticasBPMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_estadisticasBPMouseEntered
