@@ -28,7 +28,7 @@ public abstract class EstudianteManager {
             estudianteDAOImp.create(estudiante);
         } catch (SQLException e) {
             if(e.getMessage().contains("llave duplicada")) {
-                throw new ManagementException("Ya existe un estudiante con el nro de registro ingresado");
+                throw new ManagementException("Ya existe un estudiante con el nro de registro: " + estudiante.getNroRegistro());
             } else {
                 throw new ManagementException(e.getMessage());
             }
