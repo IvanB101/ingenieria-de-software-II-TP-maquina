@@ -43,7 +43,8 @@ public abstract class ArchivosManager {
             String[] datos = excel.leerFila(2);
 
             // Carga datos de plan de estudios
-            PlanEstudios plan = new PlanEstudios(datos[1], datos[0]);
+            PlanEstudios plan = new PlanEstudios(datos[1], 
+                    datos[0]);
 
             /* Se mantiene una LinkedList para mantener el orden y evitar conflictos con las correlativas 
             en la posterior carga en la base de datos */

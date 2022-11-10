@@ -46,7 +46,7 @@ public class Principal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Ha habido un problema conectando a la Base de Datos");
         }
         
-        changePane(new com.mycompany.tp_maquina_is2.Interfaces.InicioPrincipal(user, codPlan));
+        changePane(new InicioPrincipal(user, codPlan));
     }
 
     /**
@@ -99,6 +99,11 @@ public class Principal extends javax.swing.JFrame {
         titulo.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         titulo.setForeground(new java.awt.Color(255, 255, 255));
         titulo.setText("Sistema de asistencia universitaria");
+        titulo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tituloMouseClicked(evt);
+            }
+        });
         MenuTop.add(titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 20, 410, -1));
 
         closeButtonP.setBackground(new java.awt.Color(118, 35, 47));
@@ -126,7 +131,7 @@ public class Principal extends javax.swing.JFrame {
             closeButtonPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(closeButtonPLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(closeButtonL, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                .addComponent(closeButtonL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         closeButtonPLayout.setVerticalGroup(
@@ -134,7 +139,7 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(closeButtonPLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(closeButtonL, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         MenuTop.add(closeButtonP, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 0, 50, 50));
@@ -224,6 +229,10 @@ public class Principal extends javax.swing.JFrame {
     private void estudianteBP1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_estudianteBP1MouseExited
         // TODO add your handling code here:
     }//GEN-LAST:event_estudianteBP1MouseExited
+
+    private void tituloMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tituloMouseClicked
+        changePane(new InicioPrincipal(user, codPlan));
+    }//GEN-LAST:event_tituloMouseClicked
 
     /**
      * @param args the command line arguments
