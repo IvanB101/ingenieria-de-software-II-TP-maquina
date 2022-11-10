@@ -40,10 +40,11 @@ public class EstadisticasEstudiante extends javax.swing.JPanel {
         this.codPlan=codPlan;
         crearGrafico();
 
-        ChartPanel panel = new ChartPanel(chart, false);
-        panel.setBounds(30, 30, 700, 400);
-        panel.setVisible(true);
-        add(panel);
+        contenedor.setLayout(new java.awt.CardLayout());
+        contenedor.removeAll();
+        contenedor.add(new ChartPanel(chart, false));
+        contenedor.revalidate();
+        contenedor.repaint();
     }
 
     /**
@@ -55,9 +56,9 @@ public class EstadisticasEstudiante extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        PanelCambiable = new javax.swing.JPanel();
+        contenedor = new javax.swing.JPanel();
 
-        PanelCambiable.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        contenedor.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -67,7 +68,7 @@ public class EstadisticasEstudiante extends javax.swing.JPanel {
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(PanelCambiable, javax.swing.GroupLayout.PREFERRED_SIZE, 918, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(contenedor, javax.swing.GroupLayout.PREFERRED_SIZE, 918, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
@@ -75,7 +76,7 @@ public class EstadisticasEstudiante extends javax.swing.JPanel {
             .addGap(0, 516, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addComponent(PanelCambiable, javax.swing.GroupLayout.PREFERRED_SIZE, 516, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(contenedor, javax.swing.GroupLayout.PREFERRED_SIZE, 516, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -130,6 +131,6 @@ public class EstadisticasEstudiante extends javax.swing.JPanel {
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel PanelCambiable;
+    private javax.swing.JPanel contenedor;
     // End of variables declaration//GEN-END:variables
 }
