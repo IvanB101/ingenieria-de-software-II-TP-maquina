@@ -144,6 +144,10 @@ public class ArchivosManager {
                 }
 
                 datos = excel.leerFila(5);
+                
+                if(datos[0].equals("")) {
+                    break;
+                }
 
                 // Comprobacion de que la materia este en el plan de estudios
                 codMateria = codigoMateria(datos[0]);
