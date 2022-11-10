@@ -217,7 +217,7 @@ public class InscripcionPanel extends javax.swing.JPanel {
         try {
             MesaManager.añadirInscripcion(codigo,nroRegistro);
         } catch (ManagementException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Ya estás inscripto!");
         }
     }
     

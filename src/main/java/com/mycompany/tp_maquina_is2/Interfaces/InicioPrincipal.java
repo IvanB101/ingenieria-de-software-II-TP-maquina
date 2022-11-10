@@ -44,140 +44,70 @@ public class InicioPrincipal extends javax.swing.JPanel {
     private void initComponents() {
 
         contenedor = new javax.swing.JPanel();
-        estudianteBP = new javax.swing.JPanel();
         estudianteBL = new javax.swing.JLabel();
-        noDocenteBP = new javax.swing.JPanel();
         noDocenteBL = new javax.swing.JLabel();
+        jLabelfondo = new javax.swing.JLabel();
 
         contenedor.setBackground(new java.awt.Color(255, 255, 255));
         contenedor.setPreferredSize(new java.awt.Dimension(950, 500));
         contenedor.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        estudianteBP.setBackground(new java.awt.Color(118, 35, 47));
-        estudianteBP.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        estudianteBP.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        estudianteBP.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                estudianteBPMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                estudianteBPMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                estudianteBPMouseExited(evt);
-            }
-        });
-
-        estudianteBL.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        estudianteBL.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         estudianteBL.setForeground(new java.awt.Color(255, 255, 255));
-        estudianteBL.setText("Estudiante");
+        estudianteBL.setText("  ESTUDIANTE");
         estudianteBL.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
-        javax.swing.GroupLayout estudianteBPLayout = new javax.swing.GroupLayout(estudianteBP);
-        estudianteBP.setLayout(estudianteBPLayout);
-        estudianteBPLayout.setHorizontalGroup(
-            estudianteBPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(estudianteBPLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(estudianteBL)
-                .addContainerGap(29, Short.MAX_VALUE))
-        );
-        estudianteBPLayout.setVerticalGroup(
-            estudianteBPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(estudianteBPLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(estudianteBL)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        contenedor.add(estudianteBP, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 50, 120, -1));
-
-        noDocenteBP.setBackground(new java.awt.Color(118, 35, 47));
-        noDocenteBP.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        noDocenteBP.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        noDocenteBP.addMouseListener(new java.awt.event.MouseAdapter() {
+        estudianteBL.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                noDocenteBPMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                noDocenteBPMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                noDocenteBPMouseExited(evt);
+                estudianteBLMouseClicked(evt);
             }
         });
+        contenedor.add(estudianteBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 370, 190, 50));
 
-        noDocenteBL.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        noDocenteBL.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         noDocenteBL.setForeground(new java.awt.Color(255, 255, 255));
-        noDocenteBL.setText("NoDocente");
+        noDocenteBL.setText("   NO DOCENTE");
         noDocenteBL.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        noDocenteBL.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                noDocenteBLMouseClicked(evt);
+            }
+        });
+        contenedor.add(noDocenteBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 370, 210, 50));
 
-        javax.swing.GroupLayout noDocenteBPLayout = new javax.swing.GroupLayout(noDocenteBP);
-        noDocenteBP.setLayout(noDocenteBPLayout);
-        noDocenteBPLayout.setHorizontalGroup(
-            noDocenteBPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(noDocenteBPLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(noDocenteBL)
-                .addContainerGap(24, Short.MAX_VALUE))
-        );
-        noDocenteBPLayout.setVerticalGroup(
-            noDocenteBPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(noDocenteBPLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(noDocenteBL)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        contenedor.add(noDocenteBP, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, 120, -1));
+        jLabelfondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iniciopanel1200x675.jpg"))); // NOI18N
+        jLabelfondo.setText("jLabel1");
+        contenedor.add(jLabelfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 670));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 921, Short.MAX_VALUE)
+            .addGap(0, 1200, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(contenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 921, Short.MAX_VALUE))
+                .addComponent(contenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 1200, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 632, Short.MAX_VALUE)
+            .addGap(0, 670, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(contenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 632, Short.MAX_VALUE))
+                .addComponent(contenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 670, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void estudianteBPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_estudianteBPMouseClicked
+    private void estudianteBLMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_estudianteBLMouseClicked
         changePane(new InicioEstudiante(user, codPlan));
-    }//GEN-LAST:event_estudianteBPMouseClicked
+    }//GEN-LAST:event_estudianteBLMouseClicked
 
-    private void estudianteBPMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_estudianteBPMouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_estudianteBPMouseEntered
-
-    private void estudianteBPMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_estudianteBPMouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_estudianteBPMouseExited
-
-    private void noDocenteBPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_noDocenteBPMouseClicked
+    private void noDocenteBLMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_noDocenteBLMouseClicked
         changePane(new InicioNoDocente());
-    }//GEN-LAST:event_noDocenteBPMouseClicked
-
-    private void noDocenteBPMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_noDocenteBPMouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_noDocenteBPMouseEntered
-
-    private void noDocenteBPMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_noDocenteBPMouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_noDocenteBPMouseExited
+    }//GEN-LAST:event_noDocenteBLMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel contenedor;
     private javax.swing.JLabel estudianteBL;
-    private javax.swing.JPanel estudianteBP;
+    private javax.swing.JLabel jLabelfondo;
     private javax.swing.JLabel noDocenteBL;
-    private javax.swing.JPanel noDocenteBP;
     // End of variables declaration//GEN-END:variables
 
 }

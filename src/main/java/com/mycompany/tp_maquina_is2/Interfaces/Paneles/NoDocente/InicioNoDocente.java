@@ -39,25 +39,18 @@ public class InicioNoDocente extends javax.swing.JPanel {
     private void initComponents() {
 
         contenedor = new javax.swing.JPanel();
-        PrincipalL = new javax.swing.JLabel();
-        PrincipalL1 = new javax.swing.JLabel();
         MenuTop = new javax.swing.JPanel();
         planEstudiosBP = new javax.swing.JPanel();
         planEstudiosBL = new javax.swing.JLabel();
         estadisticasBP = new javax.swing.JPanel();
         estadisticasBL = new javax.swing.JLabel();
 
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         contenedor.setBackground(new java.awt.Color(255, 255, 255));
         contenedor.setPreferredSize(new java.awt.Dimension(950, 500));
         contenedor.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        PrincipalL.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
-        PrincipalL.setText("Bienvenido al sistema de asistencia universitaria");
-        contenedor.add(PrincipalL, new org.netbeans.lib.awtextra.AbsoluteConstraints(265, 60, -1, 37));
-
-        PrincipalL1.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
-        PrincipalL1.setText("Seleccione la operacion que desee realizar");
-        contenedor.add(PrincipalL1, new org.netbeans.lib.awtextra.AbsoluteConstraints(265, 103, 419, 45));
+        add(contenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(-1, 86, 1200, 584));
 
         MenuTop.setBackground(new java.awt.Color(118, 35, 47));
         MenuTop.setToolTipText("");
@@ -74,7 +67,7 @@ public class InicioNoDocente extends javax.swing.JPanel {
         MenuTop.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         planEstudiosBP.setBackground(new java.awt.Color(118, 35, 47));
-        planEstudiosBP.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        planEstudiosBP.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         planEstudiosBP.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         planEstudiosBP.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -91,29 +84,28 @@ public class InicioNoDocente extends javax.swing.JPanel {
         planEstudiosBL.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         planEstudiosBL.setForeground(new java.awt.Color(255, 255, 255));
         planEstudiosBL.setText("Planes de Estudios");
-        planEstudiosBL.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        planEstudiosBL.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         javax.swing.GroupLayout planEstudiosBPLayout = new javax.swing.GroupLayout(planEstudiosBP);
         planEstudiosBP.setLayout(planEstudiosBPLayout);
         planEstudiosBPLayout.setHorizontalGroup(
             planEstudiosBPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(planEstudiosBPLayout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, planEstudiosBPLayout.createSequentialGroup()
+                .addContainerGap(9, Short.MAX_VALUE)
                 .addComponent(planEstudiosBL)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         planEstudiosBPLayout.setVerticalGroup(
             planEstudiosBPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(planEstudiosBPLayout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(planEstudiosBL)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 12, Short.MAX_VALUE))
         );
 
-        MenuTop.add(planEstudiosBP, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, 170, -1));
+        MenuTop.add(planEstudiosBP, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 30, 170, -1));
 
         estadisticasBP.setBackground(new java.awt.Color(118, 35, 47));
-        estadisticasBP.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        estadisticasBP.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         estadisticasBP.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         estadisticasBP.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -127,54 +119,26 @@ public class InicioNoDocente extends javax.swing.JPanel {
             }
         });
 
-        estadisticasBL.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        estadisticasBL.setForeground(new java.awt.Color(255, 255, 255));
-        estadisticasBL.setText("Estadisticas");
-        estadisticasBL.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
         javax.swing.GroupLayout estadisticasBPLayout = new javax.swing.GroupLayout(estadisticasBP);
         estadisticasBP.setLayout(estadisticasBPLayout);
         estadisticasBPLayout.setHorizontalGroup(
             estadisticasBPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(estadisticasBPLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(estadisticasBL)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGap(0, 120, Short.MAX_VALUE)
         );
         estadisticasBPLayout.setVerticalGroup(
             estadisticasBPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(estadisticasBPLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(estadisticasBL)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGap(0, 36, Short.MAX_VALUE)
         );
 
-        MenuTop.add(estadisticasBP, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 10, 120, -1));
+        MenuTop.add(estadisticasBP, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 30, 120, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 920, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(MenuTop, javax.swing.GroupLayout.PREFERRED_SIZE, 920, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(contenedor, javax.swing.GroupLayout.PREFERRED_SIZE, 920, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 622, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(MenuTop, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(2, 2, 2)
-                    .addComponent(contenedor, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
+        estadisticasBL.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        estadisticasBL.setForeground(new java.awt.Color(255, 255, 255));
+        estadisticasBL.setText("Estadisticas");
+        estadisticasBL.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        MenuTop.add(estadisticasBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 30, -1, -1));
+
+        add(MenuTop, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 84));
     }// </editor-fold>//GEN-END:initComponents
 
     private void planEstudiosBPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_planEstudiosBPMouseClicked
@@ -212,8 +176,6 @@ public class InicioNoDocente extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel MenuTop;
-    private javax.swing.JLabel PrincipalL;
-    private javax.swing.JLabel PrincipalL1;
     private javax.swing.JPanel contenedor;
     private javax.swing.JLabel estadisticasBL;
     private javax.swing.JPanel estadisticasBP;
