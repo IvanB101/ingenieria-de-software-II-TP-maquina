@@ -24,12 +24,14 @@ public class ABMExpPanel extends javax.swing.JPanel {
 
     private int nroRegistro;
     private int caso;
+    private String codPlan;
 
     /**
      * Creates new form AgregarExpPanel
      */
-    public ABMExpPanel(int nroRegistro) {
+    public ABMExpPanel(int nroRegistro,String codPlan) {
         this.nroRegistro = nroRegistro;
+        this.codPlan=codPlan;
         initComponents();
         TablaExamenes.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
         TablaExamenes.getTableHeader().setOpaque(true);
@@ -102,7 +104,6 @@ public class ABMExpPanel extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(51, 51, 51));
         jLabel1.setText("Lista de Examenes");
         panelExamRendidos.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, -1, -1));
-
         BorrarL.setFont(new java.awt.Font("Segoe UI Semibold", 1, 16)); // NOI18N
         BorrarL.setText("Si selecciona una fila, borrara esa experiencia de examen");
         panelExamRendidos.add(BorrarL, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 460, -1, -1));
@@ -142,7 +143,6 @@ public class ABMExpPanel extends javax.swing.JPanel {
             }
         });
         panelExamRendidos.add(modificarExpLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 30, 120, -1));
-
         PanelDatosExp.setBackground(new java.awt.Color(255, 255, 255));
         PanelDatosExp.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -204,7 +204,6 @@ public class ABMExpPanel extends javax.swing.JPanel {
             }
         });
         PanelDatosExp.add(DiasDeEstudio, new org.netbeans.lib.awtextra.AbsoluteConstraints(174, 201, 180, -1));
-
         javax.swing.GroupLayout ContenedorLayout = new javax.swing.GroupLayout(Contenedor);
         Contenedor.setLayout(ContenedorLayout);
         ContenedorLayout.setHorizontalGroup(
@@ -320,7 +319,7 @@ public class ABMExpPanel extends javax.swing.JPanel {
 
     public void LlenarTablaExamenesSinExp() {
         try {
-            ArrayList<Examen> examenes = ExamenManager.examenesEstudianteSinExp(nroRegistro);
+            ArrayList<Examen> examenes = ExamenManager.examenesEstudianteSinExp(nroRegistro,codPlan);
             DefaultTableModel modelo = new DefaultTableModel(){
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -345,7 +344,7 @@ public class ABMExpPanel extends javax.swing.JPanel {
 
         public void LlenarTablaExamenesConExp() {
         try {
-            ArrayList<Examen> examenes = ExamenManager.examenesEstudianteConExp(nroRegistro);
+            ArrayList<Examen> examenes = ExamenManager.examenesEstudianteConExp(nroRegistro,codPlan);
             DefaultTableModel modelo = new DefaultTableModel(){
             @Override
             public boolean isCellEditable(int row, int column) {

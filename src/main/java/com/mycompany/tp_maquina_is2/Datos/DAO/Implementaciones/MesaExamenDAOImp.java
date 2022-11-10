@@ -168,7 +168,7 @@ public class MesaExamenDAOImp implements MesaExamenDAOInter {
         Connection con = conexion.getConnection();
 
         PreparedStatement ps = con.prepareStatement("SELECT nombre,apellido,nroregistro,dni FROM Persona,Estudiante,Inscripcion "
-                + "WHERE persona_codigo=codigo AND mesaexamen_turno=? AND mesaexamen_anio=? "
+                + "WHERE persona_codigo=codigo AND estudiante_nroregistro = nroregistro AND mesaexamen_turno=? AND mesaexamen_anio=? "
                 + "AND mesaexamen_materia_codigo=? AND mesaexamen_materia_planestudios_codigo=?");
         ps.setInt(1,turno);
         ps.setInt(2,anio);

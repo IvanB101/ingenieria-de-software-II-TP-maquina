@@ -112,19 +112,19 @@ public class ExamenDAOImp implements ExamenDAOInter {
         ps.executeUpdate();
     }
     
-    public ArrayList<Examen> getExamenesEstudianteSinExp(int nroRegistro) throws SQLException {
+    public ArrayList<Examen> getExamenesEstudianteSinExp(int nroRegistro,String codPlan) throws SQLException {
         ArrayList<Examen> examenes = new ArrayList<>();
         
         Connection con = conexion.getConnection();
 
-        PreparedStatement ps = con.prepareStatement("SELECT fecha,nota,materia_codigo,planestudios_codigo from examen,experiencia " +
-"EXCEPT " + "SELECT fecha,nota,materia_codigo,planestudios_codigo from examen,experiencia where examen_materia_codigo=materia_codigo "
+        PreparedStatement ps = con.prepareStatement("SELECT fecha,nota,materia_codigo,planestudios_codigo from examen,experiencia WHERE historiaacademica_estudiante_nroregistro="+nroRegistro+" AND planestudios_codigo="+"'"+codPlan+"'"+
+" EXCEPT " + "SELECT fecha,nota,materia_codigo,planestudios_codigo from examen,experiencia where examen_materia_codigo=materia_codigo "
                 + "and examen_historiaacademica_estudiante_nroregistro="+nroRegistro
                 + " and examen_planestudios_codigo=planestudios_codigo and fecha=examen_fecha ");
         
         ResultSet rs = ps.executeQuery();
         if (!rs.isBeforeFirst()){
-            ps=con.prepareStatement("SELECT fecha,nota,materia_codigo,planestudios_codigo from examen");
+            ps=con.prepareStatement("SELECT fecha,nota,materia_codigo,planestudios_codigo from examen,experiencia WHERE historiaacademica_estudiante_nroregistro="+nroRegistro+" AND planestudios_codigo="+"'"+codPlan+"'");
             rs=ps.executeQuery();
         }
         
@@ -139,14 +139,14 @@ public class ExamenDAOImp implements ExamenDAOInter {
         return examenes;
     }
     
-    public ArrayList<Examen> getExamenesEstudianteConExp(int nroRegistro) throws SQLException {
+    public ArrayList<Examen> getExamenesEstudianteConExp(int nroRegistro,String codPlan) throws SQLException {
         ArrayList<Examen> examenes = new ArrayList<>();
         Examen aux;
         Connection con = conexion.getConnection();
 
         PreparedStatement ps = con.prepareStatement("SELECT fecha,nota,materia_codigo,planestudios_codigo,dificultad,dedicacion,dias from examen,experiencia where examen_materia_codigo=materia_codigo "
                 + "and examen_historiaacademica_estudiante_nroregistro="+nroRegistro
-                + " and examen_planestudios_codigo=planestudios_codigo and fecha=examen_fecha ");
+                + " and examen_planestudios_codigo="+"'"+codPlan+"'"+" and fecha=examen_fecha ");
         
         ResultSet rs = ps.executeQuery();
         

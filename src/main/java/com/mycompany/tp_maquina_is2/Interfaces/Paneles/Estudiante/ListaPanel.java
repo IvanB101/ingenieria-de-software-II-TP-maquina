@@ -46,6 +46,8 @@ public class ListaPanel extends javax.swing.JPanel {
         inscribirseExamenLabel.setVisible(false);
         verListaInscriptosLabel.setVisible(false);
         mesa.setVisible(false);
+        Estadisticas.setVisible(false);
+
     }
 
     public void listaFinales(int dias) {
@@ -228,6 +230,45 @@ public class ListaPanel extends javax.swing.JPanel {
         });
         PanelCambiable.add(inscribirseExamenLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 350, -1, -1));
 
+        Estadisticas.setBackground(new java.awt.Color(118, 35, 47));
+        Estadisticas.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Estadisticas.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        Estadisticas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                EstadisticasMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                EstadisticasMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                EstadisticasMouseExited(evt);
+            }
+        });
+
+        estudianteBL2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        estudianteBL2.setForeground(new java.awt.Color(255, 255, 255));
+        estudianteBL2.setText("Ver Estadisticas");
+        estudianteBL2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        javax.swing.GroupLayout EstadisticasLayout = new javax.swing.GroupLayout(Estadisticas);
+        Estadisticas.setLayout(EstadisticasLayout);
+        EstadisticasLayout.setHorizontalGroup(
+            EstadisticasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(EstadisticasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(estudianteBL2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        EstadisticasLayout.setVerticalGroup(
+            EstadisticasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(EstadisticasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(estudianteBL2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        PanelCambiable.add(Estadisticas, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 440, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -280,6 +321,7 @@ public class ListaPanel extends javax.swing.JPanel {
         inscribirseExamenLabel.setVisible(true);
         verListaInscriptosLabel.setVisible(true);
         mesa.setVisible(true);
+        Estadisticas.setVisible(true);
 
     }//GEN-LAST:event_TablaMateriasMouseClicked
 
@@ -290,6 +332,19 @@ public class ListaPanel extends javax.swing.JPanel {
     private void inscribirseExamenLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inscribirseExamenLabelMouseClicked
         changePane(new InscripcionPanel(nroRegistro, codPlanEstudios, (String) TablaMaterias.getValueAt(TablaMaterias.getSelectedRow(), 0), false));
     }//GEN-LAST:event_inscribirseExamenLabelMouseClicked
+
+    private void EstadisticasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EstadisticasMouseClicked
+       changePane(new EstadisticasEstudiante((String) TablaMaterias.getValueAt(TablaMaterias.getSelectedRow(), 0),codPlanEstudios));
+
+    }//GEN-LAST:event_EstadisticasMouseClicked
+
+    private void EstadisticasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EstadisticasMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EstadisticasMouseEntered
+
+    private void EstadisticasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EstadisticasMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EstadisticasMouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
