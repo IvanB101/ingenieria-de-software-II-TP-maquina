@@ -389,29 +389,36 @@ public class ABMExpPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ConfirmarDatosExpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarDatosExpActionPerformed
+    public boolean validarDatos(){
         try {
             int diasEstudio = Integer.parseInt(DiasDeEstudio.getText().trim());
-            int dificultad = SliderDif.getValue();
-            int dedicacion = SliderDedi.getValue();
-            String codExamen = (String) TablaExamenes.getValueAt(TablaExamenes.getSelectedRow(), 0);
-            Experiencia experiencia=new Experiencia(dificultad, diasEstudio, dedicacion, codExamen);
+        }catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            return false;
+        }
+        return true;
+    }
+    
+    private void ConfirmarDatosExpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarDatosExpActionPerformed
+        if(validarDatos()){
+            Experiencia experiencia=new Experiencia(SliderDif.getValue(),Integer.parseInt(DiasDeEstudio.getText().trim()), SliderDedi.getValue(), (String) TablaExamenes.getValueAt(TablaExamenes.getSelectedRow(), 0));
+            try{
             if(caso==1){
-                ExamenManager.agregarExperiencia(experiencia);
+                
+                ExamenManager.crearExperiencia(experiencia);
                 JOptionPane.showMessageDialog(null, "Experiencia cargada exitosamente!.");
                 LlenarTablaExamenesSinExp();
             }else{
-                ExamenManager.ModificarExperiencia(codExamen,experiencia);
+                ExamenManager.ModificarExperiencia((String)TablaExamenes.getValueAt(TablaExamenes.getSelectedRow(), 0),experiencia);
                 JOptionPane.showMessageDialog(null, "Experiencia modificada exitosamente!.");
                 LlenarTablaExamenesConExp();
-            }
+            }}catch(ManagementException ex){
+                    JOptionPane.showMessageDialog(null, ex.getMessage());}
             SliderDedi.setValue(5);
             SliderDif.setValue(5);
             DiasDeEstudio.setText("");
-
-        } catch (ManagementException | HeadlessException | NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        }
+        }else{
+            JOptionPane.showMessageDialog(null, "Datos Invalidos!");}
     }//GEN-LAST:event_ConfirmarDatosExpActionPerformed
 
     private void SliderDifStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_SliderDifStateChanged
@@ -430,14 +437,22 @@ public class ABMExpPanel extends javax.swing.JPanel {
         if(caso==1 || caso==3){
             PanelDatosExp.setVisible(true);
         }else{
+        switch (JOptionPane.showConfirmDialog(this, "Esta seguro de que desea borrar la experiencia (nombre: "
+                + TablaExamenes.getValueAt(TablaExamenes.getSelectedRow(), 1) + "),\n se borrara toda la informacion"
+                + "relacionada al mismo")) {
+        case JOptionPane.OK_OPTION:
         String codExamen = (String) TablaExamenes.getValueAt(TablaExamenes.getSelectedRow(), 0);
         try{
         ExamenManager.EliminarExperiencia(codExamen);
         JOptionPane.showMessageDialog(null, "Experiencia eliminada exitosamente!.");
+        DefaultTableModel modelo = (DefaultTableModel)TablaExamenes.getModel();
+        modelo.removeRow(TablaExamenes.getSelectedRow());
+        TablaExamenes.setModel(modelo);
         }catch (ManagementException | HeadlessException | NumberFormatException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
-        LlenarTablaExamenesConExp();
+        break;
+        }
         }
     }//GEN-LAST:event_TablaExamenesMouseClicked
 

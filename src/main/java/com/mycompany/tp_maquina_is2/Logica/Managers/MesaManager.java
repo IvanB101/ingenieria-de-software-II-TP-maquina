@@ -8,9 +8,12 @@ import com.mycompany.tp_maquina_is2.Datos.Conexion;
 import com.mycompany.tp_maquina_is2.Datos.DAO.Implementaciones.MesaExamenDAOImp;
 import com.mycompany.tp_maquina_is2.Logica.Excepciones.ManagementException;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.Estudiante;
+import com.mycompany.tp_maquina_is2.Logica.Transferencia.Materia;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.MesaExamen;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -75,11 +78,19 @@ public abstract class MesaManager {
     /**
      * Metodo para eliminar una inscripcion a una mesa de examen
      *
-     * @param codigo de la mesa de examen
+     * @param codigo del planEstudios
+     * @param codigo de la materia
      * @param nroRegistro del estudiante que desea eliminar la inscripcion
      * @throws ManagementException
      */
-    public static void deleteInscripcion(String codigo, int nroRegistro) throws ManagementException {
+    public static void deleteInscripcion(String codPlanEstudios,String codMateria, int nroRegistro) throws ManagementException {
+        Materia codMateriaaux=null;
+        try {
+            codMateriaaux = PlanEstudiosManager.buscarMateria(codMateria, codPlanEstudios);
+        } catch (ManagementException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+        String codigo=codPlanEstudios+"-"+codMateriaaux.getCodigo()+"-"+String.valueOf(LocalDate.now().getYear())+"-"+"12";
         try {
             mesaExamenDAOImp.deleteInscripcion(codigo, nroRegistro);
         } catch (SQLException e) {

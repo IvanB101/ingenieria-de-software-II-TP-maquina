@@ -63,7 +63,7 @@ public abstract class ExamenManager {
         }
     }
 
-    public static void agregarExperiencia(Experiencia experiencia) throws ManagementException {
+    public static void crearExperiencia(Experiencia experiencia) throws ManagementException {
         try {
             experienciaDAOImp.create(experiencia);
         } catch (SQLException e) {
