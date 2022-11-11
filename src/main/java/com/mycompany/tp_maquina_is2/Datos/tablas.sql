@@ -81,7 +81,7 @@ Examen_PlanEstudios_codigo varchar(30) NOT NULL,
 Examen_fecha date NOT NULL, 
 FOREIGN KEY (Examen_Materia_codigo, Examen_HistoriaAcademica_Estudiante_nroRegistro, Examen_PlanEstudios_codigo, Examen_fecha) 
     REFERENCES Examen(Materia_codigo, HistoriaAcademica_Estudiante_nroRegistro, PlanEstudios_codigo, fecha) ON DELETE CASCADE ON UPDATE CASCADE,
-PRIMARY KEY (Examen_Materia_codigo, Examen_HistoriaAcademica_Estudiante_nroRegistro, Examen_PlanEstudios_codigo));
+PRIMARY KEY (Examen_Materia_codigo, Examen_HistoriaAcademica_Estudiante_nroRegistro, Examen_PlanEstudios_codigo,Examen_fecha));
 
 CREATE TABLE IF NOT EXISTS MesaExamen( 
 turno int NOT NULL, 
