@@ -128,7 +128,7 @@ public class ExamenDAOImp implements ExamenDAOInter {
         
         ResultSet rs = ps.executeQuery();
         if (!rs.isBeforeFirst()){
-            ps=con.prepareStatement("SELECT fecha,nota,materia_codigo,planestudios_codigo from examen,experiencia WHERE historiaacademica_estudiante_nroregistro=? AND planestudios_codigo=?");
+            ps=con.prepareStatement("SELECT fecha,nota,materia_codigo,planestudios_codigo from examen WHERE historiaacademica_estudiante_nroregistro=? AND planestudios_codigo=?");
             ps.setInt(1, nroRegistro);
             ps.setString(2, codPlan);
             rs=ps.executeQuery();
@@ -152,7 +152,7 @@ public class ExamenDAOImp implements ExamenDAOInter {
 
         PreparedStatement ps = con.prepareStatement("SELECT dificultad,dias,dedicacion,fecha,nota,materia_codigo,planestudios_codigo from examen,experiencia " +
 "WHERE historiaacademica_estudiante_nroregistro=? AND examen_materia_codigo=materia_codigo AND historiaacademica_estudiante_nroregistro=examen_historiaacademica_estudiante_nroregistro " +
-"AND planestudios_codigo=? AND planestudios_codigo=examen_planestudios_codigo");
+"AND planestudios_codigo=? AND planestudios_codigo=examen_planestudios_codigo AND examen_fecha=fecha");
         
         ps.setInt(1, nroRegistro);
         ps.setString(2, codPlan);
