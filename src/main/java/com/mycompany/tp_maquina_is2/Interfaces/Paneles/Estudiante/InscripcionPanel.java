@@ -193,9 +193,7 @@ public class InscripcionPanel extends javax.swing.JPanel {
         try {
             MesaManager.deleteInscripcion(codPlanEstudios,String.valueOf(TablaMesasInscriptas.getValueAt(TablaMesasInscriptas.getSelectedRow(),3)), nroRegistro);
             JOptionPane.showMessageDialog(null, "Inscripcion eliminada correctamente!");
-            DefaultTableModel modelo = (DefaultTableModel)TablaMesasInscriptas.getModel();
-            modelo.removeRow(TablaMesasInscriptas.getSelectedRow());
-            TablaMesasInscriptas.setModel(modelo);
+            LlenarTablas();
         } catch (ManagementException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
