@@ -95,9 +95,11 @@ public abstract class HistoriaAcademicaManager {
                         }
                     }
                 } catch (SQLException ex) {
+                    System.out.println(ex);
                     throw new ManagementException("Error en la actualizacion de la historia academica");
                 }
             } else {
+                System.out.println(e);
                 throw new ManagementException("Ha ocurrido un error en la carga de la historia academica");
             }
         }
@@ -167,7 +169,7 @@ public abstract class HistoriaAcademicaManager {
                             if ((ExamenManager.getExperienciasAprobados(codMateria, codPlanEstudios).size()) == 0) {//si no hay experiencias de aprobados
                                 ranking.put(materia, 0);
                             } else {
-                                ranking.put(materia, ExamenManager.cantidadAprobadosUnaMateria(codMateria, dias, codPlanEstudios));
+                                ranking.put(materia, ExamenManager.cantidadAprobadosMateria(codMateria, dias, codPlanEstudios));
                             }
                             break;
                         case "Vencimiento":

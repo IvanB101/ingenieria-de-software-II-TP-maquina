@@ -11,7 +11,6 @@ import com.mycompany.tp_maquina_is2.Logica.Managers.HistoriaAcademicaManager;
 import com.mycompany.tp_maquina_is2.Logica.Managers.MesaManager;
 import com.mycompany.tp_maquina_is2.Logica.Managers.PlanEstudiosManager;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.Estudiante;
-import java.awt.Color;
 import java.io.IOException;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -23,8 +22,8 @@ import javax.swing.JPanel;
 public class Principal extends javax.swing.JFrame {
 
     private Estudiante user = new Estudiante(3010820, "Gino", "Paoletti", 44075067);
-    //private Estudiante user = new Estudiante(3026220, "Juan", "Sanchez", 44330220);
-    //private Estudiante user = new Estudiante(3026223, "Bianca", "Calderoni", 44330220);
+    // private Estudiante user = new Estudiante(3026220, "Juan", "Sanchez", 44330220);
+    // private Estudiante user = new Estudiante(3026223, "Bianca", "Calderoni", 44330220);
     private String codPlan = "32/12";
     private int xMouse, yMouse;
 
