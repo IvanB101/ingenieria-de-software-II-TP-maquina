@@ -6,8 +6,13 @@ import com.mycompany.tp_maquina_is2.Logica.Managers.ExamenManager;
 import com.mycompany.tp_maquina_is2.Logica.Managers.HistoriaAcademicaManager;
 import com.mycompany.tp_maquina_is2.Logica.Managers.PlanEstudiosManager;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.Estudiante;
+import com.mycompany.tp_maquina_is2.Logica.Transferencia.Examen;
+import com.mycompany.tp_maquina_is2.Logica.Transferencia.Experiencia;
+import com.mycompany.tp_maquina_is2.Logica.Util.ArchivosManager;
+import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -68,7 +73,6 @@ public class Inicializacion {
                             examen.getCodigo()));
                 }
             }
-            */
 
         } catch (IOException | SQLException e) {
             e.printStackTrace();
