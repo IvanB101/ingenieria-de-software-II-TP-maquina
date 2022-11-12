@@ -31,17 +31,17 @@ public abstract class ExamenManager {
         experienciaDAOImp = new ExperienciaDAOImp(conexion);
     }
 
-    public static ArrayList<Examen> examenesEstudianteSinExp(int nroRegistro,String codPlan) throws ManagementException {
+    public static ArrayList<Examen> examenesEstudianteSinExp(int nroRegistro, String codPlan) throws ManagementException {
         try {
-            return examenDAOImp.getExamenesEstudianteSinExp(nroRegistro,codPlan);
+            return examenDAOImp.getExamenesEstudianteSinExp(nroRegistro, codPlan);
         } catch (SQLException e) {
             throw new ManagementException(e.getMessage());
         }
     }
 
-    public static ArrayList<Examen> examenesEstudianteConExp(int nroRegistro,String codPlan) throws ManagementException {
+    public static ArrayList<Examen> examenesEstudianteConExp(int nroRegistro, String codPlan) throws ManagementException {
         try {
-            return examenDAOImp.getExamenesEstudianteConExp(nroRegistro,codPlan);
+            return examenDAOImp.getExamenesEstudianteConExp(nroRegistro, codPlan);
         } catch (SQLException e) {
             throw new ManagementException(e.getMessage());
         }
@@ -120,7 +120,7 @@ public abstract class ExamenManager {
 
     }
 
-    public static int cantidadAprobadosUnaMateria(String codMateria, int dias, String codPlan) throws ManagementException {
+    public static int cantidadAprobadosMateria(String codMateria, int dias, String codPlan) throws ManagementException {
         ArrayList<Experiencia> experiencias = getExperienciasAprobados(codMateria, codPlan);
 
         int cant = 0;
@@ -132,26 +132,26 @@ public abstract class ExamenManager {
 
         return cant;
     }
-    
-    public static ArrayList<Double> promediosEstadisticas(String codMateria,String codPlan) throws ManagementException {
-        int i=0;
-        ArrayList<Double> promedios =new ArrayList();
-        ArrayList<Experiencia> exps = getExperienciasAprobados(codMateria,codPlan);
-        double dias = 0,dificultad =0,dedicacion=0;
-        for (i=0;i<exps.size();i++){
-            dias+=exps.get(i).getDias();
-            dificultad+=exps.get(i).getDificultad();
-            dedicacion+=exps.get(i).getDedicacion();
+
+    public static ArrayList<Double> promediosEstadisticas(String codMateria, String codPlan) throws ManagementException {
+        int i = 0;
+        ArrayList<Double> promedios = new ArrayList();
+        ArrayList<Experiencia> exps = getExperienciasAprobados(codMateria, codPlan);
+        double dias = 0, dificultad = 0, dedicacion = 0;
+        for (i = 0; i < exps.size(); i++) {
+            dias += exps.get(i).getDias();
+            dificultad += exps.get(i).getDificultad();
+            dedicacion += exps.get(i).getDedicacion();
         }
-        dias=dias/i;
-        dificultad=dificultad/i;
-        dedicacion=dedicacion/i;
+        dias = dias / i;
+        dificultad = dificultad / i;
+        dedicacion = dedicacion / i;
         promedios.add(dificultad);
         promedios.add(dias);
         promedios.add(dedicacion);
-        
+
         return promedios;
-   }
+    }
 
     public static HashMap<String, Double> getCodTopRendidas(String codPlan) throws ManagementException {
         try {
@@ -197,6 +197,10 @@ public abstract class ExamenManager {
             for (String codMateria : result.keySet()) {
                 result.put(codMateria, result.get(codMateria) / ((double) total));
             }
+            
+            if(result.isEmpty()) {
+                throw new ManagementException("No hay examenes cargados");
+            }
 
             return result;
         } catch (SQLException e) {
@@ -218,10 +222,10 @@ public abstract class ExamenManager {
                     experiencias = experienciaDAOImp.getExperienciasPlan(codPlan);
                     break;
                 case "preparacion":
-                case "decicacion":
+                case "dedicacion":
                     experiencias = experienciaDAOImp.getExperienciasAprobadosPlan(codPlan);
             }
-
+            
             for (Experiencia experiencia : experiencias) {
                 String codMateria = experiencia.getCodMateria();
                 Double dato = temp.get(codMateria);
@@ -234,7 +238,7 @@ public abstract class ExamenManager {
                     case "preparacion":
                         sumar = (double) experiencia.getDias();
                         break;
-                    case "decicacion":
+                    case "dedicacion":
                         sumar = (double) experiencia.getDedicacion();
                 }
                 if (dato == null) {
@@ -250,10 +254,10 @@ public abstract class ExamenManager {
 
             // Pasaje a promedios
             for (String codMateria : temp.keySet()) {
-                temp.put(codPlan, temp.get(codMateria) / cantidades.get(codMateria));
+                result.put(codMateria, temp.get(codMateria) / cantidades.get(codMateria));
             }
-
-            Set<String> keys2 = temp.keySet();
+            
+            Set<String> keys2 = result.keySet();
             ArrayList<String> keys = new ArrayList<>();
 
             for (String codMateria : keys2) {
@@ -264,18 +268,24 @@ public abstract class ExamenManager {
                 Double valuec1 = temp.get(c2);
                 return valuec1.compareTo(temp.get(c1));
             });
-
+            
             if (keys.size() < 10) {
                 cantidad = keys.size();
             }
+            
+            temp.clear();
 
             for (int i = 0; i < cantidad; i++) {
                 String codMateria = keys.get(i);
 
-                result.put(codMateria, temp.get(codMateria));
+                temp.put(codMateria, result.get(codMateria));
             }
-
-            return result;
+            
+            if(temp.isEmpty()) {
+                throw new ManagementException("No hay experiencias cargadas");
+            }
+            
+            return temp;
         } catch (SQLException e) {
             System.out.println(e);
             throw new ManagementException("Ha ocurrido un error");
