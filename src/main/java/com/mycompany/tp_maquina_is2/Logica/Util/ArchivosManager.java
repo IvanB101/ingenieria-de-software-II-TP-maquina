@@ -65,7 +65,6 @@ public abstract class ArchivosManager {
                 if (codMateria.contains(".")) {
                     codMateria = (String) codMateria.subSequence(0, codMateria.indexOf("."));
                 }
-
                 Materia materia = new Materia(
                         codMateria,
                         datos[0],
