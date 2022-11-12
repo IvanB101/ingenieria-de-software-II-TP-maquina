@@ -6,8 +6,13 @@ import com.mycompany.tp_maquina_is2.Logica.Managers.ExamenManager;
 import com.mycompany.tp_maquina_is2.Logica.Managers.HistoriaAcademicaManager;
 import com.mycompany.tp_maquina_is2.Logica.Managers.PlanEstudiosManager;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.Estudiante;
+import com.mycompany.tp_maquina_is2.Logica.Transferencia.Examen;
+import com.mycompany.tp_maquina_is2.Logica.Transferencia.Experiencia;
+import com.mycompany.tp_maquina_is2.Logica.Util.ArchivosManager;
+import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -36,7 +41,7 @@ public class Inicializacion {
             // Carga de datos de prueba
             EstudianteManager.agregar(new Estudiante(3010820, "Gino", "Paoletti", 44075067));
             // EstudianteManager.agregar(new Estudiante(3026220, "Juan", "Sanchez", 44330220));
-            /*
+            EstudianteManager.agregar(new Estudiante(3026224, "Franco", "Sarubbi", 44330220));
             EstudianteManager.agregar(new Estudiante(3026223, "Luu", "loyola", 44330220));
             EstudianteManager.agregar(new Estudiante(3026222, "Pol", "santiago", 44330220));
             EstudianteManager.agregar(new Estudiante(3026221, "Bianca", "Calderoni", 44330220));
@@ -68,7 +73,6 @@ public class Inicializacion {
                             examen.getCodigo()));
                 }
             }
-            */
 
         } catch (IOException | SQLException e) {
             e.printStackTrace();
