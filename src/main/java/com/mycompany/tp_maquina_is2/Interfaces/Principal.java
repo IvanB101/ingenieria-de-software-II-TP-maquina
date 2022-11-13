@@ -22,10 +22,10 @@ import javax.swing.JPanel;
 public class Principal extends javax.swing.JFrame {
 
     //private Estudiante user = new Estudiante(3026224, "Franco", "Sarubbi", 44330220);
-    //private Estudiante user = new Estudiante(3010820, "Gino", "Paoletti", 44075067);
-    private Estudiante user = new Estudiante(3026220, "Juan", "Sanchez", 44330220);
+    private Estudiante user = new Estudiante(3010820, "Gino", "Paoletti", 44075067);
+    //private Estudiante user = new Estudiante(3026220, "Juan", "Sanchez", 44330220);
     //private Estudiante user = new Estudiante(3026223, "Bianca", "Calderoni", 44330220);
-    private String codPlan = "26/12";
+    private String codPlan = "32/12";
     private int xMouse, yMouse;
 
     /**
@@ -82,7 +82,7 @@ public class Principal extends javax.swing.JFrame {
         Cambiable.setBackground(new java.awt.Color(255, 255, 255));
         Cambiable.setPreferredSize(new java.awt.Dimension(950, 500));
         Cambiable.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        Contenedor.add(Cambiable, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 670));
+        Contenedor.add(Cambiable, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 610));
 
         getContentPane().add(Contenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 

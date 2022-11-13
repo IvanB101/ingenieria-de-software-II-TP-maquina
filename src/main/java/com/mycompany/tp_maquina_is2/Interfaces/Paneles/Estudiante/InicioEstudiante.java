@@ -23,9 +23,10 @@ import javax.swing.JPanel;
  * @author ivanb
  */
 public class InicioEstudiante extends javax.swing.JPanel {
-
+    Color DefaultColor,ClickedColor;
     private Estudiante user;
     private String codPlan;
+    
 
     /**
      * Creates new form Inicio
@@ -33,8 +34,10 @@ public class InicioEstudiante extends javax.swing.JPanel {
     public InicioEstudiante(Estudiante user, String codPlan) {
         this.user = user;
         this.codPlan = codPlan;
-        
         initComponents();
+        DefaultColor=new Color(41,40,40);
+        ClickedColor=new Color(58,56,56);
+        menu1.setBackground(DefaultColor);
         changePane(new PanelFondoInicio());
 
         try {
@@ -61,18 +64,20 @@ public class InicioEstudiante extends javax.swing.JPanel {
 
         Archivo = new javax.swing.JFileChooser();
         MenuTop = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
         labelinicio = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        añadirExpLabel = new javax.swing.JLabel();
-        verListaLabel = new javax.swing.JLabel();
+        menu1 = new javax.swing.JPanel();
         cargarHistoriaLabel = new javax.swing.JLabel();
-        jLabelnavbarfondo = new javax.swing.JLabel();
+        menu2 = new javax.swing.JPanel();
+        verListaLabel = new javax.swing.JLabel();
+        menu3 = new javax.swing.JPanel();
+        añadirExpLabel = new javax.swing.JLabel();
+        menu4 = new javax.swing.JPanel();
+        configlabel = new javax.swing.JLabel();
         Cambiable = new javax.swing.JPanel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        MenuTop.setBackground(new java.awt.Color(204, 204, 204));
+        MenuTop.setBackground(new java.awt.Color(41, 40, 40));
         MenuTop.setToolTipText("");
         MenuTop.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
@@ -86,73 +91,166 @@ public class InicioEstudiante extends javax.swing.JPanel {
         });
         MenuTop.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_account_40px.png"))); // NOI18N
-        jLabel2.setText("Cuenta");
-        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        MenuTop.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 20, 120, 50));
-
+        labelinicio.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        labelinicio.setForeground(new java.awt.Color(255, 255, 255));
+        labelinicio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logo fcfmyn.png"))); // NOI18N
+        labelinicio.setText("FCFMyN");
         labelinicio.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         labelinicio.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 labelinicioMouseClicked(evt);
             }
         });
-        MenuTop.add(labelinicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, 260, 60));
+        MenuTop.add(labelinicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 190, 70));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_automatic_40px.png"))); // NOI18N
-        jLabel1.setText("Configuración");
-        jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        MenuTop.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 20, 120, 50));
-
-        añadirExpLabel.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
-        añadirExpLabel.setForeground(new java.awt.Color(51, 51, 51));
-        añadirExpLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_talk_40px.png"))); // NOI18N
-        añadirExpLabel.setText("Experiencia");
-        añadirExpLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        añadirExpLabel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                añadirExpLabelMouseClicked(evt);
+        menu1.setBackground(new java.awt.Color(41, 40, 40));
+        menu1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                menu1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                menu1MouseExited(evt);
             }
         });
-        MenuTop.add(añadirExpLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 20, 120, 50));
 
-        verListaLabel.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
-        verListaLabel.setForeground(new java.awt.Color(51, 51, 51));
-        verListaLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_shortlist_40px.png"))); // NOI18N
-        verListaLabel.setText("Lista finales");
-        verListaLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        verListaLabel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                verListaLabelMouseClicked(evt);
-            }
-        });
-        MenuTop.add(verListaLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 20, 120, 50));
-
-        cargarHistoriaLabel.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
-        cargarHistoriaLabel.setForeground(new java.awt.Color(51, 51, 51));
-        cargarHistoriaLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_xls_import_40px.png"))); // NOI18N
-        cargarHistoriaLabel.setText("Cargar Historia");
+        cargarHistoriaLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        cargarHistoriaLabel.setForeground(new java.awt.Color(255, 255, 255));
+        cargarHistoriaLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_xls_import_40px_1.png"))); // NOI18N
+        cargarHistoriaLabel.setText("CARGAR HISTORIA");
         cargarHistoriaLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cargarHistoriaLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 cargarHistoriaLabelMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                cargarHistoriaLabelMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                cargarHistoriaLabelMouseExited(evt);
+            }
         });
-        MenuTop.add(cargarHistoriaLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 20, 120, 50));
 
-        jLabelnavbarfondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/navbar1200x115.jpg"))); // NOI18N
-        MenuTop.add(jLabelnavbarfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 90));
+        javax.swing.GroupLayout menu1Layout = new javax.swing.GroupLayout(menu1);
+        menu1.setLayout(menu1Layout);
+        menu1Layout.setHorizontalGroup(
+            menu1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(cargarHistoriaLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+        );
+        menu1Layout.setVerticalGroup(
+            menu1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(cargarHistoriaLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+        );
 
-        add(MenuTop, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 90));
+        MenuTop.add(menu1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 0, 160, 70));
+
+        menu2.setBackground(new java.awt.Color(41, 40, 40));
+        menu2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                menu2MouseEntered(evt);
+            }
+        });
+
+        verListaLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        verListaLabel.setForeground(new java.awt.Color(255, 255, 255));
+        verListaLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_shortlist_40px_1.png"))); // NOI18N
+        verListaLabel.setText("LISTA FINALES");
+        verListaLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        verListaLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                verListaLabelMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                verListaLabelMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                verListaLabelMouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout menu2Layout = new javax.swing.GroupLayout(menu2);
+        menu2.setLayout(menu2Layout);
+        menu2Layout.setHorizontalGroup(
+            menu2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(verListaLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+        );
+        menu2Layout.setVerticalGroup(
+            menu2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(verListaLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+        );
+
+        MenuTop.add(menu2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 0, 150, 70));
+
+        menu3.setBackground(new java.awt.Color(41, 40, 40));
+
+        añadirExpLabel.setBackground(new java.awt.Color(41, 40, 40));
+        añadirExpLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        añadirExpLabel.setForeground(new java.awt.Color(255, 255, 255));
+        añadirExpLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_talk_40px_1.png"))); // NOI18N
+        añadirExpLabel.setText("  EXPERIENCIA");
+        añadirExpLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        añadirExpLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                añadirExpLabelMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                añadirExpLabelMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                añadirExpLabelMouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout menu3Layout = new javax.swing.GroupLayout(menu3);
+        menu3.setLayout(menu3Layout);
+        menu3Layout.setHorizontalGroup(
+            menu3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(añadirExpLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+        );
+        menu3Layout.setVerticalGroup(
+            menu3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(añadirExpLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+        );
+
+        MenuTop.add(menu3, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 0, 150, 70));
+
+        menu4.setBackground(new java.awt.Color(41, 40, 40));
+
+        configlabel.setBackground(new java.awt.Color(41, 40, 40));
+        configlabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        configlabel.setForeground(new java.awt.Color(255, 255, 255));
+        configlabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_automatic_40px_2.png"))); // NOI18N
+        configlabel.setText("CONFIGURACIÓN");
+        configlabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        configlabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                configlabelMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                configlabelMouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout menu4Layout = new javax.swing.GroupLayout(menu4);
+        menu4.setLayout(menu4Layout);
+        menu4Layout.setHorizontalGroup(
+            menu4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(menu4Layout.createSequentialGroup()
+                .addComponent(configlabel)
+                .addGap(0, 3, Short.MAX_VALUE))
+        );
+        menu4Layout.setVerticalGroup(
+            menu4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(configlabel, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+        );
+
+        MenuTop.add(menu4, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 0, 150, 70));
+
+        add(MenuTop, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 70));
 
         Cambiable.setBackground(new java.awt.Color(255, 255, 255));
         Cambiable.setPreferredSize(new java.awt.Dimension(950, 500));
         Cambiable.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        add(Cambiable, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 82, 1200, 610));
+        add(Cambiable, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 1200, 570));
     }// </editor-fold>//GEN-END:initComponents
 
     private void changePane(JPanel jPanel) {
@@ -198,6 +296,52 @@ public class InicioEstudiante extends javax.swing.JPanel {
         changePane(new PanelFondoInicio());
     }//GEN-LAST:event_labelinicioMouseClicked
 
+    private void menu1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu1MouseEntered
+
+        
+    }//GEN-LAST:event_menu1MouseEntered
+
+    private void menu2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu2MouseEntered
+    
+    }//GEN-LAST:event_menu2MouseEntered
+
+    private void menu1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu1MouseExited
+        
+        
+    }//GEN-LAST:event_menu1MouseExited
+
+    private void cargarHistoriaLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cargarHistoriaLabelMouseEntered
+        menu1.setBackground(ClickedColor);
+    }//GEN-LAST:event_cargarHistoriaLabelMouseEntered
+
+    private void cargarHistoriaLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cargarHistoriaLabelMouseExited
+       menu1.setBackground(DefaultColor);
+    }//GEN-LAST:event_cargarHistoriaLabelMouseExited
+
+    private void verListaLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_verListaLabelMouseEntered
+        menu2.setBackground(ClickedColor);
+    }//GEN-LAST:event_verListaLabelMouseEntered
+
+    private void verListaLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_verListaLabelMouseExited
+        menu2.setBackground(DefaultColor);
+    }//GEN-LAST:event_verListaLabelMouseExited
+
+    private void añadirExpLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_añadirExpLabelMouseEntered
+        menu3.setBackground(ClickedColor);
+    }//GEN-LAST:event_añadirExpLabelMouseEntered
+
+    private void añadirExpLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_añadirExpLabelMouseExited
+        menu3.setBackground(DefaultColor);
+    }//GEN-LAST:event_añadirExpLabelMouseExited
+
+    private void configlabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_configlabelMouseEntered
+        menu4.setBackground(ClickedColor);
+    }//GEN-LAST:event_configlabelMouseEntered
+
+    private void configlabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_configlabelMouseExited
+        menu4.setBackground(DefaultColor);
+    }//GEN-LAST:event_configlabelMouseExited
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFileChooser Archivo;
@@ -205,10 +349,12 @@ public class InicioEstudiante extends javax.swing.JPanel {
     private javax.swing.JPanel MenuTop;
     private javax.swing.JLabel añadirExpLabel;
     private javax.swing.JLabel cargarHistoriaLabel;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabelnavbarfondo;
+    private javax.swing.JLabel configlabel;
     private javax.swing.JLabel labelinicio;
+    private javax.swing.JPanel menu1;
+    private javax.swing.JPanel menu2;
+    private javax.swing.JPanel menu3;
+    private javax.swing.JPanel menu4;
     private javax.swing.JLabel verListaLabel;
     // End of variables declaration//GEN-END:variables
 }
