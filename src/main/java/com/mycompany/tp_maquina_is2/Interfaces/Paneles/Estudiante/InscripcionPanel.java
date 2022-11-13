@@ -37,13 +37,18 @@ public class InscripcionPanel extends javax.swing.JPanel {
         initComponents();
         TablaMesasInscriptas.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
         TablaMesasInscriptas.getTableHeader().setOpaque(true);
-        TablaMesasInscriptas.getTableHeader().setBackground(new Color(0, 153, 153));
-        jScrollPane1.getViewport().setBackground(new Color(255, 255, 255)); //tabla color blanco
+        TablaMesasInscriptas.getTableHeader().setBackground(new Color(58,56,56));
+        TablaMesasInscriptas.setBackground(new Color(58,56,56)); //coloresrow
+        TablaMesasInscriptas.getTableHeader().setForeground(Color.white);
+        jScrollPane1.getViewport().setBackground(new Color(33, 33, 33)); //tabla color negro
+        
         TablaInscriptos.getTableHeader().setReorderingAllowed(false);
         TablaInscriptos.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
         TablaInscriptos.getTableHeader().setOpaque(true);
-        TablaInscriptos.getTableHeader().setBackground(new Color(0, 153, 153));
-        jScrollPane2.getViewport().setBackground(new Color(255, 255, 255)); //tabla color blanco
+        TablaInscriptos.getTableHeader().setBackground(new Color(58,56,56));
+        TablaInscriptos.setBackground(new Color(58,56,56));//colores row
+        TablaInscriptos.getTableHeader().setForeground(Color.white);
+        jScrollPane2.getViewport().setBackground(new Color(33, 33, 33)); //tabla color negro
         TablaInscriptos.getTableHeader().setReorderingAllowed(false);
         if(!ver){
          AltaInscripcion();}
@@ -65,14 +70,15 @@ public class InscripcionPanel extends javax.swing.JPanel {
         TablaMesasInscriptas = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         TablaInscriptos = new javax.swing.JTable();
+        nombreMateria = new javax.swing.JLabel();
         jLabelMesasInscriptos = new javax.swing.JLabel();
         jLabelMesasInscriptos1 = new javax.swing.JLabel();
         jLabelExamenInscripto = new javax.swing.JLabel();
-        nombreMateria = new javax.swing.JLabel();
 
-        PanelCambiable.setBackground(new java.awt.Color(255, 255, 255));
+        PanelCambiable.setBackground(new java.awt.Color(33, 33, 33));
         PanelCambiable.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        TablaMesasInscriptas.setForeground(new java.awt.Color(255, 255, 255));
         TablaMesasInscriptas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -100,6 +106,7 @@ public class InscripcionPanel extends javax.swing.JPanel {
         TablaMesasInscriptas.setFocusable(false);
         TablaMesasInscriptas.setRowHeight(25);
         TablaMesasInscriptas.setSelectionBackground(new java.awt.Color(118, 35, 47));
+        TablaMesasInscriptas.setSelectionForeground(new java.awt.Color(255, 255, 255));
         TablaMesasInscriptas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TablaMesasInscriptasMouseClicked(evt);
@@ -113,8 +120,9 @@ public class InscripcionPanel extends javax.swing.JPanel {
             TablaMesasInscriptas.getColumnModel().getColumn(3).setResizable(false);
         }
 
-        PanelCambiable.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 80, 330, 330));
+        PanelCambiable.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 110, 420, 330));
 
+        TablaInscriptos.setForeground(new java.awt.Color(255, 255, 255));
         TablaInscriptos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -142,6 +150,7 @@ public class InscripcionPanel extends javax.swing.JPanel {
         TablaInscriptos.setFocusable(false);
         TablaInscriptos.setRowHeight(25);
         TablaInscriptos.setSelectionBackground(new java.awt.Color(118, 35, 47));
+        TablaInscriptos.setSelectionForeground(new java.awt.Color(255, 255, 255));
         TablaInscriptos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TablaInscriptosMouseClicked(evt);
@@ -153,36 +162,37 @@ public class InscripcionPanel extends javax.swing.JPanel {
             TablaInscriptos.getColumnModel().getColumn(1).setResizable(false);
         }
 
-        PanelCambiable.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 330, 330));
-
-        jLabelMesasInscriptos.setFont(new java.awt.Font("Segoe UI Semibold", 1, 12)); // NOI18N
-        jLabelMesasInscriptos.setText("Si selecciona uno se eliminara la inscripcion");
-        PanelCambiable.add(jLabelMesasInscriptos, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 50, 330, -1));
-
-        jLabelMesasInscriptos1.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
-        jLabelMesasInscriptos1.setText("Examenes a los cuales esta inscripto:");
-        PanelCambiable.add(jLabelMesasInscriptos1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 20, 310, -1));
-
-        jLabelExamenInscripto.setFont(new java.awt.Font("Segoe UI Semibold", 1, 16)); // NOI18N
-        jLabelExamenInscripto.setText("Estudiantes que rendiran el examen de: ");
-        PanelCambiable.add(jLabelExamenInscripto, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
+        PanelCambiable.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, 420, 330));
 
         nombreMateria.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
-        PanelCambiable.add(nombreMateria, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 140, 20));
+        nombreMateria.setForeground(new java.awt.Color(102, 255, 51));
+        PanelCambiable.add(nombreMateria, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 80, 330, 20));
+
+        jLabelMesasInscriptos.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
+        jLabelMesasInscriptos.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelMesasInscriptos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_info_20px.png"))); // NOI18N
+        jLabelMesasInscriptos.setText("Si selecciona uno se eliminara la inscripción");
+        PanelCambiable.add(jLabelMesasInscriptos, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 80, 330, -1));
+
+        jLabelMesasInscriptos1.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
+        jLabelMesasInscriptos1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelMesasInscriptos1.setText("Exámenes a los cuales está inscripto:");
+        PanelCambiable.add(jLabelMesasInscriptos1, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 50, 310, -1));
+
+        jLabelExamenInscripto.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
+        jLabelExamenInscripto.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelExamenInscripto.setText("Estudiantes que rendirán el examen de: ");
+        PanelCambiable.add(jLabelExamenInscripto, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 50, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(PanelCambiable, javax.swing.GroupLayout.DEFAULT_SIZE, 913, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(PanelCambiable, javax.swing.GroupLayout.DEFAULT_SIZE, 1200, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(PanelCambiable, javax.swing.GroupLayout.DEFAULT_SIZE, 506, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(PanelCambiable, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

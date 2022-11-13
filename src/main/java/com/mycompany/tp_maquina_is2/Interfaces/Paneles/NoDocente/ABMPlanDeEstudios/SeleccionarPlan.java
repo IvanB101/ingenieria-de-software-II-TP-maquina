@@ -8,6 +8,8 @@ import com.mycompany.tp_maquina_is2.Interfaces.Paneles.NoDocente.EstadisticasNoD
 import com.mycompany.tp_maquina_is2.Logica.Excepciones.ManagementException;
 import com.mycompany.tp_maquina_is2.Logica.Managers.PlanEstudiosManager;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.PlanEstudios;
+import java.awt.Color;
+import java.awt.Font;
 import java.util.LinkedList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -26,9 +28,14 @@ public class SeleccionarPlan extends javax.swing.JPanel {
      */
     public SeleccionarPlan(String operacion) {
         this.operacion = operacion;
-
         initComponents();
-
+        TablaExamenes.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
+        TablaExamenes.getTableHeader().setOpaque(true);
+        TablaExamenes.getTableHeader().setBackground(new Color(58,56,56));
+        TablaExamenes.getTableHeader().setReorderingAllowed(false);
+        TablaExamenes.setBackground(new Color(58,56,56));//coloresrow
+        TablaExamenes.getTableHeader().setForeground(Color.white);
+        jScrollPane1.getViewport().setBackground(new Color(33, 33, 33)); //tabla color negro
         if (operacion.equals("estadisticas")) {
             PrincipalL.setText("Seleccione el plan del que desea ver estadisticas");
         }
@@ -52,10 +59,11 @@ public class SeleccionarPlan extends javax.swing.JPanel {
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        contenedor.setBackground(new java.awt.Color(255, 255, 255));
+        contenedor.setBackground(new java.awt.Color(41, 40, 40));
         contenedor.setPreferredSize(new java.awt.Dimension(950, 500));
         contenedor.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        TablaExamenes.setForeground(new java.awt.Color(255, 255, 255));
         TablaExamenes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -83,6 +91,7 @@ public class SeleccionarPlan extends javax.swing.JPanel {
         TablaExamenes.setFocusable(false);
         TablaExamenes.setRowHeight(25);
         TablaExamenes.setSelectionBackground(new java.awt.Color(118, 35, 47));
+        TablaExamenes.setSelectionForeground(new java.awt.Color(255, 255, 255));
         TablaExamenes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TablaExamenesMouseClicked(evt);
@@ -92,10 +101,10 @@ public class SeleccionarPlan extends javax.swing.JPanel {
 
         contenedor.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, 810, 330));
 
-        PrincipalL.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
-        PrincipalL.setForeground(new java.awt.Color(165, 165, 165));
-        PrincipalL.setText("Seleccione el Plan de Estudios que desea modificar");
-        contenedor.add(PrincipalL, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, -1, 37));
+        PrincipalL.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        PrincipalL.setForeground(new java.awt.Color(255, 255, 255));
+        PrincipalL.setText("Seleccione el plan de estudios que desea modificar");
+        contenedor.add(PrincipalL, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, -1, 37));
 
         add(contenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 670));
     }// </editor-fold>//GEN-END:initComponents

@@ -24,26 +24,60 @@ public class PanelFondoInicio extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        labelfondo = new javax.swing.JLabel();
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fondo1200x553.jpg"))); // NOI18N
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("A RENDIR");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, 290, 40));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("DESCUBRÍ TU");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 370, 50));
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("PRÓXIMO FINAL");
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 420, 40));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Ingeniería de Software II - 2022");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, 340, 30));
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Junto a la FCFMyN trabajamos para que los estudiantes logren");
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 510, 30));
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("una mayor tasa de éxito en sus exámenes.");
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 270, 340, 30));
+
+        labelfondo.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        labelfondo.setForeground(new java.awt.Color(255, 255, 255));
+        labelfondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fondooscu2.jpg"))); // NOI18N
+        add(labelfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, -1));
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel labelfondo;
     // End of variables declaration//GEN-END:variables
 }

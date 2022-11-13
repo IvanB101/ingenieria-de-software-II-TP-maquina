@@ -44,6 +44,8 @@ public class InicioPrincipal extends javax.swing.JPanel {
     private void initComponents() {
 
         contenedor = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         estudianteBL = new javax.swing.JLabel();
         noDocenteBL = new javax.swing.JLabel();
         jLabelfondo = new javax.swing.JLabel();
@@ -52,29 +54,39 @@ public class InicioPrincipal extends javax.swing.JPanel {
         contenedor.setPreferredSize(new java.awt.Dimension(950, 500));
         contenedor.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        estudianteBL.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 65)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("BIENVENIDO");
+        contenedor.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 200, 410, 110));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Seleccione una opción por favor:");
+        contenedor.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 310, -1, -1));
+
+        estudianteBL.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         estudianteBL.setForeground(new java.awt.Color(255, 255, 255));
-        estudianteBL.setText("  ESTUDIANTE");
+        estudianteBL.setText("ESTUDIANTE ");
         estudianteBL.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         estudianteBL.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 estudianteBLMouseClicked(evt);
             }
         });
-        contenedor.add(estudianteBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 370, 190, 50));
+        contenedor.add(estudianteBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 440, 240, 70));
 
-        noDocenteBL.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        noDocenteBL.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         noDocenteBL.setForeground(new java.awt.Color(255, 255, 255));
-        noDocenteBL.setText("   NO DOCENTE");
+        noDocenteBL.setText("  NO DOCENTE");
         noDocenteBL.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         noDocenteBL.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 noDocenteBLMouseClicked(evt);
             }
         });
-        contenedor.add(noDocenteBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 370, 210, 50));
+        contenedor.add(noDocenteBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 440, 290, 70));
 
-        jLabelfondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iniciopanel1200x675.jpg"))); // NOI18N
+        jLabelfondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/inicio.jpg"))); // NOI18N
         jLabelfondo.setText("jLabel1");
         contenedor.add(jLabelfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 670));
 
@@ -106,6 +118,8 @@ public class InicioPrincipal extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel contenedor;
     private javax.swing.JLabel estudianteBL;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelfondo;
     private javax.swing.JLabel noDocenteBL;
     // End of variables declaration//GEN-END:variables

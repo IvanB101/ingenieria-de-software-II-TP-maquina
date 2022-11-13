@@ -58,6 +58,8 @@ public class EstadisticasEstudiante extends javax.swing.JPanel {
 
         contenedor = new javax.swing.JPanel();
 
+        setBackground(new java.awt.Color(41, 40, 40));
+
         contenedor.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
