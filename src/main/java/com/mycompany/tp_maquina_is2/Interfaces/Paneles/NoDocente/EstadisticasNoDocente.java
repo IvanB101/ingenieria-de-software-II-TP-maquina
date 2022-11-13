@@ -87,7 +87,7 @@ public class EstadisticasNoDocente extends javax.swing.JPanel {
         }
 
         chart = ChartFactory.createPieChart3D(
-                "Materia mas rendidas", // chart title
+                "Materias más rendidas", // chart title
                 data, // data
                 true, // include legend
                 true,
@@ -179,15 +179,16 @@ public class EstadisticasNoDocente extends javax.swing.JPanel {
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        contenedor.setBackground(new java.awt.Color(255, 255, 255));
+        contenedor.setBackground(new java.awt.Color(33, 33, 33));
+        contenedor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         contenedor.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        add(contenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 0, 900, 680));
+        add(contenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 0, 840, 670));
 
         SeleccionP.setBackground(new java.awt.Color(118, 35, 47));
         SeleccionP.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         dificultadPromedioP.setBackground(new java.awt.Color(118, 35, 47));
-        dificultadPromedioP.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        dificultadPromedioP.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         dificultadPromedioP.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         dificultadPromedioP.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -203,6 +204,7 @@ public class EstadisticasNoDocente extends javax.swing.JPanel {
 
         dificultadPromedioL.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         dificultadPromedioL.setForeground(new java.awt.Color(255, 255, 255));
+        dificultadPromedioL.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_effort_40px.png"))); // NOI18N
         dificultadPromedioL.setText("Dificultad promedio");
         dificultadPromedioL.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
@@ -213,7 +215,7 @@ public class EstadisticasNoDocente extends javax.swing.JPanel {
             .addGroup(dificultadPromedioPLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(dificultadPromedioL)
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         dificultadPromedioPLayout.setVerticalGroup(
             dificultadPromedioPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -223,10 +225,10 @@ public class EstadisticasNoDocente extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        SeleccionP.add(dificultadPromedioP, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 180, -1, -1));
+        SeleccionP.add(dificultadPromedioP, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
 
         preparacionP.setBackground(new java.awt.Color(118, 35, 47));
-        preparacionP.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        preparacionP.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         preparacionP.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         preparacionP.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -242,7 +244,8 @@ public class EstadisticasNoDocente extends javax.swing.JPanel {
 
         preparacionL.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         preparacionL.setForeground(new java.awt.Color(255, 255, 255));
-        preparacionL.setText("Promedio preparacion aprobados");
+        preparacionL.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_tuition_40px.png"))); // NOI18N
+        preparacionL.setText("Promedio preparación aprobados");
         preparacionL.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout preparacionPLayout = new javax.swing.GroupLayout(preparacionP);
@@ -262,10 +265,10 @@ public class EstadisticasNoDocente extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        SeleccionP.add(preparacionP, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 228, -1, -1));
+        SeleccionP.add(preparacionP, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, -1, -1));
 
         dedicacionP.setBackground(new java.awt.Color(118, 35, 47));
-        dedicacionP.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        dedicacionP.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         dedicacionP.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         dedicacionP.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -281,7 +284,8 @@ public class EstadisticasNoDocente extends javax.swing.JPanel {
 
         dedicacionL.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         dedicacionL.setForeground(new java.awt.Color(255, 255, 255));
-        dedicacionL.setText("Dedicacion promedio aprobados");
+        dedicacionL.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_winner_40px.png"))); // NOI18N
+        dedicacionL.setText("Dedicación promedio aprobados");
         dedicacionL.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout dedicacionPLayout = new javax.swing.GroupLayout(dedicacionP);
@@ -301,7 +305,7 @@ public class EstadisticasNoDocente extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        SeleccionP.add(dedicacionP, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 276, -1, -1));
+        SeleccionP.add(dedicacionP, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, -1, -1));
 
         mesasP.setBackground(new java.awt.Color(118, 35, 47));
         mesasP.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -320,7 +324,8 @@ public class EstadisticasNoDocente extends javax.swing.JPanel {
 
         mesasL.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         mesasL.setForeground(new java.awt.Color(255, 255, 255));
-        mesasL.setText("Mesas mas rendidas");
+        mesasL.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_investment_portfolio_40px.png"))); // NOI18N
+        mesasL.setText("Mesas más rendidas");
         mesasL.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout mesasPLayout = new javax.swing.GroupLayout(mesasP);
@@ -340,17 +345,19 @@ public class EstadisticasNoDocente extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        SeleccionP.add(mesasP, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 324, -1, -1));
+        SeleccionP.add(mesasP, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, -1, -1));
 
-        labelSeleccion.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        labelSeleccion.setText("Seleccione una Estadistica");
-        SeleccionP.add(labelSeleccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
+        labelSeleccion.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        labelSeleccion.setForeground(new java.awt.Color(255, 255, 255));
+        labelSeleccion.setText("Seleccione una Estadística:");
+        SeleccionP.add(labelSeleccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
-        labelTop10.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        labelTop10.setText("Top 10");
-        SeleccionP.add(labelTop10, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
+        labelTop10.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        labelTop10.setForeground(new java.awt.Color(255, 255, 255));
+        labelTop10.setText("TOP 10");
+        SeleccionP.add(labelTop10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
 
-        add(SeleccionP, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 300, 690));
+        add(SeleccionP, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 360, 680));
     }// </editor-fold>//GEN-END:initComponents
 
     private void dificultadPromedioPMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_dificultadPromedioPMouseClicked

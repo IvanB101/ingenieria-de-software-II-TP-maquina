@@ -9,6 +9,7 @@ import com.mycompany.tp_maquina_is2.Logica.Managers.PlanEstudiosManager;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.Materia;
 import com.mycompany.tp_maquina_is2.Logica.Transferencia.PlanEstudios;
 import java.awt.Color;
+import java.awt.Font;
 import java.util.HashMap;
 import java.util.LinkedList;
 import javax.swing.JOptionPane;
@@ -50,13 +51,26 @@ public class ModificarPlan extends javax.swing.JPanel {
             propuestaTF.setText(PlanEstudiosManager.buscar(codPlanEstudios).getPropuesta());
         } catch (ManagementException e) {
         }
-
+        
+        tablaMaterias.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
+        tablaMaterias.getTableHeader().setOpaque(true);
+        tablaMaterias.getTableHeader().setBackground(new Color(58,56,56));
+        tablaMaterias.setBackground(new Color(58,56,56)); //coloresrow
+        tablaMaterias.getTableHeader().setForeground(Color.white);
+        jScrollPane2.getViewport().setBackground(new Color(33, 33, 33)); //tabla color negro
+        
+        tablaCorrelativas.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
+        tablaCorrelativas.getTableHeader().setOpaque(true);
+        tablaCorrelativas.getTableHeader().setBackground(new Color(58,56,56));
+        tablaCorrelativas.setBackground(new Color(58,56,56)); //coloresrow
+        tablaCorrelativas.getTableHeader().setForeground(Color.white);
+        jScrollPane1.getViewport().setBackground(new Color(33, 33, 33)); //tabla color negro
+        
         sepCodigo.setVisible(false);
         sepPropuesta.setVisible(false);
         sepCodigoMateria.setVisible(false);
         sepNombre.setVisible(false);
         sepCorrelativa.setVisible(false);
-
         materiaP.setVisible(false);
 
         llenarTablaMaterias();
@@ -111,18 +125,21 @@ public class ModificarPlan extends javax.swing.JPanel {
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        contenedor.setBackground(new java.awt.Color(255, 255, 255));
+        contenedor.setBackground(new java.awt.Color(33, 33, 33));
+        contenedor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         contenedor.setPreferredSize(new java.awt.Dimension(950, 500));
         contenedor.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        PrincipalL.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        PrincipalL.setForeground(new java.awt.Color(165, 165, 165));
+        PrincipalL.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        PrincipalL.setForeground(java.awt.Color.white);
         PrincipalL.setText("Propuesta:");
-        contenedor.add(PrincipalL, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, 30));
+        contenedor.add(PrincipalL, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, -1, 30));
 
-        materiaP.setBackground(new java.awt.Color(255, 255, 255));
+        materiaP.setBackground(new java.awt.Color(33, 33, 33));
+        materiaP.setForeground(null);
         materiaP.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        tablaCorrelativas.setForeground(new java.awt.Color(255, 255, 255));
         tablaCorrelativas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -150,6 +167,7 @@ public class ModificarPlan extends javax.swing.JPanel {
         tablaCorrelativas.setFocusable(false);
         tablaCorrelativas.setRowHeight(25);
         tablaCorrelativas.setSelectionBackground(new java.awt.Color(118, 35, 47));
+        tablaCorrelativas.setSelectionForeground(new java.awt.Color(255, 255, 255));
         tablaCorrelativas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tablaCorrelativasMouseClicked(evt);
@@ -164,18 +182,18 @@ public class ModificarPlan extends javax.swing.JPanel {
         materiaP.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 250, 380, 200));
 
         PrincipalL3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        PrincipalL3.setForeground(new java.awt.Color(165, 165, 165));
+        PrincipalL3.setForeground(java.awt.Color.white);
         PrincipalL3.setText("Seleccione una correlativa para eliminarla");
         materiaP.add(PrincipalL3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 220, -1, 30));
 
-        PrincipalL4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        PrincipalL4.setForeground(new java.awt.Color(165, 165, 165));
+        PrincipalL4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        PrincipalL4.setForeground(java.awt.Color.white);
         PrincipalL4.setText("Nombre:");
         materiaP.add(PrincipalL4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, -1, 30));
 
         codigoMateriaTF.setBackground(new java.awt.Color(255, 255, 255));
         codigoMateriaTF.setFont(new java.awt.Font("Segoe UI Symbol", 0, 14)); // NOI18N
-        codigoMateriaTF.setForeground(new java.awt.Color(165, 165, 165));
+        codigoMateriaTF.setForeground(new java.awt.Color(51, 51, 51));
         codigoMateriaTF.setBorder(null);
         codigoMateriaTF.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -192,8 +210,8 @@ public class ModificarPlan extends javax.swing.JPanel {
         });
         materiaP.add(codigoMateriaTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 290, 30));
 
-        PrincipalL5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        PrincipalL5.setForeground(new java.awt.Color(165, 165, 165));
+        PrincipalL5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        PrincipalL5.setForeground(java.awt.Color.white);
         PrincipalL5.setText("Codigo:");
         materiaP.add(PrincipalL5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, -1, 30));
 
@@ -240,7 +258,7 @@ public class ModificarPlan extends javax.swing.JPanel {
 
         nombreTF.setBackground(new java.awt.Color(255, 255, 255));
         nombreTF.setFont(new java.awt.Font("Segoe UI Symbol", 0, 14)); // NOI18N
-        nombreTF.setForeground(new java.awt.Color(165, 165, 165));
+        nombreTF.setForeground(new java.awt.Color(51, 51, 51));
         nombreTF.setBorder(null);
         nombreTF.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -257,15 +275,15 @@ public class ModificarPlan extends javax.swing.JPanel {
         });
         materiaP.add(nombreTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 290, 30));
 
-        PrincipalL8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        PrincipalL8.setForeground(new java.awt.Color(165, 165, 165));
+        PrincipalL8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        PrincipalL8.setForeground(java.awt.Color.white);
         PrincipalL8.setText("Correlativa:");
-        materiaP.add(PrincipalL8, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, 70, 30));
+        materiaP.add(PrincipalL8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 170, 80, 30));
         materiaP.add(sepCorrelativa, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 200, 180, -1));
 
         correlativaTF.setBackground(new java.awt.Color(255, 255, 255));
         correlativaTF.setFont(new java.awt.Font("Segoe UI Symbol", 0, 14)); // NOI18N
-        correlativaTF.setForeground(new java.awt.Color(165, 165, 165));
+        correlativaTF.setForeground(new java.awt.Color(51, 51, 51));
         correlativaTF.setText("codigo");
         correlativaTF.setBorder(null);
         correlativaTF.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -322,21 +340,21 @@ public class ModificarPlan extends javax.swing.JPanel {
 
         materiaP.add(agregarCorrelativaBP, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 160, 90, -1));
 
-        contenedor.add(materiaP, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 0, 690, 520));
+        contenedor.add(materiaP, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 0, 740, 670));
 
-        seleccionMateria.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        seleccionMateria.setForeground(new java.awt.Color(165, 165, 165));
+        seleccionMateria.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        seleccionMateria.setForeground(java.awt.Color.white);
         seleccionMateria.setText("Seleccione si desea modificar una materia");
         contenedor.add(seleccionMateria, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, -1, 37));
 
-        PrincipalL2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        PrincipalL2.setForeground(new java.awt.Color(165, 165, 165));
+        PrincipalL2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        PrincipalL2.setForeground(java.awt.Color.white);
         PrincipalL2.setText("Codigo:");
         contenedor.add(PrincipalL2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, -1, 30));
 
         propuestaTF.setBackground(new java.awt.Color(255, 255, 255));
         propuestaTF.setFont(new java.awt.Font("Segoe UI Symbol", 0, 14)); // NOI18N
-        propuestaTF.setForeground(new java.awt.Color(165, 165, 165));
+        propuestaTF.setForeground(new java.awt.Color(51, 51, 51));
         propuestaTF.setBorder(null);
         propuestaTF.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -357,7 +375,7 @@ public class ModificarPlan extends javax.swing.JPanel {
 
         codigoTF.setBackground(new java.awt.Color(255, 255, 255));
         codigoTF.setFont(new java.awt.Font("Segoe UI Symbol", 0, 14)); // NOI18N
-        codigoTF.setForeground(new java.awt.Color(165, 165, 165));
+        codigoTF.setForeground(new java.awt.Color(51, 51, 51));
         codigoTF.setBorder(null);
         codigoTF.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -375,7 +393,7 @@ public class ModificarPlan extends javax.swing.JPanel {
         contenedor.add(codigoTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, 360, 30));
 
         modificarBP.setBackground(new java.awt.Color(118, 35, 47));
-        modificarBP.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        modificarBP.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         modificarBP.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         modificarBP.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -392,7 +410,7 @@ public class ModificarPlan extends javax.swing.JPanel {
         modificarBL.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         modificarBL.setForeground(new java.awt.Color(255, 255, 255));
         modificarBL.setText("Modificar");
-        modificarBL.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        modificarBL.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout modificarBPLayout = new javax.swing.GroupLayout(modificarBP);
         modificarBP.setLayout(modificarBPLayout);
@@ -413,6 +431,7 @@ public class ModificarPlan extends javax.swing.JPanel {
 
         contenedor.add(modificarBP, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 140, 90, -1));
 
+        tablaMaterias.setForeground(new java.awt.Color(255, 255, 255));
         tablaMaterias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -440,6 +459,7 @@ public class ModificarPlan extends javax.swing.JPanel {
         tablaMaterias.setFocusable(false);
         tablaMaterias.setRowHeight(25);
         tablaMaterias.setSelectionBackground(new java.awt.Color(118, 35, 47));
+        tablaMaterias.setSelectionForeground(new java.awt.Color(255, 255, 255));
         tablaMaterias.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tablaMateriasMouseClicked(evt);
@@ -456,7 +476,7 @@ public class ModificarPlan extends javax.swing.JPanel {
         contenedor.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 430, 240));
 
         crearMBP.setBackground(new java.awt.Color(118, 35, 47));
-        crearMBP.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        crearMBP.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         crearMBP.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         crearMBP.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -472,8 +492,8 @@ public class ModificarPlan extends javax.swing.JPanel {
 
         crearMBL.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         crearMBL.setForeground(new java.awt.Color(255, 255, 255));
-        crearMBL.setText("Añadir");
-        crearMBL.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        crearMBL.setText("  Añadir");
+        crearMBL.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout crearMBPLayout = new javax.swing.GroupLayout(crearMBP);
         crearMBP.setLayout(crearMBPLayout);
@@ -481,8 +501,8 @@ public class ModificarPlan extends javax.swing.JPanel {
             crearMBPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(crearMBPLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(crearMBL)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(crearMBL, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         crearMBPLayout.setVerticalGroup(
             crearMBPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -495,7 +515,7 @@ public class ModificarPlan extends javax.swing.JPanel {
         contenedor.add(crearMBP, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 470, 90, -1));
 
         modificarMBP.setBackground(new java.awt.Color(118, 35, 47));
-        modificarMBP.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        modificarMBP.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         modificarMBP.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         modificarMBP.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -512,7 +532,7 @@ public class ModificarPlan extends javax.swing.JPanel {
         modificarMBL.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         modificarMBL.setForeground(new java.awt.Color(255, 255, 255));
         modificarMBL.setText("Modificar");
-        modificarMBL.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        modificarMBL.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout modificarMBPLayout = new javax.swing.GroupLayout(modificarMBP);
         modificarMBP.setLayout(modificarMBPLayout);
@@ -534,7 +554,7 @@ public class ModificarPlan extends javax.swing.JPanel {
         contenedor.add(modificarMBP, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 470, 90, -1));
 
         eliminarMBP.setBackground(new java.awt.Color(118, 35, 47));
-        eliminarMBP.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        eliminarMBP.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         eliminarMBP.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         eliminarMBP.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -550,35 +570,32 @@ public class ModificarPlan extends javax.swing.JPanel {
 
         eliminarMBL.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         eliminarMBL.setForeground(new java.awt.Color(255, 255, 255));
-        eliminarMBL.setText("Eliminar");
-        eliminarMBL.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        eliminarMBL.setText("  Eliminar");
+        eliminarMBL.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout eliminarMBPLayout = new javax.swing.GroupLayout(eliminarMBP);
         eliminarMBP.setLayout(eliminarMBPLayout);
         eliminarMBPLayout.setHorizontalGroup(
             eliminarMBPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(eliminarMBPLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(eliminarMBL)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(eliminarMBL, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
         );
         eliminarMBPLayout.setVerticalGroup(
             eliminarMBPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(eliminarMBPLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(eliminarMBL)
+                .addComponent(eliminarMBL, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         contenedor.add(eliminarMBP, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 470, 90, -1));
 
-        PrincipalL7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        PrincipalL7.setForeground(new java.awt.Color(165, 165, 165));
+        PrincipalL7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        PrincipalL7.setForeground(java.awt.Color.white);
         PrincipalL7.setText("Seleccione una operacion");
         contenedor.add(PrincipalL7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 430, -1, 37));
 
-        PrincipalL9.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        PrincipalL9.setForeground(new java.awt.Color(128, 128, 128));
+        PrincipalL9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        PrincipalL9.setForeground(java.awt.Color.white);
         PrincipalL9.setText("Plan de Estudios");
         contenedor.add(PrincipalL9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 320, 30));
 

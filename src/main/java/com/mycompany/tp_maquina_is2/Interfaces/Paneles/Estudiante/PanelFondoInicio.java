@@ -42,12 +42,12 @@ public class PanelFondoInicio extends javax.swing.JPanel {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("DESCUBRÍ TU");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 370, 40));
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 370, 50));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("PRÓXIMO FINAL");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, 420, 50));
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 420, 40));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));

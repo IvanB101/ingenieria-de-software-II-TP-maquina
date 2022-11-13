@@ -37,7 +37,6 @@ public class InicioEstudiante extends javax.swing.JPanel {
         initComponents();
         DefaultColor=new Color(41,40,40);
         ClickedColor=new Color(58,56,56);
-        menu1.setBackground(DefaultColor);
         changePane(new PanelFondoInicio());
 
         try {
@@ -101,7 +100,7 @@ public class InicioEstudiante extends javax.swing.JPanel {
                 labelinicioMouseClicked(evt);
             }
         });
-        MenuTop.add(labelinicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 190, 70));
+        MenuTop.add(labelinicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 210, 70));
 
         menu1.setBackground(new java.awt.Color(41, 40, 40));
         menu1.addMouseListener(new java.awt.event.MouseAdapter() {

@@ -6,6 +6,7 @@ package com.mycompany.tp_maquina_is2.Interfaces.Paneles.NoDocente;
 
 import com.mycompany.tp_maquina_is2.Interfaces.Paneles.NoDocente.ABMPlanDeEstudios.ABMPlanEstudios;
 import com.mycompany.tp_maquina_is2.Interfaces.Paneles.NoDocente.ABMPlanDeEstudios.SeleccionarPlan;
+import java.awt.Color;
 import javax.swing.JPanel;
 
 /**
@@ -13,12 +14,16 @@ import javax.swing.JPanel;
  * @author ivanb
  */
 public class InicioNoDocente extends javax.swing.JPanel {
-
+    Color DefaultColor,ClickedColor;
+    int panelactual; // 1 plan estudios, 2 estadisticas
     /**
      * Creates new form InicioNoDocente
      */
     public InicioNoDocente() {
         initComponents();
+        DefaultColor=new Color(41,40,40);
+        ClickedColor=new Color(118,35,47);
+        changePane(new PanelFondoInicioDOCENTE());
     }
     
     private void changePane(JPanel jPanel) {
@@ -44,15 +49,17 @@ public class InicioNoDocente extends javax.swing.JPanel {
         planEstudiosBL = new javax.swing.JLabel();
         estadisticasBP = new javax.swing.JPanel();
         estadisticasBL = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         contenedor.setBackground(new java.awt.Color(255, 255, 255));
+        contenedor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         contenedor.setPreferredSize(new java.awt.Dimension(950, 500));
         contenedor.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        add(contenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(-1, 86, 1200, 590));
+        add(contenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 1200, 600));
 
-        MenuTop.setBackground(new java.awt.Color(118, 35, 47));
+        MenuTop.setBackground(new java.awt.Color(41, 40, 40));
         MenuTop.setToolTipText("");
         MenuTop.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
@@ -66,7 +73,7 @@ public class InicioNoDocente extends javax.swing.JPanel {
         });
         MenuTop.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        planEstudiosBP.setBackground(new java.awt.Color(118, 35, 47));
+        planEstudiosBP.setBackground(new java.awt.Color(41, 40, 40));
         planEstudiosBP.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         planEstudiosBP.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         planEstudiosBP.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -83,29 +90,35 @@ public class InicioNoDocente extends javax.swing.JPanel {
 
         planEstudiosBL.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         planEstudiosBL.setForeground(new java.awt.Color(255, 255, 255));
+        planEstudiosBL.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_Books_40px.png"))); // NOI18N
         planEstudiosBL.setText("Planes de Estudios");
-        planEstudiosBL.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        planEstudiosBL.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        planEstudiosBL.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                planEstudiosBLMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                planEstudiosBLMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                planEstudiosBLMouseExited(evt);
+            }
+        });
 
         javax.swing.GroupLayout planEstudiosBPLayout = new javax.swing.GroupLayout(planEstudiosBP);
         planEstudiosBP.setLayout(planEstudiosBPLayout);
         planEstudiosBPLayout.setHorizontalGroup(
             planEstudiosBPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, planEstudiosBPLayout.createSequentialGroup()
-                .addContainerGap(9, Short.MAX_VALUE)
-                .addComponent(planEstudiosBL)
-                .addContainerGap())
+            .addComponent(planEstudiosBL, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
         );
         planEstudiosBPLayout.setVerticalGroup(
             planEstudiosBPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, planEstudiosBPLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(planEstudiosBL)
-                .addContainerGap())
+            .addComponent(planEstudiosBL, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
         );
 
-        MenuTop.add(planEstudiosBP, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 30, 170, -1));
+        MenuTop.add(planEstudiosBP, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 0, 210, 70));
 
-        estadisticasBP.setBackground(new java.awt.Color(118, 35, 47));
+        estadisticasBP.setBackground(new java.awt.Color(41, 40, 40));
         estadisticasBP.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         estadisticasBP.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         estadisticasBP.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -122,33 +135,51 @@ public class InicioNoDocente extends javax.swing.JPanel {
 
         estadisticasBL.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         estadisticasBL.setForeground(new java.awt.Color(255, 255, 255));
-        estadisticasBL.setText("Estadisticas");
-        estadisticasBL.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        estadisticasBL.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_chart_40px.png"))); // NOI18N
+        estadisticasBL.setText("Estadísticas");
+        estadisticasBL.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        estadisticasBL.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                estadisticasBLMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                estadisticasBLMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                estadisticasBLMouseExited(evt);
+            }
+        });
 
         javax.swing.GroupLayout estadisticasBPLayout = new javax.swing.GroupLayout(estadisticasBP);
         estadisticasBP.setLayout(estadisticasBPLayout);
         estadisticasBPLayout.setHorizontalGroup(
             estadisticasBPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(estadisticasBPLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(estadisticasBL)
-                .addContainerGap(18, Short.MAX_VALUE))
+            .addComponent(estadisticasBL, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
         );
         estadisticasBPLayout.setVerticalGroup(
             estadisticasBPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(estadisticasBPLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(estadisticasBL)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(estadisticasBL, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
         );
 
-        MenuTop.add(estadisticasBP, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 30, 120, -1));
+        MenuTop.add(estadisticasBP, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 1, 170, 70));
 
-        add(MenuTop, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 84));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logo fcfmyn.png"))); // NOI18N
+        jLabel1.setText("FCFMyN");
+        jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
+        MenuTop.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 220, 70));
+
+        add(MenuTop, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 70));
     }// </editor-fold>//GEN-END:initComponents
 
     private void planEstudiosBPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_planEstudiosBPMouseClicked
-        changePane(new ABMPlanEstudios());
+        //changePane(new ABMPlanEstudios());
     }//GEN-LAST:event_planEstudiosBPMouseClicked
 
     private void planEstudiosBPMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_planEstudiosBPMouseEntered
@@ -160,7 +191,7 @@ public class InicioNoDocente extends javax.swing.JPanel {
     }//GEN-LAST:event_planEstudiosBPMouseExited
 
     private void estadisticasBPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_estadisticasBPMouseClicked
-        changePane(new SeleccionarPlan("estadisticas"));
+        //changePane(new SeleccionarPlan("estadisticas"));
     }//GEN-LAST:event_estadisticasBPMouseClicked
 
     private void estadisticasBPMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_estadisticasBPMouseEntered
@@ -179,12 +210,56 @@ public class InicioNoDocente extends javax.swing.JPanel {
 
     }//GEN-LAST:event_MenuTopMousePressed
 
+    private void planEstudiosBLMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_planEstudiosBLMouseEntered
+        planEstudiosBP.setBackground(ClickedColor);
+    }//GEN-LAST:event_planEstudiosBLMouseEntered
+
+    private void planEstudiosBLMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_planEstudiosBLMouseExited
+        planEstudiosBP.setBackground(DefaultColor);
+        if(panelactual==1){
+            estadisticasBP.setBackground(DefaultColor);
+            planEstudiosBP.setBackground(ClickedColor);
+        }
+    }//GEN-LAST:event_planEstudiosBLMouseExited
+
+    private void estadisticasBLMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_estadisticasBLMouseEntered
+        estadisticasBP.setBackground(ClickedColor);
+    }//GEN-LAST:event_estadisticasBLMouseEntered
+
+    private void estadisticasBLMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_estadisticasBLMouseExited
+        estadisticasBP.setBackground(DefaultColor);
+        if(panelactual==2){
+            planEstudiosBP.setBackground(DefaultColor);
+            estadisticasBP.setBackground(ClickedColor);
+        }
+    }//GEN-LAST:event_estadisticasBLMouseExited
+
+    private void planEstudiosBLMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_planEstudiosBLMouseClicked
+        changePane(new ABMPlanEstudios());
+        panelactual=1;
+        
+        
+    }//GEN-LAST:event_planEstudiosBLMouseClicked
+
+    private void estadisticasBLMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_estadisticasBLMouseClicked
+       changePane(new SeleccionarPlan("estadisticas"));
+       panelactual=2;
+    }//GEN-LAST:event_estadisticasBLMouseClicked
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        changePane(new PanelFondoInicioDOCENTE());
+        panelactual=0;
+        planEstudiosBP.setBackground(DefaultColor);
+        estadisticasBP.setBackground(DefaultColor);
+    }//GEN-LAST:event_jLabel1MouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel MenuTop;
     private javax.swing.JPanel contenedor;
     private javax.swing.JLabel estadisticasBL;
     private javax.swing.JPanel estadisticasBP;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel planEstudiosBL;
     private javax.swing.JPanel planEstudiosBP;
     // End of variables declaration//GEN-END:variables

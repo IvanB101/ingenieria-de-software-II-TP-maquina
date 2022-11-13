@@ -35,9 +35,11 @@ public class ABMExpPanel extends javax.swing.JPanel {
         initComponents();
         TablaExamenes.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
         TablaExamenes.getTableHeader().setOpaque(true);
-        TablaExamenes.getTableHeader().setBackground(new Color(183, 84,94));
+        TablaExamenes.getTableHeader().setBackground(new Color(58,56,56));
         TablaExamenes.getTableHeader().setReorderingAllowed(false);
-        jScrollPane1.getViewport().setBackground(new Color(255, 255, 255)); //tabla color blanc
+        jScrollPane1.getViewport().setBackground(new Color(33, 33, 33)); //tabla color negro
+        TablaExamenes.setBackground(new Color(58,56,56));//coloresrow
+        TablaExamenes.getTableHeader().setForeground(Color.white);
         this.PanelDatosExp.setVisible(false);
         BorrarL.setVisible(false);
         caso=1;
@@ -73,12 +75,14 @@ public class ABMExpPanel extends javax.swing.JPanel {
         DatosDed = new javax.swing.JLabel();
         DiasDeEstudio = new javax.swing.JTextField();
 
-        Contenedor.setBackground(new java.awt.Color(255, 255, 255));
+        Contenedor.setBackground(new java.awt.Color(33, 33, 33));
         Contenedor.setPreferredSize(new java.awt.Dimension(920, 500));
 
-        panelExamRendidos.setBackground(new java.awt.Color(255, 255, 255));
+        panelExamRendidos.setBackground(new java.awt.Color(33, 33, 33));
         panelExamRendidos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        TablaExamenes.setBackground(new java.awt.Color(33, 33, 33));
+        TablaExamenes.setForeground(new java.awt.Color(255, 255, 255));
         TablaExamenes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -102,51 +106,54 @@ public class ABMExpPanel extends javax.swing.JPanel {
         panelExamRendidos.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 390, 319));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Lista de Exámenes");
         panelExamRendidos.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 20, -1, -1));
 
         BorrarL.setFont(new java.awt.Font("Segoe UI Semibold", 1, 16)); // NOI18N
+        BorrarL.setForeground(new java.awt.Color(255, 255, 255));
+        BorrarL.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_info_20px.png"))); // NOI18N
         BorrarL.setText("Si selecciona una fila, borrara esa experiencia de examen.");
         panelExamRendidos.add(BorrarL, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, -1, -1));
 
         agregarexpLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        agregarexpLabel.setForeground(new java.awt.Color(51, 51, 51));
-        agregarexpLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_add_40px.png"))); // NOI18N
-        agregarexpLabel.setText("Agregar");
+        agregarexpLabel.setForeground(new java.awt.Color(255, 255, 255));
+        agregarexpLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_add_to_inbox_50px.png"))); // NOI18N
+        agregarexpLabel.setText("AGREGAR");
         agregarexpLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         agregarexpLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 agregarexpLabelMouseClicked(evt);
             }
         });
-        panelExamRendidos.add(agregarexpLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 130, 120, -1));
+        panelExamRendidos.add(agregarexpLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 80, 140, -1));
 
         eliminarExpLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        eliminarExpLabel.setForeground(new java.awt.Color(51, 51, 51));
-        eliminarExpLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_Xbox_X_40px.png"))); // NOI18N
-        eliminarExpLabel.setText("Eliminar");
+        eliminarExpLabel.setForeground(new java.awt.Color(255, 255, 255));
+        eliminarExpLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_remove_from_inbox_50px.png"))); // NOI18N
+        eliminarExpLabel.setText("ELIMINAR");
         eliminarExpLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         eliminarExpLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 eliminarExpLabelMouseClicked(evt);
             }
         });
-        panelExamRendidos.add(eliminarExpLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 180, -1, -1));
+        panelExamRendidos.add(eliminarExpLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 170, 130, -1));
 
         modificarExpLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        modificarExpLabel.setForeground(new java.awt.Color(51, 51, 51));
-        modificarExpLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_Available_Updates_40px.png"))); // NOI18N
-        modificarExpLabel.setText("Modificar");
+        modificarExpLabel.setForeground(new java.awt.Color(255, 255, 255));
+        modificarExpLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_refresh_50px.png"))); // NOI18N
+        modificarExpLabel.setText("MODIFICAR");
         modificarExpLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         modificarExpLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 modificarExpLabelMouseClicked(evt);
             }
         });
-        panelExamRendidos.add(modificarExpLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 230, 120, -1));
+        panelExamRendidos.add(modificarExpLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 260, 140, -1));
 
-        PanelDatosExp.setBackground(new java.awt.Color(255, 255, 255));
+        PanelDatosExp.setBackground(new java.awt.Color(33, 33, 33));
+        PanelDatosExp.setForeground(new java.awt.Color(255, 255, 255));
         PanelDatosExp.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         SliderDif.setMaximum(10);
@@ -169,17 +176,20 @@ public class ABMExpPanel extends javax.swing.JPanel {
         });
         PanelDatosExp.add(SliderDedi, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 240, 190, -1));
 
-        DificultadL.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        DificultadL.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        DificultadL.setForeground(new java.awt.Color(255, 255, 255));
         DificultadL.setText("Dificultad:");
-        PanelDatosExp.add(DificultadL, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 60, -1, -1));
+        PanelDatosExp.add(DificultadL, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, -1, -1));
 
-        DificultadL1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        DificultadL1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        DificultadL1.setForeground(new java.awt.Color(255, 255, 255));
         DificultadL1.setText("Días de Estudio:");
-        PanelDatosExp.add(DificultadL1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 150, -1, -1));
+        PanelDatosExp.add(DificultadL1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, -1, -1));
 
-        DificultadL2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        DificultadL2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        DificultadL2.setForeground(new java.awt.Color(255, 255, 255));
         DificultadL2.setText("Dedicación:");
-        PanelDatosExp.add(DificultadL2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 240, -1, -1));
+        PanelDatosExp.add(DificultadL2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 240, -1, -1));
 
         ConfirmarDatosExp.setBackground(new java.awt.Color(102, 255, 102));
         ConfirmarDatosExp.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -193,13 +203,15 @@ public class ABMExpPanel extends javax.swing.JPanel {
         });
         PanelDatosExp.add(ConfirmarDatosExp, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 320, 200, 32));
 
-        Datos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        Datos.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        Datos.setForeground(new java.awt.Color(255, 255, 255));
         Datos.setPreferredSize(new java.awt.Dimension(20, 10));
-        PanelDatosExp.add(Datos, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 90, 20, 26));
+        PanelDatosExp.add(Datos, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 90, 30, 26));
 
-        DatosDed.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        DatosDed.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        DatosDed.setForeground(new java.awt.Color(255, 255, 255));
         DatosDed.setPreferredSize(new java.awt.Dimension(20, 15));
-        PanelDatosExp.add(DatosDed, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 270, 20, 26));
+        PanelDatosExp.add(DatosDed, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 270, 30, 26));
 
         DiasDeEstudio.setToolTipText("Cantidad de días estudiados");
         DiasDeEstudio.addActionListener(new java.awt.event.ActionListener() {

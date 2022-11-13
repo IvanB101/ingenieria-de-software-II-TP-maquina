@@ -197,6 +197,7 @@ public class ListaPanel extends javax.swing.JPanel {
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("ACEPTAR");
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -205,10 +206,10 @@ public class ListaPanel extends javax.swing.JPanel {
         PanelCambiable.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 210, 170, 30));
 
         mesa.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
-        mesa.setForeground(new java.awt.Color(255, 255, 255));
+        mesa.setForeground(new java.awt.Color(102, 255, 51));
         mesa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_calendar_40px_1.png"))); // NOI18N
         mesa.setText("Se corresponden a la mesa siguiente : Diciembre");
-        mesa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        mesa.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         PanelCambiable.add(mesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 440, 380, -1));
 
         verListaInscriptosLabel.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
