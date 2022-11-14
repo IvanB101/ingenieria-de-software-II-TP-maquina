@@ -5,11 +5,14 @@
 package com.mycompany.tp_maquina_is2.Interfaces.Paneles.Estudiante;
 
 import com.mycompany.tp_maquina_is2.Logica.Excepciones.ManagementException;
+import com.mycompany.tp_maquina_is2.Logica.Managers.ExamenManager;
 import com.mycompany.tp_maquina_is2.Logica.Managers.HistoriaAcademicaManager;
+import com.mycompany.tp_maquina_is2.Logica.Transferencia.Experiencia;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -49,7 +52,31 @@ public class ListaPanel extends javax.swing.JPanel {
         inscribirseExamenLabel.setVisible(false);
         verListaInscriptosLabel.setVisible(false);
         mesa.setVisible(false);
+        verEstadisticasLabel.setVisible(false);
+        String proxmesa = mesaSiguiente();
+        mesa.setText("Se corresponden a la mesa siguiente : "+proxmesa);
 
+
+    }
+    
+       public String mesaSiguiente(){
+        String mes="";
+        int actual=LocalDate.now().getMonthValue();
+        switch (actual){
+            case 1: mes="Febrero"; break;
+            case 2: mes="Marzo"; break;
+            case 3: mes="Julio"; break;
+            case 4: mes="Julio"; break;
+            case 5: mes="Julio"; break;
+            case 6: mes="Julio"; break;
+            case 7: mes="Agosto"; break;
+            case 8: mes="Noviembre"; break;
+            case 9: mes="Noviembre"; break;
+            case 10: mes="Noviembre"; break;
+            case 11: mes="Diciembre"; break;
+            case 12: mes="Febrero"; break;
+        }
+        return mes;
     }
 
     public void listaFinales(int dias) {
@@ -293,6 +320,9 @@ public class ListaPanel extends javax.swing.JPanel {
             }
         }
         this.listaFinales(dias);
+        verListaInscriptosLabel.setVisible(false);
+        mesa.setVisible(false);
+        verEstadisticasLabel.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
     private void TablaMateriasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaMateriasMouseClicked
         inscribirseExamenLabel.setVisible(true);
@@ -310,7 +340,14 @@ public class ListaPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_inscribirseExamenLabelMouseClicked
 
     private void verEstadisticasLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_verEstadisticasLabelMouseClicked
-        changePane(new EstadisticasEstudiante( (String) TablaMaterias.getValueAt(TablaMaterias.getSelectedRow(), 0),codPlanEstudios));
+        try{
+        aux = ExamenManager.getExperienciasAprobados((String) TablaMaterias.getValueAt(TablaMaterias.getSelectedRow(), 0), codPlanEstudios);
+        }catch(ManagementException ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+        if(aux.isEmpty()){
+          JOptionPane.showMessageDialog(null, "No hay datos suficientes cargados para la materia seleccionada");
+        }else{
     }//GEN-LAST:event_verEstadisticasLabelMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
