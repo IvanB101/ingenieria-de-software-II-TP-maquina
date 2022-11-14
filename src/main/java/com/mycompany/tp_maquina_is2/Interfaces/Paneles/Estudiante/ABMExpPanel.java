@@ -298,7 +298,7 @@ public class ABMExpPanel extends javax.swing.JPanel {
         }else{
         switch (JOptionPane.showConfirmDialog(this, "Esta seguro de que desea borrar la experiencia (nombre: "
                 + TablaExamenes.getValueAt(TablaExamenes.getSelectedRow(), 1) + "),\n se borrara toda la informacion"
-                + "relacionada al mismo")) {
+                + " relacionada al mismo")) {
         case JOptionPane.OK_OPTION:
         String codExamen = (String) TablaExamenes.getValueAt(TablaExamenes.getSelectedRow(), 0);
         try{
