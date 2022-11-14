@@ -13,7 +13,9 @@ import com.mycompany.tp_maquina_is2.Logica.Transferencia.MesaExamen;
 import java.awt.Color;
 import java.awt.Font;
 import java.time.LocalDate;
+import java.time.format.TextStyle;
 import java.util.ArrayList;
+import java.util.Locale;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -216,11 +218,35 @@ public class InscripcionPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_TablaInscriptosMouseClicked
 
+    
+    public int mesaSiguienteNro(){
+        int mes=0;
+        int actual=LocalDate.now().getMonthValue();
+        switch (actual){
+            case 1: mes=2; break;
+            case 2: mes=3; break;
+            case 3: mes=7; break;
+            case 4: mes=7; break;
+            case 5: mes=7; break;
+            case 6: mes=7; break;
+            case 7: mes=8; break;
+            case 8: mes=11; break;
+            case 9: mes=11; break;
+            case 10: mes=11; break;
+            case 11: mes=12; break;
+            case 12: mes=2; break;
+        }
+        return mes;
+    }
+    
+    
+    
     public void AltaInscripcion(){ 
         // TODO SELECCIONAR TURNO Y ANIO MESA
-        String codigo=codPlanEstudios+"-"+codMateria+"-"+String.valueOf(LocalDate.now().getYear())+"-"+"12";
+        int mes=mesaSiguienteNro();
+        String codigo=codPlanEstudios+"-"+codMateria+"-"+String.valueOf(LocalDate.now().getYear())+"-"+mes;
         try{
-            MesaManager.agregarMesa(new MesaExamen(12,2022,codMateria,codPlanEstudios));
+            MesaManager.agregarMesa(new MesaExamen(mes,LocalDate.now().getYear(),codMateria,codPlanEstudios));
         } catch (ManagementException ex){}
         try {
             MesaManager.añadirInscripcion(codigo,nroRegistro);
@@ -231,13 +257,14 @@ public class InscripcionPanel extends javax.swing.JPanel {
     
     public void LlenarTablas(){
         Materia materiaaux=null;
+        int mes=mesaSiguienteNro();
         try {
             materiaaux = PlanEstudiosManager.buscarMateria(codMateria, codPlanEstudios);
             nombreMateria.setText(materiaaux.getNombre());
         } catch (ManagementException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
-        String codigo=codPlanEstudios+"-"+codMateria+"-"+String.valueOf(LocalDate.now().getYear())+"-"+"12";
+        String codigo=codPlanEstudios+"-"+codMateria+"-"+String.valueOf(LocalDate.now().getYear())+"-"+mes;
         try {
             ArrayList<Estudiante> estudiantes = MesaManager.obtenerInscriptosMesa(codigo);
             DefaultTableModel modelo = new DefaultTableModel(){
