@@ -1,7 +1,7 @@
-prueba1
-jdbc:postgresql://localhost:5432/
 postgres
-admin
+jdbc:postgresql://db-instance-unsl.cmmaintmtwrx.sa-east-1.rds.amazonaws.com:5432/
+postgres
+tebiensereyes
 
 Los anteriores son
 

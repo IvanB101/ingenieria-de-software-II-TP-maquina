@@ -39,12 +39,12 @@ public class Inicializacion {
             PlanEstudiosManager.init(conn);
 
             // Carga de datos de prueba
+            EstudianteManager.agregar(new Estudiante(3026220, "Juan", "Sanchez", 44330220));
             EstudianteManager.agregar(new Estudiante(3010820, "Gino", "Paoletti", 44075067));
-            // EstudianteManager.agregar(new Estudiante(3026220, "Juan", "Sanchez", 44330220));
-            EstudianteManager.agregar(new Estudiante(3026224, "Franco", "Sarubbi", 44330220));
-            EstudianteManager.agregar(new Estudiante(3026223, "Luu", "loyola", 44330220));
-            EstudianteManager.agregar(new Estudiante(3026222, "Pol", "santiago", 44330220));
-            EstudianteManager.agregar(new Estudiante(3026221, "Bianca", "Calderoni", 44330220));
+            //EstudianteManager.agregar(new Estudiante(3026224, "Franco", "Sarubbi", 44330220));
+            //EstudianteManager.agregar(new Estudiante(3026223, "Luu", "loyola", 44330220));
+            //EstudianteManager.agregar(new Estudiante(3026222, "Pol", "santiago", 44330220));
+            //EstudianteManager.agregar(new Estudiante(3026221, "Bianca", "Calderoni", 44330220));
             Estudiante[] estudiantes = {
                 new Estudiante(1234567, "Tebiense", "Reyes", 44178000),
                 new Estudiante(1234568, "Hernan", "un grande", 50075067),
