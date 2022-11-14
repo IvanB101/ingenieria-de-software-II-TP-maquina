@@ -320,6 +320,7 @@ public class ListaPanel extends javax.swing.JPanel {
             }
         }
         this.listaFinales(dias);
+        inscribirseExamenLabel.setVisible(false);
         verListaInscriptosLabel.setVisible(false);
         mesa.setVisible(false);
         verEstadisticasLabel.setVisible(false);
@@ -328,6 +329,7 @@ public class ListaPanel extends javax.swing.JPanel {
         inscribirseExamenLabel.setVisible(true);
         verListaInscriptosLabel.setVisible(true);
         mesa.setVisible(true);
+        verEstadisticasLabel.setVisible(true);
 
     }//GEN-LAST:event_TablaMateriasMouseClicked
 
@@ -340,6 +342,7 @@ public class ListaPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_inscribirseExamenLabelMouseClicked
 
     private void verEstadisticasLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_verEstadisticasLabelMouseClicked
+        ArrayList<Experiencia> aux=null;
         try{
         aux = ExamenManager.getExperienciasAprobados((String) TablaMaterias.getValueAt(TablaMaterias.getSelectedRow(), 0), codPlanEstudios);
         }catch(ManagementException ex){
@@ -348,6 +351,8 @@ public class ListaPanel extends javax.swing.JPanel {
         if(aux.isEmpty()){
           JOptionPane.showMessageDialog(null, "No hay datos suficientes cargados para la materia seleccionada");
         }else{
+            changePane(new EstadisticasEstudiante( (String) TablaMaterias.getValueAt(TablaMaterias.getSelectedRow(), 0),codPlanEstudios));
+        }
     }//GEN-LAST:event_verEstadisticasLabelMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
