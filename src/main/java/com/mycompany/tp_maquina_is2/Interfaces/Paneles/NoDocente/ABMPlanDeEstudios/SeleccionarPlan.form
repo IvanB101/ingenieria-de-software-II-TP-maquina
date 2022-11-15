@@ -21,7 +21,7 @@
     <Container class="javax.swing.JPanel" name="contenedor">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="28" green="28" red="29" type="rgb"/>
+          <Color blue="21" green="21" red="21" type="rgb"/>
         </Property>
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[950, 500]"/>

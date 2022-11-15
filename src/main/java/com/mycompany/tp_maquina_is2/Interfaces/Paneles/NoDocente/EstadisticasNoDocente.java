@@ -107,9 +107,9 @@ public class EstadisticasNoDocente extends javax.swing.JPanel {
 
     public JFreeChart graficaExperiencia(String tipo) throws ManagementException {
         JFreeChart chart;
-
+        String titulo="",ejex="Materia",ejey="";
         PlanEstudios planEstudios = PlanEstudiosManager.buscar(codPlan);
-
+        
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
         HashMap<String, Double> result = ExamenManager.getEstadisticaExpPlan(codPlan, tipo);
@@ -117,11 +117,24 @@ public class EstadisticasNoDocente extends javax.swing.JPanel {
         for (String codMateria : result.keySet()) {
             dataset.setValue(result.get(codMateria), "Materia", planEstudios.getMaterias().get(codMateria).getNombre());
         }
+        switch (tipo) {
+                    case "dificultad":
+                        titulo="Dificultad promedio";
+                        ejey="Dificultad promedio";
+                        break;
+                    case "preparacion":
+                        titulo="Preparación";
+                        ejey="Preparación";
+                        break;
+                    case "dedicacion":
+                        titulo="Dedicación";
+                        ejey="Dedicación";
+                }
         
         chart = ChartFactory.createBarChart3D(
-                "Demo de BarChart3D", //Nombre de la grafica
-                "Vendedor", //Nombre del eje Horizontal
-                "Cantidad vendida", //Nombre del eje vertical
+                titulo, //Nombre de la grafica
+                ejex, //Nombre del eje Horizontal
+                ejey, //Nombre del eje vertical
                 dataset, //Data
                 PlotOrientation.VERTICAL, //Orientacion HORIZONTAL o VERTICAL
                 true, //Incluir leyenda
@@ -182,7 +195,7 @@ public class EstadisticasNoDocente extends javax.swing.JPanel {
         contenedor.setBackground(new java.awt.Color(33, 33, 33));
         contenedor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         contenedor.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        add(contenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 0, 840, 670));
+        add(contenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 0, 840, 550));
 
         SeleccionP.setBackground(new java.awt.Color(118, 35, 47));
         SeleccionP.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
