@@ -103,7 +103,7 @@ public class ABMExpPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(TablaExamenes);
 
-        panelExamRendidos.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 390, 319));
+        panelExamRendidos.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 480, 319));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -126,7 +126,7 @@ public class ABMExpPanel extends javax.swing.JPanel {
                 agregarexpLabelMouseClicked(evt);
             }
         });
-        panelExamRendidos.add(agregarexpLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 80, 140, -1));
+        panelExamRendidos.add(agregarexpLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 80, 140, -1));
 
         eliminarExpLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         eliminarExpLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -138,7 +138,7 @@ public class ABMExpPanel extends javax.swing.JPanel {
                 eliminarExpLabelMouseClicked(evt);
             }
         });
-        panelExamRendidos.add(eliminarExpLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 170, 130, -1));
+        panelExamRendidos.add(eliminarExpLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 170, 130, -1));
 
         modificarExpLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         modificarExpLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -150,7 +150,7 @@ public class ABMExpPanel extends javax.swing.JPanel {
                 modificarExpLabelMouseClicked(evt);
             }
         });
-        panelExamRendidos.add(modificarExpLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 260, 140, -1));
+        panelExamRendidos.add(modificarExpLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 260, 140, -1));
 
         PanelDatosExp.setBackground(new java.awt.Color(33, 33, 33));
         PanelDatosExp.setForeground(new java.awt.Color(255, 255, 255));
@@ -164,7 +164,7 @@ public class ABMExpPanel extends javax.swing.JPanel {
                 SliderDifStateChanged(evt);
             }
         });
-        PanelDatosExp.add(SliderDif, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 60, -1, 28));
+        PanelDatosExp.add(SliderDif, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 60, -1, 20));
 
         SliderDedi.setMaximum(10);
         SliderDedi.setValue(5);
@@ -174,22 +174,22 @@ public class ABMExpPanel extends javax.swing.JPanel {
                 SliderDediStateChanged(evt);
             }
         });
-        PanelDatosExp.add(SliderDedi, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 240, 190, -1));
+        PanelDatosExp.add(SliderDedi, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 240, 190, 20));
 
         DificultadL.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         DificultadL.setForeground(new java.awt.Color(255, 255, 255));
         DificultadL.setText("Dificultad:");
-        PanelDatosExp.add(DificultadL, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, -1, -1));
+        PanelDatosExp.add(DificultadL, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, -1, -1));
 
         DificultadL1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         DificultadL1.setForeground(new java.awt.Color(255, 255, 255));
         DificultadL1.setText("Días de Estudio:");
-        PanelDatosExp.add(DificultadL1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, -1, -1));
+        PanelDatosExp.add(DificultadL1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 150, -1, -1));
 
         DificultadL2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         DificultadL2.setForeground(new java.awt.Color(255, 255, 255));
         DificultadL2.setText("Dedicación:");
-        PanelDatosExp.add(DificultadL2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 240, -1, -1));
+        PanelDatosExp.add(DificultadL2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 240, -1, -1));
 
         ConfirmarDatosExp.setBackground(new java.awt.Color(102, 255, 102));
         ConfirmarDatosExp.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -201,17 +201,17 @@ public class ABMExpPanel extends javax.swing.JPanel {
                 ConfirmarDatosExpActionPerformed(evt);
             }
         });
-        PanelDatosExp.add(ConfirmarDatosExp, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 320, 200, 32));
+        PanelDatosExp.add(ConfirmarDatosExp, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 320, 200, 32));
 
         Datos.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         Datos.setForeground(new java.awt.Color(255, 255, 255));
         Datos.setPreferredSize(new java.awt.Dimension(20, 10));
-        PanelDatosExp.add(Datos, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 90, 30, 26));
+        PanelDatosExp.add(Datos, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 90, 30, 26));
 
         DatosDed.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         DatosDed.setForeground(new java.awt.Color(255, 255, 255));
         DatosDed.setPreferredSize(new java.awt.Dimension(20, 15));
-        PanelDatosExp.add(DatosDed, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 270, 30, 26));
+        PanelDatosExp.add(DatosDed, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 270, 30, 26));
 
         DiasDeEstudio.setToolTipText("Cantidad de días estudiados");
         DiasDeEstudio.addActionListener(new java.awt.event.ActionListener() {
@@ -219,16 +219,16 @@ public class ABMExpPanel extends javax.swing.JPanel {
                 DiasDeEstudioActionPerformed(evt);
             }
         });
-        PanelDatosExp.add(DiasDeEstudio, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 150, 180, -1));
+        PanelDatosExp.add(DiasDeEstudio, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 150, 180, -1));
 
         javax.swing.GroupLayout ContenedorLayout = new javax.swing.GroupLayout(Contenedor);
         Contenedor.setLayout(ContenedorLayout);
         ContenedorLayout.setHorizontalGroup(
             ContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ContenedorLayout.createSequentialGroup()
-                .addComponent(panelExamRendidos, javax.swing.GroupLayout.PREFERRED_SIZE, 611, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panelExamRendidos, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(PanelDatosExp, javax.swing.GroupLayout.DEFAULT_SIZE, 583, Short.MAX_VALUE))
+                .addComponent(PanelDatosExp, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         ContenedorLayout.setVerticalGroup(
             ContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

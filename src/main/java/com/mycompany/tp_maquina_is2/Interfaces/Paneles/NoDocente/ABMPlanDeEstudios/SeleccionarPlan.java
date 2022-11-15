@@ -59,7 +59,7 @@ public class SeleccionarPlan extends javax.swing.JPanel {
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        contenedor.setBackground(new java.awt.Color(41, 40, 40));
+        contenedor.setBackground(new java.awt.Color(33, 33, 33));
         contenedor.setPreferredSize(new java.awt.Dimension(950, 500));
         contenedor.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
