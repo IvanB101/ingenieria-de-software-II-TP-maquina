@@ -37,7 +37,7 @@ public class InicioEstudiante extends javax.swing.JPanel {
         initComponents();
         DefaultColor=new Color(41,40,40);
         ClickedColor=new Color(58,56,56);
-        changePane(new PanelFondoInicio());
+        changePane(new PanelFondoInicio(user.getNombre()));
 
         try {
             Conexion conn = Conexion.getInstance();
@@ -292,7 +292,7 @@ public class InicioEstudiante extends javax.swing.JPanel {
     }//GEN-LAST:event_añadirExpLabelMouseClicked
 
     private void labelinicioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelinicioMouseClicked
-        changePane(new PanelFondoInicio());
+        changePane(new PanelFondoInicio(user.getNombre()));
     }//GEN-LAST:event_labelinicioMouseClicked
 
     private void menu1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu1MouseEntered
