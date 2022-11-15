@@ -39,13 +39,16 @@ public class Inicializacion {
             PlanEstudiosManager.init(conn);
 
             // Carga de datos de prueba
-            EstudianteManager.agregar(new Estudiante(3026220, "Juan", "Sanchez", 44330220));
-            EstudianteManager.agregar(new Estudiante(3010820, "Gino", "Paoletti", 44075067));
-            //EstudianteManager.agregar(new Estudiante(3026224, "Franco", "Sarubbi", 44330220));
-            //EstudianteManager.agregar(new Estudiante(3026223, "Luu", "loyola", 44330220));
-            //EstudianteManager.agregar(new Estudiante(3026222, "Pol", "santiago", 44330220));
-            //EstudianteManager.agregar(new Estudiante(3026221, "Bianca", "Calderoni", 44330220));
-            Estudiante[] estudiantes = {
+            //EstudianteManager.agregar(new Estudiante(3026220, "Juan", "Sanchez", 44330220));
+            //EstudianteManager.agregar(new Estudiante(3010820, "Gino", "Paoletti", 44075067));
+            EstudianteManager.agregar(new Estudiante(3091218, "Emiliano", "Diaz", 44320210));
+            EstudianteManager.agregar(new Estudiante(3027222, "Maximiliano", "Lopez", 44320210));
+            EstudianteManager.agregar(new Estudiante(3026224, "Franco", "Sarubbi", 44330220));
+            EstudianteManager.agregar(new Estudiante(3026223, "Luciana", "Loyola", 44330220));
+            EstudianteManager.agregar(new Estudiante(3026222, "Santiago", "Polliti", 44330220));
+            EstudianteManager.agregar(new Estudiante(3026221, "Bianca", "Calderoni", 44330220));
+            EstudianteManager.agregar(new Estudiante(3026225, "Ivan", "Brocas", 44330220));
+            /*Estudiante[] estudiantes = {
                 new Estudiante(1234567, "Tebiense", "Reyes", 44178000),
                 new Estudiante(1234568, "Hernan", "un grande", 50075067),
                 new Estudiante(1234569, "Bad", "Bunny", 44111178),
@@ -54,7 +57,7 @@ public class Inicializacion {
                 new Estudiante(1234512, "es que", "es ordenada", 44099999),
                 new Estudiante(1234513, "Norita", "REYE", 41111122),
                 new Estudiante(1234514, "fernandito", "keyshan", 60128989)
-            };
+            }; 
             
             String codPlan = "32/12";
 
@@ -73,9 +76,9 @@ public class Inicializacion {
                             examen.getCodigo()));
                 }
             }
-
+*/
         } catch (IOException | SQLException e) {
-            e.printStackTrace();
+            e.printStackTrace(); 
         }
     }
 }
