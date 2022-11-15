@@ -22,9 +22,13 @@ import javax.swing.JPanel;
 public class Principal extends javax.swing.JFrame {
 
     //private Estudiante user = new Estudiante(3026224, "Franco", "Sarubbi", 44330220);
+    //private Estudiante user = new Estudiante(3026225, "Ivan", "Brocas", 44330220);
+    //private Estudiante user = new Estudiante(3026223, "Luciana", "Loyola", 44330220);
+    private Estudiante user = new Estudiante(3027222, "Maximiliano", "Lopez", 44320210);
+    //private Estudiante user = new Estudiante(3026222, "Santiago", "Polliti", 44330220);
     //private Estudiante user = new Estudiante(3010820, "Gino", "Paoletti", 44075067);
-    private Estudiante user = new Estudiante(3026220, "Juan", "Sanchez", 44330220);
-    //private Estudiante user = new Estudiante(3026223, "Bianca", "Calderoni", 44330220);
+    //private Estudiante user = new Estudiante(3026220, "Juan", "Sanchez", 44330220);
+    //private Estudiante user = new Estudiante(3026221, "Bianca", "Calderoni", 44330220);
     private String codPlan = "26/12";
     private int xMouse, yMouse;
 
