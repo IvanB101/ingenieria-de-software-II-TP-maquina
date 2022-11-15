@@ -13,8 +13,9 @@ public class PanelFondoInicio extends javax.swing.JPanel {
     /**
      * Creates new form PanelFondoInicio
      */
-    public PanelFondoInicio() {
+    public PanelFondoInicio(String nombre) {
         initComponents();
+        labelHola.setText(labelHola.getText() + " " + nombre);
     }
 
     /**
@@ -30,6 +31,7 @@ public class PanelFondoInicio extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        labelHola = new javax.swing.JLabel();
         labelfondo = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -64,6 +66,11 @@ public class PanelFondoInicio extends javax.swing.JPanel {
         jLabel6.setText("una mayor tasa de éxito en sus exámenes.");
         add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 270, 340, 30));
 
+        labelHola.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        labelHola.setForeground(new java.awt.Color(255, 255, 255));
+        labelHola.setText("Hola,");
+        add(labelHola, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, -1, 40));
+
         labelfondo.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
         labelfondo.setForeground(new java.awt.Color(255, 255, 255));
         labelfondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fondooscu2.jpg"))); // NOI18N
@@ -78,6 +85,7 @@ public class PanelFondoInicio extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel labelHola;
     private javax.swing.JLabel labelfondo;
     // End of variables declaration//GEN-END:variables
 }
