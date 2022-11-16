@@ -338,7 +338,7 @@ public class EstadisticasNoDocente extends javax.swing.JPanel {
         mesasL.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         mesasL.setForeground(new java.awt.Color(255, 255, 255));
         mesasL.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_investment_portfolio_40px.png"))); // NOI18N
-        mesasL.setText("Mesas más rendidas");
+        mesasL.setText("Materias más rendidas");
         mesasL.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout mesasPLayout = new javax.swing.GroupLayout(mesasP);
