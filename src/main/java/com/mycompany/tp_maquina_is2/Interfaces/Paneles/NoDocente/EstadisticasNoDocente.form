@@ -297,7 +297,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/icons8_investment_portfolio_40px.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Mesas m&#xe1;s rendidas"/>
+                <Property name="text" type="java.lang.String" value="Materias m&#xe1;s rendidas"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                   <Color id="Hand Cursor"/>
                 </Property>
