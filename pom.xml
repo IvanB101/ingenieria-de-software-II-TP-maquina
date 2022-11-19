@@ -70,4 +70,50 @@
             <version>1.0.13</version>
         </dependency>
     </dependencies>
+    
+    
+    <build>
+        <plugins>
+            <plugin>
+                <version>3.0.2</version>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <mainClass>com.mycompany.tp_maquina_is2.Interfaces.Principal</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+          
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <archive>
+                                <manifest>
+                                    <mainClass>
+                                        com.mycompany.tp_maquina_is2.Interfaces.Principal
+                                    </mainClass>
+                                </manifest>
+                            </archive>
+                            <descriptorRefs>
+                                <descriptorRef>jar-with-dependencies</descriptorRef>
+                            </descriptorRefs>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+          
+          
+        </plugins>
+    </build>
 </project>

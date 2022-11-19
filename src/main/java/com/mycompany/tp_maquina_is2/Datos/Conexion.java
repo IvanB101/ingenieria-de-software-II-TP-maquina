@@ -19,15 +19,15 @@ import java.sql.Statement;
  */
 public class Conexion {
 
-    private final String DB_NAME;
-    private final String DB_URL;
-    private final String DB_USER;
-    private final String DB_PWD;
+    private final String DB_NAME="postgres";
+    private final String DB_URL="jdbc:postgresql://db-instance-unsl.cmmaintmtwrx.sa-east-1.rds.amazonaws.com:5432/postgres";
+    private final String DB_USER="postgres";
+    private final String DB_PWD="tebiensereyes";
 
     private static Conexion conexion;
 
     private Conexion() throws IOException {
-        // Archivo con los datos referentes a la conexion
+        /* Archivo con los datos referentes a la conexion
         BufferedReader reader = new BufferedReader(new FileReader(new File(
                 "src\\main\\java\\com\\mycompany\\tp_maquina_is2\\Datos\\conexion.txt")));
 
@@ -35,6 +35,7 @@ public class Conexion {
         this.DB_URL = reader.readLine() + DB_NAME;
         this.DB_USER = reader.readLine();
         this.DB_PWD = reader.readLine();
+        */
     }
 
     public static Conexion getInstance() throws IOException {
