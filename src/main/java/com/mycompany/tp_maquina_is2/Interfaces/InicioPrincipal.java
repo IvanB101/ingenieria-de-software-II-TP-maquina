@@ -73,7 +73,7 @@ public class InicioPrincipal extends javax.swing.JPanel {
                 estudianteBLMouseClicked(evt);
             }
         });
-        contenedor.add(estudianteBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 440, 240, 70));
+        contenedor.add(estudianteBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 440, 250, 70));
 
         noDocenteBL.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         noDocenteBL.setForeground(new java.awt.Color(255, 255, 255));
