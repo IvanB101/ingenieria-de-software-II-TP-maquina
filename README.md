@@ -4,6 +4,5 @@ Cliente: UNSL.
 Proyecto final de la materia Ingeniería de software II, UNSL.
 
 -------------------------------------------------------------------------------------------
-*Java
-*Patrones de diseño: Singleton, DAO, Facade.
-*SQL
+Java | SQL | Patrones de diseño: Singleton, DAO, Facade |
+
