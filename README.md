@@ -9,7 +9,7 @@ Proyecto final de la materia Ingeniería de software II, UNSL.
 ![](readme-img/1-estudiante.png)
 ![](readme-img/2-estudiante.png)
 ![](readme-img/3-estudiante-vencimiento.png)
-![](readme-img/4-estudiante y experiencia.png)
+![](4-estudiante-experiencia.png)
 ![](readme-img/readme-img/5-2.png)
 ![](readme-img/readme-img/5-3.png)
 ![](readme-img/readme-img/5-4.png)
