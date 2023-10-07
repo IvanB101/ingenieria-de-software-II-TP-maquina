@@ -6,7 +6,7 @@ Cliente: UNSL.
 
 Backend programado en Java, haciendo uso de patrones de diseño (Singleton, DAO, Facade). Persistencia de datos con Bases de datos Relacional (SQL)
 Proyecto final de la materia Ingeniería de software II, UNSL.
-![](https://github.com/IvanB101/ingenieria-de-software-II-TP-maquina/tree/master/readme-img/1-estudiante.png)
+![](readme-img/1-estudiante.png)
 
 
 
